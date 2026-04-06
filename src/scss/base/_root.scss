@@ -1,0 +1,65 @@
+// =============================================================================
+// LUNARCSS - Root & Base Styles
+// =============================================================================
+// Styles for :root, html, and body elements.
+// =============================================================================
+
+:root {
+  // Smooth scrolling
+  scroll-behavior: smooth;
+}
+
+html {
+  // Base font size (1rem = 16px)
+  font-size: 100%;
+  // Prevent horizontal overflow
+  overflow-x: hidden;
+  // Better font rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--lunar-font-sans);
+  font-size: var(--lunar-text-base);
+  font-weight: var(--lunar-font-regular);
+  line-height: var(--lunar-leading-relaxed);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-bg);
+
+  // Smooth transitions for theme changes
+  transition:
+    background-color var(--lunar-transition-slow),
+    color var(--lunar-transition-slow);
+}
+
+// Text selection
+::selection {
+  background-color: var(--lunar-selection-bg);
+  color: var(--lunar-selection-fg);
+}
+
+// Focus visible - consistent focus styles across all elements
+:focus-visible {
+  outline: 2px solid var(--lunar-accent);
+  outline-offset: 2px;
+}
+
+// Sectioning elements
+main {
+  display: block; // IE11 fix
+}
+
+header,
+footer,
+nav,
+article,
+section,
+aside {
+  display: block; // IE11 fix
+}
+
+address {
+  font-style: normal;
+  line-height: inherit;
+}

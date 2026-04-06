@@ -1,0 +1,43 @@
+// =============================================================================
+// LUNARCSS - Typography Base
+// =============================================================================
+// Base typography settings and font imports.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// System Font Stack (default)
+// ---------------------------------------------------------------------------
+// Using system fonts for optimal performance and native feel.
+// Override --lunar-font-sans in your custom styles to use different fonts.
+
+// ---------------------------------------------------------------------------
+// Paragraph Base Styles
+// ---------------------------------------------------------------------------
+p {
+  margin-bottom: var(--lunar-space-4);
+  max-width: var(--lunar-content-width);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Prose-like content spacing
+// ---------------------------------------------------------------------------
+// Adjacent block elements get consistent spacing
+article,
+section {
+  > * + * {
+    margin-top: var(--lunar-space-4);
+  }
+
+  > h1 + *,
+  > h2 + *,
+  > h3 + *,
+  > h4 + *,
+  > h5 + *,
+  > h6 + * {
+    margin-top: var(--lunar-space-3);
+  }
+}

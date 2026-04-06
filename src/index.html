@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LunarCSS - A plug-and-play CSS theme that styles all standard HTML elements. No classes, just beautiful defaults.">
+  <title>LunarCSS - Classless CSS Theme</title>
+  <link rel="stylesheet" href="./scss/showcase.scss">
+</head>
+<body>
+  <div class="showcase">
+    <!-- Header -->
+    <header class="showcase-header">
+      <h1>🌙 LunarCSS</h1>
+      <p>A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes needed—just beautiful defaults out of the box.</p>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span>Toggle Theme</span>
+      </button>
+    </header>
+
+    <!-- Navigation / Table of Contents -->
+    <nav>
+      <details open>
+        <summary>Table of Contents</summary>
+        <ul>
+          <li><a href="#headings">Headings</a></li>
+          <li><a href="#text">Text & Paragraphs</a></li>
+          <li><a href="#inline">Inline Elements</a></li>
+          <li><a href="#lists">Lists</a></li>
+          <li><a href="#tables">Tables</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#interactive">Interactive</a></li>
+        </ul>
+      </details>
+    </nav>
+
+    <main>
+      <!-- ================================================================== -->
+      <!-- HEADINGS -->
+      <!-- ================================================================== -->
+      <section id="headings" class="showcase-section">
+        <div class="section-title">
+          <h2>Headings</h2>
+          <code>&lt;h1&gt; - &lt;h6&gt;</code>
+        </div>
+        <p class="section-description">
+          Headings establish content hierarchy. LunarCSS applies a modular scale for font sizes, with responsive adjustments for smaller screens.
+        </p>
+
+        <div class="demo-box">
+          <h1>Heading 1 <small>With subtitle</small></h1>
+          <h2>Heading 2</h2>
+          <h3>Heading 3</h3>
+          <h4>Heading 4</h4>
+          <h5>Heading 5</h5>
+          <h6>Heading 6</h6>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TEXT & PARAGRAPHS -->
+      <!-- ================================================================== -->
+      <section id="text" class="showcase-section">
+        <div class="section-title">
+          <h2>Text & Paragraphs</h2>
+          <code>&lt;p&gt;, &lt;blockquote&gt;, &lt;pre&gt;, &lt;hr&gt;</code>
+        </div>
+        <p class="section-description">
+          Core text elements for content. Paragraphs have optimized line-height and max-width for readability.
+        </p>
+
+        <h3>Paragraph</h3>
+        <div class="demo-box">
+          <p>This is a standard paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+          <p>A second paragraph demonstrating spacing. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        </div>
+
+        <h3>Blockquote</h3>
+        <div class="demo-box">
+          <blockquote>
+            <p>The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.</p>
+            <cite>Steve Jobs</cite>
+          </blockquote>
+        </div>
+
+        <h3>Preformatted Text</h3>
+        <div class="demo-box">
+          <pre><code>function greet(name) {
+  console.log(`Hello, ${name}!`);
+  return true;
+}
+
+greet('World');</code></pre>
+        </div>
+
+        <h3>Horizontal Rule</h3>
+        <div class="demo-box">
+          <p>Content above the rule.</p>
+          <hr>
+          <p>Content below the rule.</p>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- INLINE ELEMENTS -->
+      <!-- ================================================================== -->
+      <section id="inline" class="showcase-section">
+        <div class="section-title">
+          <h2>Inline Elements</h2>
+          <code>&lt;a&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;code&gt;, etc.</code>
+        </div>
+        <p class="section-description">
+          Inline elements for semantic text formatting. Each has distinct styling while maintaining harmony.
+        </p>
+
+        <h3>Links</h3>
+        <div class="demo-box">
+          <p>This is a <a href="#">regular link</a> and this is a <a href="https://example.com" target="_blank">link to external site</a>.</p>
+        </div>
+
+        <h3>Text Formatting</h3>
+        <div class="demo-box">
+          <div class="inline-demo">
+            <p><strong>Strong text</strong></p>
+            <p><b>Bold text</b></p>
+            <p><em>Emphasized text</em></p>
+            <p><i>Italic text</i></p>
+            <p><mark>Marked/highlighted</mark></p>
+            <p><small>Small text</small></p>
+            <p><s>Strikethrough</s></p>
+            <p><del>Deleted text</del></p>
+            <p><ins>Inserted text</ins></p>
+            <p>H<sub>2</sub>O (subscript)</p>
+            <p>E=mc<sup>2</sup> (superscript)</p>
+          </div>
+        </div>
+
+        <h3>Code Elements</h3>
+        <div class="demo-box">
+          <p>Inline <code>code element</code> for short snippets.</p>
+          <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</p>
+          <p>Sample output: <samp>Hello, World!</samp></p>
+          <p>Variable: <var>x</var> = 42</p>
+        </div>
+
+        <h3>Abbreviations & Definitions</h3>
+        <div class="demo-box">
+          <p><abbr title="Cascading Style Sheets">CSS</abbr> is awesome.</p>
+          <p><dfn>LunarCSS</dfn> is a classless CSS framework.</p>
+        </div>
+
+        <h3>Quotations & Citations</h3>
+        <div class="demo-box">
+          <p>She said, <q>This is amazing!</q></p>
+          <p>As mentioned in <cite>The Art of CSS</cite>.</p>
+        </div>
+
+        <h3>Time</h3>
+        <div class="demo-box">
+          <p>Published on <time datetime="2024-01-15">January 15, 2024</time>.</p>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- LISTS -->
+      <!-- ================================================================== -->
+      <section id="lists" class="showcase-section">
+        <div class="section-title">
+          <h2>Lists</h2>
+          <code>&lt;ul&gt;, &lt;ol&gt;, &lt;dl&gt;</code>
+        </div>
+        <p class="section-description">
+          Ordered, unordered, and definition lists with proper indentation and nesting support.
+        </p>
+
+        <div class="demo-row">
+          <div>
+            <h3>Unordered List</h3>
+            <div class="demo-box">
+              <ul>
+                <li>First item</li>
+                <li>Second item
+                  <ul>
+                    <li>Nested item</li>
+                    <li>Another nested
+                      <ul>
+                        <li>Deep nested</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Third item</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h3>Ordered List</h3>
+            <div class="demo-box">
+              <ol>
+                <li>First step</li>
+                <li>Second step
+                  <ol>
+                    <li>Sub-step A</li>
+                    <li>Sub-step B
+                      <ol>
+                        <li>Detail i</li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+                <li>Third step</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <h3>Definition List</h3>
+        <div class="demo-box">
+          <dl>
+            <dt>HTML</dt>
+            <dd>HyperText Markup Language - the standard markup language for documents designed to be displayed in a web browser.</dd>
+
+            <dt>CSS</dt>
+            <dd>Cascading Style Sheets - a style sheet language used for describing the presentation of a document written in HTML.</dd>
+
+            <dt>JavaScript</dt>
+            <dd>A programming language that is one of the core technologies of the World Wide Web.</dd>
+            <dd>Often abbreviated as JS.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TABLES -->
+      <!-- ================================================================== -->
+      <section id="tables" class="showcase-section">
+        <div class="section-title">
+          <h2>Tables</h2>
+          <code>&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;th&gt;, &lt;td&gt;</code>
+        </div>
+        <p class="section-description">
+          Tables for displaying structured data with header styling, row hover effects, and responsive behavior.
+        </p>
+
+        <div class="demo-box">
+          <table>
+            <caption>Monthly Sales Data</caption>
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Revenue</th>
+                <th>Expenses</th>
+                <th>Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>January</td>
+                <td>$10,000</td>
+                <td>$6,000</td>
+                <td>$4,000</td>
+              </tr>
+              <tr>
+                <td>February</td>
+                <td>$12,500</td>
+                <td>$7,200</td>
+                <td>$5,300</td>
+              </tr>
+              <tr>
+                <td>March</td>
+                <td>$15,000</td>
+                <td>$8,100</td>
+                <td>$6,900</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <td>$37,500</td>
+                <td>$21,300</td>
+                <td>$16,200</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- FORMS -->
+      <!-- ================================================================== -->
+      <section id="forms" class="showcase-section">
+        <div class="section-title">
+          <h2>Forms</h2>
+          <code>&lt;form&gt;, &lt;input&gt;, &lt;select&gt;, &lt;button&gt;</code>
+        </div>
+        <p class="section-description">
+          Form elements with consistent styling across browsers. Focus states, validation states, and disabled states are all handled.
+        </p>
+
+        <h3>Text Inputs</h3>
+        <div class="demo-box form-demo">
+          <form onsubmit="event.preventDefault()">
+            <label for="text-input">Text Input</label>
+            <input type="text" id="text-input" placeholder="Enter text...">
+
+            <label for="email-input">Email</label>
+            <input type="email" id="email-input" placeholder="you@example.com">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" placeholder="••••••••">
+
+            <label for="search-input">Search</label>
+            <input type="search" id="search-input" placeholder="Search...">
+
+            <label for="url-input">URL</label>
+            <input type="url" id="url-input" placeholder="https://example.com">
+
+            <label for="tel-input">Phone</label>
+            <input type="tel" id="tel-input" placeholder="+1 (555) 123-4567">
+
+            <label for="disabled-input">Disabled Input</label>
+            <input type="text" id="disabled-input" value="Can't edit this" disabled>
+
+            <label for="readonly-input">Read-only Input</label>
+            <input type="text" id="readonly-input" value="Read only value" readonly>
+          </form>
+        </div>
+
+        <h3>Number & Date Inputs</h3>
+        <div class="demo-box form-demo">
+          <label for="number-input">Number</label>
+          <input type="number" id="number-input" placeholder="0" min="0" max="100">
+
+          <label for="date-input">Date</label>
+          <input type="date" id="date-input">
+
+          <label for="time-input">Time</label>
+          <input type="time" id="time-input">
+
+          <label for="datetime-input">Date & Time</label>
+          <input type="datetime-local" id="datetime-input">
+
+          <label for="month-input">Month</label>
+          <input type="month" id="month-input">
+
+          <label for="week-input">Week</label>
+          <input type="week" id="week-input">
+        </div>
+
+        <h3>Textarea</h3>
+        <div class="demo-box form-demo">
+          <label for="textarea-demo">Message</label>
+          <textarea id="textarea-demo" rows="4" placeholder="Write your message here..."></textarea>
+        </div>
+
+        <h3>Select</h3>
+        <div class="demo-box form-demo">
+          <label for="select-demo">Choose an option</label>
+          <select id="select-demo">
+            <option value="">Select...</option>
+            <optgroup label="Group 1">
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+            </optgroup>
+            <optgroup label="Group 2">
+              <option value="3">Option 3</option>
+              <option value="4">Option 4</option>
+            </optgroup>
+          </select>
+
+          <label for="select-multiple">Multiple Select</label>
+          <select id="select-multiple" multiple>
+            <option value="1">Choice A</option>
+            <option value="2">Choice B</option>
+            <option value="3">Choice C</option>
+            <option value="4">Choice D</option>
+          </select>
+        </div>
+
+        <h3>Checkboxes & Radios</h3>
+        <div class="demo-box">
+          <fieldset>
+            <legend>Select your interests</legend>
+            <label><input type="checkbox" name="interest" value="design"> Design</label><br>
+            <label><input type="checkbox" name="interest" value="development" checked> Development</label><br>
+            <label><input type="checkbox" name="interest" value="marketing"> Marketing</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Select your plan</legend>
+            <label><input type="radio" name="plan" value="free"> Free</label><br>
+            <label><input type="radio" name="plan" value="pro" checked> Pro</label><br>
+            <label><input type="radio" name="plan" value="enterprise"> Enterprise</label>
+          </fieldset>
+        </div>
+
+        <h3>Range & Color</h3>
+        <div class="demo-box form-demo">
+          <label for="range-input">Range: <output id="range-output">50</output></label>
+          <input type="range" id="range-input" min="0" max="100" value="50" oninput="document.getElementById('range-output').value = this.value">
+
+          <label for="color-input">Color Picker</label>
+          <input type="color" id="color-input" value="#3b82f6">
+        </div>
+
+        <h3>File Input</h3>
+        <div class="demo-box form-demo">
+          <label for="file-input">Upload a file</label>
+          <input type="file" id="file-input">
+        </div>
+
+        <h3>Datalist</h3>
+        <div class="demo-box form-demo">
+          <label for="browser">Choose your browser:</label>
+          <input list="browsers" id="browser" name="browser" placeholder="Type to search...">
+          <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Edge">
+            <option value="Opera">
+          </datalist>
+        </div>
+
+        <h3>Buttons</h3>
+        <div class="demo-box">
+          <div class="demo-row">
+            <button type="button">Button</button>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+            <button type="button" disabled>Disabled</button>
+          </div>
+        </div>
+
+        <h3>Progress & Meter</h3>
+        <div class="demo-box form-demo">
+          <label>Progress (70%)</label>
+          <progress value="70" max="100">70%</progress>
+
+          <label>Meter (optimal)</label>
+          <meter value="0.8" min="0" max="1" low="0.3" high="0.7" optimum="0.9">80%</meter>
+
+          <label>Meter (suboptimal)</label>
+          <meter value="0.5" min="0" max="1" low="0.3" high="0.7" optimum="0.9">50%</meter>
+
+          <label>Meter (poor)</label>
+          <meter value="0.2" min="0" max="1" low="0.3" high="0.7" optimum="0.9">20%</meter>
+        </div>
+
+        <h3>Output</h3>
+        <div class="demo-box">
+          <p>Result: <output>42</output></p>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- MEDIA -->
+      <!-- ================================================================== -->
+      <section id="media" class="showcase-section">
+        <div class="section-title">
+          <h2>Media</h2>
+          <code>&lt;img&gt;, &lt;video&gt;, &lt;audio&gt;, &lt;figure&gt;</code>
+        </div>
+        <p class="section-description">
+          Media elements are responsive by default with max-width constraints and appropriate styling.
+        </p>
+
+        <h3>Image</h3>
+        <div class="demo-box">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop" alt="Mountain landscape at sunset" width="800" height="400">
+        </div>
+
+        <h3>Figure with Caption</h3>
+        <div class="demo-box">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop" alt="Nature landscape" width="600" height="400">
+            <figcaption>A beautiful nature landscape showcasing mountains and forests.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Video</h3>
+        <div class="demo-box">
+          <video controls width="100%" poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&h=450&fit=crop">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <h3>Audio</h3>
+        <div class="demo-box">
+          <audio controls>
+            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <h3>Iframe</h3>
+        <div class="demo-box">
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1318359375%2C51.50190910631058%2C-0.0714111328125%2C51.52374803661363" width="100%" height="300" loading="lazy" title="Map embed"></iframe>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- INTERACTIVE -->
+      <!-- ================================================================== -->
+      <section id="interactive" class="showcase-section">
+        <div class="section-title">
+          <h2>Interactive Elements</h2>
+          <code>&lt;details&gt;, &lt;summary&gt;, &lt;dialog&gt;</code>
+        </div>
+        <p class="section-description">
+          Native interactive elements that provide disclosure widgets and modal dialogs without JavaScript.
+        </p>
+
+        <h3>Details & Summary</h3>
+        <div class="demo-box">
+          <details>
+            <summary>What is LunarCSS?</summary>
+            <p>LunarCSS is a classless CSS framework that provides beautiful default styles for all standard HTML elements. Just include the CSS file and your HTML will look great!</p>
+          </details>
+
+          <details>
+            <summary>How do I use it?</summary>
+            <p>Simply add the LunarCSS stylesheet to your HTML document. No classes required—the framework styles all elements using element selectors.</p>
+          </details>
+
+          <details>
+            <summary>Can I customize it?</summary>
+            <p>Yes! LunarCSS uses CSS custom properties (variables) for all colors, spacing, and typography. Override the variables in your own stylesheet to create a custom theme.</p>
+
+            <details>
+              <summary>Nested details</summary>
+              <p>Details can be nested inside other details elements.</p>
+            </details>
+          </details>
+        </div>
+
+        <h3>Dialog</h3>
+        <div class="demo-box">
+          <button type="button" onclick="document.getElementById('demo-dialog').showModal()">Open Dialog</button>
+
+          <dialog id="demo-dialog">
+            <h3>Modal Dialog</h3>
+            <p>This is a native HTML dialog element. It includes a backdrop and is centered on the screen.</p>
+            <p>Press <kbd>Esc</kbd> or click the button below to close.</p>
+            <form method="dialog">
+              <button type="submit">Close Dialog</button>
+            </form>
+          </dialog>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- ADDRESS -->
+      <!-- ================================================================== -->
+      <section id="address" class="showcase-section">
+        <div class="section-title">
+          <h2>Address</h2>
+          <code>&lt;address&gt;</code>
+        </div>
+        <p class="section-description">
+          The address element for contact information.
+        </p>
+
+        <div class="demo-box">
+          <address>
+            LunarCSS Project<br>
+            123 Web Dev Lane<br>
+            Internet City, WW 12345<br>
+            <a href="mailto:hello@lunarcss.dev">hello@lunarcss.dev</a>
+          </address>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="showcase-footer">
+      <p>Made with 🌙 by the LunarCSS team</p>
+      <p><a href="https://github.com/lunarcss/lunarcss">GitHub</a> · <a href="#top">Back to top</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme preference
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    })();
+  </script>
+</body>
+</html>

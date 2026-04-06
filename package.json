@@ -1,0 +1,36 @@
+{
+  "name": "lunarcss",
+  "version": "1.0.0",
+  "description": "A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes, just beautiful defaults.",
+  "type": "module",
+  "main": "dist/lunarcss.min.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "css",
+    "theme",
+    "classless",
+    "minimal",
+    "dark-mode",
+    "light-mode",
+    "scss",
+    "html",
+    "styling"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.77.0",
+    "vite": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}

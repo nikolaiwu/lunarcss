@@ -1,0 +1,86 @@
+// =============================================================================
+// LUNARCSS - Text Block Elements
+// =============================================================================
+// Styles for p, blockquote, pre, hr elements.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Paragraph
+// ---------------------------------------------------------------------------
+// Base styles are in _typography.scss
+
+// ---------------------------------------------------------------------------
+// Blockquote
+// ---------------------------------------------------------------------------
+blockquote {
+  padding: var(--lunar-space-4) var(--lunar-space-6);
+  margin: var(--lunar-space-6) 0;
+  border-left: 4px solid var(--lunar-blockquote-border);
+  background-color: var(--lunar-blockquote-bg);
+  border-radius: 0 var(--lunar-radius-md) var(--lunar-radius-md) 0;
+  font-style: italic;
+  color: var(--lunar-fg-muted);
+
+  p {
+    margin-bottom: var(--lunar-space-2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  cite {
+    display: block;
+    margin-top: var(--lunar-space-3);
+    font-size: var(--lunar-text-sm);
+    font-style: normal;
+    color: var(--lunar-fg-subtle);
+
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// Nested blockquotes
+blockquote blockquote {
+  margin: var(--lunar-space-4) 0;
+  border-left-color: var(--lunar-border-emphasis);
+}
+
+// ---------------------------------------------------------------------------
+// Preformatted Text
+// ---------------------------------------------------------------------------
+pre {
+  display: block;
+  padding: var(--lunar-space-4);
+  margin: var(--lunar-space-6) 0;
+  overflow-x: auto;
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-sm);
+  line-height: var(--lunar-leading-relaxed);
+  color: var(--lunar-pre-fg);
+  background-color: var(--lunar-pre-bg);
+  border-radius: var(--lunar-radius-lg);
+  tab-size: 2;
+  -webkit-overflow-scrolling: touch;
+
+  // Code inside pre should not have additional styling
+  code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal Rule
+// ---------------------------------------------------------------------------
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--lunar-hr);
+  margin: var(--lunar-space-8) 0;
+}

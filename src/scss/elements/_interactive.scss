@@ -1,0 +1,135 @@
+// =============================================================================
+// LUNARCSS - Interactive Elements
+// =============================================================================
+// Styles for details, summary, dialog elements.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Details
+// ---------------------------------------------------------------------------
+details {
+  margin-bottom: var(--lunar-space-4);
+  border: 1px solid var(--lunar-border);
+  border-radius: var(--lunar-radius-lg);
+  overflow: hidden;
+
+  &[open] {
+    summary {
+      border-bottom: 1px solid var(--lunar-border);
+    }
+  }
+
+  // Nested details
+  details {
+    margin: var(--lunar-space-3);
+    margin-bottom: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Summary
+// ---------------------------------------------------------------------------
+summary {
+  display: flex;
+  align-items: center;
+  padding: var(--lunar-space-3) var(--lunar-space-4);
+  font-weight: var(--lunar-font-medium);
+  color: var(--lunar-fg);
+  cursor: pointer;
+  background-color: var(--lunar-bg-subtle);
+  list-style: none;
+  transition: background-color var(--lunar-transition-fast);
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // Custom arrow indicator
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: var(--lunar-space-3);
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform var(--lunar-transition-fast);
+  }
+
+  details[open] > & {
+    &::before {
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover {
+    background-color: var(--lunar-bg-muted);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--lunar-accent);
+  }
+}
+
+// Details content
+details > *:not(summary) {
+  padding: var(--lunar-space-4);
+}
+
+details > p:not(summary),
+details > div:not(summary) {
+  margin: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Dialog
+// ---------------------------------------------------------------------------
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(90vw, 32rem);
+  max-height: 85vh;
+  padding: var(--lunar-space-6);
+  background-color: var(--lunar-bg);
+  color: var(--lunar-fg);
+  border: 1px solid var(--lunar-border);
+  border-radius: var(--lunar-radius-xl);
+  box-shadow: var(--lunar-shadow-xl);
+  overflow: auto;
+
+  &::backdrop {
+    background-color: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  // Dialog not open
+  &:not([open]) {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Popover (HTML popover attribute)
+// ---------------------------------------------------------------------------
+[popover] {
+  position: fixed;
+  inset: unset;
+  padding: var(--lunar-space-4);
+  background-color: var(--lunar-bg);
+  color: var(--lunar-fg);
+  border: 1px solid var(--lunar-border);
+  border-radius: var(--lunar-radius-lg);
+  box-shadow: var(--lunar-shadow-lg);
+
+  &::backdrop {
+    background-color: transparent;
+  }
+
+  &:not(:popover-open) {
+    display: none;
+  }
+}

@@ -1,0 +1,102 @@
+// =============================================================================
+// LUNARCSS - Lists
+// =============================================================================
+// Styles for ul, ol, li, dl, dt, dd elements.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Unordered Lists
+// ---------------------------------------------------------------------------
+ul {
+  list-style: disc;
+  padding-left: var(--lunar-space-6);
+  margin-bottom: var(--lunar-space-4);
+
+  ul {
+    list-style-type: circle;
+    margin-top: var(--lunar-space-2);
+    margin-bottom: 0;
+
+    ul {
+      list-style-type: square;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Ordered Lists
+// ---------------------------------------------------------------------------
+ol {
+  list-style: decimal;
+  padding-left: var(--lunar-space-6);
+  margin-bottom: var(--lunar-space-4);
+
+  ol {
+    list-style-type: lower-alpha;
+    margin-top: var(--lunar-space-2);
+    margin-bottom: 0;
+
+    ol {
+      list-style-type: lower-roman;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// List Items
+// ---------------------------------------------------------------------------
+li {
+  margin-bottom: var(--lunar-space-2);
+  line-height: var(--lunar-leading-relaxed);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // Nested lists inside list items
+  > ul,
+  > ol {
+    margin-top: var(--lunar-space-2);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Definition Lists
+// ---------------------------------------------------------------------------
+dl {
+  margin-bottom: var(--lunar-space-4);
+}
+
+dt {
+  font-weight: var(--lunar-font-semibold);
+  color: var(--lunar-fg);
+  margin-top: var(--lunar-space-4);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+dd {
+  margin-left: var(--lunar-space-6);
+  margin-bottom: var(--lunar-space-2);
+  color: var(--lunar-fg-muted);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // Multiple definitions for single term
+  + dd {
+    margin-top: var(--lunar-space-2);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Menu (deprecated but still used)
+// ---------------------------------------------------------------------------
+menu {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: var(--lunar-space-4);
+}

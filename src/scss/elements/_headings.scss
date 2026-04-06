@@ -1,0 +1,74 @@
+// =============================================================================
+// LUNARCSS - Headings
+// =============================================================================
+// Styles for h1-h6 heading elements.
+// =============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--lunar-font-sans);
+  font-weight: var(--lunar-font-bold);
+  line-height: var(--lunar-leading-tight);
+  color: var(--lunar-fg);
+  letter-spacing: var(--lunar-tracking-tight);
+  margin-bottom: var(--lunar-space-4);
+}
+
+h1 {
+  font-size: var(--lunar-text-5xl);
+  font-weight: var(--lunar-font-extrabold);
+  margin-bottom: var(--lunar-space-6);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-4xl);
+  }
+}
+
+h2 {
+  font-size: var(--lunar-text-4xl);
+  margin-bottom: var(--lunar-space-5);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-3xl);
+  }
+}
+
+h3 {
+  font-size: var(--lunar-text-3xl);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-2xl);
+  }
+}
+
+h4 {
+  font-size: var(--lunar-text-2xl);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-xl);
+  }
+}
+
+h5 {
+  font-size: var(--lunar-text-xl);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-lg);
+  }
+}
+
+h6 {
+  font-size: var(--lunar-text-lg);
+  font-weight: var(--lunar-font-semibold);
+  letter-spacing: var(--lunar-tracking-normal);
+}
+
+// Subheadings / small text within headings
+h1, h2, h3, h4, h5, h6 {
+  small {
+    font-size: 0.75em;
+    font-weight: var(--lunar-font-regular);
+    color: var(--lunar-fg-muted);
+    display: block;
+    margin-top: var(--lunar-space-1);
+  }
+}

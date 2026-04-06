@@ -1,0 +1,116 @@
+// =============================================================================
+// LUNARCSS - Dark Theme
+// =============================================================================
+// Semantic color mappings for dark mode.
+// Applied via [data-theme="dark"] or prefers-color-scheme: dark.
+// =============================================================================
+
+@mixin dark-theme-vars {
+  // Color scheme hint for browser
+  color-scheme: dark;
+
+  // ---------------------------------------------------------------------------
+  // Background Colors
+  // ---------------------------------------------------------------------------
+  --lunar-bg: var(--lunar-gray-900);
+  --lunar-bg-subtle: var(--lunar-gray-800);
+  --lunar-bg-muted: var(--lunar-gray-700);
+  --lunar-bg-emphasis: var(--lunar-gray-600);
+
+  // ---------------------------------------------------------------------------
+  // Foreground / Text Colors
+  // ---------------------------------------------------------------------------
+  --lunar-fg: var(--lunar-gray-100);
+  --lunar-fg-muted: var(--lunar-gray-400);
+  --lunar-fg-subtle: var(--lunar-gray-500);
+  --lunar-fg-on-emphasis: var(--lunar-gray-900);
+
+  // ---------------------------------------------------------------------------
+  // Border Colors
+  // ---------------------------------------------------------------------------
+  --lunar-border: var(--lunar-gray-700);
+  --lunar-border-muted: var(--lunar-gray-800);
+  --lunar-border-emphasis: var(--lunar-gray-600);
+
+  // ---------------------------------------------------------------------------
+  // Interactive / Accent Colors
+  // ---------------------------------------------------------------------------
+  --lunar-accent: var(--lunar-primary-500);
+  --lunar-accent-hover: var(--lunar-primary-400);
+  --lunar-accent-muted: var(--lunar-primary-900);
+  --lunar-accent-fg: var(--lunar-gray-900);
+
+  // ---------------------------------------------------------------------------
+  // Link Colors
+  // ---------------------------------------------------------------------------
+  --lunar-link: var(--lunar-primary-400);
+  --lunar-link-hover: var(--lunar-primary-300);
+  --lunar-link-visited: var(--lunar-primary-500);
+
+  // ---------------------------------------------------------------------------
+  // Form Colors
+  // ---------------------------------------------------------------------------
+  --lunar-input-bg: var(--lunar-gray-800);
+  --lunar-input-border: var(--lunar-gray-600);
+  --lunar-input-border-hover: var(--lunar-gray-500);
+  --lunar-input-border-focus: var(--lunar-primary-500);
+  --lunar-input-placeholder: var(--lunar-gray-500);
+
+  // ---------------------------------------------------------------------------
+  // Code / Pre Colors
+  // ---------------------------------------------------------------------------
+  --lunar-code-bg: var(--lunar-gray-800);
+  --lunar-code-fg: var(--lunar-gray-200);
+  --lunar-pre-bg: var(--lunar-gray-950);
+  --lunar-pre-fg: var(--lunar-gray-200);
+
+  // ---------------------------------------------------------------------------
+  // Table Colors
+  // ---------------------------------------------------------------------------
+  --lunar-table-border: var(--lunar-gray-700);
+  --lunar-table-header-bg: var(--lunar-gray-800);
+  --lunar-table-row-hover: var(--lunar-gray-800);
+  --lunar-table-stripe: var(--lunar-gray-850, #1f1f23);
+
+  // ---------------------------------------------------------------------------
+  // Semantic Status Colors
+  // ---------------------------------------------------------------------------
+  --lunar-success-bg: #052e16;
+  --lunar-success-fg: #86efac;
+  --lunar-success-border: #166534;
+
+  --lunar-warning-bg: #451a03;
+  --lunar-warning-fg: #fcd34d;
+  --lunar-warning-border: #92400e;
+
+  --lunar-error-bg: #450a0a;
+  --lunar-error-fg: #fca5a5;
+  --lunar-error-border: #991b1b;
+
+  --lunar-info-bg: #172554;
+  --lunar-info-fg: #93c5fd;
+  --lunar-info-border: #1e40af;
+
+  // ---------------------------------------------------------------------------
+  // Misc
+  // ---------------------------------------------------------------------------
+  --lunar-mark-bg: #854d0e;
+  --lunar-mark-fg: var(--lunar-gray-100);
+  --lunar-selection-bg: var(--lunar-primary-800);
+  --lunar-selection-fg: var(--lunar-gray-100);
+  --lunar-hr: var(--lunar-gray-700);
+  --lunar-blockquote-border: var(--lunar-gray-600);
+  --lunar-blockquote-bg: var(--lunar-gray-800);
+}
+
+// Apply dark theme when system prefers dark and user hasn't set light
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-theme-vars;
+  }
+}
+
+// Apply dark theme when explicitly set via data attribute
+[data-theme="dark"] {
+  @include dark-theme-vars;
+}

@@ -1,0 +1,118 @@
+// =============================================================================
+// LUNARCSS - Tables
+// =============================================================================
+// Styles for table, thead, tbody, tfoot, tr, th, td, caption elements.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Table
+// ---------------------------------------------------------------------------
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: var(--lunar-space-6);
+  font-size: var(--lunar-text-sm);
+
+  // Table wrapper for horizontal scrolling on small screens
+  overflow-x: auto;
+  display: block;
+
+  @media (min-width: 640px) {
+    display: table;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Caption
+// ---------------------------------------------------------------------------
+caption {
+  padding: var(--lunar-space-3) var(--lunar-space-4);
+  font-weight: var(--lunar-font-semibold);
+  text-align: left;
+  color: var(--lunar-fg);
+  caption-side: top;
+}
+
+// ---------------------------------------------------------------------------
+// Table Header
+// ---------------------------------------------------------------------------
+thead {
+  background-color: var(--lunar-table-header-bg);
+  border-bottom: 2px solid var(--lunar-table-border);
+}
+
+// ---------------------------------------------------------------------------
+// Table Body
+// ---------------------------------------------------------------------------
+tbody {
+  tr {
+    border-bottom: 1px solid var(--lunar-table-border);
+    transition: background-color var(--lunar-transition-fast);
+
+    &:hover {
+      background-color: var(--lunar-table-row-hover);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Striped rows (optional - add via attribute or class in showcase)
+  &[data-striped] tr:nth-child(even),
+  table[data-striped] & tr:nth-child(even) {
+    background-color: var(--lunar-table-stripe);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Table Footer
+// ---------------------------------------------------------------------------
+tfoot {
+  background-color: var(--lunar-table-header-bg);
+  border-top: 2px solid var(--lunar-table-border);
+  font-weight: var(--lunar-font-semibold);
+}
+
+// ---------------------------------------------------------------------------
+// Table Row
+// ---------------------------------------------------------------------------
+tr {
+  // Styles applied in tbody context above
+}
+
+// ---------------------------------------------------------------------------
+// Table Header Cell
+// ---------------------------------------------------------------------------
+th {
+  padding: var(--lunar-space-3) var(--lunar-space-4);
+  font-weight: var(--lunar-font-semibold);
+  text-align: left;
+  color: var(--lunar-fg);
+  white-space: nowrap;
+
+  &[scope="row"] {
+    background-color: var(--lunar-table-header-bg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Table Data Cell
+// ---------------------------------------------------------------------------
+td {
+  padding: var(--lunar-space-3) var(--lunar-space-4);
+  color: var(--lunar-fg);
+  vertical-align: top;
+}
+
+// ---------------------------------------------------------------------------
+// Column Group & Column
+// ---------------------------------------------------------------------------
+colgroup {
+  // Allows styling of columns
+}
+
+col {
+  // Individual column styling
+}

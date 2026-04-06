@@ -1,0 +1,394 @@
+// =============================================================================
+// LUNARCSS - Forms
+// =============================================================================
+// Styles for form elements: form, input, textarea, select, button, etc.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Form
+// ---------------------------------------------------------------------------
+form {
+  margin-bottom: var(--lunar-space-4);
+}
+
+// ---------------------------------------------------------------------------
+// Fieldset
+// ---------------------------------------------------------------------------
+fieldset {
+  border: 1px solid var(--lunar-border);
+  border-radius: var(--lunar-radius-lg);
+  padding: var(--lunar-space-6);
+  margin-bottom: var(--lunar-space-4);
+}
+
+// ---------------------------------------------------------------------------
+// Legend
+// ---------------------------------------------------------------------------
+legend {
+  font-weight: var(--lunar-font-semibold);
+  padding: 0 var(--lunar-space-2);
+  color: var(--lunar-fg);
+}
+
+// ---------------------------------------------------------------------------
+// Label
+// ---------------------------------------------------------------------------
+label {
+  display: block;
+  font-weight: var(--lunar-font-medium);
+  margin-bottom: var(--lunar-space-2);
+  color: var(--lunar-fg);
+}
+
+// ---------------------------------------------------------------------------
+// Input (Text-like types)
+// ---------------------------------------------------------------------------
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="image"]) {
+  display: block;
+  width: 100%;
+  padding: var(--lunar-space-2) var(--lunar-space-3);
+  font-size: var(--lunar-text-base);
+  line-height: var(--lunar-leading-normal);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-input-bg);
+  border: 1px solid var(--lunar-input-border);
+  border-radius: var(--lunar-radius-md);
+  transition:
+    border-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast);
+  margin-bottom: var(--lunar-space-4);
+
+  &:hover:not(:disabled) {
+    border-color: var(--lunar-input-border-hover);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--lunar-input-border-focus);
+    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+  }
+
+  &::placeholder {
+    color: var(--lunar-input-placeholder);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--lunar-bg-muted);
+  }
+
+  &:read-only {
+    background-color: var(--lunar-bg-subtle);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Textarea
+// ---------------------------------------------------------------------------
+textarea {
+  display: block;
+  width: 100%;
+  padding: var(--lunar-space-3);
+  font-size: var(--lunar-text-base);
+  line-height: var(--lunar-leading-normal);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-input-bg);
+  border: 1px solid var(--lunar-input-border);
+  border-radius: var(--lunar-radius-md);
+  transition:
+    border-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast);
+  resize: vertical;
+  margin-bottom: var(--lunar-space-4);
+
+  &:hover:not(:disabled) {
+    border-color: var(--lunar-input-border-hover);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--lunar-input-border-focus);
+    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+  }
+
+  &::placeholder {
+    color: var(--lunar-input-placeholder);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Select
+// ---------------------------------------------------------------------------
+select {
+  display: block;
+  width: 100%;
+  padding: var(--lunar-space-2) var(--lunar-space-8) var(--lunar-space-2) var(--lunar-space-3);
+  font-size: var(--lunar-text-base);
+  line-height: var(--lunar-leading-normal);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-input-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--lunar-space-2) center;
+  background-size: 1.25em;
+  border: 1px solid var(--lunar-input-border);
+  border-radius: var(--lunar-radius-md);
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast);
+  margin-bottom: var(--lunar-space-4);
+
+  &:hover:not(:disabled) {
+    border-color: var(--lunar-input-border-hover);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--lunar-input-border-focus);
+    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[multiple] {
+    background-image: none;
+    padding-right: var(--lunar-space-3);
+    height: auto;
+  }
+}
+
+option {
+  padding: var(--lunar-space-2);
+}
+
+optgroup {
+  font-weight: var(--lunar-font-semibold);
+}
+
+// ---------------------------------------------------------------------------
+// Checkbox & Radio
+// ---------------------------------------------------------------------------
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-right: var(--lunar-space-2);
+  vertical-align: middle;
+  cursor: pointer;
+  accent-color: var(--lunar-accent);
+}
+
+// ---------------------------------------------------------------------------
+// Range
+// ---------------------------------------------------------------------------
+input[type="range"] {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--lunar-bg-muted);
+  border-radius: var(--lunar-radius-full);
+  cursor: pointer;
+  accent-color: var(--lunar-accent);
+  margin-bottom: var(--lunar-space-4);
+}
+
+// ---------------------------------------------------------------------------
+// Color
+// ---------------------------------------------------------------------------
+input[type="color"] {
+  width: 3rem;
+  height: 2.5rem;
+  padding: var(--lunar-space-1);
+  border: 1px solid var(--lunar-input-border);
+  border-radius: var(--lunar-radius-md);
+  cursor: pointer;
+  margin-bottom: var(--lunar-space-4);
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--lunar-radius-sm);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// File
+// ---------------------------------------------------------------------------
+input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: var(--lunar-space-2);
+  font-size: var(--lunar-text-sm);
+  color: var(--lunar-fg-muted);
+  border: 1px dashed var(--lunar-border);
+  border-radius: var(--lunar-radius-md);
+  cursor: pointer;
+  margin-bottom: var(--lunar-space-4);
+
+  &::file-selector-button {
+    padding: var(--lunar-space-2) var(--lunar-space-4);
+    margin-right: var(--lunar-space-3);
+    font-weight: var(--lunar-font-medium);
+    color: var(--lunar-fg);
+    background-color: var(--lunar-bg-subtle);
+    border: 1px solid var(--lunar-border);
+    border-radius: var(--lunar-radius-md);
+    cursor: pointer;
+    transition: background-color var(--lunar-transition-fast);
+
+    &:hover {
+      background-color: var(--lunar-bg-muted);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Buttons (button, submit, reset)
+// ---------------------------------------------------------------------------
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lunar-space-2) var(--lunar-space-4);
+  font-size: var(--lunar-text-base);
+  font-weight: var(--lunar-font-medium);
+  line-height: var(--lunar-leading-normal);
+  color: var(--lunar-accent-fg);
+  background-color: var(--lunar-accent);
+  border: 1px solid transparent;
+  border-radius: var(--lunar-radius-md);
+  cursor: pointer;
+  transition:
+    background-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast);
+  margin-bottom: var(--lunar-space-4);
+
+  &:hover:not(:disabled) {
+    background-color: var(--lunar-accent-hover);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+input[type="reset"] {
+  background-color: var(--lunar-bg-subtle);
+  color: var(--lunar-fg);
+  border-color: var(--lunar-border);
+
+  &:hover:not(:disabled) {
+    background-color: var(--lunar-bg-muted);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Datalist
+// ---------------------------------------------------------------------------
+datalist {
+  // Styled by browser
+}
+
+// ---------------------------------------------------------------------------
+// Output
+// ---------------------------------------------------------------------------
+output {
+  display: inline-block;
+  padding: var(--lunar-space-2) var(--lunar-space-3);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-sm);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-bg-subtle);
+  border-radius: var(--lunar-radius-md);
+}
+
+// ---------------------------------------------------------------------------
+// Progress
+// ---------------------------------------------------------------------------
+progress {
+  display: block;
+  width: 100%;
+  height: 0.75rem;
+  border: none;
+  border-radius: var(--lunar-radius-full);
+  background-color: var(--lunar-bg-muted);
+  overflow: hidden;
+  margin-bottom: var(--lunar-space-4);
+
+  &::-webkit-progress-bar {
+    background-color: var(--lunar-bg-muted);
+    border-radius: var(--lunar-radius-full);
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--lunar-accent);
+    border-radius: var(--lunar-radius-full);
+    transition: width var(--lunar-transition-base);
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--lunar-accent);
+    border-radius: var(--lunar-radius-full);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Meter
+// ---------------------------------------------------------------------------
+meter {
+  display: block;
+  width: 100%;
+  height: 0.75rem;
+  border: none;
+  border-radius: var(--lunar-radius-full);
+  background-color: var(--lunar-bg-muted);
+  overflow: hidden;
+  margin-bottom: var(--lunar-space-4);
+
+  &::-webkit-meter-bar {
+    background-color: var(--lunar-bg-muted);
+    border-radius: var(--lunar-radius-full);
+    border: none;
+  }
+
+  &::-webkit-meter-optimum-value {
+    background-color: var(--lunar-success);
+    border-radius: var(--lunar-radius-full);
+  }
+
+  &::-webkit-meter-suboptimum-value {
+    background-color: var(--lunar-warning);
+    border-radius: var(--lunar-radius-full);
+  }
+
+  &::-webkit-meter-even-less-good-value {
+    background-color: var(--lunar-error);
+    border-radius: var(--lunar-radius-full);
+  }
+}
