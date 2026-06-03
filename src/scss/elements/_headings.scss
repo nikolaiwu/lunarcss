@@ -4,7 +4,12 @@
 // Styles for h1-h6 heading elements.
 // =============================================================================
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--lunar-font-sans);
   font-weight: var(--lunar-font-bold);
   line-height: var(--lunar-leading-tight);
@@ -63,11 +68,16 @@ h6 {
 }
 
 // Subheadings / small text within headings
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   small {
     font-size: 0.75em;
     font-weight: var(--lunar-font-regular);
-    color: var(--lunar-fg-muted);
+    color: var(--lunar-muted);
     display: block;
     margin-top: var(--lunar-space-1);
   }

@@ -6,29 +6,29 @@
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// 1. Configuration (CSS Custom Properties / Design Tokens)
+// Configuration (CSS Custom Properties / Design Tokens)
 // ---------------------------------------------------------------------------
 @use "config";
 
 // ---------------------------------------------------------------------------
-// 2. Theme Definitions (Light/Dark mode variables)
+// Theme Definitions (Light/Dark mode variables)
 // ---------------------------------------------------------------------------
 @use "themes/light";
 @use "themes/dark";
 
 // ---------------------------------------------------------------------------
-// 3. CSS Reset
+// CSS Reset
 // ---------------------------------------------------------------------------
 @use "reset";
 
 // ---------------------------------------------------------------------------
-// 4. Base Styles (root, html, body, typography foundations)
+// Base Styles (root, html, body, typography foundations)
 // ---------------------------------------------------------------------------
 @use "base/root";
 @use "base/typography";
 
 // ---------------------------------------------------------------------------
-// 5. Element Styles (all HTML elements)
+// Element Styles (all HTML elements)
 // ---------------------------------------------------------------------------
 @use "elements/headings";
 @use "elements/text";

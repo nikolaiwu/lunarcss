@@ -38,8 +38,8 @@ caption {
 // Table Header
 // ---------------------------------------------------------------------------
 thead {
-  background-color: var(--lunar-table-header-bg);
-  border-bottom: 2px solid var(--lunar-table-border);
+  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
+  border-bottom: 2px solid var(--lunar-border);
 }
 
 // ---------------------------------------------------------------------------
@@ -47,11 +47,15 @@ thead {
 // ---------------------------------------------------------------------------
 tbody {
   tr {
-    border-bottom: 1px solid var(--lunar-table-border);
+    border-bottom: var(--lunar-border-width) solid var(--lunar-border);
     transition: background-color var(--lunar-transition-fast);
 
     &:hover {
-      background-color: var(--lunar-table-row-hover);
+      background-color: color-mix(
+        in srgb,
+        var(--lunar-bg) 92%,
+        var(--lunar-muted)
+      );
     }
 
     &:last-child {
@@ -62,7 +66,11 @@ tbody {
   // Striped rows (optional - add via attribute or class in showcase)
   &[data-striped] tr:nth-child(even),
   table[data-striped] & tr:nth-child(even) {
-    background-color: var(--lunar-table-stripe);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 96%,
+      var(--lunar-muted)
+    );
   }
 }
 
@@ -70,8 +78,8 @@ tbody {
 // Table Footer
 // ---------------------------------------------------------------------------
 tfoot {
-  background-color: var(--lunar-table-header-bg);
-  border-top: 2px solid var(--lunar-table-border);
+  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
+  border-top: 2px solid var(--lunar-border);
   font-weight: var(--lunar-font-semibold);
 }
 
@@ -93,7 +101,11 @@ th {
   white-space: nowrap;
 
   &[scope="row"] {
-    background-color: var(--lunar-table-header-bg);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 85%,
+      var(--lunar-muted)
+    );
   }
 }
 

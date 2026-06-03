@@ -15,11 +15,11 @@
 blockquote {
   padding: var(--lunar-space-4) var(--lunar-space-6);
   margin: var(--lunar-space-6) 0;
-  border-left: 4px solid var(--lunar-blockquote-border);
-  background-color: var(--lunar-blockquote-bg);
+  border-left: 4px solid var(--lunar-border);
+  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
   border-radius: 0 var(--lunar-radius-md) var(--lunar-radius-md) 0;
   font-style: italic;
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
 
   p {
     margin-bottom: var(--lunar-space-2);
@@ -34,7 +34,7 @@ blockquote {
     margin-top: var(--lunar-space-3);
     font-size: var(--lunar-text-sm);
     font-style: normal;
-    color: var(--lunar-fg-subtle);
+    color: var(--lunar-muted);
 
     &::before {
       content: "— ";
@@ -45,7 +45,11 @@ blockquote {
 // Nested blockquotes
 blockquote blockquote {
   margin: var(--lunar-space-4) 0;
-  border-left-color: var(--lunar-border-emphasis);
+  border-left-color: color-mix(
+    in srgb,
+    var(--lunar-border) 50%,
+    var(--lunar-muted)
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -59,8 +63,15 @@ pre {
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
   line-height: var(--lunar-leading-relaxed);
-  color: var(--lunar-pre-fg);
-  background-color: var(--lunar-pre-bg);
+  // color: light-dark(var(--color-stone-beige), #e4e4e7);
+  // background-color: light-dark(var(--color-charcoal-grey), #09090b);
+  // color: light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
+  // background-color: light-dark(
+  //   var(--color-stone-beige),
+  //   var(--color-charcoal-grey)
+  // );
+  border: var(--lunar-border-width) dotted
+    light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
   border-radius: var(--lunar-radius-lg);
   tab-size: 2;
   -webkit-overflow-scrolling: touch;
@@ -80,7 +91,7 @@ pre {
 // ---------------------------------------------------------------------------
 hr {
   border: 0;
-  height: 1px;
-  background-color: var(--lunar-hr);
+  height: var(--lunar-border-width);
+  background-color: var(--lunar-border);
   margin: var(--lunar-space-8) 0;
 }

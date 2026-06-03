@@ -8,23 +8,23 @@
 // Links
 // ---------------------------------------------------------------------------
 a {
-  color: var(--lunar-link);
+  color: var(--lunar-accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
   transition: color var(--lunar-transition-fast);
 
   &:hover {
-    color: var(--lunar-link-hover);
+    color: color-mix(in srgb, var(--lunar-accent) 80%, var(--lunar-fg));
     text-decoration-thickness: 2px;
   }
 
   &:visited {
-    color: var(--lunar-link-visited);
+    color: color-mix(in srgb, var(--lunar-accent) 70%, var(--lunar-muted));
   }
 
   &:active {
-    color: var(--lunar-link-hover);
+    color: color-mix(in srgb, var(--lunar-accent) 80%, var(--lunar-fg));
   }
 }
 
@@ -48,8 +48,11 @@ i {
 // Mark (Highlight)
 // ---------------------------------------------------------------------------
 mark {
-  background-color: var(--lunar-mark-bg);
-  color: var(--lunar-mark-fg);
+  background-color: light-dark(
+    var(--color-charcoal-grey),
+    var(--color-stone-beige)
+  );
+  color: light-dark(var(--color-stone-beige), var(--color-charcoal-grey));
   padding: 0.125em 0.25em;
   border-radius: var(--lunar-radius-sm);
 }
@@ -59,7 +62,7 @@ mark {
 // ---------------------------------------------------------------------------
 small {
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
@@ -68,7 +71,7 @@ small {
 s,
 del {
   text-decoration: line-through;
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
@@ -77,8 +80,12 @@ del {
 ins {
   text-decoration: underline;
   text-decoration-style: dotted;
-  background-color: var(--lunar-success-bg);
-  color: var(--lunar-success-fg);
+  background-color: color-mix(
+    in srgb,
+    var(--lunar-success) 15%,
+    var(--lunar-bg)
+  );
+  color: var(--lunar-success);
 }
 
 // ---------------------------------------------------------------------------
@@ -107,8 +114,8 @@ code {
   font-family: var(--lunar-font-mono);
   font-size: 0.875em;
   padding: 0.125em 0.375em;
-  background-color: var(--lunar-code-bg);
-  color: var(--lunar-code-fg);
+  background-color: color-mix(in srgb, var(--lunar-bg) 75%, var(--lunar-muted));
+  color: var(--lunar-fg);
   border-radius: var(--lunar-radius-md);
 }
 
@@ -119,13 +126,13 @@ kbd {
   font-family: var(--lunar-font-mono);
   font-size: 0.875em;
   padding: 0.125em 0.5em;
-  background-color: var(--lunar-bg-subtle);
+  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
   color: var(--lunar-fg);
-  border: 1px solid var(--lunar-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
-  box-shadow:
-    0 1px 0 var(--lunar-border-emphasis),
-    inset 0 0 0 1px var(--lunar-bg);
+  // box-shadow:
+  //   0 1px 0 color-mix(in srgb, var(--lunar-border) 50%, var(--lunar-muted)),
+  //   inset 0 0 0 1px var(--lunar-bg);
 }
 
 // ---------------------------------------------------------------------------
@@ -134,7 +141,7 @@ kbd {
 samp {
   font-family: var(--lunar-font-mono);
   font-size: 0.875em;
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
@@ -152,14 +159,14 @@ var {
 abbr[title] {
   text-decoration: underline dotted;
   cursor: help;
-  text-decoration-color: var(--lunar-fg-subtle);
+  text-decoration-color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
 // Quote
 // ---------------------------------------------------------------------------
 q {
-  quotes: """ """ "'" "'";
+  quotes: "" " " "" "'" "'";
 
   &::before {
     content: open-quote;
@@ -175,7 +182,7 @@ q {
 // ---------------------------------------------------------------------------
 cite {
   font-style: italic;
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------

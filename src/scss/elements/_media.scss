@@ -33,7 +33,7 @@ video {
   max-width: 100%;
   height: auto;
   border-radius: var(--lunar-radius-lg);
-  background-color: var(--lunar-gray-900);
+  background-color: light-dark(var(--color-charcoal-grey), #09090b);
 }
 
 // ---------------------------------------------------------------------------
@@ -45,7 +45,11 @@ audio {
   margin-bottom: var(--lunar-space-4);
 
   &::-webkit-media-controls-panel {
-    background-color: var(--lunar-bg-subtle);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 90%,
+      var(--lunar-muted)
+    );
   }
 }
 
@@ -55,7 +59,7 @@ audio {
 iframe {
   display: block;
   max-width: 100%;
-  border: 1px solid var(--lunar-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-lg);
 }
 
@@ -77,7 +81,7 @@ figure {
 // ---------------------------------------------------------------------------
 figcaption {
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-fg-muted);
+  color: var(--lunar-muted);
   text-align: center;
   font-style: italic;
 }

@@ -15,7 +15,7 @@ form {
 // Fieldset
 // ---------------------------------------------------------------------------
 fieldset {
-  border: 1px solid var(--lunar-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-lg);
   padding: var(--lunar-space-6);
   margin-bottom: var(--lunar-space-4);
@@ -43,15 +43,19 @@ label {
 // ---------------------------------------------------------------------------
 // Input (Text-like types)
 // ---------------------------------------------------------------------------
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="image"]) {
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
+    [type="file"]
+  ):not([type="color"]):not([type="submit"]):not([type="reset"]):not(
+    [type="button"]
+  ):not([type="image"]) {
   display: block;
   width: 100%;
   padding: var(--lunar-space-2) var(--lunar-space-3);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
-  background-color: var(--lunar-input-bg);
-  border: 1px solid var(--lunar-input-border);
+  background-color: var(--lunar-bg);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   transition:
     border-color var(--lunar-transition-fast),
@@ -59,27 +63,40 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="
   margin-bottom: var(--lunar-space-4);
 
   &:hover:not(:disabled) {
-    border-color: var(--lunar-input-border-hover);
+    border-color: color-mix(
+      in srgb,
+      var(--lunar-border) 50%,
+      var(--lunar-muted)
+    );
   }
 
   &:focus {
     outline: none;
-    border-color: var(--lunar-input-border-focus);
-    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+    border-color: var(--lunar-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
   }
 
   &::placeholder {
-    color: var(--lunar-input-placeholder);
+    color: var(--lunar-muted);
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: var(--lunar-bg-muted);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
   }
 
   &:read-only {
-    background-color: var(--lunar-bg-subtle);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 90%,
+      var(--lunar-muted)
+    );
   }
 }
 
@@ -93,8 +110,8 @@ textarea {
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
-  background-color: var(--lunar-input-bg);
-  border: 1px solid var(--lunar-input-border);
+  background-color: var(--lunar-bg);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   transition:
     border-color var(--lunar-transition-fast),
@@ -103,17 +120,22 @@ textarea {
   margin-bottom: var(--lunar-space-4);
 
   &:hover:not(:disabled) {
-    border-color: var(--lunar-input-border-hover);
+    border-color: color-mix(
+      in srgb,
+      var(--lunar-border) 50%,
+      var(--lunar-muted)
+    );
   }
 
   &:focus {
     outline: none;
-    border-color: var(--lunar-input-border-focus);
-    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+    border-color: var(--lunar-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
   }
 
   &::placeholder {
-    color: var(--lunar-input-placeholder);
+    color: var(--lunar-muted);
   }
 
   &:disabled {
@@ -128,16 +150,17 @@ textarea {
 select {
   display: block;
   width: 100%;
-  padding: var(--lunar-space-2) var(--lunar-space-8) var(--lunar-space-2) var(--lunar-space-3);
+  padding: var(--lunar-space-2) var(--lunar-space-8) var(--lunar-space-2)
+    var(--lunar-space-3);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
-  background-color: var(--lunar-input-bg);
+  background-color: var(--lunar-bg);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right var(--lunar-space-2) center;
   background-size: 1.25em;
-  border: 1px solid var(--lunar-input-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   appearance: none;
   cursor: pointer;
@@ -147,13 +170,18 @@ select {
   margin-bottom: var(--lunar-space-4);
 
   &:hover:not(:disabled) {
-    border-color: var(--lunar-input-border-hover);
+    border-color: color-mix(
+      in srgb,
+      var(--lunar-border) 50%,
+      var(--lunar-muted)
+    );
   }
 
   &:focus {
     outline: none;
-    border-color: var(--lunar-input-border-focus);
-    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+    border-color: var(--lunar-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
   }
 
   &:disabled {
@@ -195,7 +223,7 @@ input[type="radio"] {
 input[type="range"] {
   width: 100%;
   height: 0.5rem;
-  background-color: var(--lunar-bg-muted);
+  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
   border-radius: var(--lunar-radius-full);
   cursor: pointer;
   accent-color: var(--lunar-accent);
@@ -209,7 +237,7 @@ input[type="color"] {
   width: 3rem;
   height: 2.5rem;
   padding: var(--lunar-space-1);
-  border: 1px solid var(--lunar-input-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
@@ -232,8 +260,8 @@ input[type="file"] {
   width: 100%;
   padding: var(--lunar-space-2);
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-fg-muted);
-  border: 1px dashed var(--lunar-border);
+  color: var(--lunar-muted);
+  border: var(--lunar-border-width) dashed var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
@@ -243,14 +271,22 @@ input[type="file"] {
     margin-right: var(--lunar-space-3);
     font-weight: var(--lunar-font-medium);
     color: var(--lunar-fg);
-    background-color: var(--lunar-bg-subtle);
-    border: 1px solid var(--lunar-border);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 90%,
+      var(--lunar-muted)
+    );
+    border: var(--lunar-border-width) solid var(--lunar-border);
     border-radius: var(--lunar-radius-md);
     cursor: pointer;
     transition: background-color var(--lunar-transition-fast);
 
     &:hover {
-      background-color: var(--lunar-bg-muted);
+      background-color: color-mix(
+        in srgb,
+        var(--lunar-bg) 80%,
+        var(--lunar-muted)
+      );
     }
   }
 }
@@ -269,9 +305,10 @@ input[type="button"] {
   font-size: var(--lunar-text-base);
   font-weight: var(--lunar-font-medium);
   line-height: var(--lunar-leading-normal);
-  color: var(--lunar-accent-fg);
+  // color: var(--lunar-bg);
+  // color: var(--color-stone-beige), var(--color-charcoal-grey);
   background-color: var(--lunar-accent);
-  border: 1px solid transparent;
+  border: var(--lunar-border-width) solid transparent;
   border-radius: var(--lunar-radius-md);
   cursor: pointer;
   transition:
@@ -280,12 +317,17 @@ input[type="button"] {
   margin-bottom: var(--lunar-space-4);
 
   &:hover:not(:disabled) {
-    background-color: var(--lunar-accent-hover);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-accent) 85%,
+      var(--lunar-fg)
+    );
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px var(--lunar-accent-muted);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
   }
 
   &:active:not(:disabled) {
@@ -299,12 +341,16 @@ input[type="button"] {
 }
 
 input[type="reset"] {
-  background-color: var(--lunar-bg-subtle);
+  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
   color: var(--lunar-fg);
   border-color: var(--lunar-border);
 
   &:hover:not(:disabled) {
-    background-color: var(--lunar-bg-muted);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
   }
 }
 
@@ -324,7 +370,7 @@ output {
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
   color: var(--lunar-fg);
-  background-color: var(--lunar-bg-subtle);
+  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
   border-radius: var(--lunar-radius-md);
 }
 
@@ -337,12 +383,16 @@ progress {
   height: 0.75rem;
   border: none;
   border-radius: var(--lunar-radius-full);
-  background-color: var(--lunar-bg-muted);
+  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
   overflow: hidden;
   margin-bottom: var(--lunar-space-4);
 
   &::-webkit-progress-bar {
-    background-color: var(--lunar-bg-muted);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
     border-radius: var(--lunar-radius-full);
   }
 
@@ -367,12 +417,16 @@ meter {
   height: 0.75rem;
   border: none;
   border-radius: var(--lunar-radius-full);
-  background-color: var(--lunar-bg-muted);
+  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
   overflow: hidden;
   margin-bottom: var(--lunar-space-4);
 
   &::-webkit-meter-bar {
-    background-color: var(--lunar-bg-muted);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
     border-radius: var(--lunar-radius-full);
     border: none;
   }

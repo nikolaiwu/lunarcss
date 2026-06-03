@@ -26,6 +26,7 @@ body {
   line-height: var(--lunar-leading-relaxed);
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
+  padding: var(--lunar-space-4);
 
   // Smooth transitions for theme changes
   transition:
@@ -35,8 +36,12 @@ body {
 
 // Text selection
 ::selection {
-  background-color: var(--lunar-selection-bg);
-  color: var(--lunar-selection-fg);
+  background-color: color-mix(
+    in srgb,
+    var(--lunar-accent) 30%,
+    var(--lunar-bg)
+  );
+  color: var(--lunar-fg);
 }
 
 // Focus visible - consistent focus styles across all elements

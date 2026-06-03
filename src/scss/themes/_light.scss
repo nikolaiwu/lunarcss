@@ -1,105 +1,10 @@
 // =============================================================================
 // LUNARCSS - Light Theme
 // =============================================================================
-// Semantic color mappings for light mode.
-// Applied by default and when [data-theme="light"] is set.
+// Forces light color scheme when [data-theme="light"] is set.
+// All color tokens are defined in _config.scss using light-dark().
 // =============================================================================
 
-:root,
 [data-theme="light"] {
-  // Color scheme hint for browser
   color-scheme: light;
-
-  // ---------------------------------------------------------------------------
-  // Background Colors
-  // ---------------------------------------------------------------------------
-  --lunar-bg: var(--lunar-gray-50);
-  --lunar-bg-subtle: var(--lunar-gray-100);
-  --lunar-bg-muted: var(--lunar-gray-200);
-  --lunar-bg-emphasis: var(--lunar-gray-300);
-
-  // ---------------------------------------------------------------------------
-  // Foreground / Text Colors
-  // ---------------------------------------------------------------------------
-  --lunar-fg: var(--lunar-gray-900);
-  --lunar-fg-muted: var(--lunar-gray-600);
-  --lunar-fg-subtle: var(--lunar-gray-500);
-  --lunar-fg-on-emphasis: var(--lunar-gray-50);
-
-  // ---------------------------------------------------------------------------
-  // Border Colors
-  // ---------------------------------------------------------------------------
-  --lunar-border: var(--lunar-gray-200);
-  --lunar-border-muted: var(--lunar-gray-100);
-  --lunar-border-emphasis: var(--lunar-gray-300);
-
-  // ---------------------------------------------------------------------------
-  // Interactive / Accent Colors
-  // ---------------------------------------------------------------------------
-  --lunar-accent: var(--lunar-primary-600);
-  --lunar-accent-hover: var(--lunar-primary-700);
-  --lunar-accent-muted: var(--lunar-primary-100);
-  --lunar-accent-fg: var(--lunar-gray-50);
-
-  // ---------------------------------------------------------------------------
-  // Link Colors
-  // ---------------------------------------------------------------------------
-  --lunar-link: var(--lunar-primary-600);
-  --lunar-link-hover: var(--lunar-primary-800);
-  --lunar-link-visited: var(--lunar-primary-700);
-
-  // ---------------------------------------------------------------------------
-  // Form Colors
-  // ---------------------------------------------------------------------------
-  --lunar-input-bg: var(--lunar-gray-50);
-  --lunar-input-border: var(--lunar-gray-300);
-  --lunar-input-border-hover: var(--lunar-gray-400);
-  --lunar-input-border-focus: var(--lunar-primary-500);
-  --lunar-input-placeholder: var(--lunar-gray-400);
-
-  // ---------------------------------------------------------------------------
-  // Code / Pre Colors
-  // ---------------------------------------------------------------------------
-  --lunar-code-bg: var(--lunar-gray-100);
-  --lunar-code-fg: var(--lunar-gray-800);
-  --lunar-pre-bg: var(--lunar-gray-900);
-  --lunar-pre-fg: var(--lunar-gray-100);
-
-  // ---------------------------------------------------------------------------
-  // Table Colors
-  // ---------------------------------------------------------------------------
-  --lunar-table-border: var(--lunar-gray-200);
-  --lunar-table-header-bg: var(--lunar-gray-100);
-  --lunar-table-row-hover: var(--lunar-gray-50);
-  --lunar-table-stripe: var(--lunar-gray-50);
-
-  // ---------------------------------------------------------------------------
-  // Semantic Status Colors
-  // ---------------------------------------------------------------------------
-  --lunar-success-bg: #dcfce7;
-  --lunar-success-fg: #166534;
-  --lunar-success-border: #86efac;
-
-  --lunar-warning-bg: #fef3c7;
-  --lunar-warning-fg: #92400e;
-  --lunar-warning-border: #fcd34d;
-
-  --lunar-error-bg: #fee2e2;
-  --lunar-error-fg: #991b1b;
-  --lunar-error-border: #fca5a5;
-
-  --lunar-info-bg: #dbeafe;
-  --lunar-info-fg: #1e40af;
-  --lunar-info-border: #93c5fd;
-
-  // ---------------------------------------------------------------------------
-  // Misc
-  // ---------------------------------------------------------------------------
-  --lunar-mark-bg: #fef08a;
-  --lunar-mark-fg: var(--lunar-gray-900);
-  --lunar-selection-bg: var(--lunar-primary-200);
-  --lunar-selection-fg: var(--lunar-gray-900);
-  --lunar-hr: var(--lunar-gray-200);
-  --lunar-blockquote-border: var(--lunar-gray-300);
-  --lunar-blockquote-bg: var(--lunar-gray-50);
 }

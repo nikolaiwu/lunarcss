@@ -21,16 +21,19 @@ This guide covers everything you need to know to use and customize LunarCSS.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css">
-  <title>My Page</title>
-</head>
-<body>
-  <h1>Hello, LunarCSS!</h1>
-  <p>Your content is now beautifully styled.</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css"
+    />
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello, LunarCSS!</h1>
+    <p>Your content is now beautifully styled.</p>
+  </body>
 </html>
 ```
 
@@ -43,13 +46,13 @@ npm install lunarcss
 Then import in your HTML or build system:
 
 ```html
-<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css">
+<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css" />
 ```
 
 Or in a JavaScript bundler:
 
 ```javascript
-import 'lunarcss/dist/lunarcss.min.css';
+import "lunarcss/dist/lunarcss.min.css";
 ```
 
 ### Option 3: Download
@@ -57,7 +60,7 @@ import 'lunarcss/dist/lunarcss.min.css';
 Download `lunarcss.min.css` from the releases page and add it to your project:
 
 ```html
-<link rel="stylesheet" href="path/to/lunarcss.min.css">
+<link rel="stylesheet" href="path/to/lunarcss.min.css" />
 ```
 
 ---
@@ -69,7 +72,9 @@ LunarCSS styles all standard HTML elements automatically. Just write semantic HT
 ```html
 <article>
   <h1>Article Title</h1>
-  <p>This is a paragraph with <strong>bold</strong> and <em>italic</em> text.</p>
+  <p>
+    This is a paragraph with <strong>bold</strong> and <em>italic</em> text.
+  </p>
 
   <h2>A Subheading</h2>
   <p>More content with a <a href="#">link</a>.</p>
@@ -94,12 +99,7 @@ No classes needed!
 
 ### Automatic Theme Detection
 
-By default, LunarCSS respects the user's operating system preference:
-
-- **Light mode**: If the user's OS is set to light mode
-- **Dark mode**: If the user's OS is set to dark mode
-
-This works via the CSS `prefers-color-scheme` media query.
+By default, LunarCSS respects the user's operating system preference via the CSS `prefers-color-scheme` media query. All color tokens use `light-dark()`, so the browser automatically picks the right value.
 
 ### Manual Theme Control
 
@@ -108,10 +108,12 @@ To manually control the theme, add the `data-theme` attribute to the `<html>` el
 ```html
 <!-- Force light theme -->
 <html data-theme="light">
-
-<!-- Force dark theme -->
-<html data-theme="dark">
+  <!-- Force dark theme -->
+  <html data-theme="dark"></html>
+</html>
 ```
+
+This works by switching the `color-scheme` property, which flips all `light-dark()` values simultaneously.
 
 ### JavaScript Theme Toggle
 
@@ -121,18 +123,18 @@ Here's a complete theme toggle implementation:
 // Toggle between light and dark
 function toggleTheme() {
   const html = document.documentElement;
-  const currentTheme = html.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  const currentTheme = html.getAttribute("data-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-  html.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
+  html.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
 }
 
 // Load saved theme on page load
 function loadTheme() {
-  const savedTheme = localStorage.getItem('theme');
+  const savedTheme = localStorage.getItem("theme");
   if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }
 }
 
@@ -154,94 +156,43 @@ loadTheme();
 
 LunarCSS uses CSS custom properties for all design tokens. Override these in your own stylesheet to customize the theme.
 
-### Color Primitives
+### Color Tokens
+
+LunarCSS has **9 color tokens**. Each uses `light-dark()` so a single definition covers both light and dark mode automatically — no theme overrides needed.
 
 ```css
 :root {
-  /* Gray scale */
-  --lunar-gray-50: #fafafa;
-  --lunar-gray-100: #f4f4f5;
-  --lunar-gray-200: #e4e4e7;
-  --lunar-gray-300: #d4d4d8;
-  --lunar-gray-400: #a1a1aa;
-  --lunar-gray-500: #71717a;
-  --lunar-gray-600: #52525b;
-  --lunar-gray-700: #3f3f46;
-  --lunar-gray-800: #27272a;
-  --lunar-gray-900: #18181b;
-  --lunar-gray-950: #09090b;
-
-  /* Primary accent (blue) */
-  --lunar-primary-50: #eff6ff;
-  --lunar-primary-100: #dbeafe;
-  --lunar-primary-200: #bfdbfe;
-  --lunar-primary-300: #93c5fd;
-  --lunar-primary-400: #60a5fa;
-  --lunar-primary-500: #3b82f6;
-  --lunar-primary-600: #2563eb;
-  --lunar-primary-700: #1d4ed8;
-  --lunar-primary-800: #1e40af;
-  --lunar-primary-900: #1e3a8a;
-
-  /* Semantic colors */
-  --lunar-success: #22c55e;
-  --lunar-warning: #f59e0b;
-  --lunar-error: #ef4444;
-  --lunar-info: #3b82f6;
+  --lunar-bg: light-dark(#d6d2c4, #36454f); /* Page background */
+  --lunar-fg: light-dark(#36454f, #d6d2c4); /* Primary text */
+  --lunar-accent: light-dark(
+    #2563eb,
+    #3b82f6
+  ); /* Interactive / links / focus */
+  --lunar-muted: light-dark(
+    #71717a,
+    #a1a1aa
+  ); /* Secondary text, placeholders */
+  --lunar-border: light-dark(#e4e4e7, #3f3f46); /* Borders and dividers */
+  --lunar-success: light-dark(#16a34a, #4ade80); /* Success state */
+  --lunar-warning: light-dark(#d97706, #fbbf24); /* Warning state */
+  --lunar-error: light-dark(#dc2626, #f87171); /* Error state */
+  --lunar-info: light-dark(#2563eb, #60a5fa); /* Informational state */
 }
 ```
 
-### Semantic Colors (Theme-aware)
-
-These colors automatically adjust based on light/dark theme:
+Override any token to rebrand. For example, to change the accent to purple:
 
 ```css
 :root {
-  /* Backgrounds */
-  --lunar-bg: /* Base background */
-  --lunar-bg-subtle: /* Slightly emphasized */
-  --lunar-bg-muted: /* More emphasized */
-  --lunar-bg-emphasis: /* Most emphasized */
+  --lunar-accent: light-dark(#7c3aed, #a78bfa);
+}
+```
 
-  /* Foreground / Text */
-  --lunar-fg: /* Primary text */
-  --lunar-fg-muted: /* Secondary text */
-  --lunar-fg-subtle: /* Tertiary text */
+Or use a single color (same in both modes):
 
-  /* Borders */
-  --lunar-border: /* Default border */
-  --lunar-border-muted: /* Subtle border */
-  --lunar-border-emphasis: /* Strong border */
-
-  /* Interactive / Accent */
-  --lunar-accent: /* Primary action color */
-  --lunar-accent-hover: /* Hover state */
-  --lunar-accent-muted: /* Light accent background */
-  --lunar-accent-fg: /* Text on accent background */
-
-  /* Links */
-  --lunar-link: /* Link color */
-  --lunar-link-hover: /* Link hover */
-  --lunar-link-visited: /* Visited link */
-
-  /* Forms */
-  --lunar-input-bg: /* Input background */
-  --lunar-input-border: /* Input border */
-  --lunar-input-border-hover: /* Input border on hover */
-  --lunar-input-border-focus: /* Input border on focus */
-  --lunar-input-placeholder: /* Placeholder text */
-
-  /* Code */
-  --lunar-code-bg: /* Inline code background */
-  --lunar-code-fg: /* Inline code text */
-  --lunar-pre-bg: /* Code block background */
-  --lunar-pre-fg: /* Code block text */
-
-  /* Tables */
-  --lunar-table-border: /* Table borders */
-  --lunar-table-header-bg: /* Header background */
-  --lunar-table-row-hover: /* Row hover */
-  --lunar-table-stripe: /* Striped row */
+```css
+:root {
+  --lunar-accent: #7c3aed;
 }
 ```
 
@@ -250,21 +201,23 @@ These colors automatically adjust based on light/dark theme:
 ```css
 :root {
   /* Font families */
-  --lunar-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --lunar-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
-  --lunar-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --lunar-font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --lunar-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --lunar-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Font sizes */
-  --lunar-text-xs: 0.75rem;    /* 12px */
-  --lunar-text-sm: 0.875rem;   /* 14px */
-  --lunar-text-base: 1rem;     /* 16px */
-  --lunar-text-lg: 1.125rem;   /* 18px */
-  --lunar-text-xl: 1.25rem;    /* 20px */
-  --lunar-text-2xl: 1.5rem;    /* 24px */
-  --lunar-text-3xl: 1.875rem;  /* 30px */
-  --lunar-text-4xl: 2.25rem;   /* 36px */
-  --lunar-text-5xl: 3rem;      /* 48px */
-  --lunar-text-6xl: 3.75rem;   /* 60px */
+  --lunar-text-xs: 0.75rem; /* 12px */
+  --lunar-text-sm: 0.875rem; /* 14px */
+  --lunar-text-base: 1rem; /* 16px */
+  --lunar-text-lg: 1.125rem; /* 18px */
+  --lunar-text-xl: 1.25rem; /* 20px */
+  --lunar-text-2xl: 1.5rem; /* 24px */
+  --lunar-text-3xl: 1.875rem; /* 30px */
+  --lunar-text-4xl: 2.25rem; /* 36px */
+  --lunar-text-5xl: 3rem; /* 48px */
+  --lunar-text-6xl: 3.75rem; /* 60px */
 
   /* Line heights */
   --lunar-leading-none: 1;
@@ -290,18 +243,18 @@ These colors automatically adjust based on light/dark theme:
 ```css
 :root {
   --lunar-space-0: 0;
-  --lunar-space-1: 0.25rem;   /* 4px */
-  --lunar-space-2: 0.5rem;    /* 8px */
-  --lunar-space-3: 0.75rem;   /* 12px */
-  --lunar-space-4: 1rem;      /* 16px */
-  --lunar-space-5: 1.25rem;   /* 20px */
-  --lunar-space-6: 1.5rem;    /* 24px */
-  --lunar-space-8: 2rem;      /* 32px */
-  --lunar-space-10: 2.5rem;   /* 40px */
-  --lunar-space-12: 3rem;     /* 48px */
-  --lunar-space-16: 4rem;     /* 64px */
-  --lunar-space-20: 5rem;     /* 80px */
-  --lunar-space-24: 6rem;     /* 96px */
+  --lunar-space-1: 0.25rem; /* 4px */
+  --lunar-space-2: 0.5rem; /* 8px */
+  --lunar-space-3: 0.75rem; /* 12px */
+  --lunar-space-4: 1rem; /* 16px */
+  --lunar-space-5: 1.25rem; /* 20px */
+  --lunar-space-6: 1.5rem; /* 24px */
+  --lunar-space-8: 2rem; /* 32px */
+  --lunar-space-10: 2.5rem; /* 40px */
+  --lunar-space-12: 3rem; /* 48px */
+  --lunar-space-16: 4rem; /* 64px */
+  --lunar-space-20: 5rem; /* 80px */
+  --lunar-space-24: 6rem; /* 96px */
 }
 ```
 
@@ -310,11 +263,11 @@ These colors automatically adjust based on light/dark theme:
 ```css
 :root {
   --lunar-radius-none: 0;
-  --lunar-radius-sm: 0.125rem;   /* 2px */
-  --lunar-radius-md: 0.375rem;   /* 6px */
-  --lunar-radius-lg: 0.5rem;     /* 8px */
-  --lunar-radius-xl: 0.75rem;    /* 12px */
-  --lunar-radius-2xl: 1rem;      /* 16px */
+  --lunar-radius-sm: 0.125rem; /* 2px */
+  --lunar-radius-md: 0.375rem; /* 6px */
+  --lunar-radius-lg: 0.5rem; /* 8px */
+  --lunar-radius-xl: 0.75rem; /* 12px */
+  --lunar-radius-2xl: 1rem; /* 16px */
   --lunar-radius-full: 9999px;
 }
 ```
@@ -324,9 +277,12 @@ These colors automatically adjust based on light/dark theme:
 ```css
 :root {
   --lunar-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --lunar-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --lunar-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --lunar-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --lunar-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --lunar-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --lunar-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 ```
 
@@ -344,30 +300,32 @@ These colors automatically adjust based on light/dark theme:
 
 ## Customization Examples
 
-### Change Primary Color to Purple
+### Change Accent Color to Purple
 
 ```css
 :root {
-  --lunar-primary-50: #faf5ff;
-  --lunar-primary-100: #f3e8ff;
-  --lunar-primary-200: #e9d5ff;
-  --lunar-primary-300: #d8b4fe;
-  --lunar-primary-400: #c084fc;
-  --lunar-primary-500: #a855f7;
-  --lunar-primary-600: #9333ea;
-  --lunar-primary-700: #7e22ce;
-  --lunar-primary-800: #6b21a8;
-  --lunar-primary-900: #581c87;
+  --lunar-accent: light-dark(#7c3aed, #a78bfa);
+}
+```
+
+### Warmer Neutral Background
+
+```css
+:root {
+  --lunar-bg: light-dark(#faf9f7, #1c1917);
+  --lunar-fg: light-dark(#1c1917, #f5f5f4);
+  --lunar-muted: light-dark(#78716c, #a8a29e);
+  --lunar-border: light-dark(#e7e5e4, #44403c);
 }
 ```
 
 ### Use Custom Fonts
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  --lunar-font-sans: 'Inter', system-ui, sans-serif;
+  --lunar-font-sans: "Inter", system-ui, sans-serif;
 }
 ```
 
@@ -376,23 +334,6 @@ These colors automatically adjust based on light/dark theme:
 ```css
 html {
   font-size: 112.5%; /* 18px base instead of 16px */
-}
-```
-
-### Warmer Color Palette
-
-```css
-:root {
-  --lunar-gray-50: #fafaf9;
-  --lunar-gray-100: #f5f5f4;
-  --lunar-gray-200: #e7e5e4;
-  --lunar-gray-300: #d6d3d1;
-  --lunar-gray-400: #a8a29e;
-  --lunar-gray-500: #78716c;
-  --lunar-gray-600: #57534e;
-  --lunar-gray-700: #44403c;
-  --lunar-gray-800: #292524;
-  --lunar-gray-900: #1c1917;
 }
 ```
 
@@ -406,9 +347,9 @@ LunarCSS works great as a base layer before adding Tailwind:
 
 ```html
 <!-- LunarCSS first for base element styles -->
-<link rel="stylesheet" href="lunarcss.min.css">
+<link rel="stylesheet" href="lunarcss.min.css" />
 <!-- Tailwind second for utility classes -->
-<link rel="stylesheet" href="output.css">
+<link rel="stylesheet" href="output.css" />
 ```
 
 Your HTML elements will have beautiful defaults, and you can use Tailwind utilities for layout and customization.
@@ -418,8 +359,8 @@ Your HTML elements will have beautiful defaults, and you can use Tailwind utilit
 Load LunarCSS before Bootstrap to provide better defaults:
 
 ```html
-<link rel="stylesheet" href="lunarcss.min.css">
-<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="lunarcss.min.css" />
+<link rel="stylesheet" href="bootstrap.min.css" />
 ```
 
 ### With React/Vue/Svelte
@@ -428,8 +369,8 @@ Import LunarCSS in your entry point:
 
 ```javascript
 // main.js or App.jsx
-import 'lunarcss/dist/lunarcss.min.css';
-import './your-styles.css'; // Your custom styles after
+import "lunarcss/dist/lunarcss.min.css";
+import "./your-styles.css"; // Your custom styles after
 ```
 
 ---
@@ -445,8 +386,8 @@ import './your-styles.css'; // Your custom styles after
 ### Dark Mode Not Working
 
 1. **Check `data-theme` attribute**: Make sure it's on the `<html>` element, not `<body>`
-2. **Check system preference**: LunarCSS respects `prefers-color-scheme` by default
-3. **Check for conflicts**: Other CSS may override theme variables
+2. **Check system preference**: LunarCSS respects `prefers-color-scheme` by default using `light-dark()` CSS function
+3. **Browser support**: `light-dark()` requires a modern browser (Chrome 123+, Firefox 120+, Safari 17.5+). For older browsers, colors will fall back to the light values.
 
 ### Forms Look Different
 

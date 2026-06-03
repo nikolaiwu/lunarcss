@@ -6,59 +6,55 @@
 // =============================================================================
 
 :root {
-  // ---------------------------------------------------------------------------
-  // Color Palette (Primitives)
-  // ---------------------------------------------------------------------------
-  // Neutral scale - used for text, backgrounds, borders
-  --lunar-gray-50: #fafafa;
-  --lunar-gray-100: #f4f4f5;
-  --lunar-gray-200: #e4e4e7;
-  --lunar-gray-300: #d4d4d8;
-  --lunar-gray-400: #a1a1aa;
-  --lunar-gray-500: #71717a;
-  --lunar-gray-600: #52525b;
-  --lunar-gray-700: #3f3f46;
-  --lunar-gray-800: #27272a;
-  --lunar-gray-900: #18181b;
-  --lunar-gray-950: #09090b;
+  color-scheme: light dark;
 
-  // Primary accent color scale
-  --lunar-primary-50: #eff6ff;
-  --lunar-primary-100: #dbeafe;
-  --lunar-primary-200: #bfdbfe;
-  --lunar-primary-300: #93c5fd;
-  --lunar-primary-400: #60a5fa;
-  --lunar-primary-500: #3b82f6;
-  --lunar-primary-600: #2563eb;
-  --lunar-primary-700: #1d4ed8;
-  --lunar-primary-800: #1e40af;
-  --lunar-primary-900: #1e3a8a;
+  // ---------------------------------------------------------------------------
+  // Color Tokens
+  // ---------------------------------------------------------------------------
+  // Uses light-dark() so a single definition covers both themes.
+  // Override any of these 9 props to rebrand. Force a theme by setting
+  // color-scheme: light  or  color-scheme: dark  on a parent element.
+  // ---------------------------------------------------------------------------
+  --color-stone-beige: #d6d2c4;
+  --color-charcoal-grey: #36454f;
 
-  // Semantic colors
-  --lunar-success: #22c55e;
-  --lunar-warning: #f59e0b;
-  --lunar-error: #ef4444;
-  --lunar-info: #3b82f6;
+  --lunar-bg: light-dark(var(--color-stone-beige), var(--color-charcoal-grey));
+  --lunar-fg: light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
+  // --lunar-accent: light-dark(#2563eb, #3b82f6);
+  --lunar-accent: #deb223;
+  --lunar-muted: light-dark(#71717a, #a1a1aa);
+  --lunar-border: light-dark(
+    var(--color-charcoal-grey),
+    var(--color-stone-beige)
+  );
+  --lunar-success: light-dark(#16a34a, #4ade80);
+  --lunar-warning: light-dark(#d97706, #fbbf24);
+  --lunar-error: light-dark(#dc2626, #f87171);
+  --lunar-info: light-dark(#2563eb, #60a5fa);
 
   // ---------------------------------------------------------------------------
   // Typography Scale
   // ---------------------------------------------------------------------------
   // Font families
-  --lunar-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --lunar-font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
-  --lunar-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --lunar-font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --lunar-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --lunar-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
 
   // Font sizes (modular scale ~1.25)
-  --lunar-text-xs: 0.75rem;      // 12px
-  --lunar-text-sm: 0.875rem;     // 14px
-  --lunar-text-base: 1rem;       // 16px
-  --lunar-text-lg: 1.125rem;     // 18px
-  --lunar-text-xl: 1.25rem;      // 20px
-  --lunar-text-2xl: 1.5rem;      // 24px
-  --lunar-text-3xl: 1.875rem;    // 30px
-  --lunar-text-4xl: 2.25rem;     // 36px
-  --lunar-text-5xl: 3rem;        // 48px
-  --lunar-text-6xl: 3.75rem;     // 60px
+  --lunar-text-xs: 0.75rem; // 12px
+  --lunar-text-sm: 0.875rem; // 14px
+  --lunar-text-base: 1rem; // 16px
+  --lunar-text-lg: 1.125rem; // 18px
+  --lunar-text-xl: 1.25rem; // 20px
+  --lunar-text-2xl: 1.5rem; // 24px
+  --lunar-text-3xl: 1.875rem; // 30px
+  --lunar-text-4xl: 2.25rem; // 36px
+  --lunar-text-5xl: 3rem; // 48px
+  --lunar-text-6xl: 3.75rem; // 60px
 
   // Line heights
   --lunar-leading-none: 1;
@@ -86,37 +82,45 @@
   // Spacing Scale
   // ---------------------------------------------------------------------------
   --lunar-space-0: 0;
-  --lunar-space-1: 0.25rem;    // 4px
-  --lunar-space-2: 0.5rem;     // 8px
-  --lunar-space-3: 0.75rem;    // 12px
-  --lunar-space-4: 1rem;       // 16px
-  --lunar-space-5: 1.25rem;    // 20px
-  --lunar-space-6: 1.5rem;     // 24px
-  --lunar-space-8: 2rem;       // 32px
-  --lunar-space-10: 2.5rem;    // 40px
-  --lunar-space-12: 3rem;      // 48px
-  --lunar-space-16: 4rem;      // 64px
-  --lunar-space-20: 5rem;      // 80px
-  --lunar-space-24: 6rem;      // 96px
+  --lunar-space-1: 0.25rem; // 4px
+  --lunar-space-2: 0.5rem; // 8px
+  --lunar-space-3: 0.75rem; // 12px
+  --lunar-space-4: 1rem; // 16px
+  --lunar-space-5: 1.25rem; // 20px
+  --lunar-space-6: 1.5rem; // 24px
+  --lunar-space-8: 2rem; // 32px
+  --lunar-space-10: 2.5rem; // 40px
+  --lunar-space-12: 3rem; // 48px
+  --lunar-space-16: 4rem; // 64px
+  --lunar-space-20: 5rem; // 80px
+  --lunar-space-24: 6rem; // 96px
+
+  // ---------------------------------------------------------------------------
+  // Border Width
+  // ---------------------------------------------------------------------------
+  --lunar-border-width: 2px;
 
   // ---------------------------------------------------------------------------
   // Border Radius
   // ---------------------------------------------------------------------------
   --lunar-radius-none: 0;
-  --lunar-radius-sm: 0.125rem;   // 2px
-  --lunar-radius-md: 0.375rem;   // 6px
-  --lunar-radius-lg: 0.5rem;     // 8px
-  --lunar-radius-xl: 0.75rem;    // 12px
-  --lunar-radius-2xl: 1rem;      // 16px
+  --lunar-radius-sm: 0.125rem; // 2px
+  --lunar-radius-md: 0.375rem; // 6px
+  --lunar-radius-lg: 0.5rem; // 8px
+  --lunar-radius-xl: 0.75rem; // 12px
+  --lunar-radius-2xl: 1rem; // 16px
   --lunar-radius-full: 9999px;
 
   // ---------------------------------------------------------------------------
   // Shadows
   // ---------------------------------------------------------------------------
   --lunar-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --lunar-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --lunar-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --lunar-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --lunar-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --lunar-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --lunar-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
   // ---------------------------------------------------------------------------
   // Transitions
