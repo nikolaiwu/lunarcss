@@ -3,19 +3,21 @@
 // =============================================================================
 // Styles for details, summary, dialog elements.
 // =============================================================================
+@use "../mixins";
 
 // ---------------------------------------------------------------------------
 // Details
 // ---------------------------------------------------------------------------
+
 details {
   margin-bottom: var(--lunar-space-4);
-  border: 1px solid var(--lunar-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-lg);
   overflow: hidden;
 
   &[open] {
     summary {
-      border-bottom: 1px solid var(--lunar-border);
+      border-bottom: var(--lunar-border-width) solid var(--lunar-border);
     }
   }
 
@@ -36,7 +38,7 @@ summary {
   font-weight: var(--lunar-font-medium);
   color: var(--lunar-fg);
   cursor: pointer;
-  background-color: var(--lunar-bg-subtle);
+  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
   list-style: none;
   transition: background-color var(--lunar-transition-fast);
 
@@ -64,7 +66,11 @@ summary {
   }
 
   &:hover {
-    background-color: var(--lunar-bg-muted);
+    background-color: color-mix(
+      in srgb,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
   }
 
   &:focus-visible {
@@ -87,6 +93,8 @@ details > div:not(summary) {
 // Dialog
 // ---------------------------------------------------------------------------
 dialog {
+  @include mixins.cyberbox;
+
   position: fixed;
   top: 50%;
   left: 50%;
@@ -94,21 +102,47 @@ dialog {
   max-width: min(90vw, 32rem);
   max-height: 85vh;
   padding: var(--lunar-space-6);
-  background-color: var(--lunar-bg);
+  // background-color: var(--lunar-bg);
   color: var(--lunar-fg);
-  border: 1px solid var(--lunar-border);
-  border-radius: var(--lunar-radius-xl);
+  border: 0;
+  // border: var(--lunar-border-width) solid var(--lunar-border);
+  // border-radius: var(--lunar-radius-xl);
   box-shadow: var(--lunar-shadow-xl);
   overflow: auto;
 
+  transition:
+    opacity 0.3s ease-in,
+    transform 0.2s ease-in,
+    // overlay 0.7s ease-in allow-discrete,
+    display 0.3s ease-in allow-discrete;
+
+  opacity: 0;
+
+  &:open {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
   &::backdrop {
-    background-color: rgb(0 0 0 / 0.5);
+    background-color: light-dark(
+      rgb(255 255 255 / 0.5),
+      rgb(0 0 0 / 0.5)
+    ); // TODO: use fg and bg variants
     backdrop-filter: blur(4px);
   }
 
   // Dialog not open
   &:not([open]) {
     display: none;
+    opacity: 0;
+    transform: translate(-50%, -75%);
+  }
+}
+
+@starting-style {
+  dialog:open {
+    opacity: 0;
+    transform: translate(-50%, -75%);
   }
 }
 
@@ -121,7 +155,7 @@ dialog {
   padding: var(--lunar-space-4);
   background-color: var(--lunar-bg);
   color: var(--lunar-fg);
-  border: 1px solid var(--lunar-border);
+  border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-lg);
   box-shadow: var(--lunar-shadow-lg);
 

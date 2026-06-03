@@ -1,0 +1,32 @@
+@mixin cyberbox {
+  --size: --lunar-space-8;
+
+  // position: relative;
+  background-color: var(--lunar-bg);
+  // clip-path: polygon(
+  //   0 0,
+  //   calc(100% - var(--lunar-space-8)) 0,
+  //   100% var(--lunar-space-8),
+  //   100% 100%,
+  //   0 100%
+  // );
+  clip-path: polygon(
+    var(--lunar-space-8) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--lunar-space-8)
+  );
+  padding-left: var(--lunar-space-8) !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--lunar-space-8) * -1);
+    left: calc(var(--lunar-space-8) * -1);
+    background-color: var(--lunar-border);
+    width: var(--lunar-space-16);
+    height: var(--lunar-space-16);
+    transform: rotate(45deg);
+  }
+}
