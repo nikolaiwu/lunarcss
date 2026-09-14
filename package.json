@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes, just beautiful defaults.",
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "main": "dist/lunarcss.min.css",
   "files": [
     "dist"

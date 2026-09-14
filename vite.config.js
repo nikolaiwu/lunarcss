@@ -35,7 +35,8 @@ export default defineConfig(({ mode }) => {
             // Output CSS with proper naming
             if (assetInfo.name?.endsWith('.css')) {
               // Name the main theme CSS appropriately
-              if (assetInfo.name === 'main.css') {
+              // (Vite names it after the `lunarcss` input key, not the source file)
+              if (assetInfo.name === 'lunarcss.css') {
                 return isProduction ? 'lunarcss.min.css' : 'lunarcss.css';
               }
               return '[name].[ext]';

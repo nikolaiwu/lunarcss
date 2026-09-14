@@ -16,7 +16,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 
 ## Installation
 
-### Option 1: CDN (Recommended for Quick Start)
+### Option 1: CDN (Coming Soon)
 
 ```html
 <!DOCTYPE html>
@@ -107,13 +107,13 @@ To manually control the theme, add the `data-theme` attribute to the `<html>` el
 
 ```html
 <!-- Force light theme -->
-<html data-theme="light">
-  <!-- Force dark theme -->
-  <html data-theme="dark"></html>
-</html>
+<html data-theme="light"></html>
+
+<!-- Force dark theme -->
+<html data-theme="dark"></html>
 ```
 
-This works by switching the `color-scheme` property, which flips all `light-dark()` values simultaneously.
+This works by switching the `color-scheme` property, which flips all `light-dark()` values simultaneously. Because `color-scheme` is inherited, you can also put `data-theme` on any element to theme just that subtree (e.g. a dark `<aside>` on a light page).
 
 ### JavaScript Theme Toggle
 
@@ -158,27 +158,28 @@ LunarCSS uses CSS custom properties for all design tokens. Override these in you
 
 ### Color Tokens
 
-LunarCSS has **9 color tokens**. Each uses `light-dark()` so a single definition covers both light and dark mode automatically — no theme overrides needed.
+LunarCSS has **9 color tokens**. Most use `light-dark()` so a single definition covers both light and dark mode automatically — no theme overrides needed. The background, text and border colors are built from two base palette colors.
 
 ```css
 :root {
-  --lunar-bg: light-dark(#d6d2c4, #36454f); /* Page background */
-  --lunar-fg: light-dark(#36454f, #d6d2c4); /* Primary text */
-  --lunar-accent: light-dark(
-    #2563eb,
-    #3b82f6
-  ); /* Interactive / links / focus */
-  --lunar-muted: light-dark(
-    #71717a,
-    #a1a1aa
-  ); /* Secondary text, placeholders */
-  --lunar-border: light-dark(#e4e4e7, #3f3f46); /* Borders and dividers */
+  /* Base palette */
+  --color-stone-beige: #d6d2c4;
+  --color-charcoal-grey: #36454f;
+
+  /* Color tokens */
+  --lunar-bg: light-dark(var(--color-stone-beige), var(--color-charcoal-grey)); /* Page background */
+  --lunar-fg: light-dark(var(--color-charcoal-grey), var(--color-stone-beige)); /* Primary text */
+  --lunar-accent: #deb223; /* Interactive / links / focus (same in both modes) */
+  --lunar-muted: light-dark(#71717a, #a1a1aa); /* Secondary text, placeholders */
+  --lunar-border: light-dark(var(--color-charcoal-grey), var(--color-stone-beige)); /* Borders and dividers */
   --lunar-success: light-dark(#16a34a, #4ade80); /* Success state */
   --lunar-warning: light-dark(#d97706, #fbbf24); /* Warning state */
   --lunar-error: light-dark(#dc2626, #f87171); /* Error state */
   --lunar-info: light-dark(#2563eb, #60a5fa); /* Informational state */
 }
 ```
+
+To swap the whole base look at once, override just the two palette colors.
 
 Override any token to rebrand. For example, to change the accent to purple:
 
@@ -202,10 +203,12 @@ Or use a single color (same in both modes):
 :root {
   /* Font families */
   --lunar-font-sans:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   --lunar-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
   --lunar-font-mono:
-    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
 
   /* Font sizes */
   --lunar-text-xs: 0.75rem; /* 12px */
@@ -235,6 +238,11 @@ Or use a single color (same in both modes):
   --lunar-font-semibold: 600;
   --lunar-font-bold: 700;
   --lunar-font-extrabold: 800;
+
+  /* Letter spacing */
+  --lunar-tracking-tight: -0.025em;
+  --lunar-tracking-normal: 0;
+  --lunar-tracking-wide: 0.025em;
 }
 ```
 
@@ -258,10 +266,13 @@ Or use a single color (same in both modes):
 }
 ```
 
-### Border Radius
+### Borders
 
 ```css
 :root {
+  --lunar-border-width: 2px;
+
+  /* Radius */
   --lunar-radius-none: 0;
   --lunar-radius-sm: 0.125rem; /* 2px */
   --lunar-radius-md: 0.375rem; /* 6px */
@@ -293,6 +304,29 @@ Or use a single color (same in both modes):
   --lunar-transition-fast: 150ms ease;
   --lunar-transition-base: 200ms ease;
   --lunar-transition-slow: 300ms ease;
+}
+```
+
+### Z-Index
+
+```css
+:root {
+  --lunar-z-dropdown: 1000;
+  --lunar-z-sticky: 1020;
+  --lunar-z-fixed: 1030;
+  --lunar-z-modal-backdrop: 1040;
+  --lunar-z-modal: 1050;
+  --lunar-z-popover: 1060;
+  --lunar-z-tooltip: 1070;
+}
+```
+
+### Content Width
+
+```css
+:root {
+  --lunar-content-width: 65ch;
+  --lunar-content-width-wide: 80ch;
 }
 ```
 
@@ -385,9 +419,9 @@ import "./your-styles.css"; // Your custom styles after
 
 ### Dark Mode Not Working
 
-1. **Check `data-theme` attribute**: Make sure it's on the `<html>` element, not `<body>`
-2. **Check system preference**: LunarCSS respects `prefers-color-scheme` by default using `light-dark()` CSS function
-3. **Browser support**: `light-dark()` requires a modern browser (Chrome 123+, Firefox 120+, Safari 17.5+). For older browsers, colors will fall back to the light values.
+1. **Check `data-theme` attribute**: To theme the whole page, put it on the `<html>` element. On any other element it only themes that element and its children.
+2. **Check system preference**: Without `data-theme`, LunarCSS follows `prefers-color-scheme` via the `light-dark()` CSS function
+3. **Browser support**: `light-dark()` requires a modern browser (Chrome 123+, Firefox 120+, Safari 17.5+). Older browsers don't fall back to either theme: the color tokens that use it are ignored, and those elements get browser default colors.
 
 ### Forms Look Different
 
@@ -395,7 +429,7 @@ Different browsers render form elements differently. LunarCSS normalizes most el
 
 ### Print Styles
 
-LunarCSS includes basic print-friendly styles via `prefers-reduced-motion`. For extensive print support, add your own `@media print` rules.
+LunarCSS doesn't include print styles. Add your own `@media print` rules if you need them. (It does respect `prefers-reduced-motion` by disabling animations and transitions.)
 
 ---
 

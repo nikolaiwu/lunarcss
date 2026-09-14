@@ -75,9 +75,12 @@ Override CSS custom properties to customize the theme:
 
 ```css
 :root {
-  /* Change primary accent color */
-  --lunar-primary-500: #8b5cf6;
-  --lunar-primary-600: #7c3aed;
+  /* Change accent color (separate light/dark values) */
+  --lunar-accent: light-dark(#7c3aed, #a78bfa);
+
+  /* Change the base palette used for background, text and borders */
+  --color-stone-beige: #f5f5f4;
+  --color-charcoal-grey: #1c1917;
 
   /* Change font family */
   --lunar-font-sans: 'Inter', system-ui, sans-serif;
@@ -94,7 +97,7 @@ See the [User Guide](USER-GUIDE.md) for a complete list of CSS variables.
 ### Prerequisites
 
 - Node.js 18+
-- npm or pnpm
+- pnpm (version pinned via `packageManager` in `package.json`; run `corepack enable` to use it)
 
 ### Setup
 
@@ -104,19 +107,19 @@ git clone https://github.com/lunarcss/lunarcss.git
 cd lunarcss
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 ```
 
 ### Commands
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build production CSS to `dist/` |
-| `npm run preview` | Preview production build |
+| `pnpm dev` | Start development server with hot reload |
+| `pnpm build` | Build the minified theme CSS and the showcase page to `dist/` |
+| `pnpm preview` | Preview production build |
 
 ### Project Structure
 
@@ -124,8 +127,9 @@ npm run dev
 lunarcss/
 ├── src/
 │   ├── scss/
-│   │   ├── _config.scss          # Design tokens & CSS variables
+│   │   ├── _config.scss          # Design tokens & CSS variables (all colors, via light-dark())
 │   │   ├── _reset.scss           # CSS reset
+│   │   ├── mixins.scss           # Shared SCSS mixins
 │   │   ├── base/
 │   │   │   ├── _root.scss        # :root, html, body styles
 │   │   │   └── _typography.scss  # Base typography
@@ -139,8 +143,8 @@ lunarcss/
 │   │   │   ├── _media.scss       # img, video, audio, etc.
 │   │   │   └── _interactive.scss # details, summary, dialog
 │   │   ├── themes/
-│   │   │   ├── _light.scss       # Light theme variables
-│   │   │   └── _dark.scss        # Dark theme variables
+│   │   │   ├── _light.scss       # [data-theme="light"] → color-scheme: light
+│   │   │   └── _dark.scss        # [data-theme="dark"] → color-scheme: dark
 │   │   ├── main.scss             # Production entry point
 │   │   └── showcase.scss         # Showcase-only styles
 │   └── index.html                # Showcase page
@@ -159,6 +163,8 @@ LunarCSS supports all modern browsers:
 - Firefox (last 2 versions)
 - Safari (last 2 versions)
 - Edge (last 2 versions)
+
+Theming relies on the CSS `light-dark()` function (Chrome 123+, Firefox 120+, Safari 17.5+).
 
 ## Principles
 
