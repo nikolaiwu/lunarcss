@@ -16,7 +16,10 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 ### CDN (Coming Soon)
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css"
+/>
 ```
 
 ### NPM
@@ -26,7 +29,7 @@ npm install lunarcss
 ```
 
 ```html
-<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css">
+<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css" />
 ```
 
 ### Download
@@ -34,7 +37,7 @@ npm install lunarcss
 Download `lunarcss.min.css` from the [releases page](https://github.com/lunarcss/lunarcss/releases) and include it in your HTML:
 
 ```html
-<link rel="stylesheet" href="lunarcss.min.css">
+<link rel="stylesheet" href="lunarcss.min.css" />
 ```
 
 That's it! Your HTML will now have beautiful default styles.
@@ -53,10 +56,10 @@ Add a `data-theme` attribute to the `<html>` element:
 
 ```html
 <!-- Light theme -->
-<html data-theme="light">
+<html data-theme="light"></html>
 
 <!-- Dark theme -->
-<html data-theme="dark">
+<html data-theme="dark"></html>
 ```
 
 Toggle with JavaScript:
@@ -64,8 +67,8 @@ Toggle with JavaScript:
 ```javascript
 function toggleTheme() {
   const html = document.documentElement;
-  const current = html.getAttribute('data-theme');
-  html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  const current = html.getAttribute("data-theme");
+  html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
 }
 ```
 
@@ -83,7 +86,7 @@ Override CSS custom properties to customize the theme:
   --lunar-accent: light-dark(#7c3aed, #a78bfa);
 
   /* Change font family */
-  --lunar-font-sans: 'Inter', system-ui, sans-serif;
+  --lunar-font-sans: "Inter", system-ui, sans-serif;
 
   /* Adjust spacing */
   --lunar-space-4: 1.25rem;
@@ -115,11 +118,13 @@ pnpm dev
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server with hot reload |
-| `pnpm build` | Build the minified theme CSS and the showcase page to `dist/` |
-| `pnpm preview` | Preview production build |
+| Command             | Description                                                   |
+| ------------------- | ------------------------------------------------------------- |
+| `pnpm dev`          | Start development server with hot reload                      |
+| `pnpm build`        | Build the minified theme CSS and the showcase page to `dist/` |
+| `pnpm preview`      | Preview production build                                      |
+| `pnpm format`       | Format all files with Prettier                                |
+| `pnpm format:check` | Check formatting without writing changes                      |
 
 ### Project Structure
 

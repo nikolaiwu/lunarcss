@@ -173,17 +173,17 @@ LunarCSS is built on two main colors. Light mode uses the light color for the ba
 
 The remaining color tokens are listed below. Most use `light-dark()`, so one definition covers both modes and no theme overrides are needed.
 
-| Token | Used for |
-|---|---|
-| `--lunar-bg` | Page background (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-fg` | Primary text (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-border` | Borders and dividers (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-accent` | Links, interactive elements, focus |
-| `--lunar-muted` | Secondary text, placeholders |
-| `--lunar-success` | Success state |
-| `--lunar-warning` | Warning state |
-| `--lunar-error` | Error state |
-| `--lunar-info` | Informational state |
+| Token             | Used for                                                           |
+| ----------------- | ------------------------------------------------------------------ |
+| `--lunar-bg`      | Page background (built from `--lunar-light` / `--lunar-dark`)      |
+| `--lunar-fg`      | Primary text (built from `--lunar-light` / `--lunar-dark`)         |
+| `--lunar-border`  | Borders and dividers (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-accent`  | Links, interactive elements, focus                                 |
+| `--lunar-muted`   | Secondary text, placeholders                                       |
+| `--lunar-success` | Success state                                                      |
+| `--lunar-warning` | Warning state                                                      |
+| `--lunar-error`   | Error state                                                        |
+| `--lunar-info`    | Informational state                                                |
 
 For the default values, see `src/scss/_config.scss`.
 

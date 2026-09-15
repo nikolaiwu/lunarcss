@@ -48,10 +48,7 @@ i {
 // Mark (Highlight)
 // ---------------------------------------------------------------------------
 mark {
-  background-color: light-dark(
-    var(--lunar-dark),
-    var(--lunar-light)
-  );
+  background-color: light-dark(var(--lunar-dark), var(--lunar-light));
   color: light-dark(var(--lunar-light), var(--lunar-dark));
   padding: 0.125em 0.25em;
   border-radius: var(--lunar-radius-sm);

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-LunarCSS is a classless CSS theme: SCSS compiled by Vite into a single stylesheet that styles plain HTML elements. There is no JS library code, and there are no tests or linters.
+LunarCSS is a classless CSS theme: SCSS compiled by Vite into a single stylesheet that styles plain HTML elements. There is no JS library code, and there are no tests or linters; formatting is handled by Prettier.
 
 ## Commands
 
@@ -14,6 +14,7 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
 - `pnpm build`: production build of the minified theme CSS and the showcase to `dist/`
 - `pnpm build --mode development`: unminified build with sourcemaps
 - `pnpm preview`: serve `dist/` on port 4173
+- `pnpm format` / `pnpm format:check`: run Prettier over the repo with default settings (`.prettierrc` is `{}`). `dist/` and `pnpm-lock.yaml` are ignored. Run `pnpm format` after editing.
 
 ## Architecture
 
@@ -26,6 +27,7 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
   3. Semantic tokens such as `--lunar-bg` and `--lunar-fg`.
 
   Element styles should use `var(--lunar-*)` and never `--color-*` or hard-coded values. The docs deliberately don't list default color values; they tell users to override `--lunar-light` and `--lunar-dark`.
+
 - **Mixins:** [src/scss/mixins.scss](src/scss/mixins.scss) is not a partial and is not in `main.scss`. Modules that need it import it themselves with `@use "../mixins"` (for example, `elements/_interactive.scss` uses `cyberbox`).
 - **Showcase vs. production:** `src/index.html` links `main.scss` and `showcase.scss` directly. It may use classes; the production theme may not. `showcase.scss` is currently entirely commented out.
 

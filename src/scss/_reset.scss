@@ -37,7 +37,12 @@ ol {
 }
 
 // Set shorter line heights on headings and interactive elements
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 button,
 input,
 label {
@@ -45,7 +50,12 @@ label {
 }
 
 // Balance text wrapping on headings
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
