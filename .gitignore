@@ -26,6 +26,9 @@ Thumbs.db
 .env.local
 .env.*.local
 
+# Personal local notes (e.g. PUBLISHING.local.md)
+*.local.md
+
 # Cache
 .cache/
 .parcel-cache/

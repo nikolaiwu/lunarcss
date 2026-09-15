@@ -1,11 +1,41 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import { readFileSync } from "fs";
+
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, "package.json"), "utf-8"),
+);
+
+// Prepends a license/version banner to the theme CSS (`/*!` survives minification)
+function banner() {
+  const text = `/*! LunarCSS v${pkg.version} | ${pkg.license} License | ${pkg.homepage} */\n`;
+
+  return {
+    name: "lunarcss-banner",
+    apply: "build",
+    enforce: "post",
+    generateBundle(_, bundle) {
+      for (const file of Object.values(bundle)) {
+        if (
+          file.type === "asset" &&
+          /^lunarcss(\.min)?\.css$/.test(file.fileName)
+        ) {
+          // @charset must stay the very first statement, so insert after it
+          const source = String(file.source);
+          const charset = source.match(/^@charset "[^"]*";\s*/)?.[0] ?? "";
+          file.source = charset + text + source.slice(charset.length);
+        }
+      }
+    },
+  };
+}
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
 
   return {
     root: "src",
+    plugins: [banner()],
     publicDir: "../public",
 
     css: {

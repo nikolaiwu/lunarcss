@@ -1,19 +1,30 @@
 {
-  "name": "lunarcss",
-  "version": "1.0.0",
+  "name": "@nikolaiwu/lunarcss",
+  "version": "0.1.0",
   "description": "A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes, just beautiful defaults.",
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "main": "dist/lunarcss.min.css",
+  "style": "dist/lunarcss.min.css",
+  "exports": {
+    ".": "./dist/lunarcss.min.css",
+    "./scss": "./src/scss/main.scss",
+    "./package.json": "./package.json"
+  },
   "files": [
-    "dist"
+    "dist/lunarcss.min.css",
+    "src/scss",
+    "!src/scss/showcase.scss"
   ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepublishOnly": "pnpm build",
+    "release:patch": "npm version patch -m \"Release v%s\"",
+    "release:minor": "npm version minor -m \"Release v%s\"",
+    "release:major": "npm version major -m \"Release v%s\""
   },
   "keywords": [
     "css",
@@ -26,15 +37,22 @@
     "html",
     "styling"
   ],
-  "author": "",
+  "author": "Nikolai Vuchkov",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolaiwu/lunarcss.git"
+  },
+  "homepage": "https://github.com/nikolaiwu/lunarcss#readme",
+  "bugs": {
+    "url": "https://github.com/nikolaiwu/lunarcss/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "prettier": "^3.9.6",
     "sass": "^1.77.0",
     "vite": "^5.4.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
   }
 }

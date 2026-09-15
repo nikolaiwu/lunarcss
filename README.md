@@ -13,28 +13,34 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 
 ## Quick Start
 
-### CDN (Coming Soon)
+### CDN
 
 ```html
 <link
   rel="stylesheet"
-  href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
 />
 ```
 
-### NPM
+Pin a version range (like `@0.1` above) so a future breaking release can't change your site. unpkg works too: `https://unpkg.com/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css`.
+
+### npm
 
 ```bash
-npm install lunarcss
+npm install @nikolaiwu/lunarcss
 ```
 
-```html
-<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css" />
+Import it in your bundler entry point:
+
+```javascript
+import "@nikolaiwu/lunarcss";
 ```
+
+Sass users can also compile from source with `@use "pkg:@nikolaiwu/lunarcss/scss";` (requires Sass's Node package importer; see the [User Guide](USER-GUIDE.md#using-the-scss-source)).
 
 ### Download
 
-Download `lunarcss.min.css` from the [releases page](https://github.com/lunarcss/lunarcss/releases) and include it in your HTML:
+Download `lunarcss.min.css` from the [releases page](https://github.com/nikolaiwu/lunarcss/releases) and include it in your HTML:
 
 ```html
 <link rel="stylesheet" href="lunarcss.min.css" />
@@ -106,7 +112,7 @@ See the [User Guide](USER-GUIDE.md) for a complete list of CSS variables.
 
 ```bash
 # Clone the repository
-git clone https://github.com/lunarcss/lunarcss.git
+git clone https://github.com/nikolaiwu/lunarcss.git
 cd lunarcss
 
 # Install dependencies
@@ -125,6 +131,16 @@ pnpm dev
 | `pnpm preview`      | Preview production build                                      |
 | `pnpm format`       | Format all files with Prettier                                |
 | `pnpm format:check` | Check formatting without writing changes                      |
+
+### Releasing
+
+Versions follow [Semantic Versioning](https://semver.org/); see [CHANGELOG.md](CHANGELOG.md) for what counts as a breaking change.
+
+1. Move the `[Unreleased]` notes in `CHANGELOG.md` under a new version heading and commit.
+2. Bump the version: `pnpm release:patch`, `pnpm release:minor` or `pnpm release:major`. This updates `package.json`, commits and creates a `vX.Y.Z` tag. The working tree must be clean.
+3. Push the commit and tag: `git push --follow-tags`.
+
+Pushing the tag runs the [release workflow](.github/workflows/release.yml), which publishes to npm (and so to the CDNs) and creates a GitHub release with `lunarcss.min.css` attached.
 
 ### Project Structure
 
@@ -153,9 +169,11 @@ lunarcss/
 │   │   ├── main.scss             # Production entry point
 │   │   └── showcase.scss         # Showcase-only styles
 │   └── index.html                # Showcase page
+├── .github/workflows/release.yml # Publish to npm + GitHub release on version tags
 ├── dist/                         # Build output
 ├── vite.config.js
 ├── package.json
+├── CHANGELOG.md
 ├── README.md
 └── USER-GUIDE.md
 ```

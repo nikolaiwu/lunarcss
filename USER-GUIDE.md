@@ -16,7 +16,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 
 ## Installation
 
-### Option 1: CDN (Coming Soon)
+### Option 1: CDN (Recommended for Quick Start)
 
 ```html
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/lunarcss@latest/dist/lunarcss.min.css"
+      href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
     />
     <title>My Page</title>
   </head>
@@ -37,27 +37,42 @@ This guide covers everything you need to know to use and customize LunarCSS.
 </html>
 ```
 
-### Option 2: NPM
+The `@0.1` in the URL is a version range: you get fixes automatically, but not breaking changes. Use an exact version (e.g. `@0.1.0`) to pin completely, or `@latest` only for experiments. The same paths work on unpkg (`https://unpkg.com/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css`).
+
+### Option 2: npm
 
 ```bash
-npm install lunarcss
+npm install @nikolaiwu/lunarcss
 ```
 
-Then import in your HTML or build system:
-
-```html
-<link rel="stylesheet" href="node_modules/lunarcss/dist/lunarcss.min.css" />
-```
-
-Or in a JavaScript bundler:
+Then import it in a JavaScript bundler:
 
 ```javascript
-import "lunarcss/dist/lunarcss.min.css";
+import "@nikolaiwu/lunarcss";
 ```
+
+Or link the file directly:
+
+```html
+<link
+  rel="stylesheet"
+  href="node_modules/@nikolaiwu/lunarcss/dist/lunarcss.min.css"
+/>
+```
+
+#### Using the SCSS source
+
+The package also includes the SCSS source, so Sass users can compile the theme as part of their own build:
+
+```scss
+@use "pkg:@nikolaiwu/lunarcss/scss";
+```
+
+The `pkg:` URL needs Sass's Node package importer (Dart Sass 1.71+). On the command line, pass `--pkg-importer=node`. In the JS API, pass `importers: [new NodePackageImporter()]`, which is also how to configure it in bundlers such as Vite (under `css.preprocessorOptions.scss`).
 
 ### Option 3: Download
 
-Download `lunarcss.min.css` from the releases page and add it to your project:
+Download `lunarcss.min.css` from the [releases page](https://github.com/nikolaiwu/lunarcss/releases) and add it to your project:
 
 ```html
 <link rel="stylesheet" href="path/to/lunarcss.min.css" />
@@ -408,7 +423,7 @@ Import LunarCSS in your entry point:
 
 ```javascript
 // main.js or App.jsx
-import "lunarcss/dist/lunarcss.min.css";
+import "@nikolaiwu/lunarcss";
 import "./your-styles.css"; // Your custom styles after
 ```
 
@@ -440,9 +455,9 @@ LunarCSS doesn't include print styles. Add your own `@media print` rules if you 
 
 ## Support
 
-- **Documentation**: [lunarcss.dev](https://lunarcss.dev)
-- **GitHub Issues**: [github.com/lunarcss/lunarcss/issues](https://github.com/lunarcss/lunarcss/issues)
-- **Discussions**: [github.com/lunarcss/lunarcss/discussions](https://github.com/lunarcss/lunarcss/discussions)
+- **Documentation**: [github.com/nikolaiwu/lunarcss](https://github.com/nikolaiwu/lunarcss)
+- **GitHub Issues**: [github.com/nikolaiwu/lunarcss/issues](https://github.com/nikolaiwu/lunarcss/issues)
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
