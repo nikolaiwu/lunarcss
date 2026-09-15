@@ -22,6 +22,7 @@
   // --color-charcoal-grey: #36454f;
   --color-warm-white: #ece8e3;
   --color-meteorite-black: #2a2c2f;
+  --color-solar-orange: #ff5623;
 
   // Main colors (use these instead of the primitives)
   --lunar-light: var(--color-warm-white);
@@ -29,9 +30,20 @@
 
   --lunar-bg: light-dark(var(--lunar-light), var(--lunar-dark));
   --lunar-fg: light-dark(var(--lunar-dark), var(--lunar-light));
-  // --lunar-accent: light-dark(#2563eb, #3b82f6);
-  --lunar-accent: #deb223;
-  --lunar-muted: light-dark(#71717a, #a1a1aa);
+  --lunar-accent: var(--color-solar-orange);
+  --lunar-muted-mix: 60%;
+  --lunar-muted: light-dark(
+    color-mix(
+      in oklch,
+      var(--lunar-light),
+      var(--lunar-dark) var(--lunar-muted-mix)
+    ),
+    color-mix(
+      in oklch,
+      var(--lunar-dark),
+      var(--lunar-light) var(--lunar-muted-mix)
+    )
+  );
   --lunar-border: light-dark(var(--lunar-dark), var(--lunar-light));
   --lunar-success: light-dark(#16a34a, #4ade80);
   --lunar-warning: light-dark(#d97706, #fbbf24);

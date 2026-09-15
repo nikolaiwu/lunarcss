@@ -350,19 +350,31 @@ LunarCSS is built on two main colors. Light mode uses the light color for the ba
 
 The remaining color tokens are listed below. Most use `light-dark()`, so one definition covers both modes and no theme overrides are needed.
 
-| Token             | Used for                                                           |
-| ----------------- | ------------------------------------------------------------------ |
-| `--lunar-bg`      | Page background (built from `--lunar-light` / `--lunar-dark`)      |
-| `--lunar-fg`      | Primary text (built from `--lunar-light` / `--lunar-dark`)         |
-| `--lunar-border`  | Borders and dividers (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-accent`  | Links, interactive elements, focus                                 |
-| `--lunar-muted`   | Secondary text, placeholders                                       |
-| `--lunar-success` | Success state                                                      |
-| `--lunar-warning` | Warning state                                                      |
-| `--lunar-error`   | Error state                                                        |
-| `--lunar-info`    | Informational state                                                |
+| Token             | Used for                                                                   |
+| ----------------- | -------------------------------------------------------------------------- |
+| `--lunar-bg`      | Page background (built from `--lunar-light` / `--lunar-dark`)              |
+| `--lunar-fg`      | Primary text (built from `--lunar-light` / `--lunar-dark`)                 |
+| `--lunar-border`  | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)         |
+| `--lunar-muted`   | Secondary text, placeholders (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-accent`  | Links, interactive elements, focus                                         |
+| `--lunar-success` | Success state                                                              |
+| `--lunar-warning` | Warning state                                                              |
+| `--lunar-error`   | Error state                                                                |
+| `--lunar-info`    | Informational state                                                        |
 
 For the default values, see `src/scss/_config.scss`.
+
+#### Muted color
+
+`--lunar-muted` follows your main colors automatically. It mixes the background color toward the text color, so it's a bit darker than the background in light mode and a bit lighter in dark mode. Adjust how far it moves with one setting:
+
+```css
+:root {
+  --lunar-muted-mix: 70%; /* default 60%; higher = more contrast */
+}
+```
+
+Muted text is still text, so keep it readable. The default gives about 4:1 contrast. Use `65%` or more to meet WCAG AA (4.5:1) for small text in both modes.
 
 Override any token to rebrand. For example, to change the accent to purple:
 
@@ -530,7 +542,7 @@ Or use a single color (same in both modes):
 :root {
   --lunar-light: #faf9f7;
   --lunar-dark: #1c1917;
-  --lunar-muted: light-dark(#78716c, #a8a29e);
+  --lunar-muted-mix: 55%; /* softer secondary text */
 }
 ```
 
