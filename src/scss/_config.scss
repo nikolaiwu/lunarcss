@@ -18,22 +18,21 @@
   // ---------------------------------------------------------------------------
 
   // Primitives (raw palette values; don't reference these outside this block)
-  --color-stone-beige: #d6d2c4;
-  --color-charcoal-grey: #36454f;
+  // --color-stone-beige: #d6d2c4;
+  // --color-charcoal-grey: #36454f;
+  --color-warm-white: #ece8e3;
+  --color-meteorite-black: #2a2c2f;
 
   // Main colors (use these instead of the primitives)
-  --lunar-light: var(--color-stone-beige);
-  --lunar-dark: var(--color-charcoal-grey);
+  --lunar-light: var(--color-warm-white);
+  --lunar-dark: var(--color-meteorite-black);
 
   --lunar-bg: light-dark(var(--lunar-light), var(--lunar-dark));
   --lunar-fg: light-dark(var(--lunar-dark), var(--lunar-light));
   // --lunar-accent: light-dark(#2563eb, #3b82f6);
   --lunar-accent: #deb223;
   --lunar-muted: light-dark(#71717a, #a1a1aa);
-  --lunar-border: light-dark(
-    var(--lunar-dark),
-    var(--lunar-light)
-  );
+  --lunar-border: light-dark(var(--lunar-dark), var(--lunar-light));
   --lunar-success: light-dark(#16a34a, #4ade80);
   --lunar-warning: light-dark(#d97706, #fbbf24);
   --lunar-error: light-dark(#dc2626, #f87171);
@@ -105,7 +104,7 @@
   // ---------------------------------------------------------------------------
   // Border Width
   // ---------------------------------------------------------------------------
-  --lunar-border-width: 2px;
+  --lunar-border-width: 1px;
 
   // ---------------------------------------------------------------------------
   // Border Radius
