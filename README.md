@@ -5,6 +5,7 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 ## Features
 
 - **Classless** — Styles all HTML elements using element selectors only
+- **Cards** — Every `<article>` is a card with optional `<header>` / `<footer>`; sibling articles form a responsive grid
 - **Light & Dark** — Built-in theme support with automatic system preference detection
 - **CSS Variables** — Fully customizable via CSS custom properties
 - **Modern** — Built with SCSS, processed with Vite
@@ -150,7 +151,9 @@ lunarcss/
 │   ├── scss/
 │   │   ├── _config.scss          # Design tokens & CSS variables (all colors, via light-dark())
 │   │   ├── _reset.scss           # CSS reset
-│   │   ├── mixins.scss           # Shared SCSS mixins
+│   │   ├── mixins/               # Shared SCSS mixins (_index.scss forwards all)
+│   │   │   ├── _cut-corner.scss  # cut-corner-border
+│   │   │   └── _card.scss        # card look (article, dialog)
 │   │   ├── base/
 │   │   │   ├── _root.scss        # :root, html, body styles
 │   │   │   └── _typography.scss  # Base typography
@@ -162,7 +165,8 @@ lunarcss/
 │   │   │   ├── _tables.scss      # table, thead, tbody, etc.
 │   │   │   ├── _forms.scss       # form, input, button, etc.
 │   │   │   ├── _media.scss       # img, video, audio, etc.
-│   │   │   └── _interactive.scss # details, summary, dialog
+│   │   │   ├── _interactive.scss # details, summary, dialog
+│   │   │   └── _article.scss     # article cards + card grid
 │   │   ├── themes/
 │   │   │   ├── _light.scss       # [data-theme="light"] → color-scheme: light
 │   │   │   └── _dark.scss        # [data-theme="dark"] → color-scheme: dark

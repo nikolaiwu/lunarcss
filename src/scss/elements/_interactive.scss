@@ -92,31 +92,31 @@ details > div:not(summary) {
 // ---------------------------------------------------------------------------
 // Dialog
 // ---------------------------------------------------------------------------
+// Same look as cards (article): cut-corner border, header and footer rules.
 dialog {
-  @include mixins.cyberbox;
+  @include mixins.card;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: min(90vw, 32rem);
-  max-height: 85vh;
-  padding: var(--lunar-space-6);
-  // background-color: var(--lunar-bg);
-  color: var(--lunar-fg);
-  border: 0;
-  // border: var(--lunar-border-width) solid var(--lunar-border);
-  // border-radius: var(--lunar-radius-xl);
-  box-shadow: var(--lunar-shadow-xl);
-  overflow: auto;
+  // Wrapped in & so these come after the mixin's output and override it
+  // (position: fixed replaces the mixin's position: relative)
+  & {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: min(90vw, 32rem);
+    max-height: 85vh;
+    margin: 0;
+    // No box-shadow: a rectangular shadow would show past the cut corners
+    overflow: auto;
 
-  transition:
-    opacity 0.3s ease-in,
-    transform 0.2s ease-in,
-    // overlay 0.7s ease-in allow-discrete,
-    display 0.3s ease-in allow-discrete;
+    transition:
+      opacity 0.3s ease-in,
+      transform 0.2s ease-in,
+      // overlay 0.7s ease-in allow-discrete,
+      display 0.3s ease-in allow-discrete;
 
-  opacity: 0;
+    opacity: 0;
+  }
 
   &:open {
     opacity: 1;

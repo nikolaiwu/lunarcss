@@ -151,4 +151,10 @@
   // ---------------------------------------------------------------------------
   --lunar-content-width: 65ch;
   --lunar-content-width-wide: 80ch;
+
+  // ---------------------------------------------------------------------------
+  // Components
+  // ---------------------------------------------------------------------------
+  // Minimum card width before the card grid wraps to fewer columns
+  --lunar-card-min-width: 18rem;
 }

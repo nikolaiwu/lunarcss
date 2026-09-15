@@ -1,0 +1,45 @@
+// =============================================================================
+// LUNARCSS - Article (Card)
+// =============================================================================
+// Every <article> is a card: a cut-corner bordered box for self-contained
+// content. Optional <header> and <footer> children form its top and bottom.
+//
+//   <article>
+//     <header><h3>Title</h3></header>
+//     <p>Body…</p>
+//     <footer><button>Action</button></footer>
+//   </article>
+//
+// The look comes from the `card` mixin (mixins/_card.scss), shared with <dialog>.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Card
+// ---------------------------------------------------------------------------
+article {
+  margin-bottom: var(--lunar-space-4);
+
+  @include mixins.card;
+}
+
+// ---------------------------------------------------------------------------
+// Card Grid
+// ---------------------------------------------------------------------------
+// The one intentional layout rule: a parent whose direct children are all
+// articles (at least two) lays them out as a responsive grid. Any other child,
+// such as a heading before the cards, turns the grid off, so wrap the cards
+// in their own element.
+:has(> article + article):not(:has(> :not(article))) {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--lunar-card-min-width)), 1fr)
+  );
+  gap: var(--lunar-space-6);
+
+  > article {
+    margin: 0; // gap handles spacing
+  }
+}

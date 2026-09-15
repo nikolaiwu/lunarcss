@@ -6,6 +6,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
+- [Cards](#cards)
 - [Theme Switching](#theme-switching)
 - [CSS Variables Reference](#css-variables-reference)
 - [Customization Examples](#customization-examples)
@@ -107,6 +108,110 @@ LunarCSS styles all standard HTML elements automatically. Just write semantic HT
 ```
 
 No classes needed!
+
+---
+
+## Cards
+
+Every `<article>` is a card: a bordered box with cut corners for self-contained content such as a post preview, product, comment or pricing tier. Add an optional `<header>` (it gets a dashed rule below it) and `<footer>` (a striped band separates it from the content). Put the body content directly inside the article:
+
+```html
+<article>
+  <header>
+    <h3>Card title</h3>
+  </header>
+  <p>Card body content.</p>
+  <footer>
+    <button>Action</button>
+  </footer>
+</article>
+```
+
+Use `article`, not `section`, for cards: `section` is meant for a themed part of a larger document.
+
+### Cut corners
+
+By default, the top-right and bottom-left corners are cut at 45°. Adjust the look with these custom properties, globally on `:root` or on specific cards:
+
+```css
+:root {
+  --lunar-cut-size: 1.5rem; /* size of each corner cut */
+  --lunar-cut-border-width: 1px; /* border thickness */
+  --lunar-cut-border-color: var(--lunar-accent);
+  --lunar-cut-bg: var(--lunar-bg); /* card fill */
+}
+```
+
+The border and fill are drawn with the card's `::before` and `::after` pseudo-elements, so don't use those on `article` or `dialog` for anything else.
+
+### Dialogs
+
+`<dialog>` shares the card look, including the cut corners, the `--lunar-cut-*` overrides, and the optional `<header>` and `<footer>`:
+
+```html
+<dialog id="confirm">
+  <header><h3>Delete file?</h3></header>
+  <p>This can't be undone.</p>
+  <footer>
+    <form method="dialog"><button>Close</button></form>
+  </footer>
+</dialog>
+```
+
+### Card grid
+
+When a parent's direct children are **all** articles (at least two), they're laid out as a responsive grid that wraps to fewer columns on narrow screens:
+
+```html
+<div>
+  <article>…</article>
+  <article>…</article>
+  <article>…</article>
+</div>
+```
+
+This is LunarCSS's only layout rule. Any other direct child turns the grid off, so put a heading **outside** the wrapper:
+
+```html
+<section>
+  <h2>Latest posts</h2>
+  <div>
+    <article>…</article>
+    <article>…</article>
+  </div>
+</section>
+```
+
+Change the minimum card width (default `18rem`) before columns wrap:
+
+```css
+:root {
+  --lunar-card-min-width: 22rem;
+}
+```
+
+### Full-page articles
+
+Because every article is a card, a whole blog post wrapped in `<main><article>` is also boxed. If you don't want that, reset it:
+
+```css
+main > article {
+  padding: 0;
+}
+
+main > article::before,
+main > article::after,
+main > article > footer::before {
+  content: none;
+}
+
+main > article > header {
+  padding-bottom: 0;
+  background: none;
+}
+```
+
+The card grid needs `:has()` support (Chrome 105+, Firefox 121+, Safari 15.4+), which every browser that supports `light-dark()` already has.
 
 ---
 

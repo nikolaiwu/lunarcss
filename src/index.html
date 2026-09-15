@@ -65,6 +65,7 @@
             <li><a href="#forms">Forms</a></li>
             <li><a href="#media">Media</a></li>
             <li><a href="#interactive">Interactive</a></li>
+            <li><a href="#cards">Cards</a></li>
           </ul>
         </details>
       </nav>
@@ -774,16 +775,79 @@ greet('World');</code></pre>
             </button>
 
             <dialog id="demo-dialog">
-              <h3>Modal Dialog</h3>
+              <header>
+                <h3>Modal Dialog</h3>
+              </header>
               <p>
-                This is a native HTML dialog element. It includes a backdrop and
-                is centered on the screen.
+                This is a native HTML dialog element. It includes a backdrop, is
+                centered on the screen, and shares the card look.
               </p>
               <p>Press <kbd>Esc</kbd> or click the button below to close.</p>
-              <form method="dialog">
-                <button type="submit">Close Dialog</button>
-              </form>
+              <footer>
+                <form method="dialog">
+                  <button type="submit">Close Dialog</button>
+                </form>
+              </footer>
             </dialog>
+          </div>
+        </section>
+
+        <!-- ================================================================== -->
+        <!-- CARDS -->
+        <!-- ================================================================== -->
+        <section id="cards" class="showcase-section">
+          <div class="section-title">
+            <h2>Cards</h2>
+            <code>&lt;article&gt;</code>
+          </div>
+          <p class="section-description">
+            Every article is a card. Add an optional header and footer. Sibling
+            articles lay out as a responsive grid.
+          </p>
+
+          <h3>Single card</h3>
+          <div class="demo-box">
+            <article>
+              <header>
+                <h3>Card title</h3>
+              </header>
+              <p>
+                Cards wrap self-contained content with a border and padding, no
+                classes needed.
+              </p>
+              <footer>
+                <button>Action</button>
+              </footer>
+            </article>
+          </div>
+
+          <h3>Card grid</h3>
+          <div class="demo-box">
+            <div>
+              <article>
+                <header><h4>First</h4></header>
+                <p>The parent only contains articles, so it becomes a grid.</p>
+              </article>
+              <article>
+                <header><h4>Second</h4></header>
+                <p>Columns wrap to fit the available width.</p>
+                <footer><a href="#cards">Read more</a></footer>
+              </article>
+              <article>
+                <p>A card without a header or footer.</p>
+              </article>
+            </div>
+          </div>
+
+          <h3>Nested card</h3>
+          <div class="demo-box">
+            <article>
+              <header><h4>Post</h4></header>
+              <p>Articles can contain articles, such as comments.</p>
+              <article>
+                <p>A nested comment card.</p>
+              </article>
+            </article>
           </div>
         </section>
 

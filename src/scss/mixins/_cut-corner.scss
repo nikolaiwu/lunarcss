@@ -1,0 +1,106 @@
+// =============================================================================
+// LUNARCSS - Mixins: Cut Corner Border
+// =============================================================================
+
+@use "sass:list";
+
+// ---------------------------------------------------------------------------
+// Cut Corner Border
+// ---------------------------------------------------------------------------
+// A bordered box with 45° cut corners. clip-path can't draw a border along the
+// diagonal, so two pseudo-elements do it: ::before is the border-colored
+// outer shape, ::after is the background inset by the border width. Both sit
+// behind the content, so the host itself stays unclipped.
+//
+// Uses ::before and ::after of the host; don't use them for anything else.
+//
+// Runtime overrides (set on the element or any ancestor):
+//   --lunar-cut-size          size of each corner cut
+//   --lunar-cut-border-width  border thickness
+//   --lunar-cut-border-color  border color
+//   --lunar-cut-bg            fill color
+//
+// Usage:
+//   @include mixins.cut-corner-border;                        // top-right + bottom-left
+//   @include mixins.cut-corner-border((top-left, bottom-right));
+// ---------------------------------------------------------------------------
+
+// Polygon for a box with the given corners cut by $cut (clockwise from top-left)
+@function cut-corner-polygon($cut, $corners) {
+  $points: ();
+
+  @if list.index($corners, top-left) {
+    $points: list.append($points, 0 $cut, comma);
+    $points: list.append($points, $cut 0, comma);
+  } @else {
+    $points: list.append($points, 0 0, comma);
+  }
+
+  @if list.index($corners, top-right) {
+    $points: list.append($points, calc(100% - #{$cut}) 0, comma);
+    $points: list.append($points, 100% $cut, comma);
+  } @else {
+    $points: list.append($points, 100% 0, comma);
+  }
+
+  @if list.index($corners, bottom-right) {
+    $points: list.append($points, 100% calc(100% - #{$cut}), comma);
+    $points: list.append($points, calc(100% - #{$cut}) 100%, comma);
+  } @else {
+    $points: list.append($points, 100% 100%, comma);
+  }
+
+  @if list.index($corners, bottom-left) {
+    $points: list.append($points, $cut 100%, comma);
+    $points: list.append($points, 0 calc(100% - #{$cut}), comma);
+  } @else {
+    $points: list.append($points, 0 100%, comma);
+  }
+
+  @return polygon($points);
+}
+
+@mixin cut-corner-border(
+  $corners: (
+    top-right,
+    bottom-left,
+  ),
+  $size: var(--lunar-space-4),
+  $border-width: var(--lunar-border-width),
+  $border-color: var(--lunar-border),
+  $background: var(--lunar-bg)
+) {
+  position: relative; // hosts may override with fixed/absolute/sticky
+  isolation: isolate; // keeps the z-index: -1 pseudo-elements inside this box
+  border: 0; // the pseudo-elements draw the border
+  background-color: transparent; // a host background would show past the cuts
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+
+    // Resolved per pseudo-element so overrides on the host or ancestors apply
+    --_cut-size: var(--lunar-cut-size, #{$size});
+    --_cut-border-width: var(--lunar-cut-border-width, #{$border-width});
+  }
+
+  // Outer shape: the border
+  &::before {
+    inset: 0;
+    background-color: var(--lunar-cut-border-color, #{$border-color});
+    clip-path: cut-corner-polygon(var(--_cut-size), $corners);
+  }
+
+  // Inner shape: the fill. Moving a 45° edge inward by the border width
+  // shrinks its cut by border-width × (2 − √2) ≈ 0.5858.
+  &::after {
+    --_cut-inner: calc(var(--_cut-size) - var(--_cut-border-width) * 0.5858);
+
+    inset: var(--_cut-border-width);
+    background-color: var(--lunar-cut-bg, #{$background});
+    clip-path: cut-corner-polygon(var(--_cut-inner), $corners);
+  }
+}

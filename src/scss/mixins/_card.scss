@@ -1,0 +1,85 @@
+// =============================================================================
+// LUNARCSS - Mixins: Card
+// =============================================================================
+
+@use "cut-corner";
+
+// ---------------------------------------------------------------------------
+// Card
+// ---------------------------------------------------------------------------
+// The card look, shared by <article> and <dialog>: a cut-corner border,
+// optional <header> with an irregular dashed rule below it, and optional
+// <footer> with a 45° striped band above it.
+//
+// Uses the host's ::before/::after (cut-corner-border) and footer::before.
+// ---------------------------------------------------------------------------
+@mixin card {
+  // Local knobs: restyle the card by changing these in one place
+  --_card-padding: var(--lunar-space-4);
+  --_card-line: var(--lunar-border-width);
+  --_card-line-color: var(--lunar-border);
+
+  display: block;
+  padding: var(--_card-padding);
+  color: var(--lunar-fg);
+
+  // Cut corners (--lunar-cut-* to override)
+  @include cut-corner.cut-corner-border;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  // Header: irregular dashed rule below
+  > header {
+    // Dash layout as color stops: long dash, gap, medium dash, gap, short dash
+    --_card-dashes: linear-gradient(
+      to right,
+      var(--_card-line-color) 0 2%,
+      transparent 2% 4%,
+      var(--_card-line-color) 4% 48%,
+      transparent 48% 56%,
+      var(--_card-line-color) 56% 86%,
+      transparent 86% 90%,
+      var(--_card-line-color) 90% 100%
+    );
+
+    display: block;
+    margin-bottom: var(--lunar-space-6);
+    margin-inline: calc(var(--_card-padding) * -1);
+    padding-inline: var(--_card-padding);
+    padding-bottom: var(--lunar-space-2);
+    background: var(--_card-dashes) bottom / 100% var(--_card-line) no-repeat;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Footer: 45° striped band above, splitting it from the content
+  > footer {
+    display: block;
+    margin-top: var(--lunar-space-6);
+
+    &::before {
+      content: "";
+      display: block;
+      height: var(--lunar-space-4);
+      margin-bottom: var(--lunar-space-2);
+      margin-inline: calc(var(--_card-padding) * -1);
+      background: repeating-linear-gradient(
+        135deg,
+        var(--_card-line-color) 0 var(--_card-line),
+        transparent var(--_card-line) var(--lunar-space-2)
+      );
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}

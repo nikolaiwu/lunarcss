@@ -17,6 +17,7 @@ Initial release, to be published as 0.1.0.
 ### Added
 
 - Classless styles for headings, text, inline elements, lists, tables, forms, media and interactive elements
+- Cards: every `<article>` is a cut-corner bordered box with optional `<header>` (dashed rule) / `<footer>` (striped band), and a parent containing only articles lays them out as a responsive grid (`--lunar-card-min-width`). `<dialog>` shares the same card look
 - Light and dark themes via `light-dark()`, with `data-theme` to force either mode
 - `--lunar-light` / `--lunar-dark` main color tokens, plus semantic, typography, spacing, radius, shadow, transition, z-index and content-width tokens
 - Published to npm as `@nikolaiwu/lunarcss`, with the compiled CSS and SCSS source
