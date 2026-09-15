@@ -49,10 +49,10 @@ i {
 // ---------------------------------------------------------------------------
 mark {
   background-color: light-dark(
-    var(--color-charcoal-grey),
-    var(--color-stone-beige)
+    var(--lunar-dark),
+    var(--lunar-light)
   );
-  color: light-dark(var(--color-stone-beige), var(--color-charcoal-grey));
+  color: light-dark(var(--lunar-light), var(--lunar-dark));
   padding: 0.125em 0.25em;
   border-radius: var(--lunar-radius-sm);
 }

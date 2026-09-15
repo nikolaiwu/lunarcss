@@ -20,7 +20,12 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
 - **Vite root is `src/`** ([vite.config.js](vite.config.js)). There are two Rollup inputs: `src/scss/main.scss` (the distributed theme) and `src/index.html` (the showcase). A custom `assetFileNames` names the theme output `dist/lunarcss.min.css` in production and `dist/lunarcss.css` in development mode. It matches on `lunarcss.css`, because Vite names the asset after the input key, not the source file. `package.json` `main` and the docs depend on the `.min.css` name.
 - **`main.scss` sets the cascade order** using `@use` (the modern Sass module system, `api: 'modern-compiler'`): config → themes → reset → base → elements. Every new partial must be added there.
 - **Theming uses CSS `light-dark()`, not duplicated variable sets.** All color tokens live in [src/scss/_config.scss](src/scss/_config.scss) on `:root` with `color-scheme: light dark`. `themes/_light.scss` and `themes/_dark.scss` only set `color-scheme` under `[data-theme="light"|"dark"]` to force a mode. To add or change colors, edit `_config.scss`; don't add per-theme overrides.
-- **Token naming:** public tokens use the `--lunar-*` prefix (`--lunar-bg`, `--lunar-fg`, `--lunar-accent`, `--lunar-muted`, `--lunar-border`, and the status colors, plus the typography, spacing, radius, and transition scales). Raw palette values use `--color-*`. Element styles should use `var(--lunar-*)`, not hard-coded values.
+- **Token naming:** public tokens use the `--lunar-*` prefix (`--lunar-bg`, `--lunar-fg`, `--lunar-accent`, `--lunar-muted`, `--lunar-border`, and the status colors, plus the typography, spacing, radius, and transition scales). Color layers:
+  1. `--color-*` primitives hold raw values and are referenced only by `--lunar-light` and `--lunar-dark` in `_config.scss`.
+  2. `--lunar-light` and `--lunar-dark` are the main colors, used by `--lunar-bg`, `--lunar-fg`, `--lunar-border` and element styles.
+  3. Semantic tokens such as `--lunar-bg` and `--lunar-fg`.
+
+  Element styles should use `var(--lunar-*)` and never `--color-*` or hard-coded values. The docs deliberately don't list default color values; they tell users to override `--lunar-light` and `--lunar-dark`.
 - **Mixins:** [src/scss/mixins.scss](src/scss/mixins.scss) is not a partial and is not in `main.scss`. Modules that need it import it themselves with `@use "../mixins"` (for example, `elements/_interactive.scss` uses `cyberbox`).
 - **Showcase vs. production:** `src/index.html` links `main.scss` and `showcase.scss` directly. It may use classes; the production theme may not. `showcase.scss` is currently entirely commented out.
 

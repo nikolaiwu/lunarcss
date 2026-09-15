@@ -12,20 +12,27 @@
   // Color Tokens
   // ---------------------------------------------------------------------------
   // Uses light-dark() so a single definition covers both themes.
-  // Override any of these 9 props to rebrand. Force a theme by setting
+  // Override --lunar-light / --lunar-dark to change the main colors, or any
+  // of the tokens below to rebrand. Force a theme by setting
   // color-scheme: light  or  color-scheme: dark  on a parent element.
   // ---------------------------------------------------------------------------
+
+  // Primitives (raw palette values; don't reference these outside this block)
   --color-stone-beige: #d6d2c4;
   --color-charcoal-grey: #36454f;
 
-  --lunar-bg: light-dark(var(--color-stone-beige), var(--color-charcoal-grey));
-  --lunar-fg: light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
+  // Main colors (use these instead of the primitives)
+  --lunar-light: var(--color-stone-beige);
+  --lunar-dark: var(--color-charcoal-grey);
+
+  --lunar-bg: light-dark(var(--lunar-light), var(--lunar-dark));
+  --lunar-fg: light-dark(var(--lunar-dark), var(--lunar-light));
   // --lunar-accent: light-dark(#2563eb, #3b82f6);
   --lunar-accent: #deb223;
   --lunar-muted: light-dark(#71717a, #a1a1aa);
   --lunar-border: light-dark(
-    var(--color-charcoal-grey),
-    var(--color-stone-beige)
+    var(--lunar-dark),
+    var(--lunar-light)
   );
   --lunar-success: light-dark(#16a34a, #4ade80);
   --lunar-warning: light-dark(#d97706, #fbbf24);

@@ -75,12 +75,12 @@ Override CSS custom properties to customize the theme:
 
 ```css
 :root {
+  /* Change the main colors (background, text and borders in both modes) */
+  --lunar-light: #f5f5f4;
+  --lunar-dark: #1c1917;
+
   /* Change accent color (separate light/dark values) */
   --lunar-accent: light-dark(#7c3aed, #a78bfa);
-
-  /* Change the base palette used for background, text and borders */
-  --color-stone-beige: #f5f5f4;
-  --color-charcoal-grey: #1c1917;
 
   /* Change font family */
   --lunar-font-sans: 'Inter', system-ui, sans-serif;

@@ -63,15 +63,15 @@ pre {
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
   line-height: var(--lunar-leading-relaxed);
-  // color: light-dark(var(--color-stone-beige), #e4e4e7);
-  // background-color: light-dark(var(--color-charcoal-grey), #09090b);
-  // color: light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
+  // color: light-dark(var(--lunar-light), #e4e4e7);
+  // background-color: light-dark(var(--lunar-dark), #09090b);
+  // color: light-dark(var(--lunar-dark), var(--lunar-light));
   // background-color: light-dark(
-  //   var(--color-stone-beige),
-  //   var(--color-charcoal-grey)
+  //   var(--lunar-light),
+  //   var(--lunar-dark)
   // );
   border: var(--lunar-border-width) dotted
-    light-dark(var(--color-charcoal-grey), var(--color-stone-beige));
+    light-dark(var(--lunar-dark), var(--lunar-light));
   border-radius: var(--lunar-radius-lg);
   tab-size: 2;
   -webkit-overflow-scrolling: touch;

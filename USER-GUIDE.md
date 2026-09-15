@@ -158,28 +158,34 @@ LunarCSS uses CSS custom properties for all design tokens. Override these in you
 
 ### Color Tokens
 
-LunarCSS has **9 color tokens**. Most use `light-dark()` so a single definition covers both light and dark mode automatically — no theme overrides needed. The background, text and border colors are built from two base palette colors.
+#### Main colors
+
+LunarCSS is built on two main colors. Light mode uses the light color for the background and the dark color for text and borders, and dark mode swaps them. To change the overall look, override just these two:
 
 ```css
 :root {
-  /* Base palette */
-  --color-stone-beige: #d6d2c4;
-  --color-charcoal-grey: #36454f;
-
-  /* Color tokens */
-  --lunar-bg: light-dark(var(--color-stone-beige), var(--color-charcoal-grey)); /* Page background */
-  --lunar-fg: light-dark(var(--color-charcoal-grey), var(--color-stone-beige)); /* Primary text */
-  --lunar-accent: #deb223; /* Interactive / links / focus (same in both modes) */
-  --lunar-muted: light-dark(#71717a, #a1a1aa); /* Secondary text, placeholders */
-  --lunar-border: light-dark(var(--color-charcoal-grey), var(--color-stone-beige)); /* Borders and dividers */
-  --lunar-success: light-dark(#16a34a, #4ade80); /* Success state */
-  --lunar-warning: light-dark(#d97706, #fbbf24); /* Warning state */
-  --lunar-error: light-dark(#dc2626, #f87171); /* Error state */
-  --lunar-info: light-dark(#2563eb, #60a5fa); /* Informational state */
+  --lunar-light: #f5f5f4;
+  --lunar-dark: #1c1917;
 }
 ```
 
-To swap the whole base look at once, override just the two palette colors.
+#### Semantic tokens
+
+The remaining color tokens are listed below. Most use `light-dark()`, so one definition covers both modes and no theme overrides are needed.
+
+| Token | Used for |
+|---|---|
+| `--lunar-bg` | Page background (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-fg` | Primary text (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-border` | Borders and dividers (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-accent` | Links, interactive elements, focus |
+| `--lunar-muted` | Secondary text, placeholders |
+| `--lunar-success` | Success state |
+| `--lunar-warning` | Warning state |
+| `--lunar-error` | Error state |
+| `--lunar-info` | Informational state |
+
+For the default values, see `src/scss/_config.scss`.
 
 Override any token to rebrand. For example, to change the accent to purple:
 
@@ -346,10 +352,9 @@ Or use a single color (same in both modes):
 
 ```css
 :root {
-  --lunar-bg: light-dark(#faf9f7, #1c1917);
-  --lunar-fg: light-dark(#1c1917, #f5f5f4);
+  --lunar-light: #faf9f7;
+  --lunar-dark: #1c1917;
   --lunar-muted: light-dark(#78716c, #a8a29e);
-  --lunar-border: light-dark(#e7e5e4, #44403c);
 }
 ```
 
