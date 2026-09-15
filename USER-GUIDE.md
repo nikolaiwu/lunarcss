@@ -5,6 +5,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Fonts](#fonts)
 - [Basic Usage](#basic-usage)
 - [Cards](#cards)
 - [Theme Switching](#theme-switching)
@@ -77,6 +78,62 @@ Download `lunarcss.min.css` from the [releases page](https://github.com/nikolaiw
 
 ```html
 <link rel="stylesheet" href="path/to/lunarcss.min.css" />
+```
+
+To use the fonts as well, download the release `.zip`. It contains `lunarcss.min.css`, `lunarcss-fonts.min.css` and the `fonts/` folder, which must stay next to `lunarcss-fonts.min.css`.
+
+---
+
+## Fonts
+
+LunarCSS is designed around two open-license fonts: **Space Grotesk** for body text and headings, and **Space Mono** for code. The theme itself **never downloads fonts**. `--lunar-font-sans` and `--lunar-font-mono` list them first, and fall back to system fonts when they aren't available.
+
+### Loading the bundled fonts (optional)
+
+For the full look, load `lunarcss-fonts.min.css` **before** the theme:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-fonts.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
+/>
+```
+
+With npm and a bundler:
+
+```javascript
+import "@nikolaiwu/lunarcss/fonts";
+import "@nikolaiwu/lunarcss";
+```
+
+- **Self-hosted:** the font files are served from the same place as the stylesheet (the CDN, your `node_modules`, or your own server). Nothing is requested from Google, so there's no third-party tracking or GDPR concern.
+- **Only what's needed is downloaded:** fonts are split into Latin, Latin Extended and Vietnamese subsets, and browsers fetch only the subsets a page uses, and only for the weights and styles it renders.
+- **No invisible text:** `font-display: swap` shows system fonts until the custom fonts have loaded.
+- **Licensing:** both fonts use the SIL Open Font License 1.1. The license texts ship in `dist/fonts/`.
+- **Sass users:** `pkg:@nikolaiwu/lunarcss/scss` compiles only the theme. Load `lunarcss-fonts.min.css` separately.
+
+### Using your own fonts
+
+Skip the fonts stylesheet and override the font tokens:
+
+```css
+:root {
+  --lunar-font-sans: "Inter", system-ui, sans-serif;
+  --lunar-font-mono: "Fira Code", ui-monospace, monospace;
+}
+```
+
+For plain system fonts, remove the first entry from each stack:
+
+```css
+:root {
+  --lunar-font-sans: system-ui, sans-serif;
+  --lunar-font-mono: ui-monospace, monospace;
+}
 ```
 
 ---
@@ -327,14 +384,13 @@ Or use a single color (same in both modes):
 
 ```css
 :root {
-  /* Font families */
+  /* Font families (see Fonts for loading Space Grotesk / Space Mono) */
   --lunar-font-sans:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --lunar-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+    "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   --lunar-font-mono:
-    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
-    monospace;
+    "Space Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
 
   /* Font sizes */
   --lunar-text-xs: 0.75rem; /* 12px */
@@ -480,13 +536,22 @@ Or use a single color (same in both modes):
 
 ### Use Custom Fonts
 
+Load your font however you like (ideally self-hosted), then point the token at it:
+
 ```css
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 :root {
   --lunar-font-sans: "Inter", system-ui, sans-serif;
 }
 ```
+
+See [Fonts](#fonts) for the bundled Space Grotesk and Space Mono.
 
 ### Increase Base Font Size
 

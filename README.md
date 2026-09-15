@@ -10,6 +10,7 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 - **CSS Variables** — Fully customizable via CSS custom properties
 - **Modern** — Built with SCSS, processed with Vite
 - **Lightweight** — Minimal footprint, maximum impact
+- **Private fonts** — System fonts by default; optional self-hosted Space Grotesk and Space Mono with no Google requests
 - **Accessible** — Focus states, reduced motion support, and semantic HTML styling
 
 ## Quick Start
@@ -25,6 +26,15 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 
 Pin a version range (like `@0.1` above) so a future breaking release can't change your site. unpkg works too: `https://unpkg.com/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css`.
 
+For the full look, also load the optional self-hosted fonts (Space Grotesk and Space Mono) before the theme. Nothing is requested from Google:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-fonts.min.css"
+/>
+```
+
 ### npm
 
 ```bash
@@ -34,6 +44,7 @@ npm install @nikolaiwu/lunarcss
 Import it in your bundler entry point:
 
 ```javascript
+import "@nikolaiwu/lunarcss/fonts"; // optional
 import "@nikolaiwu/lunarcss";
 ```
 
@@ -46,6 +57,8 @@ Download `lunarcss.min.css` from the [releases page](https://github.com/nikolaiw
 ```html
 <link rel="stylesheet" href="lunarcss.min.css" />
 ```
+
+For the fonts, download the release `.zip` instead and keep `lunarcss-fonts.min.css` next to its `fonts/` folder.
 
 That's it! Your HTML will now have beautiful default styles.
 
@@ -171,6 +184,7 @@ lunarcss/
 │   │   │   ├── _light.scss       # [data-theme="light"] → color-scheme: light
 │   │   │   └── _dark.scss        # [data-theme="dark"] → color-scheme: dark
 │   │   ├── main.scss             # Production entry point
+│   │   ├── fonts.scss            # Optional fonts entry → lunarcss-fonts.min.css
 │   │   └── showcase.scss         # Showcase-only styles
 │   └── index.html                # Showcase page
 ├── .github/workflows/release.yml # Publish to npm + GitHub release on version tags

@@ -42,13 +42,15 @@
   // Typography Scale
   // ---------------------------------------------------------------------------
   // Font families
+  // "Space Grotesk" and "Space Mono" are used when available: loaded via the
+  // optional lunarcss-fonts stylesheet, installed locally, or loaded by the
+  // site. Nothing is downloaded by this file; otherwise system fonts are used.
   --lunar-font-sans:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --lunar-font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+    "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   --lunar-font-mono:
-    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
-    monospace;
+    "Space Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
 
   // Font sizes (modular scale ~1.25)
   --lunar-text-xs: 0.75rem; // 12px

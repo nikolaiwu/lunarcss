@@ -20,8 +20,21 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
 
 ## Architecture
 
-- **Vite root is `src/`** ([vite.config.js](vite.config.js)). There are two Rollup inputs: `src/scss/main.scss` (the distributed theme) and `src/index.html` (the showcase). A custom `assetFileNames` names the theme output `dist/lunarcss.min.css` in production and `dist/lunarcss.css` in development mode. It matches on `lunarcss.css`, because Vite names the asset after the input key, not the source file. `package.json` (`style`, `exports`, `files`), the docs' CDN URLs and the release workflow all depend on the `.min.css` name. A `banner()` plugin in the same file adds `/*! LunarCSS vX.Y.Z … */` after `@charset`, which must stay the first statement.
-- **Publishing:** the package is `@nikolaiwu/lunarcss`, because unscoped `lunarcss` is taken on npm. `files` ships only `dist/lunarcss.min.css` and `src/scss` (not `showcase.scss`, and not the built showcase `index.html`). `exports["./scss"]` lets Sass users `@use "pkg:@nikolaiwu/lunarcss/scss"` with the Node package importer (a bare path without `pkg:` does not resolve), so SCSS partials must keep resolving from `main.scss` with relative paths. The jsDelivr and unpkg CDNs serve straight from npm.
+- **Vite root is `src/`** ([vite.config.js](vite.config.js)). There are three Rollup inputs:
+  - `src/scss/main.scss`: the distributed theme
+  - `src/scss/fonts.scss`: the optional fonts stylesheet
+  - `src/index.html`: the showcase
+
+  `base: "./"` keeps asset URLs relative, so the fonts CSS works from any CDN path. A custom `assetFileNames` names the theme output `dist/lunarcss.min.css` in production and `dist/lunarcss.css` in development mode (the fonts CSS follows the same pattern), and writes font files to `dist/fonts/` without hashes. It matches on `lunarcss.css`, because Vite names the asset after the input key, not the source file. `package.json` (`style`, `exports`, `files`), the docs' CDN URLs and the release workflow all depend on the `.min.css` name. A `banner()` plugin in the same file adds `/*! LunarCSS vX.Y.Z … */` after `@charset`, which must stay the first statement.
+
+- **Publishing:** the package is `@nikolaiwu/lunarcss`, because unscoped `lunarcss` is taken on npm. `files` ships only these:
+  - `dist/lunarcss.min.css`
+  - `dist/lunarcss-fonts.min.css`
+  - `dist/fonts/`
+  - `src/scss`, except `showcase.scss` and `fonts.scss`, whose package URLs only resolve inside this repo's Vite build
+
+  The built showcase `index.html` is not shipped either. `exports["./scss"]` lets Sass users `@use "pkg:@nikolaiwu/lunarcss/scss"` with the Node package importer (a bare path without `pkg:` does not resolve), so SCSS partials must keep resolving from `main.scss` with relative paths. The jsDelivr and unpkg CDNs serve straight from npm.
+
 - **Versioning:** SemVer, with CHANGELOG.md in Keep a Changelog format. Removing or renaming a `--lunar-*` token or changing which elements a rule targets is a breaking change (minor bump while below 1.0). Add user-facing changes under `[Unreleased]`.
 - **`main.scss` sets the cascade order** using `@use` (the modern Sass module system, `api: 'modern-compiler'`): config → themes → reset → base → elements. Every new partial must be added there.
 - **Theming uses CSS `light-dark()`, not duplicated variable sets.** All color tokens live in [src/scss/_config.scss](src/scss/_config.scss) on `:root` with `color-scheme: light dark`. `themes/_light.scss` and `themes/_dark.scss` only set `color-scheme` under `[data-theme="light"|"dark"]` to force a mode. To add or change colors, edit `_config.scss`; don't add per-theme overrides.
@@ -32,6 +45,12 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
 
   Element styles should use `var(--lunar-*)` and never `--color-*` or hard-coded values. The docs deliberately don't list default color values; they tell users to override `--lunar-light` and `--lunar-dark`.
 
+- **Fonts:** the theme never downloads fonts. `--lunar-font-sans` and `--lunar-font-mono` in `_config.scss` start with "Space Grotesk" and "Space Mono", then fall back to system stacks.
+  - The optional [src/scss/fonts.scss](src/scss/fonts.scss) generates woff2-only `@font-face` rules for each unicode subset, pointing at the Fontsource devDependencies (`@fontsource-variable/space-grotesk`, `@fontsource/space-mono`). Vite resolves and copies those files.
+  - The Grotesk family is declared as plain "Space Grotesk", not Fontsource's "Space Grotesk Variable", so it matches the token stack.
+  - The `fontLicenses()` Vite plugin copies the OFL license texts into `dist/fonts/`, as the license requires.
+  - No Google Fonts or other remote font URLs, anywhere.
+  - The release workflow attaches a zip of both stylesheets plus `fonts/`.
 - **Cards:** `article` is the classless card component ([elements/_article.scss](src/scss/elements/_article.scss)), with optional `header` (irregular dashed rule below it) and `footer` (45° striped band above it). The look comes from the `card` mixin (shared with `dialog`), with local `--_card-*` properties at its top. A parent whose direct children are all articles (two or more) becomes a responsive grid, selected with `:has()`. That's the only intentional layout rule; don't add other layout styles.
 - **Mixins:** [src/scss/mixins/](src/scss/mixins/) holds one file per mixin. `_index.scss` `@forward`s them all, so modules import them with `@use "../mixins"` and call `mixins.<name>` (`_article.scss` and `_interactive.scss` do). The folder isn't in `main.scss` and emits no CSS on its own. Add new mixin files to `_index.scss`; a mixin that uses another one `@use`s that sibling file directly (as `_card.scss` does with `cut-corner`).
   - `cut-corner-border($corners, $size, $border-width, $border-color, $background)` draws a bordered box with 45° cut corners. `clip-path` can't draw a border along the diagonal, so `::before` is the border shape and `::after` is the fill, inset by the border width (the inner cut is `size − width × 0.5858`). It takes over the host's `::before` and `::after`, and sets `position: relative`, `isolation: isolate`, `border: 0` and a transparent background. A host box-shadow would show as a rectangle past the cuts.
