@@ -36,7 +36,10 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
   The built showcase `index.html` is not shipped either. `exports["./scss"]` lets Sass users `@use "pkg:@nikolaiwu/lunarcss/scss"` with the Node package importer (a bare path without `pkg:` does not resolve), so SCSS partials must keep resolving from `main.scss` with relative paths. The jsDelivr and unpkg CDNs serve straight from npm.
 
 - **Versioning:** SemVer, with CHANGELOG.md in Keep a Changelog format. Removing or renaming a `--lunar-*` token or changing which elements a rule targets is a breaking change (minor bump while below 1.0). Add user-facing changes under `[Unreleased]`.
-- **`main.scss` sets the cascade order** using `@use` (the modern Sass module system, `api: 'modern-compiler'`): config → themes → reset → base → elements. Every new partial must be added there.
+- **`main.scss` sets the cascade order and wraps everything in `@layer lunarcss { … }`**, so unlayered user CSS and later layers (e.g. Tailwind v4 utilities) always override the theme, regardless of specificity.
+  - `@use` can't go inside `@layer`, so partials are loaded with `@include meta.load-css("…")`, in the order config → themes → reset → base → elements. Every new partial must be added there.
+  - Don't emit theme CSS outside the layer, and don't rely on specificity or `!important` to beat user styles.
+  - `fonts.scss` (only `@font-face`) and `showcase.scss` are not layered.
 - **Theming uses CSS `light-dark()`, not duplicated variable sets.** All color tokens live in [src/scss/_config.scss](src/scss/_config.scss) on `:root` with `color-scheme: light dark`. `themes/_light.scss` and `themes/_dark.scss` only set `color-scheme` under `[data-theme="light"|"dark"]` to force a mode. To add or change colors, edit `_config.scss`; don't add per-theme overrides.
 - **Token naming:** public tokens use the `--lunar-*` prefix (`--lunar-bg`, `--lunar-fg`, `--lunar-accent`, `--lunar-muted`, `--lunar-border`, and the status colors, plus the typography, spacing, radius, and transition scales). Color layers:
   1. `--color-*` primitives hold raw values and are referenced only by `--lunar-light` and `--lunar-dark` in `_config.scss`.
@@ -56,7 +59,7 @@ The repo uses pnpm, pinned via `packageManager` in `package.json`. `pnpm-workspa
   - `cut-corner-border($corners, $size, $border-width, $border-color, $background)` draws a bordered box with 45° cut corners. `clip-path` can't draw a border along the diagonal, so `::before` is the border shape and `::after` is the fill, inset by the border width (the inner cut is `size − width × 0.5858`). It takes over the host's `::before` and `::after`, and sets `position: relative`, `isolation: isolate`, `border: 0` and a transparent background. A host box-shadow would show as a rectangle past the cuts.
   - `card` is the full card look (padding, cut-corner border, `> header` dashes, `> footer` stripes). `article` and `dialog` both include it. A host that needs its own `position` or other overrides should put them in a `& { … }` block after the `@include`, so they come after the mixin's output (see `dialog`).
   - Runtime overrides for users: `--lunar-cut-size`, `--lunar-cut-border-width`, `--lunar-cut-border-color` and `--lunar-cut-bg`.
-- **Showcase vs. production:** `src/index.html` links `main.scss` and `showcase.scss` directly. It may use classes; the production theme may not. `showcase.scss` is currently entirely commented out.
+- **Showcase vs. production:** `src/index.html` links `fonts.scss`, `main.scss` and `showcase.scss` directly. It may use classes; the production theme may not. `showcase.scss` is **layout only**: width, spacing, flex/grid and alignment for the demo page. No colors, borders, typography or other visual styles, so the showcase shows the theme as-is. It doesn't `@use "main"`, because the theme is linked separately.
 
 ## Conventions
 

@@ -1,41 +1,52 @@
 // =============================================================================
 // LUNARCSS - Main Entry Point
 // =============================================================================
-// This is the production entry point. It imports all theme styles
-// in the correct order. The output is a single CSS file.
+// This is the production entry point. It loads all theme styles in the
+// correct order. The output is a single CSS file.
+//
+// Everything is wrapped in the `lunarcss` cascade layer. Styles outside any
+// layer (the user's own CSS) and later layers (e.g. Tailwind's utilities)
+// always override the theme, regardless of selector specificity.
+//
+// @use can't be nested inside @layer, so partials are loaded with
+// meta.load-css() instead. Order below = cascade order.
 // =============================================================================
 
-// ---------------------------------------------------------------------------
-// Configuration (CSS Custom Properties / Design Tokens)
-// ---------------------------------------------------------------------------
-@use "config";
+@use "sass:meta";
 
-// ---------------------------------------------------------------------------
-// Theme Definitions (Light/Dark mode variables)
-// ---------------------------------------------------------------------------
-@use "themes/light";
-@use "themes/dark";
+@layer lunarcss {
+  // ---------------------------------------------------------------------------
+  // Configuration (CSS Custom Properties / Design Tokens)
+  // ---------------------------------------------------------------------------
+  @include meta.load-css("config");
 
-// ---------------------------------------------------------------------------
-// CSS Reset
-// ---------------------------------------------------------------------------
-@use "reset";
+  // ---------------------------------------------------------------------------
+  // Theme Definitions (Light/Dark mode variables)
+  // ---------------------------------------------------------------------------
+  @include meta.load-css("themes/light");
+  @include meta.load-css("themes/dark");
 
-// ---------------------------------------------------------------------------
-// Base Styles (root, html, body, typography foundations)
-// ---------------------------------------------------------------------------
-@use "base/root";
-@use "base/typography";
+  // ---------------------------------------------------------------------------
+  // CSS Reset
+  // ---------------------------------------------------------------------------
+  @include meta.load-css("reset");
 
-// ---------------------------------------------------------------------------
-// Element Styles (all HTML elements)
-// ---------------------------------------------------------------------------
-@use "elements/headings";
-@use "elements/text";
-@use "elements/inline";
-@use "elements/lists";
-@use "elements/tables";
-@use "elements/forms";
-@use "elements/media";
-@use "elements/interactive";
-@use "elements/article";
+  // ---------------------------------------------------------------------------
+  // Base Styles (root, html, body, typography foundations)
+  // ---------------------------------------------------------------------------
+  @include meta.load-css("base/root");
+  @include meta.load-css("base/typography");
+
+  // ---------------------------------------------------------------------------
+  // Element Styles (all HTML elements)
+  // ---------------------------------------------------------------------------
+  @include meta.load-css("elements/headings");
+  @include meta.load-css("elements/text");
+  @include meta.load-css("elements/inline");
+  @include meta.load-css("elements/lists");
+  @include meta.load-css("elements/tables");
+  @include meta.load-css("elements/forms");
+  @include meta.load-css("elements/media");
+  @include meta.load-css("elements/interactive");
+  @include meta.load-css("elements/article");
+}

@@ -213,6 +213,7 @@ Theming relies on the CSS `light-dark()` function (Chrome 123+, Firefox 120+, Sa
 2. **Progressive enhancement** — Base styles work everywhere, enhanced features for modern browsers
 3. **Customization via variables** — All design decisions exposed as CSS custom properties
 4. **Minimal reset** — Just enough to normalize, not opinionated overrides
+5. **Easy to override** — Everything lives in the `lunarcss` cascade layer, so your CSS and utility frameworks always win, no specificity battles
 
 ## Contributing
 

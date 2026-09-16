@@ -577,22 +577,35 @@ html {
 
 ## Working with Frameworks
 
+### How LunarCSS stays out of your way
+
+All LunarCSS styles live in a single [cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) named `lunarcss`. In CSS, styles that aren't in any layer always beat layered styles, **whatever their specificity or load order**. So:
+
+- **Your own CSS always wins.** `p { margin: 0 }` overrides the theme without extra specificity or `!important`.
+- **Later layers win too.** Frameworks that use layers (like Tailwind v4) override the theme, whichever file loads first.
+
 ### With Tailwind CSS
 
-LunarCSS works great as a base layer before adding Tailwind:
+**Tailwind v4** puts its utilities in layers, so they override LunarCSS automatically. Skip Tailwind's Preflight reset, which would strip LunarCSS's element styles, by importing only the theme and utilities:
 
-```html
-<!-- LunarCSS first for base element styles -->
-<link rel="stylesheet" href="lunarcss.min.css" />
-<!-- Tailwind second for utility classes -->
-<link rel="stylesheet" href="output.css" />
+```css
+/* app.css */
+@import "@nikolaiwu/lunarcss";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 ```
 
-Your HTML elements will have beautiful defaults, and you can use Tailwind utilities for layout and customization.
+To make the order explicit, declare it once at the top. Later layers win:
+
+```css
+@layer lunarcss, theme, utilities;
+```
+
+**Tailwind v3** emits utilities without layers, so they already override LunarCSS. Set `corePlugins: { preflight: false }` to keep the theme's element styles.
 
 ### With Bootstrap
 
-Load LunarCSS before Bootstrap to provide better defaults:
+Bootstrap's CSS isn't layered, so it overrides LunarCSS completely, including its reset and component styles. LunarCSS then only fills in what Bootstrap doesn't style. Mixing two full design systems usually isn't worth it. Pick one, or use LunarCSS with a utility-only library.
 
 ```html
 <link rel="stylesheet" href="lunarcss.min.css" />
@@ -606,7 +619,7 @@ Import LunarCSS in your entry point:
 ```javascript
 // main.js or App.jsx
 import "@nikolaiwu/lunarcss";
-import "./your-styles.css"; // Your custom styles after
+import "./your-styles.css"; // your styles override the theme, whatever the order
 ```
 
 ---
@@ -615,9 +628,9 @@ import "./your-styles.css"; // Your custom styles after
 
 ### Styles Not Applying
 
-1. **Check CSS load order**: LunarCSS should load before your custom styles
-2. **Check specificity**: LunarCSS uses element selectors, which have low specificity. Your custom styles should override easily.
-3. **Check for conflicting resets**: If you have another CSS reset, it may conflict with LunarCSS.
+1. **Your override isn't working?** Check whether your CSS is itself inside a `@layer`. Unlayered CSS always overrides LunarCSS, but a layered style only wins if its layer comes after `lunarcss` in the order. Declare the order with `@layer lunarcss, your-layer;`.
+2. **LunarCSS isn't applying?** Unlayered CSS always wins over the theme, so any other reset or framework stylesheet (like Bootstrap, or Tailwind's Preflight) overrides it. Remove the conflicting reset.
+3. **`!important` in the theme:** only the reduced-motion rules use it. Inside a layer, `!important` beats unlayered `!important`, so users who prefer reduced motion always get it.
 
 ### Dark Mode Not Working
 
