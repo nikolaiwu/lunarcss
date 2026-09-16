@@ -58,7 +58,7 @@ jobs:
       - name: Package release assets
         run: |
           cd dist
-          zip -r "../lunarcss-$GITHUB_REF_NAME.zip" lunarcss.min.css lunarcss-fonts.min.css fonts
+          zip -r "../lunarcss-$GITHUB_REF_NAME.zip" lunarcss.min.css lunarcss-fonts.min.css lunarcss-layout.min.css fonts
 
       - name: Create GitHub release
         env:
