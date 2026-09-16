@@ -51,7 +51,6 @@ mark {
   background-color: light-dark(var(--lunar-dark), var(--lunar-light));
   color: light-dark(var(--lunar-light), var(--lunar-dark));
   padding: 0.125em 0.25em;
-  border-radius: var(--lunar-radius-sm);
 }
 
 // ---------------------------------------------------------------------------
@@ -113,7 +112,6 @@ code {
   padding: 0.125em 0.375em;
   background-color: color-mix(in srgb, var(--lunar-bg) 75%, var(--lunar-muted));
   color: var(--lunar-fg);
-  border-radius: var(--lunar-radius-md);
 }
 
 // ---------------------------------------------------------------------------
@@ -126,7 +124,6 @@ kbd {
   background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
   color: var(--lunar-fg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   // box-shadow:
   //   0 1px 0 color-mix(in srgb, var(--lunar-border) 50%, var(--lunar-muted)),
   //   inset 0 0 0 1px var(--lunar-bg);

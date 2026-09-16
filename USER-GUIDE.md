@@ -300,6 +300,7 @@ It's about 0.6 kB gzipped and gives you:
 | `nav ul`                           | Horizontal row of links, no bullets                                                                                                               |
 | `main` and `aside` as siblings     | Sidebar beside the content above 60rem, stacked below. Source order picks the side: `aside` first puts it on the left, `main` first on the right. |
 | A parent of only `article`s        | [Responsive card grid](#card-grid), equal heights, footers aligned                                                                                |
+| A parent of only form controls     | Button/input group: a flex row with a `--lunar-button-gap` (2px) gap, so grouped controls read as one shape                                       |
 | `body > footer`                    | Its blocks spread across one row, wrapping on small screens                                                                                       |
 
 So a full page needs no classes at all:
@@ -330,6 +331,9 @@ So a full page needs no classes at all:
   --lunar-sidebar-width: 20rem; /* aside beside main */
   --lunar-layout-gap: var(--lunar-space-8); /* between page regions */
   --lunar-card-min-width: 18rem; /* card grid column before it wraps */
+  --lunar-button-gap: calc(
+    var(--lunar-space-1) / 2
+  ); /* between grouped controls */
 }
 ```
 
@@ -539,16 +543,20 @@ Or use a single color (same in both modes):
 
 ```css
 :root {
-  --lunar-border-width: 2px;
+  --lunar-border-width: 1px;
+}
+```
 
-  /* Radius */
-  --lunar-radius-none: 0;
-  --lunar-radius-sm: 0.125rem; /* 2px */
-  --lunar-radius-md: 0.375rem; /* 6px */
-  --lunar-radius-lg: 0.5rem; /* 8px */
-  --lunar-radius-xl: 0.75rem; /* 12px */
-  --lunar-radius-2xl: 1rem; /* 16px */
-  --lunar-radius-full: 9999px;
+Corners are square throughout: the theme sets no `border-radius` anywhere, and there's no radius scale. Cards and dialogs use [cut corners](#cut-corners) instead.
+
+To round things yourself, set it on the elements you want:
+
+```css
+input,
+button,
+textarea,
+select {
+  border-radius: 0.375rem;
 }
 ```
 

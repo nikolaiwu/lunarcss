@@ -1,0 +1,31 @@
+// =============================================================================
+// LUNARCSS - Mixins: Striped Background
+// =============================================================================
+// Repeating diagonal stripes, drawn with a repeating-linear-gradient.
+//
+// Runtime overrides (set on the element or any ancestor):
+//   --lunar-stripe-width    thickness of each stripe
+//   --lunar-stripe-gap      distance from one stripe to the next
+//   --lunar-stripe-angle    gradient angle: 135deg leans "/", 45deg leans "\"
+//   --lunar-stripe-color    stripe color
+//
+// Usage:
+//   @include mixins.striped;
+//   @include mixins.striped($gap: var(--lunar-space-4));
+// =============================================================================
+
+@mixin striped(
+  $width: var(--lunar-border-width),
+  $gap: var(--lunar-space-2),
+  $angle: 135deg,
+  $color: var(--lunar-border)
+) {
+  --_stripe-width: var(--lunar-stripe-width, #{$width});
+  --_stripe-gap: var(--lunar-stripe-gap, #{$gap});
+
+  background-image: repeating-linear-gradient(
+    var(--lunar-stripe-angle, #{$angle}),
+    var(--lunar-stripe-color, #{$color}) 0 var(--_stripe-width),
+    transparent var(--_stripe-width) var(--_stripe-gap)
+  );
+}

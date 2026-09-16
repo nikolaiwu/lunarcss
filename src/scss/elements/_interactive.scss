@@ -12,7 +12,6 @@
 details {
   margin-bottom: var(--lunar-space-4);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-lg);
   overflow: hidden;
 
   &[open] {
@@ -156,7 +155,6 @@ dialog {
   background-color: var(--lunar-bg);
   color: var(--lunar-fg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-lg);
   box-shadow: var(--lunar-shadow-lg);
 
   &::backdrop {

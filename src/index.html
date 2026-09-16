@@ -587,14 +587,6 @@ greet('World');</code></pre>
             </datalist>
           </div>
 
-          <h3>Buttons</h3>
-          <div class="demo-box">
-            <button type="button">Button</button>
-            <input type="submit" value="Submit" />
-            <input type="reset" value="Reset" />
-            <button type="button" disabled>Disabled</button>
-          </div>
-
           <h3>Progress & Meter</h3>
           <div class="demo-box form-demo">
             <label>Progress (70%)</label>
@@ -643,6 +635,58 @@ greet('World');</code></pre>
               Answer to the Ultimate Question of Life, the Universe, and
               Everything: <output>42</output>
             </p>
+          </div>
+
+          <h3>Buttons</h3>
+          <p class="section-description">
+            A <code>&lt;button&gt;</code> on its own is cut at the top-right and
+            bottom-left corners. Input buttons stay rectangular: the cut is
+            drawn with <code>::before</code> and <code>::after</code>, and
+            <code>&lt;input&gt;</code> is a void element, so it can't have
+            pseudo-elements.
+          </p>
+          <div class="demo-box">
+            <p><button type="button">Button</button></p>
+            <p><input type="submit" value="Submit" /></p>
+            <p><input type="reset" value="Reset" /></p>
+            <p><button type="button" disabled>Disabled</button></p>
+          </div>
+
+          <h3>Button &amp; Input Groups</h3>
+          <p class="section-description">
+            Put controls next to each other and they group up: the cut corners
+            disappear where they touch, so the row reads as one shape. Only the
+            first keeps its bottom-left cut, only the last its top-right one.
+            Spacing between them needs the optional layout stylesheet.
+          </p>
+          <div class="demo-box">
+            <div>
+              <button>First</button>
+              <button>Middle</button>
+              <button>Last</button>
+            </div>
+          </div>
+          <div class="demo-box">
+            <div>
+              <input type="search" placeholder="Search drives…" />
+              <button type="submit">Search</button>
+            </div>
+          </div>
+          <div class="demo-box">
+            <div>
+              <select>
+                <option>All models</option>
+                <option>C-90 Shuttle</option>
+                <option>C-137 Warp Drive</option>
+              </select>
+              <button>Filter</button>
+            </div>
+          </div>
+          <div class="demo-box">
+            <div>
+              <button type="submit">Send</button>
+              <input type="reset" value="Clear" />
+            </div>
           </div>
         </section>
 

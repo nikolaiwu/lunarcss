@@ -1,0 +1,36 @@
+// =============================================================================
+// LUNARCSS - Mixins: Dotted Background
+// =============================================================================
+// A repeating grid of dots, drawn with one radial-gradient tile.
+//
+// The tile is laid out from the top-left, so a band's first row of dots
+// always lines up with its edge.
+//
+// Runtime overrides (set on the element or any ancestor):
+//   --lunar-dot-size     diameter of each dot
+//   --lunar-dot-gap      tile size: dot spacing, both axes
+//   --lunar-dot-color    dot color
+//
+// Usage:
+//   @include mixins.dotted;
+//   @include mixins.dotted($gap: var(--lunar-space-4));
+// =============================================================================
+
+@mixin dotted(
+  $size: calc(var(--lunar-space-1) / 1),
+  $gap: calc(var(--lunar-space-2) / 1),
+  $color: var(--lunar-muted)
+) {
+  --_dot-size: var(--lunar-dot-size, #{$size});
+  --_dot-gap: var(--lunar-dot-gap, #{$gap});
+
+  // One dot per tile: a hard-stopped radial gradient at the tile's centre
+  background-image: radial-gradient(
+    circle at center,
+    var(--lunar-dot-color, #{$color}) 0 calc(var(--_dot-size) / 2),
+    transparent calc(var(--_dot-size) / 2)
+  );
+  background-size: var(--_dot-gap) var(--_dot-gap);
+  background-position: 0 0;
+  background-repeat: repeat;
+}

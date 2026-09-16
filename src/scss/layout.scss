@@ -26,6 +26,8 @@
     --lunar-sidebar-width: 20rem; // aside next to main
     --lunar-layout-gap: var(--lunar-space-8); // between page regions
     --lunar-card-min-width: 18rem; // card grid column before it wraps
+    // Between grouped buttons: half a spacing step (2px), so they read as one
+    --lunar-button-gap: calc(var(--lunar-space-1) / 2);
   }
 
   // ---------------------------------------------------------------------------
@@ -146,6 +148,37 @@
 
     > footer {
       margin-block-start: auto;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Button & Input Groups
+  // ---------------------------------------------------------------------------
+  // A parent whose direct children are all form controls (at least two) becomes
+  // a flex row: a button group, or an input paired with a button. Flex drops the
+  // whitespace between inline elements, so the gap is exactly
+  // --lunar-button-gap rather than a text space. The theme drops the cut corners
+  // where the controls touch, so the row reads as one shape.
+  $control: "button, input, select, textarea";
+
+  :has(> :is(#{$control}) + :is(#{$control})):not(
+    :has(> :not(:is(#{$control})))
+  ) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--lunar-button-gap);
+
+    > :is(#{$control}) {
+      margin-bottom: 0; // the row handles spacing
+    }
+
+    // Text fields fill the row; buttons keep their own width
+    > input:not([type="submit"]):not([type="reset"]):not([type="button"]),
+    > select,
+    > textarea {
+      flex: 1 1 12rem;
+      width: auto;
     }
   }
 

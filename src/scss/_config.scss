@@ -120,16 +120,8 @@
   // ---------------------------------------------------------------------------
   --lunar-border-width: 1px;
 
-  // ---------------------------------------------------------------------------
-  // Border Radius
-  // ---------------------------------------------------------------------------
-  --lunar-radius-none: 0;
-  --lunar-radius-sm: 0.125rem; // 2px
-  --lunar-radius-md: 0.375rem; // 6px
-  --lunar-radius-lg: 0.5rem; // 8px
-  --lunar-radius-xl: 0.75rem; // 12px
-  --lunar-radius-2xl: 1rem; // 16px
-  --lunar-radius-full: 9999px;
+  // Corners are square everywhere: no border-radius, and no radius scale.
+  // Cards and dialogs use cut corners instead (see mixins/_cut-corner.scss).
 
   // ---------------------------------------------------------------------------
   // Shadows

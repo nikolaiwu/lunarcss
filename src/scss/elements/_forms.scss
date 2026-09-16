@@ -4,6 +4,8 @@
 // Styles for form elements: form, input, textarea, select, button, etc.
 // =============================================================================
 
+@use "../mixins";
+
 // ---------------------------------------------------------------------------
 // Form
 // ---------------------------------------------------------------------------
@@ -16,7 +18,6 @@ form {
 // ---------------------------------------------------------------------------
 fieldset {
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-lg);
   padding: var(--lunar-space-6);
   margin-bottom: var(--lunar-space-4);
 }
@@ -56,7 +57,6 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   transition:
     border-color var(--lunar-transition-fast),
     box-shadow var(--lunar-transition-fast);
@@ -112,7 +112,6 @@ textarea {
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   transition:
     border-color var(--lunar-transition-fast),
     box-shadow var(--lunar-transition-fast);
@@ -161,7 +160,6 @@ select {
   background-position: right var(--lunar-space-2) center;
   background-size: 1.25em;
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   appearance: none;
   cursor: pointer;
   transition:
@@ -224,7 +222,6 @@ input[type="range"] {
   width: 100%;
   height: 0.5rem;
   background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
-  border-radius: var(--lunar-radius-full);
   cursor: pointer;
   accent-color: var(--lunar-accent);
   margin-bottom: var(--lunar-space-4);
@@ -238,7 +235,6 @@ input[type="color"] {
   height: 2.5rem;
   padding: var(--lunar-space-1);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
 
@@ -248,7 +244,6 @@ input[type="color"] {
 
   &::-webkit-color-swatch {
     border: none;
-    border-radius: var(--lunar-radius-sm);
   }
 }
 
@@ -262,7 +257,6 @@ input[type="file"] {
   font-size: var(--lunar-text-sm);
   color: var(--lunar-muted);
   border: var(--lunar-border-width) dashed var(--lunar-border);
-  border-radius: var(--lunar-radius-md);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
 
@@ -277,7 +271,6 @@ input[type="file"] {
       var(--lunar-muted)
     );
     border: var(--lunar-border-width) solid var(--lunar-border);
-    border-radius: var(--lunar-radius-md);
     cursor: pointer;
     transition: background-color var(--lunar-transition-fast);
 
@@ -307,10 +300,9 @@ input[type="button"] {
   line-height: var(--lunar-leading-normal);
   // color: var(--lunar-bg);
   // color: var(--lunar-light), var(--lunar-dark);
+  cursor: pointer;
   background-color: var(--lunar-accent);
   border: var(--lunar-border-width) solid transparent;
-  border-radius: var(--lunar-radius-md);
-  cursor: pointer;
   transition:
     background-color var(--lunar-transition-fast),
     box-shadow var(--lunar-transition-fast);
@@ -327,7 +319,7 @@ input[type="button"] {
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
+      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
   }
 
   &:active:not(:disabled) {
@@ -337,6 +329,100 @@ input[type="button"] {
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+// Cut bottom-left corner, for <button> only: the mixin draws the border and
+// fill with ::before/::after, and input is a void element, so it has neither.
+button {
+  --lunar-cut-size: var(--lunar-space-2);
+  --lunar-cut-bg: var(--lunar-accent);
+  --lunar-cut-border-color: transparent;
+  --_button-ring: 3px;
+
+  @include mixins.cut-corner-border((bottom-left, top-right));
+
+  // The mixin sets border: 0; keep the transparent border so buttons and
+  // input buttons are the same size, and push the layers out to cover it
+  & {
+    border: var(--lunar-border-width) solid transparent;
+  }
+
+  // Both layers cover the whole border box. The border is transparent, so the
+  // fill can use the full cut size instead of the mixin's inset one.
+  &::before,
+  &::after {
+    inset: calc(var(--lunar-border-width) * -1);
+  }
+
+  &::after {
+    --_cut-inner: var(--_cut-size);
+  }
+
+  // The fill is the mixin's ::after, so states change --lunar-cut-bg. The host
+  // background must stay transparent, or it would square off the cut corner.
+  &:hover:not(:disabled) {
+    background-color: transparent;
+    --lunar-cut-bg: color-mix(
+      in srgb,
+      var(--lunar-accent) 85%,
+      var(--lunar-fg)
+    );
+  }
+
+  // Focus ring: grow the mixin's border layer outwards and recolor it, so the
+  // ring follows the cut corner instead of boxing it in
+  &:focus-visible {
+    box-shadow: none;
+
+    &::before {
+      inset: calc((var(--_button-ring) + var(--lunar-border-width)) * -1);
+      background-color: color-mix(
+        in srgb,
+        var(--lunar-accent) 40%,
+        transparent
+      );
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Button Groups
+// ---------------------------------------------------------------------------
+// Adjacent buttons drop their inner cuts, so a row reads as one group: only
+// the first keeps the bottom-left cut, only the last keeps the top-right one.
+// Input buttons count as neighbours, but can't show cuts themselves (a void
+// element has no pseudo-elements), so `button` is always the subject here.
+// Order matters — the "middle" rule below must come last.
+$control: "button, input, select, textarea";
+
+// Not the first: no bottom-left cut
+:is(#{$control}) + button {
+  &::before {
+    clip-path: mixins.cut-corner-polygon(var(--_cut-size), (top-right));
+  }
+
+  &::after {
+    clip-path: mixins.cut-corner-polygon(var(--_cut-inner), (top-right));
+  }
+}
+
+// Not the last: no top-right cut
+button:has(+ :is(#{$control})) {
+  &::before {
+    clip-path: mixins.cut-corner-polygon(var(--_cut-size), (bottom-left));
+  }
+
+  &::after {
+    clip-path: mixins.cut-corner-polygon(var(--_cut-inner), (bottom-left));
+  }
+}
+
+// In the middle: square on both
+:is(#{$control}) + button:has(+ :is(#{$control})) {
+  &::before,
+  &::after {
+    clip-path: none;
   }
 }
 
@@ -371,7 +457,6 @@ output {
   font-size: var(--lunar-text-sm);
   color: var(--lunar-fg);
   background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
-  border-radius: var(--lunar-radius-md);
 }
 
 // ---------------------------------------------------------------------------
@@ -382,7 +467,6 @@ progress {
   width: 100%;
   height: 0.75rem;
   border: none;
-  border-radius: var(--lunar-radius-full);
   background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
   overflow: hidden;
   margin-bottom: var(--lunar-space-4);
@@ -393,18 +477,15 @@ progress {
       var(--lunar-bg) 80%,
       var(--lunar-muted)
     );
-    border-radius: var(--lunar-radius-full);
   }
 
   &::-webkit-progress-value {
     background-color: var(--lunar-accent);
-    border-radius: var(--lunar-radius-full);
     transition: width var(--lunar-transition-base);
   }
 
   &::-moz-progress-bar {
     background-color: var(--lunar-accent);
-    border-radius: var(--lunar-radius-full);
   }
 }
 
@@ -416,7 +497,6 @@ meter {
   width: 100%;
   height: 0.75rem;
   border: none;
-  border-radius: var(--lunar-radius-full);
   background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
   overflow: hidden;
   margin-bottom: var(--lunar-space-4);
@@ -427,22 +507,18 @@ meter {
       var(--lunar-bg) 80%,
       var(--lunar-muted)
     );
-    border-radius: var(--lunar-radius-full);
     border: none;
   }
 
   &::-webkit-meter-optimum-value {
     background-color: var(--lunar-success);
-    border-radius: var(--lunar-radius-full);
   }
 
   &::-webkit-meter-suboptimum-value {
     background-color: var(--lunar-warning);
-    border-radius: var(--lunar-radius-full);
   }
 
   &::-webkit-meter-even-less-good-value {
     background-color: var(--lunar-error);
-    border-radius: var(--lunar-radius-full);
   }
 }

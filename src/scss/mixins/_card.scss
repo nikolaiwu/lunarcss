@@ -3,6 +3,7 @@
 // =============================================================================
 
 @use "cut-corner";
+@use "striped";
 
 // ---------------------------------------------------------------------------
 // Card
@@ -16,8 +17,8 @@
 @mixin card {
   // Local knobs: restyle the card by changing these in one place
   --_card-padding: var(--lunar-space-4);
-  --_card-line: var(--lunar-border-width);
-  --_card-line-color: var(--lunar-border);
+  --_card-line: var(--lunar-space-1);
+  --_card-line-color: var(--lunar-muted);
 
   display: block;
   padding: var(--_card-padding);
@@ -48,15 +49,23 @@
       var(--_card-line-color) 90% 100%
     );
 
-    display: block;
+    // Title and any trailing item (price, badge, link) on one row
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lunar-space-2);
     margin-bottom: var(--lunar-space-6);
-    margin-inline: calc(var(--_card-padding) * -1);
+    margin-inline: calc(
+      (var(--_card-padding) - var(--lunar-border-width)) * -1
+    );
     padding-inline: var(--_card-padding);
     padding-bottom: var(--lunar-space-2);
     background: var(--_card-dashes) bottom / 100% var(--_card-line) no-repeat;
 
-    > :last-child {
-      margin-bottom: 0;
+    // The row handles spacing; element margins would break the baseline
+    > * {
+      margin-block: 0;
     }
   }
 
@@ -70,11 +79,13 @@
       display: block;
       height: var(--lunar-space-4);
       margin-bottom: var(--lunar-space-2);
-      margin-inline: calc(var(--_card-padding) * -1);
-      background: repeating-linear-gradient(
-        135deg,
-        var(--_card-line-color) 0 var(--_card-line),
-        transparent var(--_card-line) var(--lunar-space-2)
+      margin-inline: calc(
+        (var(--_card-padding) - var(--lunar-border-width)) * -1
+      );
+
+      @include striped.striped(
+        $width: var(--_card-line),
+        $color: var(--_card-line-color)
       );
     }
 
