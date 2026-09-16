@@ -8,6 +8,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 - [Fonts](#fonts)
 - [Basic Usage](#basic-usage)
 - [Cards](#cards)
+- [Layout](#layout)
 - [Theme Switching](#theme-switching)
 - [CSS Variables Reference](#css-variables-reference)
 - [Customization Examples](#customization-examples)
@@ -217,7 +218,7 @@ The border and fill are drawn with the card's `::before` and `::after` pseudo-el
 
 ### Card grid
 
-When a parent's direct children are **all** articles (at least two), they're laid out as a responsive grid that wraps to fewer columns on narrow screens:
+With the optional [layout stylesheet](#layout) loaded, a parent whose direct children are **all** articles (at least two) lays them out as a responsive grid that wraps to fewer columns on narrow screens:
 
 ```html
 <div>
@@ -227,7 +228,7 @@ When a parent's direct children are **all** articles (at least two), they're lai
 </div>
 ```
 
-This is LunarCSS's only layout rule. Any other direct child turns the grid off, so put a heading **outside** the wrapper:
+Any other direct child turns the grid off, so put a heading **outside** the wrapper:
 
 ```html
 <section>
@@ -246,6 +247,10 @@ Change the minimum card width (default `18rem`) before columns wrap:
   --lunar-card-min-width: 22rem;
 }
 ```
+
+Cards in a grid stretch to the same height, and their footers line up at the bottom.
+
+Without the layout stylesheet, cards simply stack, which is the theme's default flow.
 
 ### Full-page articles
 
@@ -269,6 +274,76 @@ main > article > header {
 ```
 
 The card grid needs `:has()` support (Chrome 105+, Firefox 121+, Safari 15.4+), which every browser that supports `light-dark()` already has.
+
+---
+
+## Layout
+
+The theme styles elements but never places them, so your own layout (or a framework's) stays in charge. `lunarcss-layout.min.css` is an optional stylesheet that adds page structure, still without a single class. Load it **after** the theme:
+
+```html
+<link rel="stylesheet" href="…/lunarcss.min.css" />
+<link rel="stylesheet" href="…/lunarcss-layout.min.css" />
+```
+
+```javascript
+import "@nikolaiwu/lunarcss";
+import "@nikolaiwu/lunarcss/layout";
+```
+
+It's about 0.6 kB gzipped and gives you:
+
+| Markup                             | Layout                                                                                                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `body`                             | Centred page, limited to `--lunar-page-width`                                                                                                     |
+| `body > header` containing a `nav` | Title and navigation on one row, wrapping on small screens                                                                                        |
+| `nav ul`                           | Horizontal row of links, no bullets                                                                                                               |
+| `main` and `aside` as siblings     | Sidebar beside the content above 60rem, stacked below. Source order picks the side: `aside` first puts it on the left, `main` first on the right. |
+| A parent of only `article`s        | [Responsive card grid](#card-grid), equal heights, footers aligned                                                                                |
+| `body > footer`                    | Its blocks spread across one row, wrapping on small screens                                                                                       |
+
+So a full page needs no classes at all:
+
+```html
+<body>
+  <header>
+    <h1>Acme Robotics</h1>
+    <nav>
+      <ul>
+        <li><a href="#products">Products</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="products">…</section>
+  </main>
+  <aside>…</aside>
+  <footer>…</footer>
+</body>
+```
+
+### Layout tokens
+
+```css
+:root {
+  --lunar-page-width: 72rem; /* page width, including the sidebar */
+  --lunar-sidebar-width: 20rem; /* aside beside main */
+  --lunar-layout-gap: var(--lunar-space-8); /* between page regions */
+  --lunar-card-min-width: 18rem; /* card grid column before it wraps */
+}
+```
+
+### Overriding it
+
+The layout lives in its own `lunarcss-layout` cascade layer, declared after the theme's. Your own unlayered CSS overrides both, so you can keep the parts you want and replace the rest:
+
+```css
+body {
+  max-width: none;
+}
+```
+
+Sass users can compile it from source with `@use "pkg:@nikolaiwu/lunarcss/scss/layout";`.
 
 ---
 

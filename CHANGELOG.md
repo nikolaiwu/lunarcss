@@ -18,6 +18,7 @@ Initial release, to be published as 0.1.0.
 
 - Classless styles for headings, text, inline elements, lists, tables, forms, media and interactive elements
 - Cards: every `<article>` is a cut-corner bordered box with optional `<header>` (dashed rule) / `<footer>` (striped band), and a parent containing only articles lays them out as a responsive grid (`--lunar-card-min-width`). `<dialog>` shares the same card look
+- Optional layout stylesheet `lunarcss-layout.min.css`: classless page structure (centred page, header with nav, horizontal nav lists, `main` + `aside` sidebar, footer row) and the card grid, which moved here from the theme, in its own `lunarcss-layout` cascade layer
 - Optional self-hosted fonts: `lunarcss-fonts.min.css` (Space Grotesk and Space Mono, SIL OFL 1.1, woff2 subsets, no Google requests). `--lunar-font-sans` / `--lunar-font-mono` list them first and fall back to system fonts
 - All theme styles live in the `lunarcss` cascade layer, so your own CSS and layered frameworks (e.g. Tailwind v4 utilities) override the theme regardless of specificity or load order
 - Light and dark themes via `light-dark()`, with `data-theme` to force either mode

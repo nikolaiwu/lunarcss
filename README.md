@@ -10,6 +10,7 @@ A plug-and-play CSS theme that styles all standard HTML elements using pure elem
 - **CSS Variables** — Fully customizable via CSS custom properties
 - **Modern** — Built with SCSS, processed with Vite
 - **Lightweight** — Minimal footprint, maximum impact
+- **Optional layout** — Classless page structure (header, nav, main + aside, footer, card grid) in a separate ~0.6 kB stylesheet
 - **Private fonts** — System fonts by default; optional self-hosted Space Grotesk and Space Mono with no Google requests
 - **Accessible** — Focus states, reduced motion support, and semantic HTML styling
 
@@ -46,6 +47,7 @@ Import it in your bundler entry point:
 ```javascript
 import "@nikolaiwu/lunarcss/fonts"; // optional
 import "@nikolaiwu/lunarcss";
+import "@nikolaiwu/lunarcss/layout"; // optional, after the theme
 ```
 
 Sass users can also compile from source with `@use "pkg:@nikolaiwu/lunarcss/scss";` (requires Sass's Node package importer; see the [User Guide](USER-GUIDE.md#using-the-scss-source)).
@@ -185,6 +187,7 @@ lunarcss/
 │   │   │   └── _dark.scss        # [data-theme="dark"] → color-scheme: dark
 │   │   ├── main.scss             # Production entry point
 │   │   ├── fonts.scss            # Optional fonts entry → lunarcss-fonts.min.css
+│   │   ├── layout.scss           # Optional layout entry → lunarcss-layout.min.css
 │   │   └── showcase.scss         # Showcase-only styles
 │   ├── index.html                # Showcase page (element reference)
 │   ├── demo.html                 # Acme Robotics demo: a classless landing page

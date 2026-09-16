@@ -10,6 +10,7 @@
     <title>Acme Robotics - LunarCSS Demo</title>
     <link rel="stylesheet" href="./scss/fonts.scss" />
     <link rel="stylesheet" href="./scss/main.scss" />
+    <link rel="stylesheet" href="./scss/layout.scss" />
     <script>
       // Apply the saved theme before first paint, to avoid a flash
       const saved = localStorage.getItem("theme");
@@ -331,6 +332,37 @@
         </form>
       </section>
     </main>
+
+    <aside>
+      <h2>Service bulletin</h2>
+      <article>
+        <header>
+          <h3>Coolant recall</h3>
+        </header>
+        <p>
+          Batch 88-C coolant shipped before March 2977 should be swapped at your
+          next service. Replacements are free.
+        </p>
+        <footer>
+          <small>Posted 12 March 2977</small>
+        </footer>
+      </article>
+
+      <h3>Depots</h3>
+      <ul>
+        <li>Ceres Yard</li>
+        <li>Titan Relay</li>
+        <li>Dock 12, Luna</li>
+      </ul>
+
+      <h3>Support hours</h3>
+      <dl>
+        <dt>Freight &amp; Long Haul</dt>
+        <dd>24 hours, every day</dd>
+        <dt>Shuttle</dt>
+        <dd>09:00-17:00, weekdays</dd>
+      </dl>
+    </aside>
 
     <footer>
       <p>

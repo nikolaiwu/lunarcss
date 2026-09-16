@@ -1,0 +1,166 @@
+// =============================================================================
+// LUNARCSS - Layout (optional)
+// =============================================================================
+// Separate entry point, built to dist/lunarcss-layout.min.css. The theme
+// styles elements but never places them; this file adds page structure, still
+// without a single class:
+//
+//   body > header / nav / main / aside / footer   page shell
+//   nav ul                                        horizontal link row
+//   main + aside                                  content with a sidebar
+//   a parent of only articles                     responsive card grid
+//
+// Load it after the theme. It's opt-in, because a page with its own layout
+// (or a framework's) shouldn't have to undo ours.
+//
+// Structural selectors only: widths, spacing, flex/grid and alignment. No
+// colors, borders or typography — those belong to the theme.
+// =============================================================================
+
+@layer lunarcss-layout {
+  // ---------------------------------------------------------------------------
+  // Tokens
+  // ---------------------------------------------------------------------------
+  :root {
+    --lunar-page-width: 72rem; // page shell, including the sidebar
+    --lunar-sidebar-width: 20rem; // aside next to main
+    --lunar-layout-gap: var(--lunar-space-8); // between page regions
+    --lunar-card-min-width: 18rem; // card grid column before it wraps
+  }
+
+  // ---------------------------------------------------------------------------
+  // Page Shell
+  // ---------------------------------------------------------------------------
+  // Centred, width-limited page. The theme's body padding stays the gutter.
+  body {
+    max-width: var(--lunar-page-width);
+    margin-inline: auto;
+  }
+
+  body > header,
+  body > nav,
+  body > main,
+  body > aside,
+  body > footer {
+    margin-block-end: var(--lunar-layout-gap);
+  }
+
+  // Sidebar: <main> and <aside> as siblings sit side by side when there's room.
+  // Source order picks the side — <aside> first puts it on the left, <main>
+  // first puts it on the right. Below the breakpoint they stack in that order.
+  body:has(> main + aside),
+  body:has(> aside + main) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: var(--lunar-layout-gap);
+
+    // Full-width regions above and below the two columns
+    > header,
+    > nav,
+    > footer {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 60rem) {
+    // Sidebar on the right
+    body:has(> main + aside) {
+      grid-template-columns: minmax(0, 1fr) minmax(
+          0,
+          var(--lunar-sidebar-width)
+        );
+    }
+
+    // Sidebar on the left
+    body:has(> aside + main) {
+      grid-template-columns: minmax(0, var(--lunar-sidebar-width)) minmax(
+          0,
+          1fr
+        );
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Header
+  // ---------------------------------------------------------------------------
+  body > header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--lunar-space-4);
+
+    // A header that's only text keeps its normal stacked flow
+    &:not(:has(> nav)) {
+      display: block;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Navigation
+  // ---------------------------------------------------------------------------
+  nav > ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--lunar-space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav li {
+    margin: 0;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Sections
+  // ---------------------------------------------------------------------------
+  main > section {
+    margin-block-end: var(--lunar-layout-gap);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Card Grid
+  // ---------------------------------------------------------------------------
+  // A parent whose direct children are all articles (at least two) lays them
+  // out as a responsive grid. Any other child, such as a heading before the
+  // cards, turns the grid off, so wrap the cards in their own element.
+  :has(> article + article):not(:has(> :not(article))) {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--lunar-card-min-width)), 1fr)
+    );
+    gap: var(--lunar-space-6);
+
+    > article {
+      margin: 0; // gap handles spacing
+    }
+  }
+
+  // Cards in a grid stretch to the row height, so their footers line up
+  :has(> article + article):not(:has(> :not(article))) > article {
+    display: flex;
+    flex-direction: column;
+
+    > footer {
+      margin-block-start: auto;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Footer
+  // ---------------------------------------------------------------------------
+  body > footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--lunar-space-4);
+
+    > * {
+      margin-block: 0;
+    }
+  }
+}

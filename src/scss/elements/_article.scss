@@ -23,23 +23,3 @@ article {
 
   @include mixins.card;
 }
-
-// ---------------------------------------------------------------------------
-// Card Grid
-// ---------------------------------------------------------------------------
-// The one intentional layout rule: a parent whose direct children are all
-// articles (at least two) lays them out as a responsive grid. Any other child,
-// such as a heading before the cards, turns the grid off, so wrap the cards
-// in their own element.
-:has(> article + article):not(:has(> :not(article))) {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, var(--lunar-card-min-width)), 1fr)
-  );
-  gap: var(--lunar-space-6);
-
-  > article {
-    margin: 0; // gap handles spacing
-  }
-}

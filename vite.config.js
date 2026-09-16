@@ -13,6 +13,7 @@ function banner() {
   const banners = {
     lunarcss: `/*! ${header} */\n`,
     "lunarcss-fonts": `/*! ${header} | Fonts: Space Grotesk, Space Mono (SIL OFL 1.1, see fonts/) */\n`,
+    "lunarcss-layout": `/*! ${header} | Optional layout */\n`,
   };
 
   return {
@@ -23,7 +24,7 @@ function banner() {
       for (const file of Object.values(bundle)) {
         const match =
           file.type === "asset" &&
-          file.fileName.match(/^(lunarcss(?:-fonts)?)(?:\.min)?\.css$/);
+          file.fileName.match(/^(lunarcss(?:-fonts|-layout)?)(?:\.min)?\.css$/);
         if (match) {
           // @charset must stay the very first statement, so insert after it
           const source = String(file.source);
@@ -93,6 +94,8 @@ export default defineConfig(({ mode }) => {
           lunarcss: resolve(__dirname, "src/scss/main.scss"),
           // Optional self-hosted fonts
           "lunarcss-fonts": resolve(__dirname, "src/scss/fonts.scss"),
+          // Optional page layout
+          "lunarcss-layout": resolve(__dirname, "src/scss/layout.scss"),
           // Showcase page (for preview site)
           index: resolve(__dirname, "src/index.html"),
           // Acme demo: the theme used on a realistic page, no classes
@@ -106,7 +109,8 @@ export default defineConfig(({ mode }) => {
               // (Vite names it after the `lunarcss` input key, not the source file)
               if (
                 assetInfo.name === "lunarcss.css" ||
-                assetInfo.name === "lunarcss-fonts.css"
+                assetInfo.name === "lunarcss-fonts.css" ||
+                assetInfo.name === "lunarcss-layout.css"
               ) {
                 return isProduction ? "[name].min.css" : "[name].css";
               }

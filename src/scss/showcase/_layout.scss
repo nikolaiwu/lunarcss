@@ -47,6 +47,8 @@
 // ---------------------------------------------------------------------------
 .showcase-section {
   margin-bottom: var(--lunar-space-16);
+  padding-bottom: var(--lunar-space-6);
+  border-bottom: 1px solid var(--lunar-border);
 }
 
 .section-title {
@@ -72,8 +74,6 @@
   gap: var(--lunar-space-4);
   align-items: start;
   margin-bottom: var(--lunar-space-6);
-  padding-bottom: var(--lunar-space-6);
-  border-bottom: 1px solid var(--lunar-border);
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1fr;

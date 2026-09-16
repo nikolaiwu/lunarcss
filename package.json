@@ -8,12 +8,15 @@
   "exports": {
     ".": "./dist/lunarcss.min.css",
     "./fonts": "./dist/lunarcss-fonts.min.css",
+    "./layout": "./dist/lunarcss-layout.min.css",
     "./scss": "./src/scss/main.scss",
+    "./scss/layout": "./src/scss/layout.scss",
     "./package.json": "./package.json"
   },
   "files": [
     "dist/lunarcss.min.css",
     "dist/lunarcss-fonts.min.css",
+    "dist/lunarcss-layout.min.css",
     "dist/fonts",
     "src/scss",
     "!src/scss/showcase.scss",
