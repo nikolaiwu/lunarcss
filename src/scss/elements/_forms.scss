@@ -40,6 +40,16 @@ label {
   color: var(--lunar-fg);
 }
 
+// A label wrapping a checkbox or radio toggles it, so it's clickable
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]) {
+  cursor: pointer;
+
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Input (Text-like types)
 // ---------------------------------------------------------------------------
@@ -199,19 +209,6 @@ option {
 
 optgroup {
   font-weight: var(--lunar-font-semibold);
-}
-
-// ---------------------------------------------------------------------------
-// Checkbox & Radio
-// ---------------------------------------------------------------------------
-input[type="checkbox"],
-input[type="radio"] {
-  width: 1.125rem;
-  height: 1.125rem;
-  margin-right: var(--lunar-space-2);
-  vertical-align: middle;
-  cursor: pointer;
-  accent-color: var(--lunar-accent);
 }
 
 // ---------------------------------------------------------------------------

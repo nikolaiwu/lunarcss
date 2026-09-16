@@ -122,6 +122,7 @@
 
   // Corners are square everywhere: no border-radius, and no radius scale.
   // Cards and dialogs use cut corners instead (see mixins/_cut-corner.scss).
+  // The only exception is the radio, which is a circle.
 
   // ---------------------------------------------------------------------------
   // Shadows
@@ -140,6 +141,7 @@
   --lunar-transition-fast: 150ms ease;
   --lunar-transition-base: 200ms ease;
   --lunar-transition-slow: 300ms ease;
+  --lunar-transition-slower: 600ms ease;
 
   // ---------------------------------------------------------------------------
   // Z-Index Scale
@@ -151,6 +153,24 @@
   --lunar-z-modal: 1050;
   --lunar-z-popover: 1060;
   --lunar-z-tooltip: 1070;
+
+  // ---------------------------------------------------------------------------
+  // Controls
+  // ---------------------------------------------------------------------------
+  // Height shared by inputs, selects and buttons: one line of text, plus their
+  // vertical padding and border. Checkboxes match it, so controls line up.
+  --lunar-control-height: calc(
+    var(--lunar-text-base) * var(--lunar-leading-normal) +
+      var(--lunar-space-2) * 2 + var(--lunar-border-width) * 2
+  );
+
+  // Checkbox: a vertical switch, as tall as the other controls
+  --lunar-checkbox-width: calc(var(--lunar-control-height) * 0.6);
+  --lunar-checkbox-padding: var(--lunar-space-1);
+
+  // Radio: a circle that fills with a conic sweep when selected
+  --lunar-radio-size: var(--lunar-checkbox-width);
+  --lunar-radio-padding: calc(var(--lunar-space-2) / 2);
 
   // ---------------------------------------------------------------------------
   // Content Width

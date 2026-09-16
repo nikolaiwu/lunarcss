@@ -1,0 +1,60 @@
+// =============================================================================
+// LUNARCSS - Radios
+// =============================================================================
+// A circle that fills with a conic sweep when selected — the one round shape
+// in the theme, so a radio is never mistaken for the checkbox switch.
+//
+// Drawn on the element itself: input is a void element, so there are no
+// pseudo-elements to use. The fill is a conic-gradient whose stop is a
+// registered custom property, which is what makes it animatable: a plain
+// custom property is a token stream and can't be transitioned.
+// =============================================================================
+
+@property --lunar-radio-fill {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+input[type="radio"] {
+  appearance: none;
+  width: var(--lunar-radio-size);
+  height: var(--lunar-radio-size);
+  padding: var(--lunar-radio-padding);
+  margin-right: var(--lunar-space-2);
+  vertical-align: middle;
+  cursor: pointer;
+  color: var(--lunar-accent); // the fill color
+  background-color: transparent;
+  border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: 50%; // the theme's only round corner
+
+  // Sweep, inside the padding so it never touches the ring
+  background-image: conic-gradient(
+    currentColor var(--lunar-radio-fill),
+    var(--lunar-muted) 0
+  );
+  background-origin: content-box;
+  background-clip: content-box;
+
+  transition: --lunar-radio-fill var(--lunar-transition-slower);
+
+  &:checked {
+    --lunar-radio-fill: 100%;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--lunar-border) 50%, var(--lunar-fg));
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
