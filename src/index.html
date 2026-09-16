@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="./scss/fonts.scss" />
     <link rel="stylesheet" href="./scss/main.scss" />
     <link rel="stylesheet" href="./scss/showcase.scss" />
+    <script>
+      // Apply the saved theme before first paint, to avoid a flash
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    </script>
+    <script type="module" src="./theme-toggle.js"></script>
   </head>
   <body>
     <div class="showcase">
@@ -22,9 +28,13 @@
           pure element selectors. No classes needed—just beautiful defaults out
           of the box.
         </p>
+        <p>
+          See it on a real page: <a href="./demo.html">Acme Robotics demo</a> —
+          a landing page built without a single class.
+        </p>
         <button
           class="theme-toggle"
-          onclick="toggleTheme()"
+          data-theme-toggle
           aria-label="Toggle theme"
         >
           <svg
@@ -879,24 +889,5 @@ greet('World');</code></pre>
         </p>
       </footer>
     </div>
-
-    <script>
-      // Theme toggle functionality
-      function toggleTheme() {
-        const html = document.documentElement;
-        const currentTheme = html.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        html.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-      }
-
-      // Load saved theme preference
-      (function () {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-          document.documentElement.setAttribute("data-theme", savedTheme);
-        }
-      })();
-    </script>
   </body>
 </html>

@@ -95,6 +95,8 @@ export default defineConfig(({ mode }) => {
           "lunarcss-fonts": resolve(__dirname, "src/scss/fonts.scss"),
           // Showcase page (for preview site)
           index: resolve(__dirname, "src/index.html"),
+          // Acme demo: the theme used on a realistic page, no classes
+          demo: resolve(__dirname, "src/demo.html"),
         },
         output: {
           assetFileNames: (assetInfo) => {

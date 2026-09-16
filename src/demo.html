@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Acme Robotics - a fictional landing page built with LunarCSS and no CSS classes at all."
+    />
+    <title>Acme Robotics - LunarCSS Demo</title>
+    <link rel="stylesheet" href="./scss/fonts.scss" />
+    <link rel="stylesheet" href="./scss/main.scss" />
+    <script>
+      // Apply the saved theme before first paint, to avoid a flash
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    </script>
+    <script type="module" src="./theme-toggle.js"></script>
+  </head>
+  <body>
+    <!--
+      Everything below is plain HTML: no class attributes, no inline styles.
+      All styling comes from lunarcss. This page is a fictional company
+      (Acme Robotics) with made-up data, used to show the theme in context.
+    -->
+    <header>
+      <h1>Acme Robotics</h1>
+      <p>
+        <strong>Warp drives, delivered.</strong> Propulsion hardware for small
+        crews running long hauls.
+      </p>
+      <nav>
+        <ul>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#specs">Specs</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="./index.html">LunarCSS showcase</a></li>
+        </ul>
+      </nav>
+      <p>
+        <button data-theme-toggle>Toggle theme</button>
+        <button onclick="document.getElementById('quote').showModal()">
+          Request a quote
+        </button>
+      </p>
+    </header>
+
+    <main>
+      <!-- Products: sibling articles become a card grid -->
+      <section id="products">
+        <h2>Products</h2>
+        <p>
+          Three drive classes, one mounting standard. Every unit ships with a
+          two-year service plan.
+        </p>
+
+        <div>
+          <article>
+            <header>
+              <h3>C-137 Warp Drive</h3>
+            </header>
+            <p>
+              Our workhorse drive. Cruises at 1.8 light years per day with a
+              crew of six aboard.
+            </p>
+            <p><small>Ships in 4 weeks</small></p>
+            <footer>
+              <a href="#contact">Request specs</a>
+            </footer>
+          </article>
+
+          <article>
+            <header>
+              <h3>C-201 Long Haul</h3>
+            </header>
+            <p>
+              Extended-range variant with a larger coolant loop, built for
+              routes beyond the belt.
+            </p>
+            <p><small>Ships in 9 weeks</small></p>
+            <footer>
+              <a href="#contact">Request specs</a>
+            </footer>
+          </article>
+
+          <article>
+            <header>
+              <h3>C-90 Shuttle</h3>
+            </header>
+            <p>
+              Compact drive for two-person shuttles and short orbital transfer
+              work.
+            </p>
+            <p><small>In stock</small></p>
+            <footer>
+              <a href="#contact">Request specs</a>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- Pricing -->
+      <section id="pricing">
+        <h2>Pricing</h2>
+        <p>Per drive, including installation and calibration.</p>
+
+        <div>
+          <article>
+            <header>
+              <h3>Shuttle</h3>
+              <p><strong>$24,000</strong></p>
+            </header>
+            <ul>
+              <li>C-90 drive</li>
+              <li>Standard mount</li>
+              <li>Email support</li>
+            </ul>
+            <footer>
+              <button>Choose Shuttle</button>
+            </footer>
+          </article>
+
+          <article>
+            <header>
+              <h3>Freight</h3>
+              <p><strong>$58,000</strong></p>
+            </header>
+            <ul>
+              <li>C-137 drive</li>
+              <li>Reinforced mount</li>
+              <li>24-hour support</li>
+            </ul>
+            <footer>
+              <button>Choose Freight</button>
+            </footer>
+          </article>
+
+          <article>
+            <header>
+              <h3>Long Haul</h3>
+              <p><strong>$96,000</strong></p>
+            </header>
+            <ul>
+              <li>C-201 drive</li>
+              <li>Reinforced mount</li>
+              <li>On-site engineer</li>
+            </ul>
+            <footer>
+              <button>Choose Long Haul</button>
+            </footer>
+          </article>
+        </div>
+
+        <blockquote>
+          <p>
+            We swapped three older units for C-137s and cut our Ceres run from
+            eleven days to six. The crew noticed the difference first.
+          </p>
+          <cite>Dana Okafor, Fleet Lead at Meridian Freight</cite>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <!-- Specs -->
+      <section id="specs">
+        <h2>Specifications</h2>
+        <table>
+          <caption>
+            Drive comparison, measured at standard load
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col">Cruise</th>
+              <th scope="col">Crew</th>
+              <th scope="col">Mass</th>
+              <th scope="col">Service interval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">C-90</th>
+              <td>0.9 ly/day</td>
+              <td>2</td>
+              <td>1.4 t</td>
+              <td>18 months</td>
+            </tr>
+            <tr>
+              <th scope="row">C-137</th>
+              <td>1.8 ly/day</td>
+              <td>6</td>
+              <td>3.1 t</td>
+              <td>24 months</td>
+            </tr>
+            <tr>
+              <th scope="row">C-201</th>
+              <td>2.4 ly/day</td>
+              <td>9</td>
+              <td>4.8 t</td>
+              <td>24 months</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>What's in the crate</h3>
+        <ol>
+          <li>Drive unit, sealed and pre-calibrated</li>
+          <li>Mounting kit for standard and reinforced frames</li>
+          <li>Coolant starter set (4 litres)</li>
+          <li>Service log and calibration certificate</li>
+        </ol>
+      </section>
+
+      <hr />
+
+      <!-- FAQ -->
+      <section id="faq">
+        <h2>Frequently asked questions</h2>
+
+        <details open>
+          <summary>Do you install the drive, or do we?</summary>
+          <p>
+            Installation is included in every plan. An engineer travels to your
+            dock, mounts the unit and runs a calibration burn with your crew
+            aboard.
+          </p>
+        </details>
+
+        <details>
+          <summary>What happens if a drive fails in transit?</summary>
+          <p>
+            Freight and Long Haul plans include 24-hour support. We keep spare
+            units at three depots, and a replacement ships on the next outbound.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can we retrofit an older frame?</summary>
+          <p>
+            Usually. Send us the frame number with your enquiry and we'll
+            confirm before quoting. Frames built before 2977 need an adapter
+            plate.
+          </p>
+        </details>
+      </section>
+
+      <hr />
+
+      <!-- Contact -->
+      <section id="contact">
+        <h2>Talk to us</h2>
+        <p>
+          Tell us about your route and we'll send a quote within two working
+          days.
+        </p>
+
+        <form>
+          <fieldset>
+            <legend>Your details</legend>
+
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Dana Okafor"
+              required
+            />
+
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="dana@example.com"
+              required
+            />
+
+            <label for="fleet">Fleet size</label>
+            <select id="fleet" name="fleet">
+              <option>1-2 ships</option>
+              <option selected>3-9 ships</option>
+              <option>10 or more</option>
+            </select>
+
+            <label for="model">Drive of interest</label>
+            <select id="model" name="model">
+              <option>C-90 Shuttle</option>
+              <option selected>C-137 Warp Drive</option>
+              <option>C-201 Long Haul</option>
+              <option>Not sure yet</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <legend>Your route</legend>
+
+            <label for="notes">Notes</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="Ceres run, roughly 40 weeks a year."
+            ></textarea>
+
+            <label for="launch">Target install date</label>
+            <input id="launch" name="launch" type="date" value="2977-04-01" />
+
+            <p>
+              <label for="newsletter">
+                <input
+                  id="newsletter"
+                  name="newsletter"
+                  type="checkbox"
+                  checked
+                />
+                Send me the quarterly service bulletin
+              </label>
+            </p>
+          </fieldset>
+
+          <p>
+            <button type="submit">Send enquiry</button>
+            <button type="reset">Clear</button>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <strong>Acme Robotics</strong> — a fictional company, used to
+        demonstrate <a href="./index.html">LunarCSS</a>. No classes were used on
+        this page.
+      </p>
+      <address>
+        Dock 12, Galactic Government Yard<br />
+        <a href="mailto:hello@example.com">hello@example.com</a>
+      </address>
+      <p><small>&copy; 2977 Acme Robotics. All data is made up.</small></p>
+    </footer>
+
+    <dialog id="quote">
+      <header>
+        <h3>Request a quote</h3>
+      </header>
+      <p>
+        Leave your email and we'll send drive pricing for your route within two
+        working days.
+      </p>
+      <form method="dialog">
+        <label for="quote-email">Email</label>
+        <input
+          id="quote-email"
+          name="quote-email"
+          type="email"
+          placeholder="dana@example.com"
+        />
+        <footer>
+          <button type="submit">Send</button>
+          <button type="submit" value="cancel">Cancel</button>
+        </footer>
+      </form>
+    </dialog>
+  </body>
+</html>

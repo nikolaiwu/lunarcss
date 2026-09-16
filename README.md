@@ -186,7 +186,9 @@ lunarcss/
 │   │   ├── main.scss             # Production entry point
 │   │   ├── fonts.scss            # Optional fonts entry → lunarcss-fonts.min.css
 │   │   └── showcase.scss         # Showcase-only styles
-│   └── index.html                # Showcase page
+│   ├── index.html                # Showcase page (element reference)
+│   ├── demo.html                 # Acme Robotics demo: a classless landing page
+│   └── theme-toggle.js           # Shared light/dark toggle for both pages
 ├── vite/demo-source.js           # Build-time source previews for the showcase
 ├── .github/workflows/release.yml # Publish to npm + GitHub release on version tags
 ├── dist/                         # Build output
