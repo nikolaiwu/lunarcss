@@ -187,6 +187,7 @@ lunarcss/
 │   │   ├── fonts.scss            # Optional fonts entry → lunarcss-fonts.min.css
 │   │   └── showcase.scss         # Showcase-only styles
 │   └── index.html                # Showcase page
+├── vite/demo-source.js           # Build-time source previews for the showcase
 ├── .github/workflows/release.yml # Publish to npm + GitHub release on version tags
 ├── dist/                         # Build output
 ├── vite.config.js

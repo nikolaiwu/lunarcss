@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import { readFileSync } from "fs";
+import { demoSource } from "./vite/demo-source.js";
 
 const pkg = JSON.parse(
   readFileSync(resolve(__dirname, "package.json"), "utf-8"),
@@ -66,7 +67,7 @@ export default defineConfig(({ mode }) => {
     root: "src",
     // Relative asset URLs, so the fonts stylesheet finds fonts/ from any host or CDN path
     base: "./",
-    plugins: [banner(), fontLicenses()],
+    plugins: [banner(), fontLicenses(), demoSource()],
     publicDir: "../public",
 
     css: {

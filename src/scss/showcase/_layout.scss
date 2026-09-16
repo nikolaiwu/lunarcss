@@ -1,0 +1,120 @@
+// =============================================================================
+// LUNARCSS - Showcase Styles
+// =============================================================================
+// Layout-only styles for the documentation/showcase page (src/index.html).
+// Everything visual (colors, borders, typography) comes from the theme, which
+// index.html loads separately, so the showcase shows the theme as-is.
+// NOT included in the production theme CSS output.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+.showcase {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: var(--lunar-space-8) var(--lunar-space-4);
+
+  @media (min-width: 768px) {
+    padding: var(--lunar-space-12) var(--lunar-space-8);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Header
+// ---------------------------------------------------------------------------
+.showcase-header {
+  margin-bottom: var(--lunar-space-16);
+  text-align: center;
+
+  p {
+    max-width: 60ch;
+    margin: 0 auto var(--lunar-space-6);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Theme Toggle
+// ---------------------------------------------------------------------------
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lunar-space-2);
+}
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+.showcase-section {
+  margin-bottom: var(--lunar-space-16);
+}
+
+.section-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lunar-space-3);
+  margin-bottom: var(--lunar-space-2);
+}
+
+.section-description {
+  max-width: 70ch;
+  margin-bottom: var(--lunar-space-6);
+}
+
+// ---------------------------------------------------------------------------
+// Demo + Source Preview
+// ---------------------------------------------------------------------------
+// .demo wraps each demo box and its generated source preview (see
+// vite/demo-source.js). Side by side on wide screens, stacked below 900px.
+.demo {
+  display: grid;
+  gap: var(--lunar-space-4);
+  align-items: start;
+  margin-bottom: var(--lunar-space-6);
+  padding-bottom: var(--lunar-space-6);
+  border-bottom: 1px solid var(--lunar-border);
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  // Demos that need the full width (e.g. the card grid, so its columns show):
+  // demo on top, source below
+  &.demo-wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-code {
+  min-width: 0; // let long lines scroll inside the <pre>, not stretch the grid
+
+  pre {
+    margin: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Demo Layouts
+// ---------------------------------------------------------------------------
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lunar-space-4);
+}
+
+.demo-row {
+  align-items: flex-start;
+}
+
+.form-demo {
+  max-width: 28rem;
+}
+
+// ---------------------------------------------------------------------------
+// Footer
+// ---------------------------------------------------------------------------
+.showcase-footer {
+  padding-top: var(--lunar-space-8);
+  text-align: center;
+}
