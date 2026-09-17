@@ -27,7 +27,7 @@ input[type="radio"] {
   color: var(--lunar-accent); // the fill color
   background-color: transparent;
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: 50%; // the theme's only round corner
+  border-radius: 50%;
 
   // Sweep, inside the padding so it never touches the ring
   background-image: conic-gradient(

@@ -544,19 +544,26 @@ Or use a single color (same in both modes):
 ```css
 :root {
   --lunar-border-width: 1px;
+
+  /* Radius */
+  --lunar-radius-none: 0;
+  --lunar-radius-sm: 0.125rem; /* 2px */
+  --lunar-radius-md: 0.375rem; /* 6px */
+  --lunar-radius-lg: 0.5rem; /* 8px */
+  --lunar-radius-xl: 0.75rem; /* 12px */
+  --lunar-radius-2xl: 1rem; /* 16px */
+  --lunar-radius-full: 9999px;
 }
 ```
 
-Corners are square throughout: the theme sets no `border-radius` anywhere, and there's no radius scale. Cards and dialogs use [cut corners](#cut-corners) instead.
-
-To round things yourself, set it on the elements you want:
+Most elements are square today, and cards and dialogs use [cut corners](#cut-corners). The radius scale is there to build on, and to round elements yourself:
 
 ```css
 input,
 button,
 textarea,
 select {
-  border-radius: 0.375rem;
+  border-radius: var(--lunar-radius-md);
 }
 ```
 
