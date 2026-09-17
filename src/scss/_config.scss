@@ -177,7 +177,7 @@
 
   // Radio: a circle that fills with a conic sweep when selected
   --lunar-radio-size: var(--lunar-checkbox-width);
-  --lunar-radio-padding: calc(var(--lunar-space-2) / 2);
+  --lunar-radio-padding: var(--lunar-space-1);
 
   // ---------------------------------------------------------------------------
   // Content Width

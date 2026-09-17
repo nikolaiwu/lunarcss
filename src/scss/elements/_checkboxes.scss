@@ -29,6 +29,7 @@ input[type="checkbox"] {
   color: var(--lunar-muted); // the knob color
   background-color: transparent;
   border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-radius-sm);
 
   // Knob, inside the padding box so it never touches the border
   background-image: linear-gradient(currentColor 0 0);

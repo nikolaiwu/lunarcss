@@ -21,6 +21,8 @@ blockquote {
   background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
   font-style: italic;
   color: var(--lunar-muted);
+  border-top-right-radius: var(--lunar-radius-md);
+  border-bottom-right-radius: var(--lunar-radius-md);
 
   p {
     margin-bottom: var(--lunar-space-2);
@@ -64,15 +66,8 @@ pre {
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
   line-height: var(--lunar-leading-relaxed);
-  // color: light-dark(var(--lunar-light), #e4e4e7);
-  // background-color: light-dark(var(--lunar-dark), #09090b);
-  // color: light-dark(var(--lunar-dark), var(--lunar-light));
-  // background-color: light-dark(
-  //   var(--lunar-light),
-  //   var(--lunar-dark)
-  // );
-  border: var(--lunar-border-width) dotted
-    light-dark(var(--lunar-dark), var(--lunar-light));
+  border: calc(var(--lunar-border-width) * 2) dashed var(--lunar-muted);
+  border-radius: var(--lunar-radius-md);
   tab-size: 2;
   -webkit-overflow-scrolling: touch;
 
