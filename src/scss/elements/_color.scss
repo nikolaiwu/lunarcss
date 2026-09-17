@@ -34,9 +34,7 @@ input[type="color"] {
   border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-md);
   cursor: pointer;
-  transition:
-    border-color var(--lunar-transition-fast),
-    box-shadow var(--lunar-transition-fast);
+  transition: border-color var(--lunar-transition-fast);
 
   // ---------------------------------------------------------------------------
   // Swatch
@@ -56,15 +54,13 @@ input[type="color"] {
   // ---------------------------------------------------------------------------
   // States
   // ---------------------------------------------------------------------------
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled):not(:focus-visible) {
     border-color: var(--lunar-accent);
   }
 
   &:focus-visible {
     outline: none;
     border-color: var(--lunar-accent);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
   }
 
   &:disabled {

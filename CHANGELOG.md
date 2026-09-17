@@ -20,6 +20,9 @@ Initial release, to be published as 0.1.0.
 - Buttons: a `<button>` is cut at the top-right and bottom-left. Put controls next to each other and they group up — only the first keeps its bottom-left cut and only the last its top-right one, so the row reads as one shape. Input buttons stay rectangular, since a void element has no pseudo-elements to draw the cut
 - Checkboxes are vertical switches (knob slides from bottom to top, filling with the accent) and radios are circles that fill with an animated conic sweep; both are as tall as the other controls via `--lunar-control-height`
 - Range, progress and meter are a rounded bar over a tick ruler, the same total height as the other controls; meter colors its fill by how the value sits against `low`/`high`/`optimum`
+- Text fields, textareas and selects get corner brackets that grow and turn accent on focus, with the bar's tick ruler sliding in under them; values are set in the mono font, with an accent caret
+- Number spinners, the date/time picker button and the focused segment of a date value follow the theme; an input backed by a `<datalist>` shows the select's chevron
+- Selected entries in a list box use the accent, whether or not the select has focus
 - Color inputs show the value as a droplet: the swatch is masked to an icon inside a bordered chip, sized like the other controls
 - Cards: every `<article>` is a cut-corner bordered box with optional `<header>` (dashed rule) / `<footer>` (striped band), and a parent containing only articles lays them out as a responsive grid (`--lunar-card-min-width`). `<dialog>` shares the same card look
 - Optional layout stylesheet `lunarcss-layout.min.css`: classless page structure (centred page, header with nav, horizontal nav lists, `main` + `aside` sidebar, footer row), button/input groups (`--lunar-button-gap`) and the card grid, which moved here from the theme, in its own `lunarcss-layout` cascade layer

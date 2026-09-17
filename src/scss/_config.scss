@@ -184,7 +184,12 @@
   --lunar-bar-height: calc(var(--lunar-control-height) * 2 / 3);
   --lunar-bar-gap: var(--lunar-space-1);
   --lunar-bar-tick-height: calc(
-    var(--lunar-control-height) - var(--lunar-bar-height) - var(--lunar-bar-gap)
+    (
+        var(--lunar-control-height) - var(--lunar-bar-height) - var(
+            --lunar-bar-gap
+          )
+      ) *
+      0.65
   );
   --lunar-bar-radius: var(--lunar-radius-md);
   // Gap between the bar's border and what sits inside it (fill, thumb)

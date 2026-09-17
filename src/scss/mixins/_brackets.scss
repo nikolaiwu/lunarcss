@@ -1,0 +1,77 @@
+// =============================================================================
+// LUNARCSS - Mixins: Brackets
+// =============================================================================
+// Corner brackets: an L-mark inset in each corner, drawn as eight background
+// layers (a horizontal and a vertical stroke per corner).
+//
+// Exposed as functions as well as a mixin, so callers that need other layers
+// in the same background (the field's tick ruler, a select's chevron) can
+// build one list instead of fighting over `background-image`.
+//
+// The marks read off three custom properties, so a state only has to
+// re-declare those — see `field-focus`, and the buttons' focus rule.
+//
+// Usage:
+//   @include mixins.brackets;
+//   background-image: mixins.bracket-images(), …other layers…;
+// =============================================================================
+
+@use "sass:list";
+
+$corners: (left top, right top, left bottom, right bottom);
+
+@function bracket-images($color: var(--_bracket-color)) {
+  $out: ();
+
+  @each $corner in $corners {
+    // Horizontal stroke, then vertical
+    $out: list.append($out, linear-gradient(#{$color} 0 0), comma);
+    $out: list.append($out, linear-gradient(#{$color} 0 0), comma);
+  }
+
+  @return $out;
+}
+
+@function bracket-positions($inset: var(--_bracket-inset)) {
+  $out: ();
+
+  @each $corner in $corners {
+    $at: #{list.nth($corner, 1)} #{$inset} #{list.nth($corner, 2)} #{$inset};
+
+    $out: list.append($out, $at, comma);
+    $out: list.append($out, $at, comma);
+  }
+
+  @return $out;
+}
+
+@function bracket-sizes(
+  $size: var(--_bracket-size),
+  $stroke: var(--lunar-border-width)
+) {
+  $out: ();
+
+  @each $corner in $corners {
+    $out: list.append($out, #{$size} #{$stroke}, comma);
+    $out: list.append($out, #{$stroke} #{$size}, comma);
+  }
+
+  @return $out;
+}
+
+@mixin brackets(
+  $color: var(--lunar-muted),
+  $size: var(--lunar-space-2),
+  $inset: var(--lunar-space-1)
+) {
+  --_bracket-color: #{$color};
+  --_bracket-size: #{$size};
+  --_bracket-inset: #{$inset};
+
+  background-image: bracket-images();
+  background-position: bracket-positions();
+  background-size: bracket-sizes();
+  background-repeat: no-repeat;
+
+  transition: background-size var(--lunar-transition-base);
+}

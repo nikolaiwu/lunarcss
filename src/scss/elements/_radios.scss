@@ -43,14 +43,13 @@ input[type="radio"] {
     --lunar-radio-fill: 100%;
   }
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled):not(:focus-visible) {
     border-color: color-mix(in srgb, var(--lunar-border) 50%, var(--lunar-fg));
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
+    border-color: var(--lunar-accent);
   }
 
   &:disabled {

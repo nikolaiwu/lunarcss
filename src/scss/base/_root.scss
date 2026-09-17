@@ -50,6 +50,12 @@ body {
   outline-offset: 2px;
 }
 
+// Form controls show focus themselves (accent border, brackets, ticks, thumb),
+// so they opt out of the outline rather than carrying both
+:is(input, textarea, select, button, [popover]):focus-visible {
+  outline: none;
+}
+
 // Sectioning elements
 main {
   display: block; // IE11 fix

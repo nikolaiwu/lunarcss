@@ -26,9 +26,7 @@ input[type="button"] {
   cursor: pointer;
   background-color: var(--lunar-accent);
   border: var(--lunar-border-width) solid transparent;
-  transition:
-    background-color var(--lunar-transition-fast),
-    box-shadow var(--lunar-transition-fast);
+  transition: background-color var(--lunar-transition-fast);
   margin-bottom: var(--lunar-space-4);
 
   &:hover:not(:disabled) {
@@ -41,8 +39,6 @@ input[type="button"] {
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
   }
 
   &:active:not(:disabled) {

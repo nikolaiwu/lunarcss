@@ -103,16 +103,14 @@ input[type="range"] {
   // ---------------------------------------------------------------------------
   &:focus-visible {
     outline: none;
+  }
 
-    &::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--lunar-accent) 40%, transparent);
-    }
+  &:focus-visible::-webkit-slider-thumb {
+    background-color: var(--lunar-accent);
+  }
 
-    &::-moz-range-thumb {
-      box-shadow: 0 0 0 3px
-        color-mix(in srgb, var(--lunar-accent) 40%, transparent);
-    }
+  &:focus-visible::-moz-range-thumb {
+    background-color: var(--lunar-accent);
   }
 
   &:disabled {

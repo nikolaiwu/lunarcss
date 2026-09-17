@@ -1,0 +1,82 @@
+// =============================================================================
+// LUNARCSS - Mixins: Field
+// =============================================================================
+// The decoration shared by text fields, textareas and selects: corner brackets
+// that grow and turn accent on focus, and the bar's tick ruler sliding up from
+// under the bottom edge.
+//
+// Form controls give us nothing to work with but backgrounds — input is a void
+// element, and textarea and select don't render ::before or ::after — so every
+// mark here is a background layer: eight for the brackets (two strokes per
+// corner) and one per tick.
+//
+// The moving parts are custom properties, so `field-focus` only re-declares
+// three values and the transitions carry the rest.
+//
+// Usage:
+//   input { @include mixins.field; &:focus { @include mixins.field-focus; } }
+// =============================================================================
+
+@use "sass:list";
+@use "sass:math";
+@use "brackets";
+
+@mixin field(
+  $ticks: 8,
+  // An optional layer on top, for controls with their own mark (the select
+  // arrow, or the hint on a datalist-backed input)
+  $lead-image: null,
+  $lead-position: right var(--lunar-space-2) center,
+  $lead-size: 1.25em
+) {
+  --_bracket-color: var(--lunar-muted);
+  --_bracket-size: var(--lunar-space-2);
+  --_bracket-inset: var(--lunar-space-1);
+  // Ticks wait just below the field, clipped by the border box
+  --_tick-y: calc(100% + var(--lunar-bar-tick-height));
+
+  $stroke: var(--lunar-border-width);
+  $images: ();
+  $positions: ();
+  $sizes: ();
+
+  @if $lead-image {
+    $images: list.append($images, $lead-image, comma);
+    $positions: list.append($positions, $lead-position, comma);
+    $sizes: list.append($sizes, $lead-size, comma);
+  }
+
+  // Tick ruler, evenly spread with none on the edges
+  @for $i from 1 through $ticks {
+    $at: math.div(math.round(math.div(10000 * $i, $ticks + 1)), 100) * 1%;
+
+    $images: list.append(
+      $images,
+      linear-gradient(var(--lunar-muted) 0 0),
+      comma
+    );
+    $positions: list.append($positions, #{$at} var(--_tick-y), comma);
+    $sizes: list.append($sizes, #{$stroke} var(--lunar-bar-tick-height), comma);
+  }
+
+  background-image: list.join($images, brackets.bracket-images(), comma);
+  background-position: list.join(
+    $positions,
+    brackets.bracket-positions(),
+    comma
+  );
+  background-size: list.join($sizes, brackets.bracket-sizes(), comma);
+  background-repeat: no-repeat;
+
+  transition:
+    border-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast),
+    background-position var(--lunar-transition-base),
+    background-size var(--lunar-transition-base);
+}
+
+@mixin field-focus {
+  --_bracket-color: var(--lunar-accent);
+  --_bracket-size: var(--lunar-space-4);
+  --_tick-y: bottom;
+}

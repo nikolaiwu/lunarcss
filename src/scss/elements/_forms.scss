@@ -5,6 +5,11 @@
 // Buttons live in elements/_buttons.scss.
 // =============================================================================
 
+@use "../mixins";
+
+// Chevron for the select, and for inputs backed by a datalist
+$chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
 // ---------------------------------------------------------------------------
 // Form
 // ---------------------------------------------------------------------------
@@ -61,17 +66,22 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   display: block;
   width: 100%;
   padding: var(--lunar-space-2) var(--lunar-space-3);
+  font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
+  caret-color: var(--lunar-accent);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  transition:
-    border-color var(--lunar-transition-fast),
-    box-shadow var(--lunar-transition-fast);
   margin-bottom: var(--lunar-space-4);
 
-  &:hover:not(:disabled) {
+  @include mixins.field;
+
+  &[list] {
+    @include mixins.field($lead-image: $chevron);
+  }
+
+  &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
       in srgb,
       var(--lunar-border) 50%,
@@ -82,8 +92,8 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   &:focus {
     outline: none;
     border-color: var(--lunar-accent);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
+
+    @include mixins.field-focus;
   }
 
   &::placeholder {
@@ -110,24 +120,72 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
 }
 
 // ---------------------------------------------------------------------------
+// Number, Date & Time
+// ---------------------------------------------------------------------------
+// The parts these types expose: the spinner, the calendar/clock button, and
+// the segments of a date value.
+input[type="number"] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1; // shown without hovering, like the rest of the controls
+    accent-color: var(--lunar-accent);
+  }
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"] {
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity var(--lunar-transition-fast);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // The focused segment (day, month, year) picks up the accent
+  &::-webkit-datetime-edit-day-field:focus,
+  &::-webkit-datetime-edit-month-field:focus,
+  &::-webkit-datetime-edit-year-field:focus,
+  &::-webkit-datetime-edit-hour-field:focus,
+  &::-webkit-datetime-edit-minute-field:focus,
+  &::-webkit-datetime-edit-second-field:focus,
+  &::-webkit-datetime-edit-ampm-field:focus {
+    color: var(--lunar-bg);
+    background-color: var(--lunar-accent);
+  }
+}
+
+// An input backed by a datalist gets the select's chevron, so the suggestions
+// are discoverable
+input[list] {
+  padding-right: var(--lunar-space-8);
+}
+
+// ---------------------------------------------------------------------------
 // Textarea
 // ---------------------------------------------------------------------------
 textarea {
   display: block;
   width: 100%;
   padding: var(--lunar-space-3);
+  font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
+  caret-color: var(--lunar-accent);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  transition:
-    border-color var(--lunar-transition-fast),
-    box-shadow var(--lunar-transition-fast);
   resize: vertical;
   margin-bottom: var(--lunar-space-4);
 
-  &:hover:not(:disabled) {
+  @include mixins.field;
+
+  &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
       in srgb,
       var(--lunar-border) 50%,
@@ -138,8 +196,8 @@ textarea {
   &:focus {
     outline: none;
     border-color: var(--lunar-accent);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
+
+    @include mixins.field-focus;
   }
 
   &::placeholder {
@@ -160,23 +218,19 @@ select {
   width: 100%;
   padding: var(--lunar-space-2) var(--lunar-space-8) var(--lunar-space-2)
     var(--lunar-space-3);
+  font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right var(--lunar-space-2) center;
-  background-size: 1.25em;
   border: var(--lunar-border-width) solid var(--lunar-border);
   appearance: none;
   cursor: pointer;
-  transition:
-    border-color var(--lunar-transition-fast),
-    box-shadow var(--lunar-transition-fast);
   margin-bottom: var(--lunar-space-4);
 
-  &:hover:not(:disabled) {
+  @include mixins.field($lead-image: $chevron);
+
+  &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
       in srgb,
       var(--lunar-border) 50%,
@@ -187,8 +241,8 @@ select {
   &:focus {
     outline: none;
     border-color: var(--lunar-accent);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--lunar-accent) 20%, transparent);
+
+    @include mixins.field-focus;
   }
 
   &:disabled {
@@ -205,6 +259,18 @@ select {
 
 option {
   padding: var(--lunar-space-2);
+  color: var(--lunar-fg);
+  background-color: var(--lunar-bg);
+}
+
+// Selected entries in a list box. Engines paint their own highlight over
+// background-color, so the accent goes on as a gradient image (WebKit) and as
+// a full-bleed inset shadow (Firefox); `checked` covers the select being
+// focused or not, so the accent doesn't grey out when focus moves away.
+option:checked {
+  color: var(--lunar-bg);
+  background: var(--lunar-accent) linear-gradient(var(--lunar-accent) 0 0);
+  box-shadow: inset 0 0 0 100vh var(--lunar-accent);
 }
 
 optgroup {
