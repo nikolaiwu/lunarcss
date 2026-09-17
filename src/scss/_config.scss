@@ -179,6 +179,27 @@
   --lunar-radio-size: var(--lunar-checkbox-width);
   --lunar-radio-padding: var(--lunar-space-1);
 
+  // Range, progress and meter: a bar over a tick ruler, together as tall as the
+  // other controls. The bar takes two thirds; the gap and ticks share the rest.
+  --lunar-bar-height: calc(var(--lunar-control-height) * 2 / 3);
+  --lunar-bar-gap: var(--lunar-space-1);
+  --lunar-bar-tick-height: calc(
+    var(--lunar-control-height) - var(--lunar-bar-height) - var(--lunar-bar-gap)
+  );
+  --lunar-bar-radius: var(--lunar-radius-md);
+  // Gap between the bar's border and what sits inside it (fill, thumb)
+  --lunar-bar-inset: calc(var(--lunar-border-width) * 2);
+  // Track colour where no bordered track pseudo-element exists (Firefox)
+  --lunar-bar-track: color-mix(
+    in srgb,
+    var(--lunar-bg) 85%,
+    var(--lunar-muted)
+  );
+  // Radius of what sits inside the bar, so its corners follow the outer ones
+  --lunar-bar-fill-radius: calc(
+    var(--lunar-bar-radius) - var(--lunar-border-width) - var(--lunar-bar-inset)
+  );
+
   // ---------------------------------------------------------------------------
   // Content Width
   // ---------------------------------------------------------------------------

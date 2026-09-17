@@ -1,0 +1,54 @@
+// =============================================================================
+// LUNARCSS - Mixins: Ruler
+// =============================================================================
+// Tick marks along the bottom of a box, used under the range, progress and
+// meter bars.
+//
+// The ticks are evenly spread with none on the edges: for 8 ticks the width is
+// split into 9 steps and a mark sits at each inner boundary. Each tick is one
+// background layer (a solid gradient), so no pseudo-elements are needed —
+// input is a void element and has none.
+//
+// Pass $track to add a bar-height layer above the ticks: that's the track for
+// engines with no track pseudo-element (progress and meter in Firefox).
+//
+// Usage:
+//   @include mixins.ruler;
+//   @include mixins.ruler($count: 4, $color: var(--lunar-accent));
+//   @include mixins.ruler($track: var(--lunar-bg));
+// =============================================================================
+
+@use "sass:list";
+@use "sass:math";
+
+@mixin ruler(
+  $count: 8,
+  $color: var(--lunar-muted),
+  $width: var(--lunar-border-width),
+  $height: var(--lunar-bar-tick-height),
+  $track: null
+) {
+  $images: ();
+  $positions: ();
+  $sizes: ();
+
+  @if $track {
+    $images: list.append($images, linear-gradient(#{$track} 0 0), comma);
+    $positions: list.append($positions, left top, comma);
+    $sizes: list.append($sizes, 100% var(--lunar-bar-height), comma);
+  }
+
+  @for $i from 1 through $count {
+    // Rounded, so the output doesn't carry ten decimal places
+    $at: math.div(math.round(math.div(10000 * $i, $count + 1)), 100) * 1%;
+
+    $images: list.append($images, linear-gradient(#{$color} 0 0), comma);
+    $positions: list.append($positions, #{$at} bottom, comma);
+    $sizes: list.append($sizes, #{$width} #{$height}, comma);
+  }
+
+  background-image: $images;
+  background-position: $positions;
+  background-size: $sizes;
+  background-repeat: no-repeat;
+}

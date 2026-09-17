@@ -212,18 +212,6 @@ optgroup {
 }
 
 // ---------------------------------------------------------------------------
-// Range
-// ---------------------------------------------------------------------------
-input[type="range"] {
-  width: 100%;
-  height: 0.5rem;
-  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
-  cursor: pointer;
-  accent-color: var(--lunar-accent);
-  margin-bottom: var(--lunar-space-4);
-}
-
-// ---------------------------------------------------------------------------
 // Color
 // ---------------------------------------------------------------------------
 input[type="color"] {
@@ -297,68 +285,4 @@ output {
   font-size: var(--lunar-text-sm);
   color: var(--lunar-fg);
   background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
-}
-
-// ---------------------------------------------------------------------------
-// Progress
-// ---------------------------------------------------------------------------
-progress {
-  display: block;
-  width: 100%;
-  height: 0.75rem;
-  border: none;
-  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
-  overflow: hidden;
-  margin-bottom: var(--lunar-space-4);
-
-  &::-webkit-progress-bar {
-    background-color: color-mix(
-      in srgb,
-      var(--lunar-bg) 80%,
-      var(--lunar-muted)
-    );
-  }
-
-  &::-webkit-progress-value {
-    background-color: var(--lunar-accent);
-    transition: width var(--lunar-transition-base);
-  }
-
-  &::-moz-progress-bar {
-    background-color: var(--lunar-accent);
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Meter
-// ---------------------------------------------------------------------------
-meter {
-  display: block;
-  width: 100%;
-  height: 0.75rem;
-  border: none;
-  background-color: color-mix(in srgb, var(--lunar-bg) 80%, var(--lunar-muted));
-  overflow: hidden;
-  margin-bottom: var(--lunar-space-4);
-
-  &::-webkit-meter-bar {
-    background-color: color-mix(
-      in srgb,
-      var(--lunar-bg) 80%,
-      var(--lunar-muted)
-    );
-    border: none;
-  }
-
-  &::-webkit-meter-optimum-value {
-    background-color: var(--lunar-success);
-  }
-
-  &::-webkit-meter-suboptimum-value {
-    background-color: var(--lunar-warning);
-  }
-
-  &::-webkit-meter-even-less-good-value {
-    background-color: var(--lunar-error);
-  }
 }

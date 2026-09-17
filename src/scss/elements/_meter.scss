@@ -1,0 +1,86 @@
+// =============================================================================
+// LUNARCSS - Meter
+// =============================================================================
+// Same bar and ruler as progress, but the fill color reports the value against
+// the element's low/high/optimum range: success when optimal, warning when
+// suboptimal, error when far from optimum.
+//
+// Engine note: as with progress, WebKit has a track pseudo-element and Firefox
+// doesn't, so there the track is a flat background layer instead of a bordered,
+// rounded one.
+// =============================================================================
+
+@use "../mixins";
+
+meter {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--lunar-control-height);
+  margin-bottom: var(--lunar-space-4);
+  border: 0;
+  background-color: transparent;
+
+  // Ruler, plus the track for engines without a track pseudo-element
+  // Firefox has no track pseudo-element to carry the border, so the fallback
+  // track needs a tone of its own or it vanishes against the page
+  @include mixins.ruler($track: var(--lunar-bar-track));
+
+  // ---------------------------------------------------------------------------
+  // Track (WebKit)
+  // ---------------------------------------------------------------------------
+  &::-webkit-meter-inner-element {
+    height: var(--lunar-bar-height);
+  }
+
+  &::-webkit-meter-bar {
+    // Same inset as the range's thumb: border plus padding
+    box-sizing: border-box;
+    height: var(--lunar-bar-height);
+    padding: var(--lunar-bar-inset);
+    background: var(--lunar-bg);
+    border: var(--lunar-border-width) solid var(--lunar-border);
+    border-radius: var(--lunar-bar-radius);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Fill, by how the value sits in the range
+  // ---------------------------------------------------------------------------
+  &::-webkit-meter-optimum-value {
+    background: var(--lunar-success);
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  &::-webkit-meter-suboptimum-value {
+    background: var(--lunar-warning);
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  &::-webkit-meter-even-less-good-value {
+    background: var(--lunar-error);
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  // Firefox: one fill pseudo-element, colored by state on the host, and no
+  // track pseudo-element — so the inset is set here rather than on a track
+  &::-moz-meter-bar {
+    height: calc(
+      var(--lunar-bar-height) -
+        (var(--lunar-border-width) + var(--lunar-bar-inset)) * 2
+    );
+    margin: calc(var(--lunar-border-width) + var(--lunar-bar-inset));
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  &:-moz-meter-optimum::-moz-meter-bar {
+    background: var(--lunar-success);
+  }
+
+  &:-moz-meter-sub-optimum::-moz-meter-bar {
+    background: var(--lunar-warning);
+  }
+
+  &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    background: var(--lunar-error);
+  }
+}

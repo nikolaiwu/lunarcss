@@ -1,0 +1,68 @@
+// =============================================================================
+// LUNARCSS - Progress
+// =============================================================================
+// An accent bar that fills left to right, over a tick ruler. The element is as
+// tall as the other controls: the bar takes the top two thirds, the ruler sits
+// below it.
+//
+// Engine note: WebKit has a track pseudo-element (::-webkit-progress-bar), so
+// it gets the bordered, rounded track. Firefox has none — the element itself is
+// the track — so there the track is a background layer: same size and color,
+// but flat, since a background can't carry a border or rounded corners. The
+// fill and the ruler are identical in both.
+// =============================================================================
+
+@use "../mixins";
+
+progress {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--lunar-control-height);
+  margin-bottom: var(--lunar-space-4);
+  border: 0;
+  background-color: transparent;
+
+  // Ruler, plus the track for engines without a track pseudo-element
+  // Firefox has no track pseudo-element to carry the border, so the fallback
+  // track needs a tone of its own or it vanishes against the page
+  @include mixins.ruler($track: var(--lunar-bar-track));
+
+  // ---------------------------------------------------------------------------
+  // Track (WebKit)
+  // ---------------------------------------------------------------------------
+  &::-webkit-progress-bar {
+    // border-box and the padding inset the fill the same way the range's
+    // track insets its thumb; the `*` reset doesn't reach shadow pseudos
+    box-sizing: border-box;
+    height: var(--lunar-bar-height);
+    padding: var(--lunar-bar-inset);
+    background-color: var(--lunar-bg);
+    border: var(--lunar-border-width) solid var(--lunar-border);
+    border-radius: var(--lunar-bar-radius);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Fill
+  // ---------------------------------------------------------------------------
+  &::-webkit-progress-value {
+    background-color: var(--lunar-accent);
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  // Firefox has no track pseudo-element, so the inset is set here
+  &::-moz-progress-bar {
+    height: calc(
+      var(--lunar-bar-height) -
+        (var(--lunar-border-width) + var(--lunar-bar-inset)) * 2
+    );
+    margin: calc(var(--lunar-border-width) + var(--lunar-bar-inset));
+    background-color: var(--lunar-accent);
+    border-radius: var(--lunar-bar-fill-radius);
+  }
+
+  // An indeterminate progress has no value to show
+  &:indeterminate::-webkit-progress-value {
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,122 @@
+// =============================================================================
+// LUNARCSS - Range
+// =============================================================================
+// A bordered track with a block thumb, over a tick ruler. The element is as
+// tall as the other controls: the bar takes the top two thirds, the ruler sits
+// below it.
+//
+// Range is the one control with real track pseudo-elements in every engine, so
+// the bar is styled there and the element's own background carries the ruler.
+// Firefox also fills up to the thumb (::-moz-range-progress); WebKit has no
+// equivalent, so there the track stays unfilled.
+// =============================================================================
+
+@use "../mixins";
+
+// Track: the bar itself, padded so the thumb sits evenly inside it
+@mixin bar-track {
+  // The `*` reset doesn't reach shadow pseudo-elements, so set it here: the
+  // height then includes the border and padding, and the thumb fills the rest
+  box-sizing: border-box;
+  height: var(--lunar-bar-height);
+  padding: var(--_thumb-inset);
+  background-color: var(--lunar-bg);
+  border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-bar-radius);
+}
+
+// Thumb: fills the track's content box, so the inset is even on all sides
+@mixin bar-thumb {
+  box-sizing: border-box;
+  width: var(--_thumb-width);
+  height: calc(
+    var(--lunar-bar-height) -
+      (var(--lunar-border-width) + var(--_thumb-inset)) * 2
+  );
+  background-color: var(--lunar-muted);
+  border: 0;
+  border-radius: calc(var(--lunar-bar-radius) / 2);
+  transition: background-color var(--lunar-transition-fast);
+}
+
+input[type="range"] {
+  --_thumb-width: var(--lunar-space-4);
+  --_thumb-inset: var(--lunar-bar-inset);
+
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--lunar-control-height);
+  // The engines centre the track in the content box, so the ruler's space is
+  // padding: that leaves the content box exactly one bar tall, bar on top
+  padding: 0 0 calc(var(--lunar-control-height) - var(--lunar-bar-height));
+  margin-bottom: var(--lunar-space-4);
+  background-color: transparent;
+  cursor: pointer;
+
+  @include mixins.ruler;
+
+  // ---------------------------------------------------------------------------
+  // Track
+  // ---------------------------------------------------------------------------
+  &::-webkit-slider-runnable-track {
+    @include bar-track;
+  }
+
+  &::-moz-range-track {
+    @include bar-track;
+  }
+
+  // Filled part, up to the thumb (Firefox only)
+  &::-moz-range-progress {
+    height: calc(var(--lunar-bar-height) - var(--lunar-border-width) * 2);
+    background-color: var(--lunar-accent);
+    border-radius: var(--lunar-bar-radius);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Thumb
+  // ---------------------------------------------------------------------------
+  &::-webkit-slider-thumb {
+    appearance: none;
+
+    @include bar-thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include bar-thumb;
+  }
+
+  // Accent on hover, and while being dragged
+  &:hover:not(:disabled)::-webkit-slider-thumb,
+  &:active:not(:disabled)::-webkit-slider-thumb {
+    background-color: var(--lunar-accent);
+  }
+
+  &:hover:not(:disabled)::-moz-range-thumb,
+  &:active:not(:disabled)::-moz-range-thumb {
+    background-color: var(--lunar-accent);
+  }
+
+  // ---------------------------------------------------------------------------
+  // States
+  // ---------------------------------------------------------------------------
+  &:focus-visible {
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--lunar-accent) 40%, transparent);
+    }
+
+    &::-moz-range-thumb {
+      box-shadow: 0 0 0 3px
+        color-mix(in srgb, var(--lunar-accent) 40%, transparent);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
