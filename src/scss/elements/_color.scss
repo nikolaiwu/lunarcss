@@ -1,0 +1,74 @@
+// =============================================================================
+// LUNARCSS - Color
+// =============================================================================
+// The swatch is a droplet: an SVG mask over the swatch pseudo-element, so the
+// chosen color paints the icon itself.
+//
+// The icon is a URL-encoded data URI rather than base64 — a third smaller, and
+// still readable in a diff. It's masked, not drawn, so it takes the value's
+// color with no extra markup.
+//
+// Everything is on the swatch pseudo-element (::-webkit-color-swatch /
+// ::-moz-color-swatch): input is a void element with no ::before or ::after,
+// and masking the input itself would take the focus ring with it.
+// =============================================================================
+
+$droplet: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 146 164'%3E%3Cpath d='M103 112.496C103 140.939 79.9427 163.996 51.5 163.996C23.0573 163.996 0 140.939 0 112.496C0 84.0533 51.5 23.996 51.5 23.996C51.5 23.996 103 84.0533 103 112.496Z'/%3E%3Cpath d='M145.968 46.2394C145.968 61.1001 133.921 73.1471 119.06 73.1471C104.2 73.1471 92.1526 61.1001 92.1526 46.2394C92.1526 31.3787 119.06 0 119.06 0C119.06 0 145.968 31.3787 145.968 46.2394Z'/%3E%3C/svg%3E");
+
+// Swatch shape, shared by both engines' pseudo-elements
+@mixin swatch {
+  border: 0;
+  mask-image: #{$droplet};
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+input[type="color"] {
+  box-sizing: border-box;
+  width: var(--lunar-control-height);
+  height: var(--lunar-control-height);
+  padding: var(--lunar-bar-inset);
+  margin-bottom: var(--lunar-space-4);
+  background-color: var(--lunar-bg);
+  border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-radius-md);
+  cursor: pointer;
+  transition:
+    border-color var(--lunar-transition-fast),
+    box-shadow var(--lunar-transition-fast);
+
+  // ---------------------------------------------------------------------------
+  // Swatch
+  // ---------------------------------------------------------------------------
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    @include swatch;
+  }
+
+  &::-moz-color-swatch {
+    @include swatch;
+  }
+
+  // ---------------------------------------------------------------------------
+  // States
+  // ---------------------------------------------------------------------------
+  &:hover:not(:disabled) {
+    border-color: var(--lunar-accent);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--lunar-accent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--lunar-accent) 40%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

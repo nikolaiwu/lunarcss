@@ -212,26 +212,6 @@ optgroup {
 }
 
 // ---------------------------------------------------------------------------
-// Color
-// ---------------------------------------------------------------------------
-input[type="color"] {
-  width: 3rem;
-  height: 2.5rem;
-  padding: var(--lunar-space-1);
-  border: var(--lunar-border-width) solid var(--lunar-border);
-  cursor: pointer;
-  margin-bottom: var(--lunar-space-4);
-
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-
-  &::-webkit-color-swatch {
-    border: none;
-  }
-}
-
-// ---------------------------------------------------------------------------
 // File
 // ---------------------------------------------------------------------------
 input[type="file"] {

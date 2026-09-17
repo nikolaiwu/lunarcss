@@ -543,7 +543,7 @@ greet('World');</code></pre>
             </fieldset>
           </div>
 
-          <h3>Range & Color</h3>
+          <h3>Range</h3>
           <div class="demo-box form-demo">
             <label for="range-input"
               >Range: <output id="range-output">50</output></label
@@ -558,9 +558,15 @@ greet('World');</code></pre>
                 document.getElementById('range-output').value = this.value
               "
             />
+          </div>
 
-            <label for="color-input">Color Picker</label>
-            <input type="color" id="color-input" value="#3b82f6" />
+          <h3>Color</h3>
+          <div class="demo-box form-demo">
+            <label for="color-input">Color picker</label>
+            <input type="color" id="color-input" value="#ff5623" />
+
+            <label for="color-input-2">Disabled</label>
+            <input type="color" id="color-input-2" value="#2a2c2f" disabled />
           </div>
 
           <h3>File Input</h3>
