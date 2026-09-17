@@ -289,6 +289,13 @@ input[type="file"] {
   border: var(--lunar-border-width) dashed var(--lunar-border);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
+  transition: border-color var(--lunar-transition-fast);
+
+  // Form controls opt out of the global outline, so this needs a cue of its own
+  &:focus-visible {
+    border-color: var(--lunar-accent);
+    border-style: solid;
+  }
 
   &::file-selector-button {
     padding: var(--lunar-space-2) var(--lunar-space-4);
