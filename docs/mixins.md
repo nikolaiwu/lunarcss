@@ -1,0 +1,10 @@
+# Mixins
+
+[src/scss/mixins/](../src/scss/mixins/) holds one file per mixin. `_index.scss` `@forward`s them all, so modules import them with `@use "../mixins"` and call `mixins.<name>`. The folder isn't in `main.scss` and emits no CSS on its own. Add new mixin files to `_index.scss`; a mixin that uses another one `@use`s that sibling file directly (as `_card.scss` does with `cut-corner`).
+
+- `cut-corner-border($corners, $size, $border-width, $border-color, $background)` draws a bordered box with 45° cut corners. `clip-path` can't draw a border along the diagonal, so `::before` is the border shape and `::after` is the fill, inset by the border width (the inner cut is `size − width × 0.5858`). It takes over the host's `::before` and `::after`, and sets `position: relative`, `isolation: isolate`, `border: 0` and a transparent background. A host box-shadow would show as a rectangle past the cuts. The `cut-corner-polygon()` function is forwarded too, for overriding single corners (see the button groups).
+- `card` is the full card look (padding, cut-corner border, `> header` dashes, `> footer` stripes). A host that needs its own `position` or other overrides should put them in a `& { … }` block after the `@include`, so they come after the mixin's output (see `dialog`).
+- `dotted($size, $gap, $color)` paints a repeating dot grid (one `radial-gradient` tile); `hr` uses it as a band. Overrides: `--lunar-dot-size`, `--lunar-dot-gap`, `--lunar-dot-color`.
+- `striped($width, $gap, $angle, $color)` paints repeating diagonal stripes; the card footer band uses it. Overrides: `--lunar-stripe-width`, `--lunar-stripe-gap`, `--lunar-stripe-angle`, `--lunar-stripe-color`.
+- `dotted` and `striped` set only `background-image`, so the host keeps its own background color.
+- Runtime overrides for users: `--lunar-cut-size`, `--lunar-cut-border-width`, `--lunar-cut-border-color`, `--lunar-cut-bg`.
