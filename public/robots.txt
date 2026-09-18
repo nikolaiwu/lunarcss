@@ -1,0 +1,10 @@
+# LunarCSS
+#
+# demo.html is a fictional company page, there to show the theme in use. It
+# carries <meta name="robots" content="noindex, follow">, which is what keeps
+# it out of search results. It is deliberately NOT disallowed here: a crawler
+# that can't fetch the page can't see the noindex either, and could still list
+# the URL from links pointing at it.
+
+User-agent: *
+Allow: /

@@ -7,6 +7,12 @@
       name="description"
       content="Acme Robotics - a fictional landing page built with LunarCSS and no CSS classes at all."
     />
+    <!--
+      Made-up content: keep it out of search results, but let crawlers follow
+      the links back to the showcase. robots.txt leaves this page crawlable on
+      purpose, or this tag would never be read.
+    -->
+    <meta name="robots" content="noindex, follow" />
     <title>Acme Robotics - LunarCSS Demo</title>
     <link rel="stylesheet" href="./scss/fonts.scss" />
     <link rel="stylesheet" href="./scss/main.scss" />
