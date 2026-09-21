@@ -1,6 +1,6 @@
 # 🌙 LunarCSS
 
-A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes needed—just beautiful defaults out of the box.
+A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes. Defaults out of the box, and a set of tokens to build your own look on top.
 
 ## Features
 
@@ -62,7 +62,7 @@ Download `lunarcss.min.css` from the [releases page](https://github.com/nikolaiw
 
 For the fonts, download the release `.zip` instead and keep `lunarcss-fonts.min.css` next to its `fonts/` folder.
 
-That's it! Your HTML will now have beautiful default styles.
+That's it! Your HTML now has the theme's defaults, ready to build on.
 
 ## Theme Switching
 

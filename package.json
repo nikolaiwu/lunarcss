@@ -1,7 +1,7 @@
 {
   "name": "@nikolaiwu/lunarcss",
   "version": "0.1.0",
-  "description": "A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors. No classes, just beautiful defaults.",
+  "description": "A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors, no classes.",
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "style": "dist/lunarcss.min.css",

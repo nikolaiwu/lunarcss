@@ -5,9 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="LunarCSS - A plug-and-play CSS theme that styles all standard HTML elements. No classes, just beautiful defaults."
+      content="LunarCSS - A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors, no classes."
     />
     <title>LunarCSS - Classless CSS Theme</title>
+
+    <!--
+      Social tags. Link previews need absolute URLs, so every URL below has to
+      carry the real host.
+
+      TODO before launch:
+        1. Replace https://lunarcss.example.com with the site's real origin,
+           here and in the canonical link.
+        2. Add public/og-image.png — 1200x630, the theme in use (the card grid
+           or the demo page reads well), under 8 MB.
+    -->
+    <link rel="canonical" href="https://lunarcss.example.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LunarCSS" />
+    <meta property="og:url" content="https://lunarcss.example.com/" />
+    <meta property="og:title" content="LunarCSS - Classless CSS Theme" />
+    <meta
+      property="og:description"
+      content="A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors, no classes."
+    />
+    <meta
+      property="og:image"
+      content="https://lunarcss.example.com/og-image.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="A page styled by LunarCSS: cut-corner cards, a dial-marked slider and a dark/light theme toggle."
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LunarCSS - Classless CSS Theme" />
+    <meta
+      name="twitter:description"
+      content="A plug-and-play CSS theme that styles all standard HTML elements using pure element selectors, no classes."
+    />
+    <meta
+      name="twitter:image"
+      content="https://lunarcss.example.com/og-image.png"
+    />
+
     <link rel="stylesheet" href="./scss/fonts.scss" />
     <link rel="stylesheet" href="./scss/main.scss" />
     <link rel="stylesheet" href="./scss/layout.scss" />
@@ -26,8 +69,8 @@
         <!--<h1>🌙 LunarCSS</h1>-->
         <p>
           A plug-and-play CSS theme that styles all standard HTML elements using
-          pure element selectors. No classes needed—just beautiful defaults out
-          of the box.
+          pure element selectors. No classes. Defaults out of the box, and a set
+          of tokens to build your own look on top.
         </p>
         <p>
           See it on a real page: <a href="./demo.html">Acme Robotics demo</a> —
