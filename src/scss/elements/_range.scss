@@ -101,10 +101,6 @@ input[type="range"] {
   // ---------------------------------------------------------------------------
   // States
   // ---------------------------------------------------------------------------
-  &:focus-visible {
-    outline: none;
-  }
-
   &:focus-visible::-webkit-slider-thumb {
     background-color: var(--lunar-accent);
   }

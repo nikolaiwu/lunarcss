@@ -1,0 +1,90 @@
+// =============================================================================
+// LUNARCSS - Forced Colors
+// =============================================================================
+// Windows contrast themes (and Firefox's "override colors" setting) switch on
+// forced-colors mode. The browser then swaps author colors for the user's
+// system palette, drops every background-image that isn't a url() and removes
+// box-shadow. Much of the theme is drawn exactly that way — form controls give
+// us nothing but backgrounds — so without this file a checked checkbox, a bar's
+// fill or a card's border would simply disappear.
+//
+// Three fixes, loaded last so they win over the element rules:
+//   1. The color tokens point at system colors, so anything drawn with them
+//      follows the user's palette.
+//   2. Parts drawn with backgrounds opt out of forcing (forced-color-adjust:
+//      none) and keep their shape, now in those system colors.
+//   3. Focus falls back to a real outline: the theme's own cues (accent
+//      borders, shadows, brackets) are flattened or removed.
+// =============================================================================
+
+@media (forced-colors: active) {
+  // ---------------------------------------------------------------------------
+  // Tokens
+  // ---------------------------------------------------------------------------
+  :root {
+    --lunar-bg: Canvas;
+    --lunar-fg: CanvasText;
+    --lunar-border: CanvasText;
+    --lunar-muted: CanvasText;
+    --lunar-accent: Highlight;
+    // Meter states can't be told apart by color here; its fill length still
+    // shows the value
+    --lunar-success: Highlight;
+    --lunar-warning: Highlight;
+    --lunar-error: Highlight;
+    --lunar-info: Highlight;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Decoration drawn with backgrounds
+  // ---------------------------------------------------------------------------
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"],
+  progress,
+  meter,
+  hr,
+  :is(article, dialog)::before,
+  :is(article, dialog)::after,
+  :is(article, dialog) > header,
+  :is(article, dialog) > footer::before {
+    forced-color-adjust: none;
+  }
+
+  // The swatch shows the chosen color, which forcing would replace. Separate
+  // rules: an engine drops a whole selector list over one vendor pseudo it
+  // doesn't know.
+  input[type="color"]::-webkit-color-swatch {
+    forced-color-adjust: none;
+  }
+
+  input[type="color"]::-moz-color-swatch {
+    forced-color-adjust: none;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Buttons
+  // ---------------------------------------------------------------------------
+  // The cut-corner fill is a pseudo-element background, which forcing would
+  // flatten to Canvas and leave a borderless label. Fall back to the plain
+  // system button: a rectangle with a visible border.
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    border-color: ButtonText;
+  }
+
+  button::before,
+  button::after {
+    content: none;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Focus
+  // ---------------------------------------------------------------------------
+  :is(input, textarea, select, button, summary, [popover]):focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}

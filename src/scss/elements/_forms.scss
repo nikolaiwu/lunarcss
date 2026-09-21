@@ -90,7 +90,6 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   }
 
   &:focus {
-    outline: none;
     border-color: var(--lunar-accent);
 
     @include mixins.field-focus;
@@ -194,7 +193,6 @@ textarea {
   }
 
   &:focus {
-    outline: none;
     border-color: var(--lunar-accent);
 
     @include mixins.field-focus;
@@ -239,7 +237,6 @@ select {
   }
 
   &:focus {
-    outline: none;
     border-color: var(--lunar-accent);
 
     @include mixins.field-focus;

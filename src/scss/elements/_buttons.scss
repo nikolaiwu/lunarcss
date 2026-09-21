@@ -37,10 +37,6 @@ input[type="button"] {
     );
   }
 
-  &:focus-visible {
-    outline: none;
-  }
-
   &:active:not(:disabled) {
     transform: translateY(1px);
   }
