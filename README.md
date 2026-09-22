@@ -36,6 +36,27 @@ For the full look, also load the optional self-hosted fonts (Space Grotesk and S
 />
 ```
 
+### Page padding
+
+The theme styles elements but never places them, so it doesn't pad the page. Load the optional layout stylesheet **after** the theme for a centred page with a gutter, a header row, a sidebar and the card grid:
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-layout.min.css"
+/>
+```
+
+Or, if you only want the gutter and nothing else, two lines of your own CSS:
+
+```css
+body {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1rem;
+}
+```
+
 ### npm
 
 ```bash
