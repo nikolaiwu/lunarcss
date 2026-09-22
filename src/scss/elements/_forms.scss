@@ -83,7 +83,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
 
   &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-border) 50%,
       var(--lunar-muted)
     );
@@ -95,6 +95,19 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
     @include mixins.field-focus;
   }
 
+  // Validation, once the value has been entered and left: :user-invalid and
+  // :user-valid never match an untouched field, unlike :invalid / :valid.
+  // After the focus rule, so an invalid field stays flagged while it's fixed.
+  &:user-invalid {
+    --_bracket-color: var(--lunar-error);
+
+    border-color: var(--lunar-error);
+  }
+
+  &:user-valid {
+    border-color: var(--lunar-success);
+  }
+
   &::placeholder {
     color: var(--lunar-muted);
   }
@@ -103,7 +116,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
     opacity: 0.5;
     cursor: not-allowed;
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 80%,
       var(--lunar-muted)
     );
@@ -111,7 +124,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
 
   &:read-only {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 90%,
       var(--lunar-muted)
     );
@@ -186,7 +199,7 @@ textarea {
 
   &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-border) 50%,
       var(--lunar-muted)
     );
@@ -196,6 +209,19 @@ textarea {
     border-color: var(--lunar-accent);
 
     @include mixins.field-focus;
+  }
+
+  // Validation, once the value has been entered and left: :user-invalid and
+  // :user-valid never match an untouched field, unlike :invalid / :valid.
+  // After the focus rule, so an invalid field stays flagged while it's fixed.
+  &:user-invalid {
+    --_bracket-color: var(--lunar-error);
+
+    border-color: var(--lunar-error);
+  }
+
+  &:user-valid {
+    border-color: var(--lunar-success);
   }
 
   &::placeholder {
@@ -230,7 +256,7 @@ select {
 
   &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-border) 50%,
       var(--lunar-muted)
     );
@@ -240,6 +266,19 @@ select {
     border-color: var(--lunar-accent);
 
     @include mixins.field-focus;
+  }
+
+  // Validation, once the value has been entered and left: :user-invalid and
+  // :user-valid never match an untouched field, unlike :invalid / :valid.
+  // After the focus rule, so an invalid field stays flagged while it's fixed.
+  &:user-invalid {
+    --_bracket-color: var(--lunar-error);
+
+    border-color: var(--lunar-error);
+  }
+
+  &:user-valid {
+    border-color: var(--lunar-success);
   }
 
   &:disabled {
@@ -300,7 +339,7 @@ input[type="file"] {
     font-weight: var(--lunar-font-medium);
     color: var(--lunar-fg);
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 90%,
       var(--lunar-muted)
     );
@@ -310,7 +349,7 @@ input[type="file"] {
 
     &:hover {
       background-color: color-mix(
-        in srgb,
+        in oklch,
         var(--lunar-bg) 80%,
         var(--lunar-muted)
       );
@@ -334,5 +373,9 @@ output {
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
   color: var(--lunar-fg);
-  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 90%,
+    var(--lunar-muted)
+  );
 }

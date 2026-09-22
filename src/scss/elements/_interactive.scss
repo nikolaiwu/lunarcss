@@ -37,7 +37,11 @@ summary {
   font-weight: var(--lunar-font-medium);
   color: var(--lunar-fg);
   cursor: pointer;
-  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 90%,
+    var(--lunar-muted)
+  );
   list-style: none;
   transition: background-color var(--lunar-transition-fast);
 
@@ -66,7 +70,7 @@ summary {
 
   &:hover {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 80%,
       var(--lunar-muted)
     );
@@ -109,10 +113,10 @@ dialog {
     overflow: auto;
 
     transition:
-      opacity 0.3s ease-in,
-      transform 0.2s ease-in,
-      // overlay 0.7s ease-in allow-discrete,
-      display 0.3s ease-in allow-discrete;
+      opacity var(--lunar-transition-slow),
+      transform var(--lunar-transition-base),
+      overlay var(--lunar-transition-slow) allow-discrete,
+      display var(--lunar-transition-slow) allow-discrete;
 
     opacity: 0;
   }
@@ -123,10 +127,7 @@ dialog {
   }
 
   &::backdrop {
-    background-color: light-dark(
-      rgb(255 255 255 / 0.5),
-      rgb(0 0 0 / 0.5)
-    ); // TODO: use fg and bg variants
+    background-color: var(--lunar-backdrop);
     backdrop-filter: blur(4px);
   }
 

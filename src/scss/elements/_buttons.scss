@@ -31,7 +31,7 @@ input[type="button"] {
 
   &:hover:not(:disabled) {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-accent) 85%,
       var(--lunar-fg)
     );
@@ -79,7 +79,7 @@ button {
   &:hover:not(:disabled) {
     background-color: transparent;
     --lunar-cut-bg: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-accent) 85%,
       var(--lunar-fg)
     );
@@ -93,7 +93,7 @@ button {
     &::before {
       inset: calc((var(--_button-ring) + var(--lunar-border-width)) * -1);
       background-color: color-mix(
-        in srgb,
+        in oklch,
         var(--lunar-accent) 40%,
         transparent
       );
@@ -142,13 +142,17 @@ button:has(+ :is(#{$control})) {
 }
 
 input[type="reset"] {
-  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 90%,
+    var(--lunar-muted)
+  );
   color: var(--lunar-fg);
   border-color: var(--lunar-border);
 
   &:hover:not(:disabled) {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 80%,
       var(--lunar-muted)
     );

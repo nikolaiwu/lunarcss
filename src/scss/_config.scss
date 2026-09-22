@@ -49,6 +49,8 @@
   --lunar-warning: light-dark(#d97706, #fbbf24);
   --lunar-error: light-dark(#dc2626, #f87171);
   --lunar-info: light-dark(#2563eb, #60a5fa);
+  // Behind a dialog: the page color at half opacity, so it dims either theme
+  --lunar-backdrop: color-mix(in oklch, var(--lunar-bg) 50%, transparent);
 
   // ---------------------------------------------------------------------------
   // Typography Scale
@@ -196,7 +198,7 @@
   --lunar-bar-inset: calc(var(--lunar-border-width) * 2);
   // Track colour where no bordered track pseudo-element exists (Firefox)
   --lunar-bar-track: color-mix(
-    in srgb,
+    in oklch,
     var(--lunar-bg) 85%,
     var(--lunar-muted)
   );

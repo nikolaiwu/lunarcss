@@ -44,7 +44,7 @@ input[type="radio"] {
   }
 
   &:hover:not(:disabled):not(:focus-visible) {
-    border-color: color-mix(in srgb, var(--lunar-border) 50%, var(--lunar-fg));
+    border-color: color-mix(in oklch, var(--lunar-border) 50%, var(--lunar-fg));
   }
 
   &:focus-visible {

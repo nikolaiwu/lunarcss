@@ -26,6 +26,7 @@
     --lunar-sidebar-width: 20rem; // aside next to main
     --lunar-layout-gap: var(--lunar-space-8); // between page regions
     --lunar-card-min-width: 18rem; // card grid column before it wraps
+    --lunar-page-gutter: var(--lunar-space-4); // page edge to content
     // Between grouped buttons: half a spacing step (2px), so they read as one
     --lunar-button-gap: calc(var(--lunar-space-1) / 2);
   }
@@ -33,10 +34,12 @@
   // ---------------------------------------------------------------------------
   // Page Shell
   // ---------------------------------------------------------------------------
-  // Centred, width-limited page. The theme's body padding stays the gutter.
+  // Centred, width-limited page, with a gutter at the screen edges. The theme
+  // itself never pads the body: that's placement, so it belongs here.
   body {
     max-width: var(--lunar-page-width);
     margin-inline: auto;
+    padding: var(--lunar-page-gutter);
   }
 
   body > header,

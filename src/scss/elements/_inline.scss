@@ -15,16 +15,16 @@ a {
   transition: color var(--lunar-transition-fast);
 
   &:hover {
-    color: color-mix(in srgb, var(--lunar-accent) 80%, var(--lunar-fg));
+    color: color-mix(in oklch, var(--lunar-accent) 80%, var(--lunar-fg));
     text-decoration-thickness: 2px;
   }
 
   &:visited {
-    color: color-mix(in srgb, var(--lunar-accent) 70%, var(--lunar-muted));
+    color: color-mix(in oklch, var(--lunar-accent) 70%, var(--lunar-muted));
   }
 
   &:active {
-    color: color-mix(in srgb, var(--lunar-accent) 80%, var(--lunar-fg));
+    color: color-mix(in oklch, var(--lunar-accent) 80%, var(--lunar-fg));
   }
 }
 
@@ -78,7 +78,7 @@ ins {
   text-decoration: underline;
   text-decoration-style: dotted;
   background-color: color-mix(
-    in srgb,
+    in oklch,
     var(--lunar-success) 15%,
     var(--lunar-bg)
   );
@@ -112,7 +112,11 @@ code {
   font-family: var(--lunar-font-mono);
   font-size: 0.875em;
   padding: 0.125em 0.375em;
-  background-color: color-mix(in srgb, var(--lunar-bg) 75%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 75%,
+    var(--lunar-muted)
+  );
   color: var(--lunar-fg);
   border-radius: var(--lunar-radius-sm);
 }
@@ -124,7 +128,11 @@ kbd {
   font-family: var(--lunar-font-mono);
   font-size: 0.875em;
   padding: 0.125em 0.5em;
-  background-color: color-mix(in srgb, var(--lunar-bg) 90%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 90%,
+    var(--lunar-muted)
+  );
   color: var(--lunar-fg);
   border: var(--lunar-border-width) solid var(--lunar-border);
   border-radius: var(--lunar-radius-sm);

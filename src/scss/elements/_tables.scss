@@ -43,7 +43,11 @@ caption {
 // Table Header
 // ---------------------------------------------------------------------------
 thead {
-  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 85%,
+    var(--lunar-muted)
+  );
   border-bottom: 2px solid var(--lunar-border);
 }
 
@@ -57,7 +61,7 @@ tbody {
 
     &:hover {
       background-color: color-mix(
-        in srgb,
+        in oklch,
         var(--lunar-bg) 92%,
         var(--lunar-muted)
       );
@@ -72,7 +76,7 @@ tbody {
   &[data-striped] tr:nth-child(even),
   table[data-striped] & tr:nth-child(even) {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 96%,
       var(--lunar-muted)
     );
@@ -83,7 +87,11 @@ tbody {
 // Table Footer
 // ---------------------------------------------------------------------------
 tfoot {
-  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 85%,
+    var(--lunar-muted)
+  );
   border-top: 2px solid var(--lunar-border);
   font-weight: var(--lunar-font-semibold);
 }
@@ -106,7 +114,7 @@ th {
 
   &[scope="row"] {
     background-color: color-mix(
-      in srgb,
+      in oklch,
       var(--lunar-bg) 85%,
       var(--lunar-muted)
     );

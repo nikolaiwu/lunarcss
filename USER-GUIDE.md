@@ -309,7 +309,7 @@ It's about 0.6 kB gzipped and gives you:
 
 | Markup                             | Layout                                                                                                                                            |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `body`                             | Centred page, limited to `--lunar-page-width`                                                                                                     |
+| `body`                             | Centred page, limited to `--lunar-page-width`, with a `--lunar-page-gutter` at the screen edges                                                   |
 | `body > header` containing a `nav` | Title and navigation on one row, wrapping on small screens                                                                                        |
 | `nav ul`                           | Horizontal row of links, no bullets                                                                                                               |
 | `main` and `aside` as siblings     | Sidebar beside the content above 60rem, stacked below. Source order picks the side: `aside` first puts it on the left, `main` first on the right. |
@@ -344,6 +344,7 @@ So a full page needs no classes at all:
   --lunar-page-width: 72rem; /* page width, including the sidebar */
   --lunar-sidebar-width: 20rem; /* aside beside main */
   --lunar-layout-gap: var(--lunar-space-8); /* between page regions */
+  --lunar-page-gutter: var(--lunar-space-4); /* page edge to content */
   --lunar-card-min-width: 18rem; /* card grid column before it wraps */
   --lunar-button-gap: calc(
     var(--lunar-space-1) / 2
@@ -443,17 +444,18 @@ LunarCSS is built on two main colors. Light mode uses the light color for the ba
 
 The remaining color tokens are listed below. Most use `light-dark()`, so one definition covers both modes and no theme overrides are needed.
 
-| Token             | Used for                                                                   |
-| ----------------- | -------------------------------------------------------------------------- |
-| `--lunar-bg`      | Page background (built from `--lunar-light` / `--lunar-dark`)              |
-| `--lunar-fg`      | Primary text (built from `--lunar-light` / `--lunar-dark`)                 |
-| `--lunar-border`  | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)         |
-| `--lunar-muted`   | Secondary text, placeholders (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-accent`  | Links, interactive elements, focus                                         |
-| `--lunar-success` | Success state                                                              |
-| `--lunar-warning` | Warning state                                                              |
-| `--lunar-error`   | Error state                                                                |
-| `--lunar-info`    | Informational state                                                        |
+| Token              | Used for                                                                   |
+| ------------------ | -------------------------------------------------------------------------- |
+| `--lunar-bg`       | Page background (built from `--lunar-light` / `--lunar-dark`)              |
+| `--lunar-fg`       | Primary text (built from `--lunar-light` / `--lunar-dark`)                 |
+| `--lunar-border`   | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)         |
+| `--lunar-muted`    | Secondary text, placeholders (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-accent`   | Links, interactive elements, focus                                         |
+| `--lunar-success`  | Success state                                                              |
+| `--lunar-warning`  | Warning state                                                              |
+| `--lunar-error`    | Error state, and an invalid field's border and brackets                    |
+| `--lunar-info`     | Informational state                                                        |
+| `--lunar-backdrop` | Dim behind an open `<dialog>` (the page color at half opacity)             |
 
 For the default values, see `src/scss/_config.scss`.
 
@@ -744,7 +746,9 @@ import "./your-styles.css"; // your styles override the theme, whatever the orde
 
 ### Forms Look Different
 
-Different browsers render form elements differently. LunarCSS normalizes most elements, but some (like date pickers) depend heavily on the browser.
+Different browsers render form elements differently. LunarCSS restyles the controls themselves — the checkbox switch, radio, range, progress, meter, color swatch and the field brackets are all drawn with backgrounds, since form controls have no pseudo-elements to use — but parts owned by the browser, such as the date picker panel and the select's dropdown list, can't be styled and still look native.
+
+Fields flag themselves after you fill them in and move on: `:user-invalid` turns the border and brackets the error color, `:user-valid` turns the border the success color. Neither matches an untouched field, so an empty required field isn't red before it's been used.
 
 ### Print Styles
 

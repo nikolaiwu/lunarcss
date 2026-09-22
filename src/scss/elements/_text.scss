@@ -18,7 +18,11 @@ blockquote {
   padding: var(--lunar-space-4) var(--lunar-space-6);
   margin: var(--lunar-space-6) 0;
   border-left: 4px solid var(--lunar-border);
-  background-color: color-mix(in srgb, var(--lunar-bg) 85%, var(--lunar-muted));
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 85%,
+    var(--lunar-muted)
+  );
   font-style: italic;
   color: var(--lunar-muted);
   border-top-right-radius: var(--lunar-radius-md);
@@ -49,7 +53,7 @@ blockquote {
 blockquote blockquote {
   margin: var(--lunar-space-4) 0;
   border-left-color: color-mix(
-    in srgb,
+    in oklch,
     var(--lunar-border) 50%,
     var(--lunar-muted)
   );

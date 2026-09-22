@@ -12,8 +12,6 @@
 html {
   // Base font size (1rem = 16px)
   font-size: 100%;
-  // Prevent horizontal overflow
-  overflow-x: hidden;
   // Better font rendering
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,7 +24,6 @@ body {
   line-height: var(--lunar-leading-relaxed);
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
-  padding: var(--lunar-space-4);
 
   // Smooth transitions for theme changes
   transition:
@@ -37,7 +34,7 @@ body {
 // Text selection
 ::selection {
   background-color: color-mix(
-    in srgb,
+    in oklch,
     var(--lunar-accent) 30%,
     var(--lunar-bg)
   );
