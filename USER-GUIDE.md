@@ -167,6 +167,20 @@ LunarCSS styles all standard HTML elements automatically. Just write semantic HT
 
 No classes needed!
 
+### Wide tables
+
+Tables fill the width and wrap their cell text. If a table is still too wide for small screens, wrap it in any element (or a `<figure>`, if it has a caption outside the table), and the wrapper scrolls sideways:
+
+```html
+<div>
+  <table>
+    …
+  </table>
+</div>
+```
+
+The wrapper only scrolls when the table is its sole child (or it's a `<figure>`), so it never affects other layouts.
+
 ---
 
 ## Cards

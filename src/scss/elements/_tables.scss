@@ -13,14 +13,19 @@ table {
   border-spacing: 0;
   margin-bottom: var(--lunar-space-6);
   font-size: var(--lunar-text-sm);
+}
 
-  // Table wrapper for horizontal scrolling on small screens
+// ---------------------------------------------------------------------------
+// Scroll wrapper
+// ---------------------------------------------------------------------------
+// A table too wide for the screen scrolls inside its wrapper: any element
+// holding just the table, or a figure (so a figcaption can sit alongside).
+// The table itself stays display: table — making it a block to scroll it
+// stops it filling the width and can cost it its table semantics in screen
+// readers.
+:has(> table:only-child),
+figure:has(> table) {
   overflow-x: auto;
-  display: block;
-
-  @media (min-width: 640px) {
-    display: table;
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -98,7 +103,6 @@ th {
   font-weight: var(--lunar-font-semibold);
   text-align: left;
   color: var(--lunar-fg);
-  white-space: nowrap;
 
   &[scope="row"] {
     background-color: color-mix(

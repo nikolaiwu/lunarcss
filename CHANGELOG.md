@@ -28,7 +28,7 @@ Initial release, to be published as 0.1.0.
 - Optional layout stylesheet `lunarcss-layout.min.css`: classless page structure (centred page, header with nav, horizontal nav lists, `main` + `aside` sidebar, footer row), button/input groups (`--lunar-button-gap`) and the card grid, which moved here from the theme, in its own `lunarcss-layout` cascade layer
 - Optional self-hosted fonts: `lunarcss-fonts.min.css` (Space Grotesk and Space Mono, SIL OFL 1.1, woff2 subsets, no Google requests). `--lunar-font-sans` / `--lunar-font-mono` list them first and fall back to system fonts
 - All theme styles live in the `lunarcss` cascade layer, so your own CSS and layered frameworks (e.g. Tailwind v4 utilities) override the theme regardless of specificity or load order
-- Forced colors (Windows contrast themes): tokens map to system colors, controls and card decoration drawn with backgrounds opt out of forcing so they stay visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
+- Tables stay `display: table` and fill the width at every size; a wide table scrolls inside a wrapper that holds only the table, or inside a `<figure>`
 - Forced colors (Windows contrast themes): tokens map to system colors, controls and card decoration drawn with backgrounds opt out of forcing so they stay visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
 - Light and dark themes via `light-dark()`, with `data-theme` to force either mode
 - `--lunar-light` / `--lunar-dark` main color tokens, plus semantic, typography, spacing, radius, shadow, transition, z-index and content-width tokens
