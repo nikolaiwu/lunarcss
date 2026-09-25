@@ -25,7 +25,9 @@
   // arrow, or the hint on a datalist-backed input)
   $lead-image: null,
   $lead-position: right var(--lunar-space-2) center,
-  $lead-size: 1.25em
+  $lead-size: 1.25em,
+  // Which corners get brackets (textarea leaves its resize handle clear)
+  $bracket-corners: brackets.$all-corners
 ) {
   --_bracket-color: var(--lunar-muted);
   --_bracket-size: var(--lunar-space-1);
@@ -57,13 +59,21 @@
     $sizes: list.append($sizes, #{$stroke} var(--lunar-bar-tick-height), comma);
   }
 
-  background-image: list.join($images, brackets.bracket-images(), comma);
-  background-position: list.join(
-    $positions,
-    brackets.bracket-positions(),
+  background-image: list.join(
+    $images,
+    brackets.bracket-images($corners: $bracket-corners),
     comma
   );
-  background-size: list.join($sizes, brackets.bracket-sizes(), comma);
+  background-position: list.join(
+    $positions,
+    brackets.bracket-positions($corners: $bracket-corners),
+    comma
+  );
+  background-size: list.join(
+    $sizes,
+    brackets.bracket-sizes($corners: $bracket-corners),
+    comma
+  );
   background-repeat: no-repeat;
 
   transition:

@@ -208,6 +208,7 @@ lunarcss/
 │   │   │   ├── _var.scss         # var
 │   │   │   ├── _lists.scss       # ul, ol, li, dl, dt, dd
 │   │   │   ├── _tables.scss      # table, thead, tbody, etc.
+│   │   │   ├── _fieldset.scss    # fieldset, legend
 │   │   │   ├── _forms.scss       # form, input, textarea, select, etc.
 │   │   │   ├── _buttons.scss     # buttons + button/input groups
 │   │   │   ├── _media.scss       # img, video, audio, etc.

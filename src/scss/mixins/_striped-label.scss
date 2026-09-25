@@ -1,0 +1,46 @@
+// =============================================================================
+// LUNARCSS - Mixins: Striped Label
+// =============================================================================
+// Text set into a striped rule: a short striped segment, the text, then
+// stripes to the end of the line.
+//
+// The host's text can't be targeted on its own, so the host becomes a flex
+// row: its bare text is an anonymous flex item, and ::before (fixed length) and
+// ::after (the rest) carry the stripes on either side. Both stretch to the line
+// height. Uses the host's ::before and ::after; don't use them for anything
+// else.
+//
+// Usage:
+//   @include mixins.striped-label;
+//   @include mixins.striped-label($lead: var(--lunar-space-6));
+// =============================================================================
+
+@use "striped";
+
+@mixin striped-label(
+  // Length of the stripes before the text
+  $lead: var(--lunar-space-4),
+  // Space between the stripes and the text
+  $space: var(--lunar-space-2),
+  $width: var(--lunar-space-1),
+  $gap: var(--lunar-space-2),
+  $color: var(--lunar-muted)
+) {
+  display: flex;
+  gap: $space;
+
+  &::before,
+  &::after {
+    content: "";
+
+    @include striped.striped($width: $width, $gap: $gap, $color: $color);
+  }
+
+  &::before {
+    flex: 0 0 $lead;
+  }
+
+  &::after {
+    flex: 1;
+  }
+}

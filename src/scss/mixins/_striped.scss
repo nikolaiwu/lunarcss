@@ -8,17 +8,24 @@
 //   --lunar-stripe-gap      distance from one stripe to the next
 //   --lunar-stripe-angle    gradient angle: 135deg leans "/", 45deg leans "\"
 //   --lunar-stripe-color    stripe color
+//   --lunar-stripe-height   band height, when $height is set
+//
+// Pass $height to confine the stripes to a full-width band of that height
+// (the caller sets background-position to place it). Without it, the stripes
+// fill the whole background.
 //
 // Usage:
 //   @include mixins.striped;
 //   @include mixins.striped($gap: var(--lunar-space-4));
+//   @include mixins.striped($height: var(--lunar-space-3));
 // =============================================================================
 
 @mixin striped(
   $width: var(--lunar-border-width),
   $gap: var(--lunar-space-2),
   $angle: 135deg,
-  $color: var(--lunar-border)
+  $color: var(--lunar-border),
+  $height: null
 ) {
   --_stripe-width: var(--lunar-stripe-width, #{$width});
   --_stripe-gap: var(--lunar-stripe-gap, #{$gap});
@@ -28,4 +35,11 @@
     var(--lunar-stripe-color, #{$color}) 0 var(--_stripe-width),
     transparent var(--_stripe-width) var(--_stripe-gap)
   );
+
+  @if $height {
+    --_stripe-height: var(--lunar-stripe-height, #{$height});
+
+    background-size: 100% var(--_stripe-height);
+    background-repeat: no-repeat;
+  }
 }

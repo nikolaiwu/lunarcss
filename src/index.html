@@ -434,7 +434,8 @@ greet('World');</code></pre>
           <div class="section-title">
             <h2>Forms</h2>
             <code
-              >&lt;form&gt;, &lt;input&gt;, &lt;select&gt;, &lt;button&gt;</code
+              >&lt;form&gt;, &lt;fieldset&gt;, &lt;input&gt;, &lt;select&gt;,
+              &lt;button&gt;</code
             >
           </div>
           <p class="section-description">
@@ -558,42 +559,41 @@ greet('World');</code></pre>
             </select>
           </div>
 
-          <h3>Checkboxes & Radios</h3>
+          <h3>Checkboxes</h3>
           <div class="demo-box">
-            <fieldset>
-              <legend>Select your interests</legend>
-              <label
-                ><input type="checkbox" name="interest" value="design" />
-                Design</label
-              ><br />
-              <label
-                ><input
-                  type="checkbox"
-                  name="interest"
-                  value="development"
-                  checked
-                />
-                Development</label
-              ><br />
-              <label
-                ><input type="checkbox" name="interest" value="marketing" />
-                Marketing</label
-              >
-            </fieldset>
+            <label>
+              <input type="checkbox" name="interest" value="design" />
+              Design
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="interest"
+                value="development"
+                checked
+              />
+              Development
+            </label>
+            <label>
+              <input type="checkbox" name="interest" value="marketing" />
+              Marketing
+            </label>
+          </div>
 
-            <fieldset>
-              <legend>Select your plan</legend>
-              <label><input type="radio" name="plan" value="free" /> Free</label
-              ><br />
-              <label
-                ><input type="radio" name="plan" value="pro" checked />
-                Pro</label
-              ><br />
-              <label
-                ><input type="radio" name="plan" value="enterprise" />
-                Enterprise</label
-              >
-            </fieldset>
+          <h3>Radios</h3>
+          <div class="demo-box">
+            <label>
+              <input type="radio" name="plan" value="free" />
+              Free
+            </label>
+            <label>
+              <input type="radio" name="plan" value="pro" checked />
+              Pro
+            </label>
+            <label>
+              <input type="radio" name="plan" value="enterprise" />
+              Enterprise
+            </label>
           </div>
 
           <h3>Range</h3>
@@ -644,6 +644,34 @@ greet('World');</code></pre>
               <option value="Edge"></option>
               <option value="Opera"></option>
             </datalist>
+          </div>
+
+          <h3>Fieldset & Legend</h3>
+          <div class="demo-box form-demo">
+            <form onsubmit="event.preventDefault()">
+              <fieldset>
+                <legend>Shipping address</legend>
+                <label for="street-input">Street</label>
+                <input
+                  type="text"
+                  id="street-input"
+                  placeholder="12 Dock Road"
+                />
+
+                <label for="city-input">City</label>
+                <input type="text" id="city-input" placeholder="Ceres Port" />
+              </fieldset>
+
+              <fieldset disabled>
+                <legend>Billing address (disabled)</legend>
+                <label for="billing-input">Same as shipping</label>
+                <input
+                  type="text"
+                  id="billing-input"
+                  value="12 Dock Road, Ceres Port"
+                />
+              </fieldset>
+            </form>
           </div>
 
           <h3>Progress & Meter</h3>

@@ -2,7 +2,8 @@
 // LUNARCSS - Forms
 // =============================================================================
 // Styles for form elements: form, input, textarea, select, etc.
-// Buttons live in elements/_buttons.scss.
+// Buttons live in elements/_buttons.scss, fieldset and legend in
+// elements/_fieldset.scss.
 // =============================================================================
 
 @use "../mixins";
@@ -15,24 +16,6 @@ $chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' widt
 // ---------------------------------------------------------------------------
 form {
   margin-bottom: var(--lunar-space-4);
-}
-
-// ---------------------------------------------------------------------------
-// Fieldset
-// ---------------------------------------------------------------------------
-fieldset {
-  border: var(--lunar-border-width) solid var(--lunar-border);
-  padding: var(--lunar-space-6);
-  margin-bottom: var(--lunar-space-4);
-}
-
-// ---------------------------------------------------------------------------
-// Legend
-// ---------------------------------------------------------------------------
-legend {
-  font-weight: var(--lunar-font-semibold);
-  padding: 0 var(--lunar-space-2);
-  color: var(--lunar-fg);
 }
 
 // ---------------------------------------------------------------------------
@@ -192,7 +175,14 @@ textarea {
   resize: vertical;
   margin-bottom: var(--lunar-space-4);
 
-  @include mixins.field;
+  // No bottom-right bracket: it would sit on the resize handle
+  @include mixins.field(
+    $bracket-corners: (
+      left top,
+      right top,
+      left bottom,
+    )
+  );
 
   &:hover:not(:disabled):not(:focus) {
     border-color: color-mix(

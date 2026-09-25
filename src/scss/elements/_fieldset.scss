@@ -1,0 +1,59 @@
+// =============================================================================
+// LUNARCSS - Fieldset
+// =============================================================================
+// Styles for fieldset and legend (one partial: a legend only exists inside a
+// fieldset).
+//
+// A legend normally sits in a notch cut into the fieldset's border, which is
+// awkward to style. Floated at full width it becomes an ordinary block; the
+// element after it clears the float.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Fieldset
+// ---------------------------------------------------------------------------
+fieldset {
+  --_fieldset-padding: var(--lunar-space-5);
+
+  // The UA sets min-width: min-content, which lets wide content overflow
+  min-width: 0;
+  margin-bottom: var(--lunar-space-4);
+  padding: var(--_fieldset-padding);
+  border: var(--lunar-border-width) solid var(--lunar-border);
+  border-top: 0;
+
+  // Browsers disable the fields; the legend follows
+  &[disabled] > legend {
+    opacity: 0.5;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Legend
+// ---------------------------------------------------------------------------
+// Pulled out over the fieldset's padding so it runs border to border along the
+// top. The lead stripes stop a gap short of the padding, so the text lines up
+// with the fields.
+legend {
+  float: left;
+  width: calc(100% + var(--_fieldset-padding) * 2);
+  margin: calc(var(--_fieldset-padding) * -1);
+  margin-bottom: var(--lunar-space-4);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-xs);
+  font-weight: var(--lunar-font-bold);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
+  color: var(--lunar-muted);
+
+  @include mixins.striped-label(
+    $lead: calc(var(--_fieldset-padding) - var(--lunar-space-2)),
+    $space: var(--lunar-space-2)
+  );
+
+  + * {
+    clear: both;
+  }
+}

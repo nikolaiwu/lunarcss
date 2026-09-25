@@ -53,6 +53,7 @@
   @include meta.load-css("elements/var");
   @include meta.load-css("elements/lists");
   @include meta.load-css("elements/tables");
+  @include meta.load-css("elements/fieldset");
   @include meta.load-css("elements/forms");
   @include meta.load-css("elements/checkboxes");
   @include meta.load-css("elements/radios");
