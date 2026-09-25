@@ -823,11 +823,13 @@ greet('World');</code></pre>
         <section id="interactive" class="showcase-section">
           <div class="section-title">
             <h2>Interactive Elements</h2>
-            <code>&lt;details&gt;, &lt;summary&gt;, &lt;dialog&gt;</code>
+            <code
+              >&lt;details&gt;, &lt;summary&gt;, &lt;dialog&gt;, [popover]</code
+            >
           </div>
           <p class="section-description">
-            Native interactive elements that provide disclosure widgets and
-            modal dialogs without JavaScript.
+            Native interactive elements that provide disclosure widgets, modal
+            dialogs and popovers without JavaScript.
           </p>
 
           <h3>Details & Summary</h3>
@@ -889,6 +891,20 @@ greet('World');</code></pre>
                 </form>
               </footer>
             </dialog>
+          </div>
+
+          <h3>Popover</h3>
+          <div class="demo-box">
+            <button type="button" popovertarget="demo-popover">
+              Toggle Popover
+            </button>
+
+            <div id="demo-popover" popover>
+              <p>
+                A native popover. Click outside it or press <kbd>Esc</kbd> to
+                close.
+              </p>
+            </div>
           </div>
         </section>
 

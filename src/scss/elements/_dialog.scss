@@ -1,8 +1,9 @@
 // =============================================================================
-// LUNARCSS - Interactive Elements
+// LUNARCSS - Dialog
 // =============================================================================
-// Styles for dialog and popover. Details and summary live in _details.scss.
+// A modal <dialog>: the card look, centered, fading and sliding in on open.
 // =============================================================================
+
 @use "../mixins";
 
 // ---------------------------------------------------------------------------
@@ -56,26 +57,5 @@ dialog {
   dialog:open {
     opacity: 0;
     transform: translate(-50%, -75%);
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Popover (HTML popover attribute)
-// ---------------------------------------------------------------------------
-[popover] {
-  position: fixed;
-  inset: unset;
-  padding: var(--lunar-space-4);
-  background-color: var(--lunar-bg);
-  color: var(--lunar-fg);
-  border: var(--lunar-border-width) solid var(--lunar-border);
-  box-shadow: var(--lunar-shadow-lg);
-
-  &::backdrop {
-    background-color: transparent;
-  }
-
-  &:not(:popover-open) {
-    display: none;
   }
 }

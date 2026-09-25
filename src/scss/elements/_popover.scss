@@ -1,0 +1,26 @@
+// =============================================================================
+// LUNARCSS - Popover
+// =============================================================================
+// Elements with the HTML popover attribute.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Popover (HTML popover attribute)
+// ---------------------------------------------------------------------------
+[popover] {
+  position: fixed;
+  inset: unset;
+  padding: var(--lunar-space-4);
+  background-color: var(--lunar-bg);
+  color: var(--lunar-fg);
+  border: var(--lunar-border-width) solid var(--lunar-border);
+  box-shadow: var(--lunar-shadow-lg);
+
+  &::backdrop {
+    background-color: transparent;
+  }
+
+  &:not(:popover-open) {
+    display: none;
+  }
+}

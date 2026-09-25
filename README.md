@@ -203,7 +203,8 @@ lunarcss/
 │   │   │   ├── _buttons.scss     # buttons + button/input groups
 │   │   │   ├── _media.scss       # img, video, audio, etc.
 │   │   │   ├── _details.scss     # details, summary
-│   │   │   ├── _interactive.scss # dialog, popover
+│   │   │   ├── _dialog.scss      # dialog
+│   │   │   ├── _popover.scss     # [popover]
 │   │   │   └── _article.scss     # article cards + card grid
 │   │   ├── themes/
 │   │   │   ├── _light.scss       # [data-theme="light"] → color-scheme: light
