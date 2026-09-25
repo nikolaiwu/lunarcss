@@ -453,7 +453,7 @@ The remaining color tokens are listed below. Most use `light-dark()`, so one def
 | `--lunar-accent`   | Links, interactive elements, focus                                         |
 | `--lunar-success`  | Success state                                                              |
 | `--lunar-warning`  | Warning state                                                              |
-| `--lunar-error`    | Error state, and an invalid field's border and brackets                    |
+| `--lunar-error`    | Error state, and an invalid field's border                                 |
 | `--lunar-info`     | Informational state                                                        |
 | `--lunar-backdrop` | Dim behind an open `<dialog>` (the page color at half opacity)             |
 
@@ -748,7 +748,7 @@ import "./your-styles.css"; // your styles override the theme, whatever the orde
 
 Different browsers render form elements differently. LunarCSS restyles the controls themselves — the checkbox switch, radio, range, progress, meter, color swatch and the field brackets are all drawn with backgrounds, since form controls have no pseudo-elements to use — but parts owned by the browser, such as the date picker panel and the select's dropdown list, can't be styled and still look native.
 
-Fields flag themselves after you fill them in and move on: `:user-invalid` turns the border and brackets the error color, `:user-valid` turns the border the success color. Neither matches an untouched field, so an empty required field isn't red before it's been used.
+Fields flag themselves after you fill them in and move on: `:user-invalid` turns the border the error color, `:user-valid` turns the border the success color. Neither matches an untouched field, so an empty required field isn't red before it's been used.
 
 ### Print Styles
 

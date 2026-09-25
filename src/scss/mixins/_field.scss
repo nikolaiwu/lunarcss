@@ -2,8 +2,8 @@
 // LUNARCSS - Mixins: Field
 // =============================================================================
 // The decoration shared by text fields, textareas and selects: corner brackets
-// that grow and turn accent on focus, and the bar's tick ruler sliding up from
-// under the bottom edge.
+// that grow on focus, and the bar's tick ruler sliding up from under the bottom
+// edge.
 //
 // Form controls give us nothing to work with but backgrounds — input is a void
 // element, and textarea and select don't render ::before or ::after — so every
@@ -11,7 +11,7 @@
 // corner) and one per tick.
 //
 // The moving parts are custom properties, so `field-focus` only re-declares
-// three values and the transitions carry the rest.
+// two values and the transitions carry the rest.
 //
 // Usage:
 //   input { @include mixins.field; &:focus { @include mixins.field-focus; } }
@@ -30,7 +30,7 @@
   $lead-size: 1.25em
 ) {
   --_bracket-color: var(--lunar-muted);
-  --_bracket-size: var(--lunar-space-2);
+  --_bracket-size: var(--lunar-space-1);
   --_bracket-inset: var(--lunar-space-1);
   // Ticks wait just below the field, clipped by the border box
   --_tick-y: calc(100% + var(--lunar-bar-tick-height));
@@ -76,7 +76,6 @@
 }
 
 @mixin field-focus {
-  --_bracket-color: var(--lunar-accent);
-  --_bracket-size: var(--lunar-space-4);
+  --_bracket-size: var(--lunar-space-2);
   --_tick-y: bottom;
 }

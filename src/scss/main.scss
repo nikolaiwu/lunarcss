@@ -54,6 +54,7 @@
   @include meta.load-css("elements/color");
   @include meta.load-css("elements/buttons");
   @include meta.load-css("elements/media");
+  @include meta.load-css("elements/details");
   @include meta.load-css("elements/interactive");
   @include meta.load-css("elements/article");
 

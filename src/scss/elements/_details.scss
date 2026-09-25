@@ -1,0 +1,127 @@
+// =============================================================================
+// LUNARCSS - Details
+// =============================================================================
+// Styles for details and summary elements: a disclosure row, not a box.
+//
+//   <details>
+//     <summary>Question</summary>
+//     <p>Answer…</p>
+//   </details>
+//
+// The summary has a rule below it, so stacked details read as one list (an
+// FAQ, an accordion). An accent plus at the end turns into a minus when open.
+// Hover and focus use the fields' corner brackets.
+//
+// Where ::details-content is supported, opening and closing animate the
+// height; elsewhere the content just appears.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Details
+// ---------------------------------------------------------------------------
+details {
+  // Lets block-size transition to and from `auto`
+  interpolate-size: allow-keywords;
+  margin-bottom: var(--lunar-space-4);
+
+  // Adjacent details join into one list; the group keeps the outer margin
+  &:has(+ details) {
+    margin-bottom: 0;
+  }
+
+  // Content lines up with the summary text
+  > :not(summary) {
+    margin-inline: var(--lunar-space-2);
+  }
+
+  > summary + * {
+    margin-top: var(--lunar-space-3);
+  }
+
+  > :last-child:not(summary) {
+    margin-bottom: var(--lunar-space-4);
+  }
+
+  // Nested details step in, so the hierarchy shows
+  > details {
+    margin-inline-start: var(--lunar-space-6);
+  }
+
+  // Open/close animation. flow-root keeps the children's margins inside the
+  // animated box, so nothing jumps at the start.
+  &::details-content {
+    display: flow-root;
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--lunar-transition-base),
+      content-visibility var(--lunar-transition-base) allow-discrete;
+  }
+
+  &[open]::details-content {
+    block-size: auto;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Summary
+// ---------------------------------------------------------------------------
+summary {
+  --_marker-size: 0.75em;
+  --_marker-stroke: calc(var(--lunar-border-width) * 2);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lunar-space-4);
+  padding: var(--lunar-space-3) var(--lunar-space-2);
+  font-weight: var(--lunar-font-medium);
+  color: var(--lunar-fg);
+  cursor: pointer;
+  list-style: none;
+  border-bottom: var(--lunar-border-width) solid var(--lunar-border);
+
+  // Focus brackets, small size (default value of --lunar-space-1) until hover or focus
+  @include mixins.brackets();
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // Marker: a plus whose vertical stroke collapses into a minus when open.
+  // Strokes are gradients in currentColor, so the color can transition.
+  &::after {
+    content: "";
+    flex: none;
+    width: var(--_marker-size);
+    height: var(--_marker-size);
+    color: var(--lunar-accent);
+    background-image:
+      linear-gradient(currentColor 0 0), linear-gradient(currentColor 0 0);
+    background-position: center;
+    background-size:
+      100% var(--_marker-stroke),
+      var(--_marker-stroke) 100%;
+    background-repeat: no-repeat;
+    transition:
+      color var(--lunar-transition-base),
+      background-size var(--lunar-transition-base),
+      rotate var(--lunar-transition-base);
+  }
+
+  details[open] > &::after {
+    background-size:
+      100% var(--_marker-stroke),
+      var(--_marker-stroke) 0;
+    rotate: 180deg;
+  }
+
+  // Hover + Focus: the fields' look — brackets grow
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    --_bracket-size: var(--lunar-space-2);
+  }
+}

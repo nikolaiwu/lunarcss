@@ -61,7 +61,7 @@ $corners: (left top, right top, left bottom, right bottom);
 
 @mixin brackets(
   $color: var(--lunar-muted),
-  $size: var(--lunar-space-2),
+  $size: var(--lunar-space-1),
   $inset: var(--lunar-space-1)
 ) {
   --_bracket-color: #{$color};

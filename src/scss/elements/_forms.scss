@@ -99,8 +99,6 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   // :user-valid never match an untouched field, unlike :invalid / :valid.
   // After the focus rule, so an invalid field stays flagged while it's fixed.
   &:user-invalid {
-    --_bracket-color: var(--lunar-error);
-
     border-color: var(--lunar-error);
   }
 
@@ -215,8 +213,6 @@ textarea {
   // :user-valid never match an untouched field, unlike :invalid / :valid.
   // After the focus rule, so an invalid field stays flagged while it's fixed.
   &:user-invalid {
-    --_bracket-color: var(--lunar-error);
-
     border-color: var(--lunar-error);
   }
 
@@ -272,8 +268,6 @@ select {
   // :user-valid never match an untouched field, unlike :invalid / :valid.
   // After the focus rule, so an invalid field stays flagged while it's fixed.
   &:user-invalid {
-    --_bracket-color: var(--lunar-error);
-
     border-color: var(--lunar-error);
   }
 

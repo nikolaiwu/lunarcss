@@ -44,6 +44,8 @@
   progress,
   meter,
   hr,
+  summary,
+  summary::after,
   :is(article, dialog)::before,
   :is(article, dialog)::after,
   :is(article, dialog) > header,

@@ -202,7 +202,8 @@ lunarcss/
 │   │   │   ├── _forms.scss       # form, input, textarea, select, etc.
 │   │   │   ├── _buttons.scss     # buttons + button/input groups
 │   │   │   ├── _media.scss       # img, video, audio, etc.
-│   │   │   ├── _interactive.scss # details, summary, dialog
+│   │   │   ├── _details.scss     # details, summary
+│   │   │   ├── _interactive.scss # dialog, popover
 │   │   │   └── _article.scss     # article cards + card grid
 │   │   ├── themes/
 │   │   │   ├── _light.scss       # [data-theme="light"] → color-scheme: light
