@@ -10,3 +10,7 @@
 
 // Page layout: widths, spacing, flex/grid, alignment
 @use "showcase/layout";
+// The header: the title set into an SVG dot grid (the one place with its own colors)
+@use "showcase/hero";
+// Fixed top-right controls: back to top, and the sun/moon theme toggle
+@use "showcase/page-controls";

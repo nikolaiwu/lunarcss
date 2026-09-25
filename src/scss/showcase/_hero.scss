@@ -1,0 +1,87 @@
+// =============================================================================
+// LUNARCSS - Showcase Hero
+// =============================================================================
+// The showcase's header: "LunarCSS" set into a square grid of dots (inline
+// SVG in index.html, the h1), beside the intro copy. Unlike the rest of the
+// showcase styles this carries its own colors and depth, since the artwork is
+// the showcase's own, not the theme's.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Layout: mark beside the copy, stacked on narrow screens
+// ---------------------------------------------------------------------------
+.hero {
+  display: grid;
+  gap: var(--lunar-space-8);
+  align-items: center;
+  margin-bottom: var(--lunar-space-16);
+  text-align: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: auto 1fr;
+    text-align: left;
+  }
+}
+
+.hero-copy p:not(:last-child) {
+  max-width: 60ch;
+  margin-bottom: var(--lunar-space-6);
+}
+
+.hero-mark {
+  display: grid;
+  place-items: center;
+}
+
+// ---------------------------------------------------------------------------
+// Grille: dots and title
+// ---------------------------------------------------------------------------
+// Depth on the dots and the letters alike: a dark inner shadow top-left, a
+// light outer one bottom-right, from the #hero-dot-depth filter in the SVG
+// (its dx/dy set the depth). The filter sits on the h1, so the depth stays put
+// while the SVG inside shrinks on scroll.
+.hero-grille {
+  // Black in the dark theme: --lunar-dark is the page color there, so the
+  // inner shadow would vanish
+  --hero-dot-dark: light-dark(
+    color-mix(in oklch, var(--lunar-dark) 60%, transparent),
+    black
+  );
+  --hero-dot-light: color-mix(in oklch, var(--lunar-light) 60%, transparent);
+
+  width: min(100%, 18rem);
+  margin: 0;
+  filter: url(#hero-dot-depth);
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-dot-dark {
+    flood-color: var(--hero-dot-dark);
+  }
+
+  .hero-dot-light {
+    flood-color: var(--hero-dot-light);
+  }
+}
+
+// Each dot is a zero-length segment; the round cap draws it
+.hero-dots {
+  fill: none;
+  stroke: var(--lunar-muted);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+}
+
+// The dot list in index.html was worked out from these exact settings (Space
+// Mono Bold at font-size 20, no letter-spacing); change them and it has to be
+// redone. Letter-spacing is reset, since the h1 would pass its own down.
+.hero-grille text {
+  font-family: var(--lunar-font-mono);
+  font-weight: var(--lunar-font-bold);
+  letter-spacing: 0;
+  fill: var(--lunar-accent);
+}

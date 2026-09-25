@@ -64,47 +64,146 @@
   </head>
   <body>
     <div class="showcase">
-      <!-- Header -->
-      <header class="showcase-header">
-        <!--<h1>🌙 LunarCSS</h1>-->
-        <p>
-          A plug-and-play CSS theme that styles all standard HTML elements using
-          pure element selectors. No classes. Defaults out of the box, and a set
-          of tokens to build your own look on top.
-        </p>
-        <p>
-          See it on a real page: <a href="./demo.html">Acme Robotics demo</a> —
-          a landing page built without a single class.
-        </p>
+      <!-- Page controls, fixed top right: back to top, and the theme toggle
+           whose icon morphs sun <-> moon -->
+      <div class="page-controls">
+        <button
+          class="back-to-top"
+          type="button"
+          aria-label="Back to top"
+          onclick="window.scrollTo({ top: 0 })"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </button>
         <button
           class="theme-toggle"
           data-theme-toggle
           aria-label="Toggle theme"
         >
           <svg
-            class="sun-icon"
-            xmlns="http://www.w3.org/2000/svg"
+            class="theme-icon"
+            viewBox="0 0 24 24"
             width="20"
             height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            aria-hidden="true"
           >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            <mask id="theme-icon-mask">
+              <rect width="24" height="24" fill="white" />
+              <circle
+                class="theme-icon-cut"
+                cx="17"
+                cy="7"
+                r="7"
+                fill="black"
+              />
+            </mask>
+            <g mask="url(#theme-icon-mask)">
+              <circle
+                class="theme-icon-core"
+                cx="12"
+                cy="12"
+                r="9"
+                fill="currentColor"
+              />
+            </g>
+            <g
+              class="theme-icon-rays"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </g>
           </svg>
-          <span>Toggle Theme</span>
         </button>
+      </div>
+
+      <!-- Hero -->
+      <header class="hero">
+        <div class="hero-mark">
+          <!-- The title set into a grid of dots: 14 × 10 on a 10-unit grid,
+               top-right corner cut, minus the dots the letters overlap. The
+               "L" stem sits on a dot column and the capitals span two rows,
+               so the letters take the dots' places. Each dot is a
+               zero-length segment with a round cap. The dot list was worked
+               out from Space Mono Bold's outlines at this size and position;
+               change either and it has to be redone. -->
+          <h1 class="hero-grille">
+            <svg viewBox="-10 10 146 106" role="img" aria-label="LunarCSS">
+              <!-- Depth on the dots and the text, applied from CSS to
+                   .hero-grille. dx/dy set the depth; the colors come from
+                   CSS. -->
+              <defs>
+                <filter
+                  id="hero-dot-depth"
+                  x="-5%"
+                  y="-5%"
+                  width="110%"
+                  height="110%"
+                >
+                  <!-- The dots shifted down-right -->
+                  <feOffset in="SourceAlpha" dx="1" dy="1" result="shifted" />
+                  <!-- Light outer shadow: the shifted copy, under the dots -->
+                  <feFlood class="hero-dot-light" />
+                  <feComposite in2="shifted" operator="in" result="light" />
+                  <!-- Dark inner shadow: the part of each dot the shifted copy
+                       doesn't cover, a crescent inside the top-left edge -->
+                  <feComposite
+                    in="SourceAlpha"
+                    in2="shifted"
+                    operator="out"
+                    result="crescent"
+                  />
+                  <feFlood class="hero-dot-dark" />
+                  <feComposite in2="crescent" operator="in" result="dark" />
+                  <feMerge>
+                    <feMergeNode in="light" />
+                    <feMergeNode in="SourceGraphic" />
+                    <feMergeNode in="dark" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path
+                class="hero-dots"
+                d="M-2 18h0M-2 28h0M-2 38h0M-2 48h0M-2 58h0M-2 68h0M-2 78h0M-2 88h0M-2 98h0M-2 108h0M8 18h0M18 18h0M28 18h0M38 18h0M48 18h0M58 18h0M68 18h0M78 18h0M88 18h0M98 18h0M108 18h0M8 28h0M18 28h0M28 28h0M38 28h0M48 28h0M58 28h0M68 28h0M78 28h0M88 28h0M98 28h0M108 28h0M118 28h0M8 38h0M18 38h0M28 38h0M38 38h0M48 38h0M58 38h0M68 38h0M78 38h0M88 38h0M98 38h0M108 38h0M118 38h0M128 38h0M8 48h0M18 48h0M28 48h0M38 48h0M48 48h0M58 48h0M68 48h0M78 48h0M88 48h0M98 48h0M108 48h0M118 48h0M128 48h0M8 58h0M118 58h0M128 58h0M8 68h0M118 68h0M128 68h0M8 78h0M18 78h0M28 78h0M38 78h0M48 78h0M58 78h0M68 78h0M78 78h0M88 78h0M98 78h0M108 78h0M118 78h0M128 78h0M8 88h0M18 88h0M28 88h0M38 88h0M48 88h0M58 88h0M68 88h0M78 88h0M88 88h0M98 88h0M108 88h0M118 88h0M128 88h0M8 98h0M18 98h0M28 98h0M38 98h0M48 98h0M58 98h0M68 98h0M78 98h0M88 98h0M98 98h0M108 98h0M118 98h0M128 98h0M8 108h0M18 108h0M28 108h0M38 108h0M48 108h0M58 108h0M68 108h0M78 108h0M88 108h0M98 108h0M108 108h0M118 108h0M128 108h0"
+              />
+              <text x="15.04" y="70" font-size="20" aria-hidden="true">
+                LunarCSS
+              </text>
+            </svg>
+          </h1>
+        </div>
+        <div class="hero-copy">
+          <p>
+            A plug-and-play CSS theme that styles all standard HTML elements
+            using pure element selectors. No classes. Defaults out of the box,
+            and a set of tokens to build your own look on top.
+          </p>
+          <p>
+            See a demo page:
+            <a href="./demo.html">Acme Robotics demo</a> — a landing page built
+            without a single class.
+          </p>
+        </div>
       </header>
 
       <!-- Navigation / Table of Contents -->
@@ -1017,8 +1116,7 @@ greet('World');</code></pre>
       <footer class="showcase-footer">
         <p>Made with 🌙 by the LunarCSS team</p>
         <p>
-          <a href="https://github.com/nikolaiwu/lunarcss">GitHub</a> ·
-          <a href="#top">Back to top</a>
+          <a href="https://github.com/nikolaiwu/lunarcss">GitHub</a>
         </p>
       </footer>
     </div>

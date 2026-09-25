@@ -1,0 +1,104 @@
+// =============================================================================
+// LUNARCSS - Showcase Page Controls
+// =============================================================================
+// Icon-only buttons fixed at the top right of the viewport: back to top, and
+// the theme toggle. Side by side, the theme's button-group rules join them
+// into one shape.
+//
+// Back to top appears once the page has scrolled (a scroll-driven animation,
+// where supported). The toggle's icon is one SVG that morphs: a sun while the
+// page is dark (click for light), a moon while it's light. The moon is the
+// disc grown to full size with a masked circle slid over it to leave a
+// crescent; the sun is the disc shrunk, the cut moved away and the rays spun
+// in. The disc sits in a masked group and is scaled inside it, so the mask
+// isn't scaled along with it. transform-origin is in SVG user units (the
+// default transform-box is the viewBox).
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Container and buttons
+// ---------------------------------------------------------------------------
+.page-controls {
+  position: fixed;
+  top: var(--lunar-space-4);
+  right: var(--lunar-space-4);
+  z-index: var(--lunar-z-fixed);
+  display: flex;
+  gap: var(--lunar-button-gap, var(--lunar-space-1));
+
+  button {
+    margin: 0;
+    padding: var(--lunar-space-2);
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Back to top: hidden until the page scrolls
+// ---------------------------------------------------------------------------
+// Visibility keeps its space, so the toggle stays in the corner; hidden, it
+// can't be clicked or focused
+@supports (animation-timeline: scroll()) {
+  .back-to-top {
+    animation: page-controls-reveal linear both;
+    animation-timeline: scroll();
+    animation-range: 0 40vh;
+  }
+}
+
+@keyframes page-controls-reveal {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Icon: moon by default (light)
+// ---------------------------------------------------------------------------
+.theme-icon {
+  overflow: visible;
+
+  :is(.theme-icon-core, .theme-icon-cut, .theme-icon-rays) {
+    transform-origin: 12px 12px;
+    transition:
+      transform var(--lunar-transition-slow),
+      opacity var(--lunar-transition-slow);
+  }
+}
+
+.theme-icon-rays {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+// ---------------------------------------------------------------------------
+// Sun, while the page is dark: forced, or following the system
+// ---------------------------------------------------------------------------
+@mixin sun {
+  .theme-icon-core {
+    transform: scale(0.55);
+  }
+
+  .theme-icon-cut {
+    transform: translate(10px, -10px);
+  }
+
+  .theme-icon-rays {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:root[data-theme="dark"] .theme-toggle {
+  @include sun;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle {
+    @include sun;
+  }
+}
