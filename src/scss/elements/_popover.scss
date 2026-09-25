@@ -8,13 +8,43 @@
 // Popover (HTML popover attribute)
 // ---------------------------------------------------------------------------
 [popover] {
+  // Centered in the viewport, as the browser does by default. With `auto`
+  // insets it would sit at its place in the page flow, often off-screen, and
+  // the reset's margin: 0 would undo the centering.
   position: fixed;
-  inset: unset;
+  inset: 0;
+  margin: auto;
+  max-width: min(90vw, 32rem);
   padding: var(--lunar-space-4);
   background-color: var(--lunar-bg);
   color: var(--lunar-fg);
   border: var(--lunar-border-width) solid var(--lunar-border);
   box-shadow: var(--lunar-shadow-lg);
+
+  // Anchored to its button. A popover opened with popovertarget has that
+  // button as its implicit anchor, so no anchor names (or classes) are needed.
+  // It sits just below, centered on the button, and flips above when there's
+  // no room. Opened from script with no source there's no anchor: anchor()
+  // falls back to 0 and anchor-center to center, so it shows at the top of
+  // the viewport, centered. Without anchor support, the centering above stays.
+  @supports (justify-self: anchor-center) {
+    // Explicit: the initial value (`normal`) only uses the implicit anchor
+    // together with position-area, which this doesn't use
+    position-anchor: auto;
+    top: anchor(bottom, 0);
+    bottom: auto;
+    margin: var(--lunar-space-2) 0;
+    justify-self: anchor-center;
+    position-try-fallbacks: flip-block;
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
 
   &::backdrop {
     background-color: transparent;
