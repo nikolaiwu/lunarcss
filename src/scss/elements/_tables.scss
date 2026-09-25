@@ -2,7 +2,13 @@
 // LUNARCSS - Tables
 // =============================================================================
 // Styles for table, thead, tbody, tfoot, tr, th, td, caption elements.
+//
+// A data sheet: open rules instead of a box (a heavier one on top, one below
+// the header, one closing the table), a mono label row over a tick ruler,
+// tabular figures, and the card footer's striped band above the totals.
 // =============================================================================
+
+@use "../mixins";
 
 // ---------------------------------------------------------------------------
 // Table
@@ -13,6 +19,10 @@ table {
   border-spacing: 0;
   margin-bottom: var(--lunar-space-6);
   font-size: var(--lunar-text-sm);
+  // Digits of equal width, so numbers line up down a column
+  font-variant-numeric: tabular-nums;
+  border-top: calc(var(--lunar-border-width) * 2) solid var(--lunar-border);
+  border-bottom: var(--lunar-border-width) solid var(--lunar-border);
 }
 
 // ---------------------------------------------------------------------------
@@ -31,53 +41,54 @@ figure:has(> table) {
 // ---------------------------------------------------------------------------
 // Caption
 // ---------------------------------------------------------------------------
+// A small mono label above the top rule
 caption {
-  padding: var(--lunar-space-3) var(--lunar-space-4);
-  font-weight: var(--lunar-font-semibold);
+  padding: var(--lunar-space-2) var(--lunar-space-4);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-xs);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
   text-align: left;
-  color: var(--lunar-fg);
+  color: var(--lunar-muted);
   caption-side: top;
 }
 
 // ---------------------------------------------------------------------------
 // Table Header
 // ---------------------------------------------------------------------------
-thead {
-  background-color: color-mix(
-    in oklch,
-    var(--lunar-bg) 85%,
-    var(--lunar-muted)
-  );
-  border-bottom: 2px solid var(--lunar-border);
+// Column labels over a tick ruler, the mark under range, progress and meter.
+// Each cell draws its own ruler, starting with a major tick that marks where
+// the column begins.
+thead th {
+  padding-bottom: var(--lunar-space-4);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-xs);
+  font-weight: var(--lunar-font-regular);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
+  color: var(--lunar-muted);
+  border-bottom: var(--lunar-border-width) solid var(--lunar-border);
+
+  @include mixins.ruler($count: 4, $start: true);
 }
 
 // ---------------------------------------------------------------------------
 // Table Body
 // ---------------------------------------------------------------------------
-tbody {
-  tr {
-    border-bottom: var(--lunar-border-width) solid var(--lunar-border);
-    transition: background-color var(--lunar-transition-fast);
+tbody tr {
+  border-bottom: var(--lunar-border-width) solid
+    color-mix(in oklch, var(--lunar-muted) 50%, transparent);
+  transition: background-color var(--lunar-transition-fast);
 
-    &:hover {
-      background-color: color-mix(
-        in oklch,
-        var(--lunar-bg) 92%,
-        var(--lunar-muted)
-      );
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
+  // The table's bottom rule closes it
+  &:last-child {
+    border-bottom: none;
   }
 
-  // Striped rows (optional - add via attribute or class in showcase)
-  &[data-striped] tr:nth-child(even),
-  table[data-striped] & tr:nth-child(even) {
+  &:hover {
     background-color: color-mix(
       in oklch,
-      var(--lunar-bg) 96%,
+      var(--lunar-bg) 92%,
       var(--lunar-muted)
     );
   }
@@ -86,57 +97,43 @@ tbody {
 // ---------------------------------------------------------------------------
 // Table Footer
 // ---------------------------------------------------------------------------
+// The card footer's 45° striped band, painted once across the row group (so
+// there are no seams between cells), with the first row pushed below it.
 tfoot {
-  background-color: color-mix(
-    in oklch,
-    var(--lunar-bg) 85%,
-    var(--lunar-muted)
+  --_table-band: var(--lunar-space-4);
+
+  font-weight: var(--lunar-font-semibold);
+  background-position: top;
+  background-size: 100% var(--_table-band);
+  background-repeat: no-repeat;
+
+  @include mixins.striped(
+    $width: var(--lunar-space-1),
+    $color: color-mix(in oklch, var(--lunar-muted) 50%, var(--lunar-bg))
   );
-  border-top: 2px solid var(--lunar-border);
-  font-weight: var(--lunar-font-semibold);
-}
 
-// ---------------------------------------------------------------------------
-// Table Row
-// ---------------------------------------------------------------------------
-tr {
-  // Styles applied in tbody context above
-}
-
-// ---------------------------------------------------------------------------
-// Table Header Cell
-// ---------------------------------------------------------------------------
-th {
-  padding: var(--lunar-space-3) var(--lunar-space-4);
-  font-weight: var(--lunar-font-semibold);
-  text-align: left;
-  color: var(--lunar-fg);
-
-  &[scope="row"] {
-    background-color: color-mix(
-      in oklch,
-      var(--lunar-bg) 85%,
-      var(--lunar-muted)
-    );
+  > tr:first-child > :is(th, td) {
+    padding-top: calc(var(--_table-band) + var(--lunar-space-3));
   }
 }
 
 // ---------------------------------------------------------------------------
-// Table Data Cell
+// Cells
 // ---------------------------------------------------------------------------
+th,
 td {
   padding: var(--lunar-space-3) var(--lunar-space-4);
+  text-align: left;
   color: var(--lunar-fg);
   vertical-align: top;
 }
 
-// ---------------------------------------------------------------------------
-// Column Group & Column
-// ---------------------------------------------------------------------------
-colgroup {
-  // Allows styling of columns
-}
+th {
+  font-weight: var(--lunar-font-semibold);
 
-col {
-  // Individual column styling
+  // Row headers read as IDs
+  &[scope="row"] {
+    font-family: var(--lunar-font-mono);
+    font-weight: var(--lunar-font-regular);
+  }
 }

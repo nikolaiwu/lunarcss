@@ -368,8 +368,8 @@ greet('World');</code></pre>
             >
           </div>
           <p class="section-description">
-            Tables for displaying structured data with header styling, row hover
-            effects, and responsive behavior.
+            A data sheet: open rules, mono column labels over a tick ruler,
+            tabular figures, and a striped band above the totals.
           </p>
 
           <div class="demo-box demo-wide">
@@ -379,27 +379,27 @@ greet('World');</code></pre>
               </caption>
               <thead>
                 <tr>
-                  <th>Month</th>
-                  <th>Revenue</th>
-                  <th>Expenses</th>
-                  <th>Profit</th>
+                  <th scope="col">Month</th>
+                  <th scope="col">Revenue</th>
+                  <th scope="col">Expenses</th>
+                  <th scope="col">Profit</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>January</td>
+                  <th scope="row">January</th>
                   <td>$10,000</td>
                   <td>$6,000</td>
                   <td>$4,000</td>
                 </tr>
                 <tr>
-                  <td>February</td>
+                  <th scope="row">February</th>
                   <td>$12,500</td>
                   <td>$7,200</td>
                   <td>$5,300</td>
                 </tr>
                 <tr>
-                  <td>March</td>
+                  <th scope="row">March</th>
                   <td>$15,000</td>
                   <td>$8,100</td>
                   <td>$6,900</td>
@@ -407,7 +407,7 @@ greet('World');</code></pre>
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Total</th>
+                  <th scope="row">Total</th>
                   <td>$37,500</td>
                   <td>$21,300</td>
                   <td>$16,200</td>

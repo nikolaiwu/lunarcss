@@ -12,10 +12,15 @@
 // Pass $track to add a bar-height layer above the ticks: that's the track for
 // engines with no track pseudo-element (progress and meter in Firefox).
 //
+// Pass $start: true to add a major tick on the left edge, five times as long,
+// in $start-color: the table header uses it to mark where each
+// column begins.
+//
 // Usage:
 //   @include mixins.ruler;
 //   @include mixins.ruler($count: 4, $color: var(--lunar-accent));
 //   @include mixins.ruler($track: var(--lunar-bg));
+//   @include mixins.ruler($count: 4, $start: true);
 // =============================================================================
 
 @use "sass:list";
@@ -26,11 +31,19 @@
   $color: var(--lunar-muted),
   $width: var(--lunar-border-width),
   $height: var(--lunar-bar-tick-height),
-  $track: null
+  $track: null,
+  $start: false,
+  $start-color: var(--lunar-border)
 ) {
   $images: ();
   $positions: ();
   $sizes: ();
+
+  @if $start {
+    $images: list.append($images, linear-gradient(#{$start-color} 0 0), comma);
+    $positions: list.append($positions, left bottom, comma);
+    $sizes: list.append($sizes, $width calc(#{$height} * 5), comma);
+  }
 
   @if $track {
     $images: list.append($images, linear-gradient(#{$track} 0 0), comma);
