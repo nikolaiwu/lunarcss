@@ -47,8 +47,8 @@ input[type="button"] {
   }
 }
 
-// Cut bottom-left corner, for <button> only: the mixin draws the border and
-// fill with ::before/::after, and input is a void element, so it has neither.
+// Cut corners, for <button> only: the mixin draws the border and fill with
+// ::before/::after, and input is a void element, so it has neither.
 button {
   --lunar-cut-size: var(--lunar-space-2);
   --lunar-cut-bg: var(--lunar-accent);

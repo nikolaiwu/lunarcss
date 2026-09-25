@@ -1,9 +1,8 @@
 // =============================================================================
 // LUNARCSS - Range
 // =============================================================================
-// A bordered track with a block thumb, over a tick ruler. The element is as
-// tall as the other controls: the bar takes the top two thirds, the ruler sits
-// below it.
+// The element is as tall as the other controls: the bar takes the top two
+// thirds, the ruler sits below it.
 //
 // Range is the one control with real track pseudo-elements in every engine, so
 // the bar is styled there and the element's own background carries the ruler.
@@ -87,7 +86,6 @@ input[type="range"] {
     @include bar-thumb;
   }
 
-  // Accent on hover, and while being dragged
   &:hover:not(:disabled)::-webkit-slider-thumb,
   &:active:not(:disabled)::-webkit-slider-thumb {
     background-color: var(--lunar-accent);

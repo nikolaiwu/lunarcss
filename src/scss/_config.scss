@@ -173,15 +173,15 @@
       var(--lunar-space-2) * 2 + var(--lunar-border-width) * 2
   );
 
-  // Checkbox: a vertical switch, as tall as the other controls
+  // Checkbox
   --lunar-checkbox-width: calc(var(--lunar-control-height) * 0.6);
   --lunar-checkbox-padding: var(--lunar-space-1);
 
-  // Radio: a circle that fills with a conic sweep when selected
+  // Radio
   --lunar-radio-size: var(--lunar-checkbox-width);
   --lunar-radio-padding: var(--lunar-space-1);
 
-  // Range, progress and meter: a bar over a tick ruler, together as tall as the
+  // Range, progress and meter: bar, gap and ticks together are as tall as the
   // other controls. The bar takes two thirds; the gap and ticks share the rest.
   --lunar-bar-height: calc(var(--lunar-control-height) * 2 / 3);
   --lunar-bar-gap: var(--lunar-space-1);

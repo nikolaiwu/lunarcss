@@ -1,16 +1,12 @@
 // =============================================================================
 // LUNARCSS - Details
 // =============================================================================
-// Styles for details and summary elements: a disclosure row, not a box.
+// Styles for details and summary elements.
 //
 //   <details>
 //     <summary>Question</summary>
 //     <p>Answer…</p>
 //   </details>
-//
-// The summary has a rule below it, so stacked details read as one list (an
-// FAQ, an accordion). An accent plus at the end turns into a minus when open.
-// Hover and focus use the fields' corner brackets.
 //
 // Where ::details-content is supported, opening and closing animate the
 // height; elsewhere the content just appears.
@@ -118,7 +114,7 @@ summary {
     rotate: 180deg;
   }
 
-  // Hover + Focus: the fields' look — brackets grow
+  // Hover + Focus
   &:hover,
   &:focus-visible {
     outline: none;

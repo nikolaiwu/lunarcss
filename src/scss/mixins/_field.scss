@@ -1,9 +1,7 @@
 // =============================================================================
 // LUNARCSS - Mixins: Field
 // =============================================================================
-// The decoration shared by text fields, textareas and selects: corner brackets
-// that grow on focus, and the bar's tick ruler sliding up from under the bottom
-// edge.
+// Shared by text fields, textareas and selects.
 //
 // Form controls give us nothing to work with but backgrounds — input is a void
 // element, and textarea and select don't render ::before or ::after — so every

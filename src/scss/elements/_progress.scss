@@ -1,9 +1,8 @@
 // =============================================================================
 // LUNARCSS - Progress
 // =============================================================================
-// An accent bar that fills left to right, over a tick ruler. The element is as
-// tall as the other controls: the bar takes the top two thirds, the ruler sits
-// below it.
+// The element is as tall as the other controls: the bar takes the top two
+// thirds, the ruler sits below it.
 //
 // Engine note: WebKit has a track pseudo-element (::-webkit-progress-bar), so
 // it gets the bordered, rounded track. Firefox has none — the element itself is

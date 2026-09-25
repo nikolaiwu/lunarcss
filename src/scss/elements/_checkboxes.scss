@@ -1,10 +1,6 @@
 // =============================================================================
 // LUNARCSS - Checkboxes & Radios
 // =============================================================================
-// The checkbox is a vertical switch: a bordered box as tall as the other
-// controls, with a square knob that sits at the bottom when off and slides to
-// the top, in the accent color, when on.
-//
 // It's all drawn on the element itself — input is a void element, so there are
 // no pseudo-elements to use. The knob is a background gradient: its color comes
 // from `color` (so it can transition) and it moves with background-position.

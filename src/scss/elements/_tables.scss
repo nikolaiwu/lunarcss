@@ -2,10 +2,6 @@
 // LUNARCSS - Tables
 // =============================================================================
 // Styles for table, thead, tbody, tfoot, tr, th, td, caption elements.
-//
-// A data sheet: open rules instead of a box (a heavier one on top, one below
-// the header, one closing the table), a mono label row over a tick ruler,
-// tabular figures, and the card footer's striped band above the totals.
 // =============================================================================
 
 @use "../mixins";
@@ -41,7 +37,6 @@ figure:has(> table) {
 // ---------------------------------------------------------------------------
 // Caption
 // ---------------------------------------------------------------------------
-// A small mono label above the top rule
 caption {
   padding: var(--lunar-space-2) var(--lunar-space-4);
   font-family: var(--lunar-font-mono);
@@ -56,9 +51,8 @@ caption {
 // ---------------------------------------------------------------------------
 // Table Header
 // ---------------------------------------------------------------------------
-// Column labels over a tick ruler, the mark under range, progress and meter.
-// Each cell draws its own ruler, starting with a major tick that marks where
-// the column begins.
+// Each cell draws its own ruler, so its start tick marks where the column
+// begins.
 thead th {
   padding-bottom: var(--lunar-space-4);
   font-family: var(--lunar-font-mono);
@@ -97,8 +91,8 @@ tbody tr {
 // ---------------------------------------------------------------------------
 // Table Footer
 // ---------------------------------------------------------------------------
-// The card footer's 45° striped band, painted once across the row group (so
-// there are no seams between cells), with the first row pushed below it.
+// The stripes are painted once across the row group, so there are no seams
+// between cells; the first row is pushed below the band.
 tfoot {
   --_table-band: var(--lunar-space-4);
 
@@ -131,7 +125,6 @@ td {
 th {
   font-weight: var(--lunar-font-semibold);
 
-  // Row headers read as IDs
   &[scope="row"] {
     font-family: var(--lunar-font-mono);
     font-weight: var(--lunar-font-regular);

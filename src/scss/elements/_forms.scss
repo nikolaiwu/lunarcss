@@ -157,7 +157,6 @@ input[type="week"] {
     }
   }
 
-  // The focused segment (day, month, year) picks up the accent
   &::-webkit-datetime-edit-day-field:focus,
   &::-webkit-datetime-edit-month-field:focus,
   &::-webkit-datetime-edit-year-field:focus,

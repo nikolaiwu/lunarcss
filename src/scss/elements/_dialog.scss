@@ -1,7 +1,7 @@
 // =============================================================================
 // LUNARCSS - Dialog
 // =============================================================================
-// A modal <dialog>: the card look, centered, fading and sliding in on open.
+// Styles for the dialog element.
 // =============================================================================
 
 @use "../mixins";
@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Dialog
 // ---------------------------------------------------------------------------
-// Same look as cards (article): cut-corner border, header and footer rules.
+// Uses the card mixin, shared with article.
 dialog {
   @include mixins.card;
 

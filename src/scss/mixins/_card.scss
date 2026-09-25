@@ -8,9 +8,7 @@
 // ---------------------------------------------------------------------------
 // Card
 // ---------------------------------------------------------------------------
-// The card look, shared by <article> and <dialog>: a cut-corner border,
-// optional <header> with an irregular dashed rule below it, and optional
-// <footer> with a 45° striped band above it.
+// Shared by <article> and <dialog>.
 //
 // Uses the host's ::before/::after (cut-corner-border) and footer::before.
 // ---------------------------------------------------------------------------
@@ -35,7 +33,7 @@
     margin-bottom: 0;
   }
 
-  // Header: irregular dashed rule below
+  // Header
   > header {
     // Dash layout as color stops: long dash, gap, medium dash, gap, short dash
     --_card-dashes: linear-gradient(
@@ -69,7 +67,7 @@
     }
   }
 
-  // Footer: 45° striped band above, splitting it from the content
+  // Footer
   > footer {
     display: block;
     margin-top: var(--lunar-space-6);
