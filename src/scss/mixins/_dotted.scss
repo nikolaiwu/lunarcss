@@ -17,8 +17,8 @@
 // =============================================================================
 
 @mixin dotted(
-  $size: calc(var(--lunar-space-1) / 1),
-  $gap: calc(var(--lunar-space-2) / 1),
+  $size: calc(var(--lunar-space-1) / 2),
+  $gap: calc(var(--lunar-space-2) / 2),
   $color: var(--lunar-muted)
 ) {
   --_dot-size: var(--lunar-dot-size, #{$size});

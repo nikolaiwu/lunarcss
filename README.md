@@ -194,9 +194,17 @@ lunarcss/
 │   │   │   ├── _root.scss        # :root, html, body styles
 │   │   │   └── _typography.scss  # Base typography
 │   │   ├── elements/
+│   │   │   ├── _p.scss           # p
 │   │   │   ├── _headings.scss    # h1-h6
-│   │   │   ├── _text.scss        # p, blockquote, pre, hr
-│   │   │   ├── _inline.scss      # a, strong, em, code, etc.
+│   │   │   ├── _hr.scss          # hr
+│   │   │   ├── _blockquote.scss  # blockquote, cite
+│   │   │   ├── _pre.scss         # pre
+│   │   │   ├── _inline.scss      # a, strong, em, small, etc.
+│   │   │   ├── _mark.scss        # mark
+│   │   │   ├── _code.scss        # code
+│   │   │   ├── _kbd.scss         # kbd
+│   │   │   ├── _samp.scss        # samp
+│   │   │   ├── _var.scss         # var
 │   │   │   ├── _lists.scss       # ul, ol, li, dl, dt, dd
 │   │   │   ├── _tables.scss      # table, thead, tbody, etc.
 │   │   │   ├── _forms.scss       # form, input, textarea, select, etc.

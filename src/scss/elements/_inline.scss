@@ -1,7 +1,8 @@
 // =============================================================================
 // LUNARCSS - Inline Elements
 // =============================================================================
-// Styles for inline text elements: a, strong, em, mark, code, kbd, etc.
+// Styles for inline text elements: a, strong, em, small, etc. Mark, code, kbd,
+// samp and var have their own partials.
 // =============================================================================
 
 // ---------------------------------------------------------------------------
@@ -42,16 +43,6 @@ b {
 em,
 i {
   font-style: italic;
-}
-
-// ---------------------------------------------------------------------------
-// Mark (Highlight)
-// ---------------------------------------------------------------------------
-mark {
-  background-color: light-dark(var(--lunar-dark), var(--lunar-light));
-  color: light-dark(var(--lunar-light), var(--lunar-dark));
-  padding: 0.125em 0.25em;
-  border-radius: var(--lunar-radius-sm);
 }
 
 // ---------------------------------------------------------------------------
@@ -103,57 +94,6 @@ sub {
 
 sup {
   top: -0.5em;
-}
-
-// ---------------------------------------------------------------------------
-// Inline Code
-// ---------------------------------------------------------------------------
-code {
-  font-family: var(--lunar-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.375em;
-  background-color: color-mix(
-    in oklch,
-    var(--lunar-bg) 75%,
-    var(--lunar-muted)
-  );
-  color: var(--lunar-fg);
-  border-radius: var(--lunar-radius-sm);
-}
-
-// ---------------------------------------------------------------------------
-// Keyboard Input
-// ---------------------------------------------------------------------------
-kbd {
-  font-family: var(--lunar-font-mono);
-  font-size: 0.875em;
-  padding: 0.125em 0.5em;
-  background-color: color-mix(
-    in oklch,
-    var(--lunar-bg) 90%,
-    var(--lunar-muted)
-  );
-  color: var(--lunar-fg);
-  border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-radius-sm);
-}
-
-// ---------------------------------------------------------------------------
-// Sample Output
-// ---------------------------------------------------------------------------
-samp {
-  font-family: var(--lunar-font-mono);
-  font-size: 0.875em;
-  color: var(--lunar-muted);
-}
-
-// ---------------------------------------------------------------------------
-// Variable
-// ---------------------------------------------------------------------------
-var {
-  font-family: var(--lunar-font-mono);
-  font-style: italic;
-  color: var(--lunar-accent);
 }
 
 // ---------------------------------------------------------------------------

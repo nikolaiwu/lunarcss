@@ -1,0 +1,115 @@
+// =============================================================================
+// LUNARCSS - Pre
+// =============================================================================
+// Styles for preformatted text.
+//
+// A pre scrolls sideways, and pseudo-elements (as in cut-corner-border) would
+// scroll away with the content. So the corners are cut with clip-path on the
+// pre itself, and everything drawn is a background layer, which stays put on
+// the box: the brackets, and the four diagonals that continue the border
+// across the cuts (clip-path cuts the border off there).
+// =============================================================================
+
+@use "sass:list";
+@use "../mixins";
+
+// Registered so the edge color can transition: a plain custom property is a
+// token stream and can't be animated. The border and the diagonals both read
+// it, so they change together.
+@property --_pre-edge {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+$cut: var(--lunar-space-2);
+$stroke: var(--lunar-border-width);
+
+// Each corner's diagonal: a gradient pointing into the box, whose 50% line
+// runs along the cut; the stroke sits just inside it
+$diagonals: (
+  left top: to bottom right,
+  right top: to bottom left,
+  right bottom: to top left,
+  left bottom: to top right
+);
+
+$images: ();
+$positions: ();
+$sizes: ();
+
+@each $corner, $direction in $diagonals {
+  $images: list.append(
+    $images,
+    linear-gradient(
+      $direction,
+      transparent 50%,
+      var(--_pre-edge) 0 calc(50% + #{$stroke}),
+      transparent 0
+    ),
+    comma
+  );
+  $positions: list.append($positions, $corner, comma);
+  $sizes: list.append($sizes, $cut $cut, comma);
+}
+
+// ---------------------------------------------------------------------------
+// Preformatted Text
+// ---------------------------------------------------------------------------
+pre {
+  --_pre-edge: var(--lunar-muted);
+  --_bracket-color: var(--lunar-muted);
+  --_bracket-size: var(--lunar-space-2);
+  // Clear of the cuts
+  --_bracket-inset: var(--lunar-space-2);
+
+  display: block;
+  padding: var(--lunar-space-4);
+  margin: var(--lunar-space-6) 0;
+  overflow-x: auto;
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-sm);
+  line-height: var(--lunar-leading-relaxed);
+  tab-size: 2;
+  background-color: color-mix(
+    in oklch,
+    var(--lunar-bg) 94%,
+    var(--lunar-muted)
+  );
+  border: $stroke solid var(--_pre-edge);
+  clip-path: mixins.cut-corner-polygon(
+    $cut,
+    (top-left, top-right, bottom-right, bottom-left)
+  );
+
+  background-image: list.join($images, mixins.bracket-images(), comma);
+  background-position: list.join($positions, mixins.bracket-positions(), comma);
+  background-size: list.join($sizes, mixins.bracket-sizes(), comma);
+  background-repeat: no-repeat;
+  // Corners measured from the outer edge, where the cuts are
+  background-origin: border-box;
+
+  transition: --_pre-edge var(--lunar-transition-base);
+
+  // A pre that scrolls (or has a tabindex) is focusable: the edge shows the
+  // focus instead of an outline, which the clip-path would cut off anyway
+  &:focus-visible {
+    outline: none;
+    --_pre-edge: var(--lunar-accent);
+  }
+
+  // Code inside pre should not have additional styling. It must wrap like the
+  // pre (inline code is nowrap), and drops the chip's cut-corner layers.
+  code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: inherit;
+    background-color: transparent;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+}

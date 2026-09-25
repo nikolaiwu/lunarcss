@@ -1,0 +1,21 @@
+// =============================================================================
+// LUNARCSS - Mark
+// =============================================================================
+// Styles for highlighted text.
+//
+// The corner is cut with clip-path on the mark itself: it has no border to
+// continue across the cut, so the cut-corner-border layers (which need
+// nowrap) aren't needed, and a highlighted phrase can still wrap.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Mark (Highlight)
+// ---------------------------------------------------------------------------
+mark {
+  background-color: light-dark(var(--lunar-dark), var(--lunar-light));
+  color: light-dark(var(--lunar-light), var(--lunar-dark));
+  padding: 0.125em 0.25em 0.125em 0.5em;
+  clip-path: mixins.cut-corner-polygon(var(--lunar-space-1), (top-right));
+}

@@ -1,0 +1,31 @@
+// =============================================================================
+// LUNARCSS - Code
+// =============================================================================
+// Styles for inline code. Code inside pre is reset in _pre.scss.
+//
+// The cut-corner layers are sized to the box, so code that wrapped across
+// lines would lose them: inline code never wraps.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Inline Code
+// ---------------------------------------------------------------------------
+code {
+  --_code-bg: color-mix(in oklch, var(--lunar-bg) 75%, var(--lunar-muted));
+
+  font-family: var(--lunar-font-mono);
+  font-size: 0.875em;
+  padding: 0.125em 0.375em;
+  color: var(--lunar-fg);
+  white-space: nowrap;
+
+  // Border in the fill color, so the shape reads as one solid chip
+  @include mixins.cut-corner-border(
+    (top-left, top-right, bottom-right, bottom-left),
+    $size: var(--lunar-space-1),
+    $border-color: var(--_code-bg),
+    $background: var(--_code-bg)
+  );
+}

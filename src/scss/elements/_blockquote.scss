@@ -1,0 +1,90 @@
+// =============================================================================
+// LUNARCSS - Blockquote
+// =============================================================================
+// Styles for blockquote and its cite.
+//
+// Space Grotesk ships no italic, so quotes stay upright rather than get a
+// synthesized slant.
+// =============================================================================
+
+@use "../mixins";
+
+$quote-corners: (right top, right bottom);
+
+// ---------------------------------------------------------------------------
+// Blockquote
+// ---------------------------------------------------------------------------
+// The striped mixin sets only background-image, so size and position confine
+// it to a band down the left edge. The panel is ::before, starting a gap after
+// the band: a background-color would fill the gap too. The right-hand brackets
+// are background layers on the panel.
+blockquote {
+  --_quote-band: var(--lunar-space-4);
+  --_quote-gap: var(--lunar-space-1);
+  --_bracket-color: var(--lunar-muted);
+  --_bracket-size: var(--lunar-space-2);
+  --_bracket-inset: var(--lunar-space-1);
+
+  position: relative;
+  isolation: isolate; // keeps the z-index: -1 panel inside this box
+  margin: var(--lunar-space-6) 0;
+  padding: var(--lunar-space-4) var(--lunar-space-6);
+  padding-left: calc(
+    var(--_quote-band) + var(--_quote-gap) + var(--lunar-space-6)
+  );
+  font-size: var(--lunar-text-lg);
+  color: var(--lunar-fg);
+  background-position: left top;
+  background-size: var(--_quote-band) 100%;
+  background-repeat: no-repeat;
+
+  @include mixins.striped(
+    $width: var(--lunar-space-1),
+    $color: var(--lunar-muted)
+  );
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: calc(var(--_quote-band) + var(--_quote-gap));
+    z-index: -1;
+    background-color: color-mix(
+      in oklch,
+      var(--lunar-bg) 85%,
+      var(--lunar-muted)
+    );
+    background-image: mixins.bracket-images($corners: $quote-corners);
+    background-position: mixins.bracket-positions($corners: $quote-corners);
+    background-size: mixins.bracket-sizes($corners: $quote-corners);
+    background-repeat: no-repeat;
+  }
+
+  p {
+    margin-bottom: var(--lunar-space-2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  cite {
+    display: block;
+    margin-top: var(--lunar-space-3);
+    font-family: var(--lunar-font-mono);
+    font-size: var(--lunar-text-xs);
+    font-style: normal;
+    letter-spacing: var(--lunar-tracking-wide);
+    text-transform: uppercase;
+    color: var(--lunar-muted);
+
+    &::before {
+      content: "— ";
+    }
+  }
+
+  blockquote {
+    margin: var(--lunar-space-4) 0;
+    font-size: inherit;
+  }
+}

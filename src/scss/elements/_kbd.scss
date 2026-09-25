@@ -1,0 +1,26 @@
+// =============================================================================
+// LUNARCSS - Kbd
+// =============================================================================
+// Styles for keyboard input.
+//
+// The cut-corner layers are sized to the box, so a key that wrapped across
+// lines would lose them: kbd never wraps.
+// =============================================================================
+
+@use "../mixins";
+
+// ---------------------------------------------------------------------------
+// Keyboard Input
+// ---------------------------------------------------------------------------
+kbd {
+  font-family: var(--lunar-font-mono);
+  font-size: 0.875em;
+  padding: 0.125em 0.5em;
+  color: var(--lunar-fg);
+  white-space: nowrap;
+
+  @include mixins.cut-corner-border(
+    (top-left, top-right, bottom-right, bottom-left),
+    $size: var(--lunar-space-1)
+  );
+}

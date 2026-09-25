@@ -40,9 +40,17 @@
   // ---------------------------------------------------------------------------
   // Element Styles (all HTML elements)
   // ---------------------------------------------------------------------------
+  @include meta.load-css("elements/p");
   @include meta.load-css("elements/headings");
-  @include meta.load-css("elements/text");
+  @include meta.load-css("elements/hr");
+  @include meta.load-css("elements/blockquote");
+  @include meta.load-css("elements/pre");
   @include meta.load-css("elements/inline");
+  @include meta.load-css("elements/mark");
+  @include meta.load-css("elements/code");
+  @include meta.load-css("elements/kbd");
+  @include meta.load-css("elements/samp");
+  @include meta.load-css("elements/var");
   @include meta.load-css("elements/lists");
   @include meta.load-css("elements/tables");
   @include meta.load-css("elements/forms");

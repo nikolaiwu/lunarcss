@@ -11,18 +11,6 @@
 // Override --lunar-font-sans in your custom styles to use different fonts.
 
 // ---------------------------------------------------------------------------
-// Paragraph Base Styles
-// ---------------------------------------------------------------------------
-p {
-  margin-bottom: var(--lunar-space-4);
-  max-width: var(--lunar-content-width);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Prose-like content spacing
 // ---------------------------------------------------------------------------
 // Adjacent block elements get consistent spacing
