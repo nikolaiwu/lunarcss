@@ -192,8 +192,9 @@ lunarcss/
 │   │   │   └── _card.scss        # card look (article, dialog)
 │   │   ├── base/
 │   │   │   ├── _root.scss        # :root, html, body styles
-│   │   │   └── _typography.scss  # Base typography
+│   │   │   └── _forced-colors.scss # Windows contrast themes
 │   │   ├── elements/
+│   │   │   ├── _section.scss     # section
 │   │   │   ├── _p.scss           # p
 │   │   │   ├── _headings.scss    # h1-h6
 │   │   │   ├── _hr.scss          # hr

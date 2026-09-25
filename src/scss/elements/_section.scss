@@ -1,0 +1,16 @@
+// =============================================================================
+// LUNARCSS - Section
+// =============================================================================
+// Styles for the section element.
+//
+// A section's last paragraph has no bottom margin and headings have no top
+// margin, so adjacent sections would touch. The layout stylesheet's gap for
+// main > section is the same size and collapses with this one.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Section
+// ---------------------------------------------------------------------------
+section + section {
+  margin-top: var(--lunar-space-8);
+}

@@ -32,14 +32,14 @@
   @include meta.load-css("reset");
 
   // ---------------------------------------------------------------------------
-  // Base Styles (root, html, body, typography foundations)
+  // Base Styles (root, html, body)
   // ---------------------------------------------------------------------------
   @include meta.load-css("base/root");
-  @include meta.load-css("base/typography");
 
   // ---------------------------------------------------------------------------
   // Element Styles (all HTML elements)
   // ---------------------------------------------------------------------------
+  @include meta.load-css("elements/section");
   @include meta.load-css("elements/p");
   @include meta.load-css("elements/headings");
   @include meta.load-css("elements/hr");

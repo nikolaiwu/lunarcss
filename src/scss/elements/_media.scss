@@ -11,6 +11,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  margin-bottom: var(--lunar-space-4);
 }
 
 // ---------------------------------------------------------------------------
@@ -31,6 +32,7 @@ video {
   display: block;
   max-width: 100%;
   height: auto;
+  margin-bottom: var(--lunar-space-4);
   // Letterboxing stays dark in both modes
   background-color: var(--lunar-dark);
 }
@@ -58,6 +60,7 @@ audio {
 iframe {
   display: block;
   max-width: 100%;
+  margin-bottom: var(--lunar-space-4);
   border: var(--lunar-border-width) solid var(--lunar-border);
 }
 
@@ -121,6 +124,7 @@ svg {
 canvas {
   display: block;
   max-width: 100%;
+  margin-bottom: var(--lunar-space-4);
 }
 
 // ---------------------------------------------------------------------------
