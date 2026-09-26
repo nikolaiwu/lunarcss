@@ -16,6 +16,8 @@
 mark {
   background-color: light-dark(var(--lunar-dark), var(--lunar-light));
   color: light-dark(var(--lunar-light), var(--lunar-dark));
-  padding: 0.125em 0.25em 0.125em 0.5em;
+  padding: 0.125em 0.5em 0.125em 0.5em;
   clip-path: mixins.cut-corner-polygon(var(--lunar-space-1), (top-right));
+  font-weight: var(--lunar-font-bold);
+  text-transform: uppercase;
 }

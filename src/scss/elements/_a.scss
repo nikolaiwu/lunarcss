@@ -1,0 +1,77 @@
+// =============================================================================
+// LUNARCSS - Links
+// =============================================================================
+// Styles for the a element: an inline chip, a smaller cousin of the button.
+//
+// The chip is ::before, behind the text (z-index -1; the link isolates, so it
+// stays inside it): a muted tint with an accent line along the bottom, its
+// top-right corner cut with clip-path. On hover and focus an accent sweep
+// with a 45° leading edge grows across it. The sweep is a second background
+// layer on the same ::before, not ::after, which the new-tab arrow needs.
+//
+// The sweep is a hard-edged gradient tile that grows from zero width. Its
+// edge runs through the tile's centre at 45°, so the tile has to be twice the
+// chip's width plus its height to cover it completely.
+//
+// Links that open a new tab (target="_blank") get an arrow after the text: an
+// SVG mask on ::after, painted in currentColor. Its alternative text tells
+// screen readers where the link goes, where `/ "…"` is supported.
+// =============================================================================
+
+@use "../mixins";
+
+$external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E");
+
+// ---------------------------------------------------------------------------
+// Links
+// ---------------------------------------------------------------------------
+a {
+  position: relative;
+  isolation: isolate;
+  padding-inline: var(--lunar-space-2);
+  color: var(--lunar-fg);
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: color-mix(
+      in oklch,
+      var(--lunar-bg) 80%,
+      var(--lunar-muted)
+    );
+    background-image: linear-gradient(
+      -45deg,
+      transparent 50%,
+      var(--lunar-accent) 50%
+    );
+    background-position: left center;
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    border-bottom: var(--lunar-border-width) solid var(--lunar-accent);
+    clip-path: mixins.cut-corner-polygon(var(--lunar-space-1), (top-right));
+    transition: background-size var(--lunar-transition-slow);
+  }
+
+  &:is(:hover, :focus-visible)::before {
+    background-size: calc(200% + 2em) 100%;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// External (new tab)
+// ---------------------------------------------------------------------------
+a[target="_blank"]::after {
+  content: "";
+  content: "" / " (opens in a new tab)";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-inline-start: 0.2em;
+  background-color: currentColor;
+  mask: #{$external} center / contain no-repeat;
+}

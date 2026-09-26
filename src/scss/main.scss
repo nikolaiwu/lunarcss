@@ -45,6 +45,7 @@
   @include meta.load-css("elements/hr");
   @include meta.load-css("elements/blockquote");
   @include meta.load-css("elements/pre");
+  @include meta.load-css("elements/a");
   @include meta.load-css("elements/inline");
   @include meta.load-css("elements/mark");
   @include meta.load-css("elements/code");

@@ -1,33 +1,9 @@
 // =============================================================================
 // LUNARCSS - Inline Elements
 // =============================================================================
-// Styles for inline text elements: a, strong, em, small, etc. Mark, code, kbd,
-// samp and var have their own partials.
+// Styles for inline text elements: strong, em, small, etc. Links, mark, code,
+// kbd, samp and var have their own partials.
 // =============================================================================
-
-// ---------------------------------------------------------------------------
-// Links
-// ---------------------------------------------------------------------------
-a {
-  color: var(--lunar-accent);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: color var(--lunar-transition-fast);
-
-  &:hover {
-    color: color-mix(in oklch, var(--lunar-accent) 80%, var(--lunar-fg));
-    text-decoration-thickness: 2px;
-  }
-
-  &:visited {
-    color: color-mix(in oklch, var(--lunar-accent) 70%, var(--lunar-muted));
-  }
-
-  &:active {
-    color: color-mix(in oklch, var(--lunar-accent) 80%, var(--lunar-fg));
-  }
-}
 
 // ---------------------------------------------------------------------------
 // Strong / Bold

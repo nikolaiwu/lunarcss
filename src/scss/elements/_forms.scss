@@ -164,7 +164,9 @@ input[list] {
 textarea {
   display: block;
   width: 100%;
-  padding: var(--lunar-space-3);
+  min-block-size: 3lh;
+  field-sizing: content;
+  padding: var(--lunar-space-2) var(--lunar-space-3);
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-base);
   line-height: var(--lunar-leading-normal);

@@ -59,8 +59,9 @@ h6 {
   text-wrap: balance;
 }
 
-// A elements that don't have a class get default styles
-a:not([class]) {
+// A elements that don't have a class get default styles. Zero specificity, so
+// the link styles in elements/_a.scss win.
+:where(a:not([class])) {
   text-decoration-skip-ink: auto;
   color: currentColor;
 }

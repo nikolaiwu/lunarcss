@@ -200,7 +200,8 @@ lunarcss/
 │   │   │   ├── _hr.scss          # hr
 │   │   │   ├── _blockquote.scss  # blockquote, cite
 │   │   │   ├── _pre.scss         # pre
-│   │   │   ├── _inline.scss      # a, strong, em, small, etc.
+│   │   │   ├── _a.scss           # links
+│   │   │   ├── _inline.scss      # strong, em, small, etc.
 │   │   │   ├── _mark.scss        # mark
 │   │   │   ├── _code.scss        # code
 │   │   │   ├── _kbd.scss         # kbd
