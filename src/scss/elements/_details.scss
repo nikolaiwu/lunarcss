@@ -8,8 +8,9 @@
 //     <p>Answer…</p>
 //   </details>
 //
-// Where ::details-content is supported, opening and closing animate the
-// height; elsewhere the content just appears.
+// Where ::details-content is supported, opening and closing fade the content,
+// and with interpolate-size also animate the height; elsewhere the content
+// just appears.
 // =============================================================================
 
 @use "../mixins";
@@ -62,19 +63,34 @@ details {
     margin-inline-start: var(--lunar-space-6);
   }
 
-  // Open/close animation. flow-root keeps the children's margins inside the
-  // animated box, so nothing jumps at the start.
+  // Open/close animation: the height grows and the content fades in. Height
+  // to and from `auto` needs interpolate-size (Chromium); elsewhere it jumps,
+  // but opacity still fades. content-visibility is discrete, so allow-discrete
+  // keeps the content rendered until the closing transition ends. flow-root
+  // keeps the children's margins inside the animated box, so nothing jumps
+  // at the start.
   &::details-content {
     display: flow-root;
     block-size: 0;
     overflow: clip;
+    opacity: 0;
     transition:
-      block-size var(--lunar-transition-base),
-      content-visibility var(--lunar-transition-base) allow-discrete;
+      block-size var(--lunar-transition-slow),
+      opacity var(--lunar-transition-slow),
+      content-visibility var(--lunar-transition-slow) allow-discrete;
   }
 
   &[open]::details-content {
     block-size: auto;
+    opacity: 1;
+  }
+
+  // The reset's reduced-motion rule doesn't reach this pseudo-element (and
+  // can't list it: an engine that doesn't know it would drop the whole list)
+  @media (prefers-reduced-motion: reduce) {
+    &::details-content {
+      transition: none;
+    }
   }
 }
 
