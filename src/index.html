@@ -885,75 +885,24 @@ greet('World');</code></pre>
         <section id="media" class="showcase-section">
           <div class="section-title">
             <h2>Media</h2>
-            <code
-              >&lt;img&gt;, &lt;video&gt;, &lt;audio&gt;, &lt;figure&gt;</code
-            >
+            <code>&lt;figure&gt;, &lt;figcaption&gt;, &lt;img&gt;</code>
           </div>
           <p class="section-description">
-            Media elements are responsive by default with max-width constraints
-            and appropriate styling.
+            Images, video, iframes and canvas are responsive by default: they
+            never grow wider than their container, and keep their aspect ratio.
           </p>
-
-          <h3>Image</h3>
-          <div class="demo-box">
-            <img
-              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
-              alt="Mountain landscape at sunset"
-              width="800"
-              height="400"
-            />
-          </div>
 
           <h3>Figure with Caption</h3>
           <div class="demo-box">
             <figure>
               <img
-                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop"
-                alt="Nature landscape"
-                width="600"
+                src="./figure.svg"
+                alt="A grey moon over a dark, rocky horizon"
+                width="800"
                 height="400"
               />
-              <figcaption>
-                A beautiful nature landscape showcasing mountains and forests.
-              </figcaption>
+              <figcaption>Fig. 1: Moonrise over a rocky horizon.</figcaption>
             </figure>
-          </div>
-
-          <h3>Video</h3>
-          <div class="demo-box">
-            <video
-              controls
-              width="100%"
-              poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&h=450&fit=crop"
-            >
-              <source
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-          <h3>Audio</h3>
-          <div class="demo-box">
-            <audio controls>
-              <source
-                src="https://www.w3schools.com/html/horse.mp3"
-                type="audio/mpeg"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <h3>Iframe</h3>
-          <div class="demo-box">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1318359375%2C51.50190910631058%2C-0.0714111328125%2C51.52374803661363"
-              width="100%"
-              height="300"
-              loading="lazy"
-              title="Map embed"
-            ></iframe>
           </div>
         </section>
 

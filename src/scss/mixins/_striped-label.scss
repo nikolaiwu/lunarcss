@@ -10,15 +10,18 @@
 // height. Uses the host's ::before and ::after; don't use them for anything
 // else.
 //
+// With $lead: null both sides grow equally, so the text sits in the middle.
+//
 // Usage:
 //   @include mixins.striped-label;
 //   @include mixins.striped-label($lead: var(--lunar-space-6));
+//   @include mixins.striped-label($lead: null); // centred
 // =============================================================================
 
 @use "striped";
 
 @mixin striped-label(
-  // Length of the stripes before the text
+  // Length of the stripes before the text; null centres the text
   $lead: var(--lunar-space-4),
   // Space between the stripes and the text
   $space: var(--lunar-space-2),
@@ -37,7 +40,11 @@
   }
 
   &::before {
-    flex: 0 0 $lead;
+    @if $lead {
+      flex: 0 0 $lead;
+    } @else {
+      flex: 1;
+    }
   }
 
   &::after {

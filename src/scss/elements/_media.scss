@@ -1,8 +1,11 @@
 // =============================================================================
 // LUNARCSS - Media Elements
 // =============================================================================
-// Styles for img, video, audio, picture, iframe, figure, figcaption elements.
+// Styles for img, picture, video, audio, iframe, figure, figcaption, embed,
+// object, svg and canvas elements.
 // =============================================================================
+
+@use "../mixins";
 
 // ---------------------------------------------------------------------------
 // Images
@@ -69,22 +72,31 @@ iframe {
 // ---------------------------------------------------------------------------
 figure {
   margin: var(--lunar-space-6) 0;
+  border: var(--lunar-border-width) solid var(--lunar-muted);
 
   img,
   video,
   iframe {
     margin-bottom: var(--lunar-space-3);
   }
+
+  // A caption right after the media sits against it
+  :is(img, video, iframe):has(+ figcaption) {
+    margin-bottom: 0;
+  }
 }
 
 // ---------------------------------------------------------------------------
 // Figcaption
 // ---------------------------------------------------------------------------
+// Set into a striped rule, centred between equal stripes. text-align still
+// centres the lines of a caption that wraps.
 figcaption {
   font-size: var(--lunar-text-sm);
   color: var(--lunar-muted);
   text-align: center;
-  font-style: italic;
+
+  @include mixins.striped-label($lead: null);
 }
 
 // ---------------------------------------------------------------------------
@@ -125,23 +137,4 @@ canvas {
   display: block;
   max-width: 100%;
   margin-bottom: var(--lunar-space-4);
-}
-
-// ---------------------------------------------------------------------------
-// Map (image maps)
-// ---------------------------------------------------------------------------
-map {
-  // No specific styling needed
-}
-
-area {
-  // No specific styling needed
-}
-
-// ---------------------------------------------------------------------------
-// Source & Track (media children)
-// ---------------------------------------------------------------------------
-source,
-track {
-  // No styling needed, they're metadata elements
 }
