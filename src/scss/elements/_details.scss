@@ -21,10 +21,27 @@ details {
   // Lets block-size transition to and from `auto`
   interpolate-size: allow-keywords;
   margin-bottom: var(--lunar-space-4);
+  border: var(--lunar-border-width) solid var(--lunar-muted);
 
-  // Adjacent details join into one list; the group keeps the outer margin
+  // Adjacent details join into one list: the group keeps the outer margin,
+  // neighbours overlap by a border so they share one line, and only the ends
+  // of the run are rounded
   &:has(+ details) {
     margin-bottom: 0;
+  }
+
+  & + & {
+    margin-top: calc(var(--lunar-border-width) * -1);
+  }
+
+  &:not(details + details) {
+    border-top-left-radius: var(--lunar-radius-md);
+    border-top-right-radius: var(--lunar-radius-md);
+  }
+
+  &:not(:has(+ details)) {
+    border-bottom-left-radius: var(--lunar-radius-md);
+    border-bottom-right-radius: var(--lunar-radius-md);
   }
 
   // Content lines up with the summary text
@@ -73,11 +90,11 @@ summary {
   justify-content: space-between;
   gap: var(--lunar-space-4);
   padding: var(--lunar-space-3) var(--lunar-space-2);
-  font-weight: var(--lunar-font-medium);
+  font-weight: var(--lunar-font-bold);
+  text-transform: uppercase;
   color: var(--lunar-fg);
   cursor: pointer;
   list-style: none;
-  border-bottom: var(--lunar-border-width) solid var(--lunar-muted);
 
   // Focus brackets, small size (default value of --lunar-space-1) until hover or focus
   @include mixins.brackets();
@@ -105,6 +122,10 @@ summary {
       color var(--lunar-transition-base),
       background-size var(--lunar-transition-base),
       rotate var(--lunar-transition-base);
+  }
+
+  details[open] > & {
+    border-bottom: var(--lunar-border-width) solid var(--lunar-muted);
   }
 
   details[open] > &::after {

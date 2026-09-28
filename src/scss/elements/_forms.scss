@@ -56,6 +56,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   caret-color: var(--lunar-accent);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-radius-md);
   margin-bottom: var(--lunar-space-4);
 
   @include mixins.field;
@@ -174,6 +175,7 @@ textarea {
   caret-color: var(--lunar-accent);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-radius-md);
   resize: vertical;
   margin-bottom: var(--lunar-space-4);
 
@@ -235,6 +237,7 @@ select {
   color: var(--lunar-fg);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
+  border-radius: var(--lunar-radius-md);
   appearance: none;
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);

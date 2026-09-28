@@ -564,22 +564,17 @@ Or use a single color (same in both modes):
   /* Radius */
   --lunar-radius-none: 0;
   --lunar-radius-sm: 0.125rem; /* 2px */
-  --lunar-radius-md: 0.375rem; /* 6px */
-  --lunar-radius-lg: 0.5rem; /* 8px */
-  --lunar-radius-xl: 0.75rem; /* 12px */
-  --lunar-radius-2xl: 1rem; /* 16px */
+  --lunar-radius-md: 0.25rem; /* 4px */
+  --lunar-radius-lg: 0.375rem; /* 6px */
   --lunar-radius-full: 9999px;
 }
 ```
 
-Most elements are square today, and cards and dialogs use [cut corners](#cut-corners). The radius scale is there to build on, and to round elements yourself:
+Text fields, textareas, selects, checkboxes, the color swatch, the range track and `details` use `--lunar-radius-md`, and the range thumb uses `--lunar-radius-sm`. Change the tokens to round or square them all at once. Cards, dialogs and buttons use [cut corners](#cut-corners) instead, and progress and meter stay square. To round something yourself:
 
 ```css
-input,
-button,
-textarea,
-select {
-  border-radius: var(--lunar-radius-md);
+img {
+  border-radius: var(--lunar-radius-lg);
 }
 ```
 
