@@ -31,14 +31,10 @@ body {
     color var(--lunar-transition-slow);
 }
 
-// Text selection
+// Text selection: the page colors swapped
 ::selection {
-  background-color: color-mix(
-    in oklch,
-    var(--lunar-accent) 30%,
-    var(--lunar-bg)
-  );
-  color: var(--lunar-fg);
+  background-color: var(--lunar-fg);
+  color: var(--lunar-bg);
 }
 
 // Focus visible - consistent focus styles across all elements
