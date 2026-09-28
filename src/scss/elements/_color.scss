@@ -66,4 +66,15 @@ input[type="color"] {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  // Disabled: the droplet turns muted, so it shows whatever the value (one
+  // that matches the page would vanish). The browser sets the swatch's
+  // background-color inline, so a flat image layer covers it instead.
+  &:disabled::-webkit-color-swatch {
+    background-image: linear-gradient(var(--lunar-muted) 0 0);
+  }
+
+  &:disabled::-moz-color-swatch {
+    background-image: linear-gradient(var(--lunar-muted) 0 0);
+  }
 }
