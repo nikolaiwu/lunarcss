@@ -6,6 +6,9 @@
 // Backgrounds can't paint outside the box, so the paragraph reaches left by
 // --_p-offset (negative margin) and pads the same amount back: the brackets
 // sit in that padding and the text stays where it was.
+//
+// The two left marks' vertical strokes span the full height ($vertical-size
+// 100%, with no inset), so they join into one bracket down the paragraph.
 // =============================================================================
 
 @use "../mixins";
@@ -29,7 +32,10 @@ p {
 
   background-image: mixins.bracket-images($corners: $p-corners);
   background-position: mixins.bracket-positions($corners: $p-corners);
-  background-size: mixins.bracket-sizes($corners: $p-corners);
+  background-size: mixins.bracket-sizes(
+    $corners: $p-corners,
+    $vertical-size: 100%
+  );
   background-repeat: no-repeat;
 
   &:last-child {

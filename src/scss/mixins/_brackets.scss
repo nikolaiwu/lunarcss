@@ -14,6 +14,10 @@
 // The functions take $corners, to mark only some corners; pass the same list
 // to all three so the layers line up.
 //
+// bracket-sizes() also takes $vertical-size, a length for the vertical
+// strokes alone. Set to the box height minus both insets, the two marks on
+// one side meet and read as a single bracket spanning the box.
+//
 // Usage:
 //   @include mixins.brackets;
 //   background-image: mixins.bracket-images(), …other layers…;
@@ -58,13 +62,18 @@ $all-corners: (left top, right top, left bottom, right bottom);
 @function bracket-sizes(
   $size: var(--_bracket-size),
   $stroke: var(--lunar-border-width),
-  $corners: $all-corners
+  $corners: $all-corners,
+  $vertical-size: null
 ) {
   $out: ();
 
+  @if not $vertical-size {
+    $vertical-size: $size;
+  }
+
   @each $corner in $corners {
     $out: list.append($out, #{$size} #{$stroke}, comma);
-    $out: list.append($out, #{$stroke} #{$size}, comma);
+    $out: list.append($out, #{$stroke} #{$vertical-size}, comma);
   }
 
   @return $out;
