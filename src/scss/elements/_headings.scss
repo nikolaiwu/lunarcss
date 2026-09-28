@@ -1,8 +1,32 @@
 // =============================================================================
 // LUNARCSS - Headings
 // =============================================================================
-// Styles for h1-h6 heading elements.
+// Styles for h1-h6 heading elements (one partial for all six).
+//
+// A mark of two slanted bars sits left of the text, in the heading's left
+// padding, so wrapped lines stay in line with the first. Each bar is a
+// pseudo-element shaped by clip-path: a parallelogram with its two acute
+// corners cut. It's sized in em, so it scales with each heading level, and
+// centred on the first line (lh is the line height).
+//
+// The polygon's points are worked out here, since calc() can't divide one
+// length by another to find where the cuts meet the slanted sides.
 // =============================================================================
+
+@use "sass:math";
+
+// Mark geometry, in em of the heading
+$mark-height: 0.7em;
+$mark-slant: 0.28em; // how far each bar leans across its height
+$mark-bar: 0.18em; // bar thickness, measured horizontally
+$mark-gap: 0.08em; // between the bars
+$mark-cut: 0.08em; // the corner cuts
+$mark-space: 0.1em; // mark to text
+
+// Where a cut meets a slanted side, measured along x from the side's end
+$mark-cut-run: $mark-slant * math.div($mark-cut, $mark-height);
+
+$mark-width: $mark-slant + $mark-bar * 2 + $mark-gap;
 
 h1,
 h2,
@@ -10,12 +34,39 @@ h3,
 h4,
 h5,
 h6 {
+  position: relative;
+  padding-left: $mark-width + $mark-space;
   font-family: var(--lunar-font-sans);
   font-weight: var(--lunar-font-bold);
   line-height: var(--lunar-leading-tight);
   color: var(--lunar-fg);
   letter-spacing: var(--lunar-tracking-tight);
   margin-bottom: var(--lunar-space-4);
+
+  // Bars: parallelograms leaning "\", cut at the top-left and bottom-right
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(1lh / 2);
+    left: 0;
+    width: $mark-slant + $mark-bar;
+    height: $mark-height;
+    translate: 0 -50%;
+    background-color: var(--lunar-muted);
+    clip-path: polygon(
+      $mark-cut 0,
+      $mark-bar 0,
+      ($mark-bar + $mark-slant - $mark-cut-run) ($mark-height - $mark-cut),
+      ($mark-bar + $mark-slant - $mark-cut) $mark-height,
+      $mark-slant $mark-height,
+      $mark-cut-run $mark-cut
+    );
+  }
+
+  &::after {
+    left: $mark-bar + $mark-gap;
+  }
 }
 
 h1 {
@@ -75,8 +126,8 @@ h4,
 h5,
 h6 {
   small {
-    font-size: 0.75em;
-    font-weight: var(--lunar-font-regular);
+    font-size: 0.65em;
+    font-weight: var(--lunar-font-bold);
     color: var(--lunar-muted);
     display: block;
     margin-top: var(--lunar-space-1);

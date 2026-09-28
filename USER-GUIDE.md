@@ -465,7 +465,7 @@ For the default values, see `src/scss/_config.scss`.
 
 ```css
 :root {
-  --lunar-muted-mix: 70%; /* default 60%; higher = more contrast */
+  --lunar-muted-mix: 70%; /* default 50%; higher = more contrast */
 }
 ```
 
@@ -643,7 +643,7 @@ img {
 :root {
   --lunar-light: #faf9f7;
   --lunar-dark: #1c1917;
-  --lunar-muted-mix: 55%; /* softer secondary text */
+  --lunar-muted-mix: 45%; /* softer secondary text */
 }
 ```
 

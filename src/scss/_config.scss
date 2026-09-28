@@ -31,7 +31,7 @@
   --lunar-bg: light-dark(var(--lunar-light), var(--lunar-dark));
   --lunar-fg: light-dark(var(--lunar-dark), var(--lunar-light));
   --lunar-accent: var(--color-solar-orange);
-  --lunar-muted-mix: 60%;
+  --lunar-muted-mix: 50%;
   --lunar-muted: light-dark(
     color-mix(
       in oklch,
