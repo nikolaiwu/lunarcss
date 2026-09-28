@@ -355,8 +355,12 @@ datalist {
 // ---------------------------------------------------------------------------
 // Output
 // ---------------------------------------------------------------------------
+// Centred on the surrounding text rather than baseline-aligned: Safari gives
+// an inline-block output no text baseline, so it would sit its bottom edge on
+// the line's baseline and ride above the text.
 output {
   display: inline-block;
+  vertical-align: middle;
   padding: var(--lunar-space-2) var(--lunar-space-3);
   font-family: var(--lunar-font-mono);
   font-size: var(--lunar-text-sm);
