@@ -51,6 +51,8 @@
   blockquote,
   blockquote::before,
   pre,
+  ul > li::before,
+  dt::after,
   :is(code, kbd)::before,
   :is(code, kbd)::after,
   thead th,

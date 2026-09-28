@@ -1,45 +1,105 @@
 // =============================================================================
 // LUNARCSS - Lists
 // =============================================================================
-// Styles for ul, ol, li, dl, dt, dd elements.
+// Styles for ul, ol, li, dl, dt, dd elements (one partial: li belongs to
+// both list kinds, and dt/dd only exist inside dl).
+//
+// ul: the bullet is a tick, like the ruler's, that gets longer with each
+// nesting level. It's li::before, so it's drawn at an exact length and
+// weight rather than taken from a font glyph. The native marker is hidden
+// with an empty string rather than list-style: none, which makes Safari drop
+// the list semantics for VoiceOver.
+//
+// ol: zero-padded mono numbers with a slash, from @counter-style.
+//
+// dl: a spec readout. Terms and definitions sit side by side in a grid, with
+// a dotted leader after each term. The leader is the same inline trick as a
+// line after text: an inline-block as wide as the term, with a matching
+// negative right margin so it takes no room on the line, cut off at the
+// term's edge by overflow-x: clip. That keeps inline markup in a term (dfn,
+// code) flowing normally, which a flex row would split apart.
 // =============================================================================
+
+@use "../mixins";
 
 // ---------------------------------------------------------------------------
 // Unordered Lists
 // ---------------------------------------------------------------------------
 ul {
-  list-style: disc;
+  --_list-tick: var(--lunar-space-3);
+
+  list-style-type: "";
   padding-left: var(--lunar-space-6);
   margin-bottom: var(--lunar-space-4);
 
   ul {
-    list-style-type: circle;
+    --_list-tick: var(--lunar-space-4);
+
     margin-top: var(--lunar-space-2);
     margin-bottom: 0;
 
     ul {
-      list-style-type: square;
+      --_list-tick: var(--lunar-space-5);
     }
+  }
+}
+
+ul > li {
+  position: relative;
+
+  // Right-aligned a gap from the text, so ticks of every length end at the
+  // same place; centred on the first line (lh is the line height)
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(1lh / 2);
+    right: calc(100% + var(--lunar-space-2));
+    width: var(--_list-tick);
+    height: calc(var(--lunar-border-width) * 2);
+    translate: 0 -50%;
+    background-color: var(--lunar-muted);
   }
 }
 
 // ---------------------------------------------------------------------------
 // Ordered Lists
 // ---------------------------------------------------------------------------
+@counter-style lunar-decimal {
+  system: extends decimal-leading-zero;
+  suffix: " / ";
+}
+
+@counter-style lunar-alpha {
+  system: extends lower-alpha;
+  suffix: " / ";
+}
+
+@counter-style lunar-roman {
+  system: extends lower-roman;
+  suffix: " / ";
+}
+
 ol {
-  list-style: decimal;
-  padding-left: var(--lunar-space-6);
+  list-style-type: lunar-decimal;
+  // Room for the wider mono marker, which hangs in the padding
+  padding-left: var(--lunar-space-10);
   margin-bottom: var(--lunar-space-4);
 
   ol {
-    list-style-type: lower-alpha;
+    list-style-type: lunar-alpha;
     margin-top: var(--lunar-space-2);
     margin-bottom: 0;
 
     ol {
-      list-style-type: lower-roman;
+      list-style-type: lunar-roman;
     }
   }
+}
+
+ol > li::marker {
+  font-family: var(--lunar-font-mono);
+  font-size: 0.8em;
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
@@ -63,33 +123,53 @@ li {
 // ---------------------------------------------------------------------------
 // Definition Lists
 // ---------------------------------------------------------------------------
+// Terms in the first column (no wider than half, so long terms wrap), their
+// definitions in the second. Every dd takes the second column, so several
+// definitions under one term stack, and the next dt starts a new row.
 dl {
+  display: grid;
+  grid-template-columns: fit-content(50%) 1fr;
+  align-items: baseline;
+  column-gap: var(--lunar-space-2);
+  row-gap: var(--lunar-space-2);
   margin-bottom: var(--lunar-space-4);
+
+  // A div may group a term with its definitions; its children join the grid
+  > div {
+    display: contents;
+  }
 }
 
 dt {
-  font-weight: var(--lunar-font-semibold);
-  color: var(--lunar-fg);
-  margin-top: var(--lunar-space-4);
+  grid-column: 1;
+  // The leader's minimum length: it runs through this padding even after the
+  // longest term, which sets the column width
+  padding-right: var(--lunar-space-4);
+  overflow-x: clip;
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-xs);
+  font-weight: var(--lunar-font-bold);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
+  color: var(--lunar-muted);
 
-  &:first-child {
-    margin-top: 0;
+  // Leader: one row of dots from the end of the term to the column edge,
+  // sitting on the baseline (an empty inline-block's baseline is its bottom)
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: var(--_dot-gap);
+    margin-inline: var(--lunar-space-2) -100%;
+
+    @include mixins.dotted;
   }
 }
 
 dd {
-  margin-left: var(--lunar-space-6);
-  margin-bottom: var(--lunar-space-2);
-  color: var(--lunar-muted);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  // Multiple definitions for single term
-  + dd {
-    margin-top: var(--lunar-space-2);
-  }
+  grid-column: 2;
+  margin: 0;
+  color: var(--lunar-fg);
 }
 
 // ---------------------------------------------------------------------------
