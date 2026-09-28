@@ -6,8 +6,7 @@
 // suboptimal, error when far from optimum.
 //
 // Engine note: as with progress, WebKit has a track pseudo-element and Firefox
-// doesn't, so there the track is a flat background layer instead of a bordered,
-// rounded one.
+// doesn't, so there the track is a background layer instead of a bordered one.
 // =============================================================================
 
 @use "../mixins";
@@ -40,47 +39,65 @@ meter {
     padding: var(--lunar-bar-inset);
     background: var(--lunar-bg);
     border: var(--lunar-border-width) solid var(--lunar-border);
-    border-radius: var(--lunar-bar-radius);
   }
 
   // ---------------------------------------------------------------------------
   // Fill, by how the value sits in the range
   // ---------------------------------------------------------------------------
+  // Stripes only, so the track shows between them. The UA gives each fill a
+  // background color, which is cleared. The state picks --_meter-fill; the
+  // stripes are drawn in it.
   &::-webkit-meter-optimum-value {
-    background: var(--lunar-success);
-    border-radius: var(--lunar-bar-fill-radius);
+    --_meter-fill: var(--lunar-success);
   }
 
   &::-webkit-meter-suboptimum-value {
-    background: var(--lunar-warning);
-    border-radius: var(--lunar-bar-fill-radius);
+    --_meter-fill: var(--lunar-warning);
   }
 
   &::-webkit-meter-even-less-good-value {
-    background: var(--lunar-error);
-    border-radius: var(--lunar-bar-fill-radius);
+    --_meter-fill: var(--lunar-error);
   }
 
-  // Firefox: one fill pseudo-element, colored by state on the host, and no
-  // track pseudo-element — so the inset is set here rather than on a track
+  &::-webkit-meter-optimum-value,
+  &::-webkit-meter-suboptimum-value,
+  &::-webkit-meter-even-less-good-value {
+    background-color: transparent;
+    @include mixins.striped(
+      $width: calc(var(--lunar-space-1) / 2),
+      $color: var(--_meter-fill),
+      $angle: 90deg,
+      $gap: var(--lunar-space-1)
+    );
+  }
+
+  // Firefox: one fill pseudo-element, and no track pseudo-element — so the
+  // inset is set here rather than on a track. The state is a pseudo-class on
+  // the host, which sets --_meter-fill for the fill to inherit.
   &::-moz-meter-bar {
     height: calc(
       var(--lunar-bar-height) -
         (var(--lunar-border-width) + var(--lunar-bar-inset)) * 2
     );
     margin: calc(var(--lunar-border-width) + var(--lunar-bar-inset));
-    border-radius: var(--lunar-bar-fill-radius);
+    background-color: transparent;
+    @include mixins.striped(
+      $width: calc(var(--lunar-space-1) / 2),
+      $color: var(--_meter-fill),
+      $angle: 90deg,
+      $gap: var(--lunar-space-1)
+    );
   }
 
-  &:-moz-meter-optimum::-moz-meter-bar {
-    background: var(--lunar-success);
+  &:-moz-meter-optimum {
+    --_meter-fill: var(--lunar-success);
   }
 
-  &:-moz-meter-sub-optimum::-moz-meter-bar {
-    background: var(--lunar-warning);
+  &:-moz-meter-sub-optimum {
+    --_meter-fill: var(--lunar-warning);
   }
 
-  &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
-    background: var(--lunar-error);
+  &:-moz-meter-sub-sub-optimum {
+    --_meter-fill: var(--lunar-error);
   }
 }

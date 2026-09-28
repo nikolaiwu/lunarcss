@@ -21,7 +21,6 @@
   padding: var(--_thumb-inset);
   background-color: var(--lunar-bg);
   border: var(--lunar-border-width) solid var(--lunar-border);
-  border-radius: var(--lunar-bar-radius);
 }
 
 // Thumb: fills the track's content box, so the inset is even on all sides
@@ -34,7 +33,8 @@
   );
   background-color: var(--lunar-muted);
   border: 0;
-  border-radius: calc(var(--lunar-bar-radius) / 2);
+  // Firefox's default thumb is round
+  border-radius: 0;
   transition: background-color var(--lunar-transition-fast);
 }
 
@@ -70,7 +70,6 @@ input[type="range"] {
   &::-moz-range-progress {
     height: calc(var(--lunar-bar-height) - var(--lunar-border-width) * 2);
     background-color: var(--lunar-accent);
-    border-radius: var(--lunar-bar-radius);
   }
 
   // ---------------------------------------------------------------------------

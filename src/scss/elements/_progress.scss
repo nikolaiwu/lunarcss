@@ -5,10 +5,10 @@
 // thirds, the ruler sits below it.
 //
 // Engine note: WebKit has a track pseudo-element (::-webkit-progress-bar), so
-// it gets the bordered, rounded track. Firefox has none — the element itself is
-// the track — so there the track is a background layer: same size and color,
-// but flat, since a background can't carry a border or rounded corners. The
-// fill and the ruler are identical in both.
+// it gets the bordered track. Firefox has none — the element itself is the
+// track — so there the track is a background layer: same size, but a tone of
+// its own instead of a border, since a background can't carry one. The fill
+// and the ruler are identical in both.
 // =============================================================================
 
 @use "../mixins";
@@ -38,15 +38,21 @@ progress {
     padding: var(--lunar-bar-inset);
     background-color: var(--lunar-bg);
     border: var(--lunar-border-width) solid var(--lunar-border);
-    border-radius: var(--lunar-bar-radius);
   }
 
   // ---------------------------------------------------------------------------
   // Fill
   // ---------------------------------------------------------------------------
+  // Stripes only, so the track shows between them. The UA gives the fill a
+  // background color, which is cleared.
   &::-webkit-progress-value {
-    background-color: var(--lunar-accent);
-    border-radius: var(--lunar-bar-fill-radius);
+    background-color: transparent;
+    @include mixins.striped(
+      $width: calc(var(--lunar-space-1) / 2),
+      $color: var(--lunar-muted),
+      $angle: 90deg,
+      $gap: calc(var(--lunar-space-1) / 1)
+    );
   }
 
   // Firefox has no track pseudo-element, so the inset is set here
@@ -56,12 +62,17 @@ progress {
         (var(--lunar-border-width) + var(--lunar-bar-inset)) * 2
     );
     margin: calc(var(--lunar-border-width) + var(--lunar-bar-inset));
-    background-color: var(--lunar-accent);
-    border-radius: var(--lunar-bar-fill-radius);
+    background-color: transparent;
+    @include mixins.striped(
+      $width: calc(var(--lunar-space-1) / 2),
+      $color: var(--lunar-muted),
+      $angle: 90deg,
+      $gap: calc(var(--lunar-space-1) / 1)
+    );
   }
 
   // An indeterminate progress has no value to show
   &:indeterminate::-webkit-progress-value {
-    background-color: transparent;
+    background-image: none;
   }
 }

@@ -19,7 +19,7 @@ Initial release, to be published as 0.1.0.
 - Classless styles for headings, text, inline elements, lists, tables, forms, media and interactive elements
 - Buttons: a `<button>` is cut at the top-right and bottom-left. Put controls next to each other and they group up — only the first keeps its bottom-left cut and only the last its top-right one, so the row reads as one shape. Input buttons stay rectangular, since a void element has no pseudo-elements to draw the cut
 - Checkboxes are vertical switches (knob slides from bottom to top, filling with the accent) and radios are circles that fill with an animated conic sweep; both are as tall as the other controls via `--lunar-control-height`
-- Range, progress and meter are a rounded bar over a tick ruler, the same total height as the other controls; meter colors its fill by how the value sits against `low`/`high`/`optimum`
+- Range, progress and meter are a bar over a tick ruler, the same total height as the other controls; meter colors its fill by how the value sits against `low`/`high`/`optimum`
 - Text fields, textareas and selects get corner brackets that grow and turn accent on focus, with the bar's tick ruler sliding in under them; values are set in the mono font, with an accent caret
 - Number spinners, the date/time picker button and the focused segment of a date value follow the theme; an input backed by a `<datalist>` shows the select's chevron
 - Selected entries in a list box use the accent, whether or not the select has focus
