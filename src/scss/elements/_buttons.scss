@@ -50,7 +50,7 @@ input[type="button"] {
 // Cut corners, for <button> only: the mixin draws the border and fill with
 // ::before/::after, and input is a void element, so it has neither.
 button {
-  --lunar-cut-size: var(--lunar-space-2);
+  --lunar-cut-size: var(--lunar-space-3);
   --lunar-cut-bg: var(--lunar-accent);
   --lunar-cut-border-color: transparent;
   --_button-ring: 3px;

@@ -59,8 +59,8 @@
   tfoot,
   summary,
   summary::after,
-  :is(article, dialog)::before,
-  :is(article, dialog)::after,
+  :is(article, dialog, [popover])::before,
+  :is(article, dialog, [popover])::after,
   :is(article, dialog) > header,
   :is(article, dialog) > footer::before {
     forced-color-adjust: none;

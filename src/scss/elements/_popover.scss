@@ -2,24 +2,33 @@
 // LUNARCSS - Popover
 // =============================================================================
 // Elements with the HTML popover attribute.
+//
+// The top-right corner is cut with the cut-corner-border mixin, which draws
+// the border and fill on ::before and ::after.
 // =============================================================================
+
+@use "../mixins";
 
 // ---------------------------------------------------------------------------
 // Popover (HTML popover attribute)
 // ---------------------------------------------------------------------------
 [popover] {
-  // Centered in the viewport, as the browser does by default. With `auto`
-  // insets it would sit at its place in the page flow, often off-screen, and
-  // the reset's margin: 0 would undo the centering.
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  max-width: min(90vw, 32rem);
-  padding: var(--lunar-space-4);
-  background-color: var(--lunar-bg);
-  color: var(--lunar-fg);
-  border: var(--lunar-border-width) solid var(--lunar-border);
-  box-shadow: var(--lunar-shadow-lg);
+  @include mixins.cut-corner-border((top-right));
+
+  // Wrapped in & so these come after the mixin's output and override it
+  // (position: fixed replaces the mixin's position: relative)
+  & {
+    // Centered in the viewport, as the browser does by default. With `auto`
+    // insets it would sit at its place in the page flow, often off-screen, and
+    // the reset's margin: 0 would undo the centering.
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    max-width: min(90vw, 32rem);
+    padding: var(--lunar-space-4);
+    color: var(--lunar-fg);
+    // No box-shadow: a rectangular shadow would show past the cut corner
+  }
 
   // Anchored to its button. A popover opened with popovertarget has that
   // button as its implicit anchor, so no anchor names (or classes) are needed.

@@ -53,7 +53,10 @@ a {
     background-size: 0 100%;
     background-repeat: no-repeat;
     border-bottom: var(--lunar-border-width) solid var(--lunar-accent);
-    clip-path: mixins.cut-corner-polygon(var(--lunar-space-1), (top-right));
+    clip-path: mixins.cut-corner-polygon(
+      calc(var(--lunar-space-1) * 1.5),
+      (top-right)
+    );
     transition: background-size var(--lunar-transition-slow);
   }
 

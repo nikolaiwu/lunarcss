@@ -6,7 +6,7 @@
 // A pre scrolls sideways, and pseudo-elements (as in cut-corner-border) would
 // scroll away with the content. So the corners are cut with clip-path on the
 // pre itself, and everything drawn is a background layer, which stays put on
-// the box: the brackets, and the four diagonals that continue the border
+// the box: the brackets, and the two diagonals that continue the border
 // across the cuts (clip-path cuts the border off there).
 // =============================================================================
 
@@ -25,14 +25,9 @@
 $cut: var(--lunar-space-2);
 $stroke: var(--lunar-border-width);
 
-// Each corner's diagonal: a gradient pointing into the box, whose 50% line
-// runs along the cut; the stroke sits just inside it
-$diagonals: (
-  left top: to bottom right,
-  right top: to bottom left,
-  right bottom: to top left,
-  left bottom: to top right
-);
+// Cut corners, and each one's diagonal: a gradient pointing into the box,
+// whose 50% line runs along the cut; the stroke sits just inside it
+$diagonals: (right top: to bottom left, left bottom: to top right);
 
 $images: ();
 $positions: ();
@@ -77,10 +72,7 @@ pre {
     var(--lunar-muted)
   );
   border: $stroke solid var(--_pre-edge);
-  clip-path: mixins.cut-corner-polygon(
-    $cut,
-    (top-left, top-right, bottom-right, bottom-left)
-  );
+  clip-path: mixins.cut-corner-polygon($cut, (top-right, bottom-left));
 
   background-image: list.join($images, mixins.bracket-images(), comma);
   background-position: list.join($positions, mixins.bracket-positions(), comma);

@@ -23,8 +23,8 @@ code {
 
   // Border in the fill color, so the shape reads as one solid chip
   @include mixins.cut-corner-border(
-    (top-left, top-right, bottom-right, bottom-left),
-    $size: var(--lunar-space-1),
+    (top-right, bottom-left),
+    $size: calc(var(--lunar-space-1) * 1.5),
     $border-color: var(--_code-bg),
     $background: var(--_code-bg)
   );
