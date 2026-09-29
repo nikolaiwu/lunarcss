@@ -18,11 +18,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      # v6, not v7: v7 stops exporting the placeholder NODE_AUTH_TOKEN that
+      # the registry-url .npmrc refers to, which npm needs to read the config
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: pnpm
