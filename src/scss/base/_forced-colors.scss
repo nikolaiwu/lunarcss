@@ -82,19 +82,16 @@
   // ---------------------------------------------------------------------------
   // Buttons
   // ---------------------------------------------------------------------------
-  // The cut-corner fill is a pseudo-element background, which forcing would
-  // flatten to Canvas and leave a borderless label. Fall back to the plain
-  // system button: a rectangle with a visible border.
+  // Forcing drops the cut-edge diagonals and makes the border ButtonText, so
+  // the cut would leave gaps in the border, and it would clip the focus
+  // outline below. Fall back to the plain system button: a rectangle with a
+  // visible border.
   button,
   input[type="submit"],
   input[type="reset"],
   input[type="button"] {
     border-color: ButtonText;
-  }
-
-  button::before,
-  button::after {
-    content: none;
+    clip-path: none;
   }
 
   // ---------------------------------------------------------------------------

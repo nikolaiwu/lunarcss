@@ -3,6 +3,18 @@
 // =============================================================================
 
 @use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+// The cut for one corner: $cut is a length for every corner, or a map of
+// corner to length
+@function -corner-cut($cut, $corner) {
+  @if meta.type-of($cut) == "map" {
+    @return map.get($cut, $corner);
+  }
+
+  @return $cut;
+}
 
 // ---------------------------------------------------------------------------
 // Cut Corner Border
@@ -25,39 +37,130 @@
 //   @include mixins.cut-corner-border((top-left, bottom-right));
 // ---------------------------------------------------------------------------
 
-// Polygon for a box with the given corners cut by $cut (clockwise from top-left)
-@function cut-corner-polygon($cut, $corners) {
+// Polygon for a box with the given corners cut by $cut (clockwise from
+// top-left). $cut can be a map of corner to length, one cut per corner; then
+// $corners defaults to its keys. A cut of 0px leaves that corner square.
+@function cut-corner-polygon($cut, $corners: null) {
+  @if not $corners {
+    $corners: map.keys($cut);
+  }
+
   $points: ();
 
   @if list.index($corners, top-left) {
-    $points: list.append($points, 0 $cut, comma);
-    $points: list.append($points, $cut 0, comma);
+    $c: -corner-cut($cut, top-left);
+    $points: list.append($points, 0 $c, comma);
+    $points: list.append($points, $c 0, comma);
   } @else {
     $points: list.append($points, 0 0, comma);
   }
 
   @if list.index($corners, top-right) {
-    $points: list.append($points, calc(100% - #{$cut}) 0, comma);
-    $points: list.append($points, 100% $cut, comma);
+    $c: -corner-cut($cut, top-right);
+    $points: list.append($points, calc(100% - #{$c}) 0, comma);
+    $points: list.append($points, 100% $c, comma);
   } @else {
     $points: list.append($points, 100% 0, comma);
   }
 
   @if list.index($corners, bottom-right) {
-    $points: list.append($points, 100% calc(100% - #{$cut}), comma);
-    $points: list.append($points, calc(100% - #{$cut}) 100%, comma);
+    $c: -corner-cut($cut, bottom-right);
+    $points: list.append($points, 100% calc(100% - #{$c}), comma);
+    $points: list.append($points, calc(100% - #{$c}) 100%, comma);
   } @else {
     $points: list.append($points, 100% 100%, comma);
   }
 
   @if list.index($corners, bottom-left) {
-    $points: list.append($points, $cut 100%, comma);
-    $points: list.append($points, 0 calc(100% - #{$cut}), comma);
+    $c: -corner-cut($cut, bottom-left);
+    $points: list.append($points, $c 100%, comma);
+    $points: list.append($points, 0 calc(100% - #{$c}), comma);
   } @else {
     $points: list.append($points, 0 100%, comma);
   }
 
   @return polygon($points);
+}
+
+// ---------------------------------------------------------------------------
+// Cut Edges
+// ---------------------------------------------------------------------------
+// A clip-path cut also cuts the host's own border off at the corner. These
+// background layers draw the missing diagonal, one per cut corner, so the
+// border runs on across the cut. Each is a gradient pointing into the box,
+// whose 50% line runs along the cut; the stroke sits just inside it.
+//
+// Like the brackets, they're functions, so a host can join them with its
+// other layers. Pass the same corners to all three, and set
+// background-origin: border-box, so the corners are measured from the outer
+// edge, where the cuts are. $cut can be a map of corner to length, as for
+// cut-corner-polygon().
+//
+// Usage:
+//   background-image: mixins.cut-edge-images($corners, $color, $stroke);
+//   background-position: mixins.cut-edge-positions($corners);
+//   background-size: mixins.cut-edge-sizes($cut, $corners);
+
+$-edge-directions: (
+  top-left: to bottom right,
+  top-right: to bottom left,
+  bottom-right: to top left,
+  bottom-left: to top right,
+);
+
+$-edge-positions: (
+  top-left: left top,
+  top-right: right top,
+  bottom-right: right bottom,
+  bottom-left: left bottom,
+);
+
+@function cut-edge-images(
+  $corners,
+  $color: var(--lunar-border),
+  $stroke: var(--lunar-border-width)
+) {
+  $out: ();
+
+  @each $corner in $corners {
+    $out: list.append(
+      $out,
+      linear-gradient(
+        map.get($-edge-directions, $corner),
+        transparent 50%,
+        #{$color} 0 calc(50% + #{$stroke}),
+        transparent 0
+      ),
+      comma
+    );
+  }
+
+  @return $out;
+}
+
+@function cut-edge-positions($corners) {
+  $out: ();
+
+  @each $corner in $corners {
+    $out: list.append($out, map.get($-edge-positions, $corner), comma);
+  }
+
+  @return $out;
+}
+
+@function cut-edge-sizes($cut, $corners: null) {
+  @if not $corners {
+    $corners: map.keys($cut);
+  }
+
+  $out: ();
+
+  @each $corner in $corners {
+    $c: -corner-cut($cut, $corner);
+    $out: list.append($out, $c $c, comma);
+  }
+
+  @return $out;
 }
 
 @mixin cut-corner-border(

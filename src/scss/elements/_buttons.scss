@@ -3,29 +3,66 @@
 // =============================================================================
 // button, input[type="submit"], input[type="reset"], input[type="button"],
 // plus the grouping rules that join adjacent controls into one shape.
+//
+// The top-right and bottom-left corners are cut with clip-path on the button
+// itself, so input buttons (void elements, with no pseudo-elements) get the
+// cut too, and ::before and ::after are free. Anything drawn with them is
+// clipped to the button's shape, as is an outline, so focus shows inside: the
+// edge (border plus the cut-edge diagonals, which carry it across the cuts)
+// turns the text color and doubles in width.
+//
+// Each corner's cut is its own custom property, so the group rules below only
+// zero one.
 // =============================================================================
 
+@use "sass:map";
 @use "../mixins";
+
+$button: 'button, input[type="submit"], input[type="reset"], input[type="button"]';
+
+$cuts: (
+  top-right: var(--_cut-top-right),
+  bottom-left: var(--_cut-bottom-left),
+);
 
 // ---------------------------------------------------------------------------
 // Buttons (button, submit, reset)
 // ---------------------------------------------------------------------------
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
+#{$button} {
+  --lunar-cut-size: var(--lunar-space-2);
+  --_cut-top-right: var(--lunar-cut-size);
+  --_cut-bottom-left: var(--lunar-cut-size);
+  // Transparent at rest: the border keeps buttons the size of the fields
+  --_button-edge: transparent;
+  --_button-edge-width: var(--lunar-border-width);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  // The label is smaller than a field's text, so the height no longer comes
+  // out at the control height by itself; this keeps buttons level with the
+  // fields they group with
+  min-height: var(--lunar-control-height);
   padding: var(--lunar-space-2) var(--lunar-space-4);
-  font-size: var(--lunar-text-base);
-  font-weight: var(--lunar-font-medium);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-sm);
+  font-weight: var(--lunar-font-bold);
   line-height: var(--lunar-leading-normal);
-  // color: var(--lunar-bg);
-  // color: var(--lunar-light), var(--lunar-dark);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
   cursor: pointer;
   background-color: var(--lunar-accent);
-  border: var(--lunar-border-width) solid transparent;
+  border: var(--lunar-border-width) solid var(--_button-edge);
+  clip-path: mixins.cut-corner-polygon($cuts);
+  background-image: mixins.cut-edge-images(
+    map.keys($cuts),
+    var(--_button-edge),
+    var(--_button-edge-width)
+  );
+  background-position: mixins.cut-edge-positions(map.keys($cuts));
+  background-size: mixins.cut-edge-sizes($cuts);
+  background-repeat: no-repeat;
+  background-origin: border-box;
   transition: background-color var(--lunar-transition-fast);
   margin-bottom: var(--lunar-space-4);
 
@@ -41,63 +78,18 @@ input[type="button"] {
     transform: translateY(1px);
   }
 
+  // The border can't grow without resizing the button, so an inset shadow
+  // adds the second pixel along the straight edges
+  &:focus-visible {
+    --_button-edge: var(--lunar-fg);
+    --_button-edge-width: calc(var(--lunar-border-width) * 2);
+
+    box-shadow: inset 0 0 0 var(--lunar-border-width) var(--_button-edge);
+  }
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-}
-
-// Cut corners, for <button> only: the mixin draws the border and fill with
-// ::before/::after, and input is a void element, so it has neither.
-button {
-  --lunar-cut-size: var(--lunar-space-3);
-  --lunar-cut-bg: var(--lunar-accent);
-  --lunar-cut-border-color: transparent;
-  --_button-ring: 3px;
-
-  @include mixins.cut-corner-border((bottom-left, top-right));
-
-  // The mixin sets border: 0; keep the transparent border so buttons and
-  // input buttons are the same size, and push the layers out to cover it
-  & {
-    border: var(--lunar-border-width) solid transparent;
-  }
-
-  // Both layers cover the whole border box. The border is transparent, so the
-  // fill can use the full cut size instead of the mixin's inset one.
-  &::before,
-  &::after {
-    inset: calc(var(--lunar-border-width) * -1);
-  }
-
-  &::after {
-    --_cut-inner: var(--_cut-size);
-  }
-
-  // The fill is the mixin's ::after, so states change --lunar-cut-bg. The host
-  // background must stay transparent, or it would square off the cut corner.
-  &:hover:not(:disabled) {
-    background-color: transparent;
-    --lunar-cut-bg: color-mix(
-      in oklch,
-      var(--lunar-accent) 85%,
-      var(--lunar-fg)
-    );
-  }
-
-  // Focus ring: grow the mixin's border layer outwards and recolor it, so the
-  // ring follows the cut corner instead of boxing it in
-  &:focus-visible {
-    box-shadow: none;
-
-    &::before {
-      inset: calc((var(--_button-ring) + var(--lunar-border-width)) * -1);
-      background-color: color-mix(
-        in oklch,
-        var(--lunar-accent) 40%,
-        transparent
-      );
-    }
   }
 }
 
@@ -106,49 +98,37 @@ button {
 // ---------------------------------------------------------------------------
 // Adjacent buttons drop their inner cuts, so a row reads as one group: only
 // the first keeps the bottom-left cut, only the last keeps the top-right one.
-// Input buttons count as neighbours, but can't show cuts themselves (a void
-// element has no pseudo-elements), so `button` is always the subject here.
-// Order matters — the "middle" rule below must come last.
+// A button in the middle matches both rules and is square. Any form control
+// counts as a neighbour. The cut is 0px, not 0: the polygon subtracts it from
+// 100%, and calc() can't mix a unitless 0 with a percentage.
 $control: "button, input, select, textarea";
 
 // Not the first: no bottom-left cut
-:is(#{$control}) + button {
-  &::before {
-    clip-path: mixins.cut-corner-polygon(var(--_cut-size), (top-right));
-  }
-
-  &::after {
-    clip-path: mixins.cut-corner-polygon(var(--_cut-inner), (top-right));
-  }
+:is(#{$control}) + :is(#{$button}) {
+  --_cut-bottom-left: 0px;
 }
 
 // Not the last: no top-right cut
-button:has(+ :is(#{$control})) {
-  &::before {
-    clip-path: mixins.cut-corner-polygon(var(--_cut-size), (bottom-left));
-  }
-
-  &::after {
-    clip-path: mixins.cut-corner-polygon(var(--_cut-inner), (bottom-left));
-  }
+:is(#{$button}):has(+ :is(#{$control})) {
+  --_cut-top-right: 0px;
 }
 
-// In the middle: square on both
-:is(#{$control}) + button:has(+ :is(#{$control})) {
-  &::before,
-  &::after {
-    clip-path: none;
-  }
+// A field before a button squares the corners it joins on. The field rules
+// are far more specific than this one, so it sets the custom property their
+// right-hand radius reads instead of the radius itself.
+:is(input, select, textarea):has(+ :is(#{$button})) {
+  --_field-end-radius: 0;
 }
 
 input[type="reset"] {
+  --_button-edge: var(--lunar-border);
+
   background-color: color-mix(
     in oklch,
     var(--lunar-bg) 90%,
     var(--lunar-muted)
   );
   color: var(--lunar-fg);
-  border-color: var(--lunar-border);
 
   &:hover:not(:disabled) {
     background-color: color-mix(
