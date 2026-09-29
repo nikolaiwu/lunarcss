@@ -12,6 +12,12 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-29
+
+### Fixed
+
+- TypeScript no longer flags `import "@nikolaiwu/lunarcss"` (or `/fonts`, `/layout`) with "Cannot find module or type declarations for side-effect import" (TS2882, under `noUncheckedSideEffectImports`, as in new Next.js projects): the CSS exports now point TypeScript at an empty declaration file
+
 ## [0.1.0] - 2026-09-29
 
 Initial release.

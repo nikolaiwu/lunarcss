@@ -5,10 +5,20 @@
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "style": "dist/lunarcss.min.css",
+  "types": "types/stylesheet.d.ts",
   "exports": {
-    ".": "./dist/lunarcss.min.css",
-    "./fonts": "./dist/lunarcss-fonts.min.css",
-    "./layout": "./dist/lunarcss-layout.min.css",
+    ".": {
+      "types": "./types/stylesheet.d.ts",
+      "default": "./dist/lunarcss.min.css"
+    },
+    "./fonts": {
+      "types": "./types/stylesheet.d.ts",
+      "default": "./dist/lunarcss-fonts.min.css"
+    },
+    "./layout": {
+      "types": "./types/stylesheet.d.ts",
+      "default": "./dist/lunarcss-layout.min.css"
+    },
     "./scss": "./src/scss/main.scss",
     "./scss/layout": "./src/scss/layout.scss",
     "./package.json": "./package.json"
@@ -19,6 +29,7 @@
     "dist/lunarcss-layout.min.css",
     "dist/fonts",
     "src/scss",
+    "types",
     "!src/scss/showcase.scss",
     "!src/scss/showcase",
     "!src/scss/fonts.scss"
