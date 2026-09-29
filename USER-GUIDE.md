@@ -48,10 +48,12 @@ The `@0.1` in the URL is a version range: you get fixes automatically, but not b
 npm install @nikolaiwu/lunarcss
 ```
 
-Then import it in a JavaScript bundler:
+Then import it in a JavaScript bundler. The [fonts](#fonts) and [layout](#layout) stylesheets are optional; the layout goes after the theme:
 
 ```javascript
+import "@nikolaiwu/lunarcss/fonts"; // optional
 import "@nikolaiwu/lunarcss";
+import "@nikolaiwu/lunarcss/layout"; // optional, after the theme
 ```
 
 Or link the file directly:
@@ -335,6 +337,18 @@ So a full page needs no classes at all:
   <aside>…</aside>
   <footer>…</footer>
 </body>
+```
+
+### Without the layout stylesheet
+
+The theme doesn't pad the page, so without the layout stylesheet your content runs to the screen edges. If a gutter is all you want, a few lines of your own CSS will do:
+
+```css
+body {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1rem;
+}
 ```
 
 ### Layout tokens
@@ -666,6 +680,16 @@ Load your font however you like (ideally self-hosted), then point the token at i
 
 See [Fonts](#fonts) for the bundled Space Grotesk and Space Mono.
 
+### Adjust Spacing
+
+The spacing scale (`--lunar-space-1` to `--lunar-space-24`) sets every gap and padding. Change a step and everything built on it follows:
+
+```css
+:root {
+  --lunar-space-4: 1.25rem; /* 20px instead of 16px */
+}
+```
+
 ### Increase Base Font Size
 
 ```css
@@ -756,7 +780,3 @@ LunarCSS doesn't include print styles. Add your own `@media print` rules if you 
 - **Documentation**: [github.com/nikolaiwu/lunarcss](https://github.com/nikolaiwu/lunarcss)
 - **GitHub Issues**: [github.com/nikolaiwu/lunarcss/issues](https://github.com/nikolaiwu/lunarcss/issues)
 - **Changelog**: [CHANGELOG.md](CHANGELOG.md)
-
----
-
-Made with 🌙 by the LunarCSS team
