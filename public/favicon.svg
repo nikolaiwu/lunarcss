@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Accent box, top-right corner cut like the buttons. Every edge is on an
+       even unit, so it lands on whole pixels at 16px and 32px. -->
+  <path d="M0 0H24L32 8V32H0Z" fill="#ff5623"/>
+  <!-- "L", as two bars: a favicon can't load the theme's fonts -->
+  <path d="M8 6H14V20H24V26H8Z" fill="#2a2c2f"/>
+</svg>

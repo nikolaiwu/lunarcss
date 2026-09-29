@@ -76,6 +76,6 @@ Initial release, to be published as 0.1.0.
 
 **Showcase and demo** (not part of the package)
 
-- The showcase documents every element next to its source and carries social tags and a social image; the Acme Robotics demo is a classless landing page, kept out of search results with `noindex`
+- The showcase documents every element next to its source and carries social tags, a social image and a favicon; the Acme Robotics demo is a classless landing page, kept out of search results with `noindex`
 
 [Unreleased]: https://github.com/nikolaiwu/lunarcss/commits/main
