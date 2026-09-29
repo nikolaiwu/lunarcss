@@ -28,7 +28,7 @@ Initial release, to be published as 0.1.0.
 **Text**
 
 - Headings: `h1` to `h3` carry a mark of one, two and three slanted bars
-- Paragraphs hang a full-height bracket in the margin, so the text stays aligned
+- Paragraphs hang a full-height bracket in the margin, so the text stays aligned; an `address` is mono and bracketed on both sides, with a tick on the left bracket for every line
 - Blockquotes: a striped band down the left edge and a tinted panel with bracketed right corners; the source is set in mono
 - `pre`: cut corners, corner brackets and a muted edge that turns accent when a scrolling block has focus; inline `code` and `kbd` are cut-corner chips; `mark` has a cut corner
 - Links are chips (a tint with an accent underline and a cut corner) that fill with the accent from the left on hover and focus, on every line of a link that wraps; links that open a new tab get an arrow, announced to screen readers

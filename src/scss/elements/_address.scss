@@ -1,0 +1,84 @@
+// =============================================================================
+// LUNARCSS - Address
+// =============================================================================
+// Styles for the address element: contact details, read as data. The text is
+// mono, set in full-height brackets on both sides, "[" and "]", sized to the
+// text. The left bracket carries a tick for every line, so the lines of an
+// address (split with <br>) show on its spine like a ruler.
+//
+// Like the paragraph, the box reaches left by --_address-offset (negative
+// margin) and pads the same amount back, so the text lines up with
+// paragraphs while the left bracket sits in the margin.
+//
+// The brackets reach --_address-extend past the text at both ends: vertical
+// padding, with margins above and below so they don't run into neighbours.
+//
+// The ticks are one background layer as tall as the text (the box minus the
+// padding): a repeating gradient with the stroke across the middle of every
+// line (lh is the line height), so it follows the line count without knowing
+// it, and none land in the padding however far the brackets reach.
+// =============================================================================
+
+@use "sass:list";
+@use "../mixins";
+
+$address-corners: (left top, left bottom, right top, right bottom);
+
+$ticks: repeating-linear-gradient(
+  transparent 0 calc(0.5lh - var(--lunar-border-width) / 2),
+  var(--_bracket-color) 0 calc(0.5lh + var(--lunar-border-width) / 2),
+  transparent 0 1lh
+);
+
+// ---------------------------------------------------------------------------
+// Address
+// ---------------------------------------------------------------------------
+address {
+  --_address-offset: var(--lunar-space-2);
+  --_address-tick: var(--lunar-space-1);
+  // How far the brackets reach past the text, above and below
+  --_address-extend: var(--lunar-space-1);
+  --_bracket-color: var(--lunar-muted);
+  --_bracket-size: var(--lunar-space-2);
+  --_bracket-inset: var(--lunar-space-0);
+
+  width: fit-content;
+  margin-block: var(--lunar-space-4);
+  margin-left: calc(var(--_address-offset) * -1);
+  padding: var(--_address-extend) var(--_address-offset);
+  font-family: var(--lunar-font-mono);
+  font-size: var(--lunar-text-sm);
+  font-style: normal;
+
+  // Ticks first. They start on the spine, so the layer is as wide as the
+  // stroke plus their reach.
+  background-image: list.join(
+    list.append((), $ticks, comma),
+    mixins.bracket-images($corners: $address-corners),
+    comma
+  );
+  background-position: list.join(
+    list.append((), left var(--_address-extend), comma),
+    mixins.bracket-positions($corners: $address-corners),
+    comma
+  );
+  background-size: list.join(
+    list.append(
+      (),
+      calc(var(--lunar-border-width) + var(--_address-tick))
+        calc(100% - var(--_address-extend) * 2),
+      comma
+    ),
+    mixins.bracket-sizes($corners: $address-corners, $vertical-size: 100%),
+    comma
+  );
+  background-repeat: no-repeat;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

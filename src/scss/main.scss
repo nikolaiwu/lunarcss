@@ -41,6 +41,7 @@
   // ---------------------------------------------------------------------------
   @include meta.load-css("elements/section");
   @include meta.load-css("elements/p");
+  @include meta.load-css("elements/address");
   @include meta.load-css("elements/headings");
   @include meta.load-css("elements/hr");
   @include meta.load-css("elements/blockquote");

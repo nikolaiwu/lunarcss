@@ -76,7 +76,7 @@ lunarcss/
 │   │   │   ├── _striped-label.scss # text set into a striped rule
 │   │   │   └── _dotted.scss      # dot grid
 │   │   └── elements/             # one partial per element (or tight pair)
-│   │       ├── _section.scss, _p.scss, _headings.scss, _hr.scss
+│   │       ├── _section.scss, _p.scss, _address.scss, _headings.scss, _hr.scss
 │   │       ├── _blockquote.scss, _pre.scss, _a.scss, _inline.scss
 │   │       ├── _mark.scss, _code.scss, _kbd.scss, _samp.scss, _var.scss
 │   │       ├── _lists.scss, _tables.scss, _fieldset.scss, _forms.scss
