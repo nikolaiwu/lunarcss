@@ -169,6 +169,27 @@ LunarCSS styles all standard HTML elements automatically. Just write semantic HT
 
 No classes needed!
 
+### Pseudo-elements the theme uses
+
+Some elements are drawn partly with `::before` and `::after`. On these, the theme owns the pseudo-element, so adding your own `content` there replaces part of the element's look:
+
+| Element                               | Uses                  | For                          |
+| ------------------------------------- | --------------------- | ---------------------------- |
+| `article`, `dialog`, `[popover]`      | `::before`, `::after` | Cut-corner border and fill   |
+| `article > footer`, `dialog > footer` | `::before`            | Striped band                 |
+| `h1`, `h2`, `h3`                      | `::before`            | Slanted-bar mark             |
+| `ul > li`                             | `::before`            | Tick bullet                  |
+| `dt`                                  | `::after`             | Dotted leader                |
+| `legend`, `figcaption`                | `::before`, `::after` | Striped rule around the text |
+| `blockquote`                          | `::before`            | Tinted panel                 |
+| `blockquote cite`                     | `::before`            | The dash before the source   |
+| `code`, `kbd`                         | `::before`, `::after` | Cut-corner chip              |
+| `summary`                             | `::after`             | Plus/minus marker            |
+| `q`                                   | `::before`, `::after` | Quotation marks              |
+| `a[target="_blank"]`                  | `::after`             | New-tab arrow                |
+
+Everything else, buttons and links included, leaves both free.
+
 ### Wide tables
 
 Tables fill the width and wrap their cell text. If a table is still too wide for small screens, wrap it in any element (or a `<figure>`, if it has a caption outside the table), and the wrapper scrolls sideways:
@@ -217,6 +238,8 @@ By default, the top-right and bottom-left corners are cut at 45°. Adjust the lo
 ```
 
 The border and fill are drawn with the card's `::before` and `::after` pseudo-elements, so don't use those on `article` or `dialog` for anything else.
+
+Popovers (`[popover]`) share the same cut, on the top-right corner only, and all four overrides. Buttons are cut differently (with `clip-path` on the button itself), so of these they only follow `--lunar-cut-size`, and only when it's set on the button: they set their own size, so a value on `:root` doesn't reach them.
 
 ### Dialogs
 
@@ -464,10 +487,10 @@ The remaining color tokens are listed below. Most use `light-dark()`, so one def
 | `--lunar-fg`       | Primary text (built from `--lunar-light` / `--lunar-dark`)                 |
 | `--lunar-border`   | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)         |
 | `--lunar-muted`    | Secondary text, placeholders (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-accent`   | Links, interactive elements, focus                                         |
-| `--lunar-success`  | Success state                                                              |
-| `--lunar-warning`  | Warning state                                                              |
-| `--lunar-error`    | Error state, and an invalid field's border                                 |
+| `--lunar-accent`   | Buttons, link underlines, checked controls, focus, the text caret          |
+| `--lunar-success`  | Success state, a valid field's border, a meter in its optimum range        |
+| `--lunar-warning`  | Warning state, a meter in its suboptimal range                             |
+| `--lunar-error`    | Error state, an invalid field's border, a meter far from its optimum       |
 | `--lunar-info`     | Informational state                                                        |
 | `--lunar-backdrop` | Dim behind an open `<dialog>` (the page color at half opacity)             |
 
@@ -483,7 +506,7 @@ For the default values, see `src/scss/_config.scss`.
 }
 ```
 
-Muted text is still text, so keep it readable. The default gives about 4:1 contrast. Use `65%` or more to meet WCAG AA (4.5:1) for small text in both modes.
+Muted text is still text, so keep it readable. With the default colors, the default `50%` gives about 3.1:1 contrast in light mode and 3.7:1 in dark mode: enough for large text, but below WCAG AA (4.5:1) for small text. Use `65%` or more to meet AA in both modes. (If you change the main colors, check the contrast again.)
 
 Override any token to rebrand. For example, to change the accent to purple:
 
@@ -594,6 +617,8 @@ img {
 
 ### Shadows
 
+The theme itself draws no shadows (a rectangular shadow would show past the cut corners). The scale is there for your own components.
+
 ```css
 :root {
   --lunar-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -613,10 +638,13 @@ img {
   --lunar-transition-fast: 150ms ease;
   --lunar-transition-base: 200ms ease;
   --lunar-transition-slow: 300ms ease;
+  --lunar-transition-slower: 600ms ease;
 }
 ```
 
 ### Z-Index
+
+Like the shadows, a scale for your own components; the theme doesn't set `z-index` itself.
 
 ```css
 :root {
@@ -627,6 +655,47 @@ img {
   --lunar-z-modal: 1050;
   --lunar-z-popover: 1060;
   --lunar-z-tooltip: 1070;
+}
+```
+
+### Controls
+
+Form controls share one height, so a field, a button, a checkbox and a range line up in a row. The other control sizes are derived from it, so changing the control height or the tokens it's built from resizes them all together.
+
+```css
+:root {
+  /* One line of base text, plus vertical padding and border (42px by default) */
+  --lunar-control-height: calc(
+    var(--lunar-text-base) * var(--lunar-leading-normal) +
+      var(--lunar-space-2) * 2 + var(--lunar-border-width) * 2
+  );
+
+  /* Checkbox switch and radio */
+  --lunar-checkbox-width: calc(var(--lunar-control-height) * 0.6);
+  --lunar-checkbox-padding: var(--lunar-space-1);
+  --lunar-radio-size: var(--lunar-checkbox-width);
+  --lunar-radio-padding: var(--lunar-space-1);
+
+  /* Range, progress and meter: the bar takes two thirds of the control
+     height; the gap and the tick ruler below it share the rest */
+  --lunar-bar-height: calc(var(--lunar-control-height) * 2 / 3);
+  --lunar-bar-gap: var(--lunar-space-1);
+  --lunar-bar-tick-height: calc(
+    (
+        var(--lunar-control-height) - var(--lunar-bar-height) -
+          var(--lunar-bar-gap)
+      ) *
+      0.65
+  );
+  /* Between the bar's border and the fill or thumb inside it */
+  --lunar-bar-inset: calc(var(--lunar-border-width) * 2);
+  /* Track color where the browser has no bordered track to style (Firefox's
+     progress and meter) */
+  --lunar-bar-track: color-mix(
+    in oklch,
+    var(--lunar-bg) 85%,
+    var(--lunar-muted)
+  );
 }
 ```
 
@@ -657,7 +726,7 @@ img {
 :root {
   --lunar-light: #faf9f7;
   --lunar-dark: #1c1917;
-  --lunar-muted-mix: 45%; /* softer secondary text */
+  --lunar-muted-mix: 65%; /* muted text at WCAG AA contrast */
 }
 ```
 
@@ -763,9 +832,18 @@ import "./your-styles.css"; // your styles override the theme, whatever the orde
 2. **Check system preference**: Without `data-theme`, LunarCSS follows `prefers-color-scheme` via the `light-dark()` CSS function
 3. **Browser support**: `light-dark()` requires a modern browser (Chrome 123+, Firefox 120+, Safari 17.5+). Older browsers don't fall back to either theme: the color tokens that use it are ignored, and those elements get browser default colors.
 
-### Forms Look Different
+### Parts of a Form Still Look Native
 
-Different browsers render form elements differently. LunarCSS restyles the controls themselves — the checkbox switch, radio, range, progress, meter, color swatch and the field brackets are all drawn with backgrounds, since form controls have no pseudo-elements to use — but parts owned by the browser, such as the date picker panel and the select's dropdown list, can't be styled and still look native.
+LunarCSS restyles the controls themselves, the same in every supported browser:
+
+- **Text fields, textareas and selects:** corner brackets that grow on focus, a tick ruler that slides in under the field, mono values and an accent caret. A select, and an input with a `<datalist>`, get the theme's chevron.
+- **Checkboxes and radios:** a vertical switch whose knob slides up and fills with the accent; a circle that fills with an animated sweep.
+- **Range, progress and meter:** a bar over a tick ruler. Progress and meter fill with stripes; the meter's color shows how its value sits against `low`, `high` and `optimum`.
+- **Color:** the chosen color, masked to a droplet in a bordered chip.
+- **Buttons:** cut corners and mono labels. Adjacent controls join into one group, dropping the cuts and rounded corners where they touch.
+- **Number spinners, the date and time picker buttons and the file input's button** follow the theme too.
+
+Parts the browser draws in its own layer can't be styled from CSS, so they keep the system look: the date and time picker panels, a select's dropdown list, a datalist's suggestions, and the file chooser dialog.
 
 Fields flag themselves after you fill them in and move on: `:user-invalid` turns the border the error color, `:user-valid` turns the border the success color. Neither matches an untouched field, so an empty required field isn't red before it's been used.
 
