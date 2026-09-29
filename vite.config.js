@@ -120,6 +120,10 @@ export default defineConfig(({ mode }) => {
       minify: isProduction ? "esbuild" : false,
       // Never inline fonts as data URIs; keep them as separate, cacheable files
       assetsInlineLimit: 0,
+      // The pages' only script (theme-toggle.js) imports nothing, and every
+      // supported browser has native modulepreload, so the polyfill Vite adds
+      // to each entry script would never run
+      modulePreload: { polyfill: false },
 
       rollupOptions: {
         input: {
