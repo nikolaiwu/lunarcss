@@ -51,6 +51,9 @@ $cuts: (
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
   cursor: pointer;
+  // Set, not left to the browser: iOS Safari's default for <button> is its
+  // system blue, where the others use the page's text color
+  color: var(--lunar-fg);
   background-color: var(--lunar-accent);
   border: var(--lunar-border-width) solid var(--_button-edge);
   clip-path: mixins.cut-corner-polygon($cuts);
