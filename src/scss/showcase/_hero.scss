@@ -26,6 +26,25 @@
   margin-bottom: var(--lunar-space-6);
 }
 
+// CDN links: each a read-only field grouped with its copy button (the layout
+// stylesheet's input group), under its label. Below the mark and the copy,
+// across both columns, centred.
+.hero-cdn {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 60ch;
+
+  > div {
+    margin-bottom: var(--lunar-space-3);
+  }
+
+  // Wide enough for "Selected", so the row doesn't shift as the label changes
+  button {
+    min-width: 8em;
+  }
+}
+
 .hero-mark {
   display: grid;
   place-items: center;

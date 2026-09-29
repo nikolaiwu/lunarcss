@@ -86,7 +86,8 @@ lunarcss/
 │   │       └── _article.scss
 │   ├── index.html                # Showcase: every element, with its source
 │   ├── demo.html                 # Acme Robotics: a classless landing page
-│   └── theme-toggle.js           # Shared light/dark toggle for both pages
+│   ├── theme-toggle.js           # Shared light/dark toggle for both pages
+│   └── copy.js                   # Copy buttons for the showcase's CDN links
 ├── public/                       # Copied as is: favicon, social image, robots.txt
 ├── design/                       # Social image source and its generator
 ├── docs/                         # How the theme is built

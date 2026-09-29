@@ -58,6 +58,7 @@
       if (saved) document.documentElement.setAttribute("data-theme", saved);
     </script>
     <script type="module" src="./theme-toggle.js"></script>
+    <script type="module" src="./copy.js"></script>
   </head>
   <body>
     <div class="showcase">
@@ -199,6 +200,53 @@
             See a demo page:
             <a href="./demo.html">Acme Robotics demo</a> — a landing page built
             without a single class.
+          </p>
+        </div>
+        <div class="hero-cdn">
+          <h2>Install</h2>
+          <label for="cdn-fonts"
+            >Fonts <small>(optional, load first)</small></label
+          >
+          <div>
+            <input
+              id="cdn-fonts"
+              type="url"
+              readonly
+              value="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-fonts.min.css"
+            />
+            <button type="button" data-copy="cdn-fonts">Copy</button>
+          </div>
+          <label for="cdn-theme">Theme</label>
+          <div>
+            <input
+              id="cdn-theme"
+              type="url"
+              readonly
+              value="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
+            />
+            <button type="button" data-copy="cdn-theme">Copy</button>
+          </div>
+          <label for="cdn-layout"
+            >Layout <small>(optional, load last)</small></label
+          >
+          <div>
+            <input
+              id="cdn-layout"
+              type="url"
+              readonly
+              value="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-layout.min.css"
+            />
+            <button type="button" data-copy="cdn-layout">Copy</button>
+          </div>
+          <p>
+            <small>
+              The full install guide, npm included, is in the
+              <a
+                href="https://github.com/nikolaiwu/lunarcss#quick-start"
+                target="_blank"
+                >README on GitHub</a
+              >.
+            </small>
           </p>
         </div>
       </header>
