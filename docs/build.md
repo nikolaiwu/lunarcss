@@ -12,4 +12,5 @@ Vite root is `src/` ([vite.config.js](../vite.config.js)), with five Rollup inpu
 
 - `base: "./"` keeps asset URLs relative, so the fonts CSS works from any CDN path.
 - A custom `assetFileNames` names each stylesheet `dist/<name>.min.css` in production and `dist/<name>.css` in development, and writes font files to `dist/fonts/` without hashes. It matches on `lunarcss.css`, because Vite names the asset after the input key, not the source file. `package.json` (`style`, `exports`, `files`), the docs' CDN URLs and the release workflow all depend on the `.min.css` names.
+- `base: "./"` is also what lets the site work from GitHub Pages' `/lunarcss/` subpath. [.github/workflows/pages.yml](../.github/workflows/pages.yml) builds and deploys `dist/` there on every `v*` tag (next to the npm release, so the site shows the published theme) or by hand from the Actions tab. It deploys through the `github-pages` environment, which needs a `v*` tag rule to accept tag deploys.
 - The `banner()` plugin adds `/*! LunarCSS vX.Y.Z … */` after `@charset`, which must stay the first statement. `fontLicenses()` copies the OFL license texts into `dist/fonts/`.

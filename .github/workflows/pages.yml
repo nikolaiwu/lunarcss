@@ -1,0 +1,61 @@
+# Builds the showcase and the demo and deploys them to GitHub Pages
+# (https://nikolaiwu.github.io/lunarcss/) when a version tag (v*) is pushed,
+# alongside the npm release, so the site shows the published theme rather than
+# unreleased work on main. It can also be run by hand from the Actions tab.
+#
+# Needs, once: Settings → Pages → Source: GitHub Actions, and a v* tag rule on
+# the github-pages environment (Settings → Environments), which otherwise only
+# accepts deploys from the default branch.
+
+name: Pages
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read # check out the code
+  pages: write # publish the site
+  id-token: write # prove to Pages that the deploy comes from this workflow
+
+# One deploy at a time. A newer one waits rather than cancelling a deploy
+# that's already running, which could leave the site half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Stylesheets, fonts, both pages and public/ (social image, robots.txt),
+      # all with relative URLs, so they work under /lunarcss/
+      - run: pnpm build
+        env:
+          # Read by the analytics plugin once it's added; unset, nothing reads it
+          CF_ANALYTICS_TOKEN: ${{ vars.CF_ANALYTICS_TOKEN }}
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

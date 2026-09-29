@@ -91,7 +91,9 @@ lunarcss/
 ├── design/                       # Social image source and its generator
 ├── docs/                         # How the theme is built
 ├── vite/demo-source.js           # Build-time source previews for the showcase
-├── .github/workflows/release.yml # Publish to npm + GitHub release on tags
+├── .github/workflows/
+│   ├── release.yml               # Publish to npm + GitHub release on tags
+│   └── pages.yml                 # Deploy the showcase to GitHub Pages on tags
 ├── vite.config.js
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
@@ -107,4 +109,4 @@ For maintainers. Versions follow [Semantic Versioning](https://semver.org/); [CH
 2. Bump the version: `pnpm release:patch`, `pnpm release:minor` or `pnpm release:major`. This updates `package.json`, commits and creates a `vX.Y.Z` tag. The working tree must be clean.
 3. Push the commit and tag: `git push --follow-tags`.
 
-Pushing the tag runs the [release workflow](.github/workflows/release.yml), which publishes to npm (and so to the CDNs) and creates a GitHub release with `lunarcss.min.css` attached.
+Pushing the tag runs the [release workflow](.github/workflows/release.yml), which publishes to npm (and so to the CDNs) and creates a GitHub release with `lunarcss.min.css` attached, and the [Pages workflow](.github/workflows/pages.yml), which deploys the showcase and demo to https://nikolaiwu.github.io/lunarcss/.
