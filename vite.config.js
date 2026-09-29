@@ -81,20 +81,15 @@ function analytics() {
     transformIndexHtml(html) {
       if (!token) return html.replace(marker, "");
 
-      return {
-        html: html.replace(marker, notice),
-        tags: [
-          {
-            tag: "script",
-            attrs: {
-              defer: true,
-              src: "https://static.cloudflareinsights.com/beacon.min.js",
-              "data-cf-beacon": JSON.stringify({ token }),
-            },
-            injectTo: "body",
-          },
-        ],
-      };
+      // Written out rather than passed as a tag descriptor: Vite serializes
+      // attribute values with JSON.stringify, which would backslash-escape the
+      // JSON's quotes, and HTML has no backslash escapes. Single quotes around
+      // the attribute leave the JSON intact, as in Cloudflare's own snippet.
+      const beacon = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${JSON.stringify({ token })}'></script>`;
+
+      return html
+        .replace(marker, notice)
+        .replace("</body>", `${beacon}\n</body>`);
     },
   };
 }
