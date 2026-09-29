@@ -8,7 +8,10 @@
 // sit in that padding and the text stays where it was.
 //
 // The two left marks' vertical strokes span the full height ($vertical-size
-// 100%, with no inset), so they join into one bracket down the paragraph.
+// 100%, with no inset), so they join into one bracket down the paragraph. The
+// bracket reaches --_p-extend past the text at both ends (vertical padding),
+// as the address's does. Paragraphs come in runs and the padding adds to the
+// gap between them, so it's kept small.
 // =============================================================================
 
 @use "../mixins";
@@ -20,13 +23,15 @@ $p-corners: (left top, left bottom);
 // ---------------------------------------------------------------------------
 p {
   --_p-offset: var(--lunar-space-2);
+  // How far the bracket reaches past the text, above and below
+  --_p-extend: var(--lunar-space-1);
   --_bracket-color: var(--lunar-muted);
   --_bracket-size: var(--lunar-space-2);
   --_bracket-inset: var(--lunar-space-0);
 
   margin-bottom: var(--lunar-space-4);
   margin-left: calc(var(--_p-offset) * -1);
-  padding-left: var(--_p-offset);
+  padding: var(--_p-extend) 0 var(--_p-extend) var(--_p-offset);
   // The padding comes out of the width (border-box), so add it back
   max-width: calc(var(--lunar-content-width) + var(--_p-offset));
 
