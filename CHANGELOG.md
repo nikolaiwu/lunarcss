@@ -16,25 +16,65 @@ Initial release, to be published as 0.1.0.
 
 ### Added
 
-- Classless styles for headings, text, inline elements, lists, tables, forms, media and interactive elements
-- Buttons: `<button>` and input buttons are cut at the top-right and bottom-left, with mono, bold, uppercase labels. Put controls next to each other and they group up — only the first keeps its bottom-left cut and only the last its top-right one, so the row reads as one shape
-- Checkboxes are vertical switches (knob slides from bottom to top, filling with the accent) and radios are circles that fill with an animated conic sweep; both are as tall as the other controls via `--lunar-control-height`
-- Range, progress and meter are a bar over a tick ruler, the same total height as the other controls; meter colors its fill by how the value sits against `low`/`high`/`optimum`
-- Text fields, textareas and selects get corner brackets that grow and turn accent on focus, with the bar's tick ruler sliding in under them; values are set in the mono font, with an accent caret
-- Number spinners, the date/time picker button and the focused segment of a date value follow the theme; an input backed by a `<datalist>` shows the select's chevron
-- Selected entries in a list box use the accent, whether or not the select has focus
-- Color inputs show the value as a droplet: the swatch is masked to an icon inside a bordered chip, sized like the other controls
-- Cards: every `<article>` is a cut-corner bordered box with optional `<header>` (dashed rule) / `<footer>` (striped band), and a parent containing only articles lays them out as a responsive grid (`--lunar-card-min-width`). `<dialog>` shares the same card look
-- Optional layout stylesheet `lunarcss-layout.min.css`: classless page structure (centred page, header with nav, horizontal nav lists, `main` + `aside` sidebar, footer row), button/input groups (`--lunar-button-gap`) and the card grid, which moved here from the theme, in its own `lunarcss-layout` cascade layer
-- Optional self-hosted fonts: `lunarcss-fonts.min.css` (Space Grotesk and Space Mono, SIL OFL 1.1, woff2 subsets, no Google requests). `--lunar-font-sans` / `--lunar-font-mono` list them first and fall back to system fonts
+**Foundations**
+
+- Classless styles for every standard HTML element, using element selectors only
 - All theme styles live in the `lunarcss` cascade layer, so your own CSS and layered frameworks (e.g. Tailwind v4 utilities) override the theme regardless of specificity or load order
-- Fields flag themselves once they've been filled in and left: `:user-invalid` turns the border and brackets the error color (and keeps them there while the value is being fixed), `:user-valid` turns the border the success color
-- `--lunar-backdrop` for the dim behind a `<dialog>`, derived from the page color
-- Tables stay `display: table` and fill the width at every size; a wide table scrolls inside a wrapper that holds only the table, or inside a `<figure>`
-- Forced colors (Windows contrast themes): tokens map to system colors, controls and card decoration drawn with backgrounds opt out of forcing so they stay visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
-- The theme no longer pads the `body` or hides horizontal overflow on `html`: padding is placement, so the page gutter moved to the optional layout stylesheet as `--lunar-page-gutter`, and wide content scrolls instead of being clipped
-- Light and dark themes via `light-dark()`, with `data-theme` to force either mode
-- `--lunar-light` / `--lunar-dark` main color tokens, plus semantic, typography, spacing, radius, transition, z-index and content-width tokens
-- Published to npm as `@nikolaiwu/lunarcss`, with the compiled CSS and SCSS source
+- Light and dark themes via `light-dark()`, following the system setting; `data-theme` forces either mode on the page or any element
+- Tokens: `--lunar-light` / `--lunar-dark` main colors, semantic colors (`--lunar-muted` mixed from the main colors by `--lunar-muted-mix`), typography, spacing, radius, transition, z-index, control-size and content-width scales
+- The theme styles elements but never places them: it doesn't pad the `body` or hide overflow, so wide content scrolls instead of being clipped
+- Text selection reverses the page colors
+
+**Text**
+
+- Headings: `h1` to `h3` carry a mark of one, two and three slanted bars
+- Paragraphs hang a full-height bracket in the margin, so the text stays aligned
+- Blockquotes: a striped band down the left edge and a tinted panel with bracketed right corners; the source is set in mono
+- `pre`: cut corners, corner brackets and a muted edge that turns accent when a scrolling block has focus; inline `code` and `kbd` are cut-corner chips; `mark` has a cut corner
+- Links are chips (a tint with an accent underline and a cut corner) that fill with the accent from the left on hover and focus, on every line of a link that wraps; links that open a new tab get an arrow, announced to screen readers
+- `hr` is a dotted band
+
+**Lists and tables**
+
+- `ul` bullets are ticks that grow with each nesting level; `ol` numbers are zero-padded mono (`01 /`), then letters, then roman numerals (`@counter-style` `lunar-decimal`, `lunar-alpha`, `lunar-roman`)
+- `dl` reads as a spec sheet: terms in a mono column with a dotted leader, definitions beside them
+- Tables read as a data sheet: a heavy top rule, mono header cells with a tick ruler marking each column, mono row headers, tabular figures and a striped footer band. They stay `display: table` and fill the width; a wide table scrolls inside a wrapper that holds only the table, or inside a `<figure>`
+
+**Forms**
+
+- Text fields, textareas and selects get corner brackets that grow on focus while the border turns accent, and a tick ruler slides in under them; values are mono, with an accent caret. An input backed by a `<datalist>` shows the select's chevron
+- Fields flag themselves once they've been filled in and left: `:user-invalid` turns the border the error color (and keeps it there while the value is being fixed), `:user-valid` the success color
+- Buttons (`<button>` and input buttons) have mono, bold, uppercase labels and cut top-right and bottom-left corners; focus shows as a heavier edge inside the shape. Controls placed next to each other group up: the joins lose their cuts and rounded corners, so the row reads as one shape
+- Checkboxes are vertical switches (the knob slides up and fills with the accent) and radios are circles that fill with an animated sweep
+- Range, progress and meter are a bar over a tick ruler; progress and meter fill with stripes, and the meter's color shows how its value sits against `low` / `high` / `optimum`
+- Color inputs show the value as a droplet in a bordered chip; a disabled one turns muted
+- Fieldsets are open-topped boxes whose legend is set into a striped rule
+- The file input's button, number spinners, the date and time picker buttons and the focused part of a date value follow the theme; a focused file input's dashed border turns solid accent; selected list-box entries use the accent
+- Every control shares `--lunar-control-height`, so fields, buttons, checkboxes and bars line up in a row; `output` sits centred on the surrounding text
+
+**Components**
+
+- Cards: every `<article>` is a cut-corner bordered box with an optional `<header>` (dashed rule) and `<footer>` (striped band); `--lunar-cut-*` tokens adjust the cut, border and fill. `<dialog>` shares the card look, over a `--lunar-backdrop` dim
+- Popovers take the cut-corner border on their top-right corner and sit under the button that opened them, flipping above when there's no room
+- `details` / `summary`: bordered, joined into one list when adjacent, with a plus that turns into a minus and brackets that grow on hover and focus; opening and closing fade the content and, where supported, animate the height
+- `figure` is bordered, with its `figcaption` centred in a striped rule; media are responsive by default
+
+**Optional stylesheets**
+
+- `lunarcss-layout.min.css`: classless page structure (centred page with a gutter, header with nav, horizontal nav lists, `main` + `aside` sidebar, footer row), button and input groups (`--lunar-button-gap`) and a responsive card grid (`--lunar-card-min-width`), in its own `lunarcss-layout` cascade layer
+- `lunarcss-fonts.min.css`: self-hosted Space Grotesk and Space Mono (SIL OFL 1.1, woff2 subsets, no Google requests). `--lunar-font-sans` / `--lunar-font-mono` list them first and fall back to system fonts
+
+**Accessibility**
+
+- Forced colors (Windows contrast themes): tokens map to system colors, decoration drawn with backgrounds opts out of forcing so it stays visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
+- Reduced motion turns off animations and transitions, including the `details` open and close
+
+**Distribution**
+
+- Published to npm as `@nikolaiwu/lunarcss`, with the compiled CSS and the SCSS source, and served by jsDelivr and unpkg
+
+**Showcase and demo** (not part of the package)
+
+- The showcase documents every element next to its source and carries social tags and a social image; the Acme Robotics demo is a classless landing page, kept out of search results with `noindex`
 
 [Unreleased]: https://github.com/nikolaiwu/lunarcss/commits/main
