@@ -64,6 +64,7 @@ lunarcss/
 │   │   ├── themes/               # [data-theme] → color-scheme
 │   │   ├── base/
 │   │   │   ├── _root.scss        # :root, html, body, selection, focus
+│   │   │   ├── _print.scss       # Print: light scheme, wrapping, page breaks
 │   │   │   └── _forced-colors.scss # Windows contrast themes
 │   │   ├── mixins/               # _index.scss forwards them all
 │   │   │   ├── _cut-corner.scss  # cut corners: border, polygon, edges

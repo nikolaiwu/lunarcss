@@ -1,0 +1,45 @@
+// =============================================================================
+// LUNARCSS - Print
+// =============================================================================
+// Paper can't scroll, and browsers skip background colors and images when
+// printing unless the reader turns "Background graphics" on. So the theme's
+// decoration drawn with backgrounds (brackets, ticks, stripes, fills) simply
+// drops out; the content still reads without it. These rules fix what would
+// otherwise break.
+// =============================================================================
+
+@media print {
+  // Printing keeps the page's color scheme, but not its dark background: dark
+  // mode would print light text on white paper. data-theme sets color-scheme
+  // on its own element, so it's covered as well.
+  :root,
+  [data-theme] {
+    color-scheme: light;
+  }
+
+  // A long line can't be scrolled to, so it wraps
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  // Kept whole on one page where they fit
+  article,
+  figure,
+  pre,
+  blockquote,
+  tr,
+  img {
+    break-inside: avoid;
+  }
+
+  // A heading stays with what follows it
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid;
+  }
+}

@@ -68,6 +68,7 @@ Initial release, to be published as 0.1.0.
 
 - Forced colors (Windows contrast themes): tokens map to system colors, decoration drawn with backgrounds opts out of forcing so it stays visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
 - Reduced motion turns off animations and transitions, including the `details` open and close
+- Print styles: pages print in the light theme (dark mode would otherwise put light text on white paper), code blocks wrap, and cards, figures, code, quotes, table rows and images avoid breaking across pages
 
 **Distribution**
 

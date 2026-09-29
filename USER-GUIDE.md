@@ -833,7 +833,9 @@ Fields flag themselves after you fill them in and move on: `:user-invalid` turns
 
 ### Print Styles
 
-LunarCSS doesn't include print styles. Add your own `@media print` rules if you need them. (It does respect `prefers-reduced-motion` by disabling animations and transitions.)
+Printed pages always use the light theme: printing keeps the page's color scheme but drops its background, so dark mode would put light text on white paper. Code blocks wrap their long lines, and cards, figures, code blocks, quotes, table rows and images stay whole on one page where they fit, with headings kept with what follows.
+
+Browsers leave out background colors and images when printing unless "Background graphics" is on, so the theme's decoration drawn with them (brackets, ticks, stripes, fills) drops out on paper. The content still reads without it. Add your own `@media print` rules for anything more. (The theme also respects `prefers-reduced-motion` by disabling animations and transitions.)
 
 ---
 

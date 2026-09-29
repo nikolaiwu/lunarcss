@@ -69,6 +69,9 @@
   @include meta.load-css("elements/popover");
   @include meta.load-css("elements/article");
 
+  // Print: after the elements, so its rules win over theirs
+  @include meta.load-css("base/print");
+
   // Forced colors (Windows contrast themes): last, so it overrides the above
   @include meta.load-css("base/forced-colors");
 }
