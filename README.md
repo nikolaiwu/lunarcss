@@ -32,7 +32,26 @@ npm install @nikolaiwu/lunarcss
 import "@nikolaiwu/lunarcss";
 ```
 
-The theme styles elements but never places them, so it doesn't pad the page. The [User Guide](USER-GUIDE.md) covers the optional layout and font stylesheets, theming, the token reference and customization.
+### Optional stylesheets
+
+The theme styles elements but never places them, so it doesn't pad the page. Two extras fill in, both classless:
+
+- **Fonts** (`lunarcss-fonts.min.css`): self-hosted Space Grotesk and Space Mono, with no Google requests. Load it before the theme.
+- **Layout** (`lunarcss-layout.min.css`): a centred page with a gutter, a header with nav, a sidebar, a card grid and button groups. Load it after the theme.
+
+```html
+<link rel="stylesheet" href="…/dist/lunarcss-fonts.min.css" />
+<link rel="stylesheet" href="…/dist/lunarcss.min.css" />
+<link rel="stylesheet" href="…/dist/lunarcss-layout.min.css" />
+```
+
+```javascript
+import "@nikolaiwu/lunarcss/fonts";
+import "@nikolaiwu/lunarcss";
+import "@nikolaiwu/lunarcss/layout";
+```
+
+`…` stands for `https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1`. The [User Guide](USER-GUIDE.md) covers theming, the token reference and customization.
 
 ## Browser support
 
