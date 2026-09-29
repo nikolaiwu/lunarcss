@@ -3,16 +3,20 @@
 // =============================================================================
 // Styles for h1-h6 heading elements (one partial for all six).
 //
-// A mark of two slanted bars sits left of the text, in the heading's left
-// padding, so wrapped lines stay in line with the first. Each bar is a
-// pseudo-element shaped by clip-path: a parallelogram with its two acute
-// corners cut. It's sized in em, so it scales with each heading level, and
+// h1 to h3 carry a mark of slanted bars left of the text, one bar per level
+// ($heading-bars: one on h1, two on h2, three on h3); h4 to h6 have none. The
+// mark sits in the heading's left padding, so wrapped lines stay in line with
+// the first. It's sized in em, so it scales with each heading level, and
 // centred on the first line (lh is the line height).
 //
-// The polygon's points are worked out here, since calc() can't divide one
-// length by another to find where the cuts meet the slanted sides.
+// All the bars are one ::before, shaped by one clip-path polygon: each bar is
+// a parallelogram with its two acute corners cut, and the bars are joined by
+// a bridge that runs there and back along the same line, so it encloses no
+// area. The polygon's points are worked out here, since calc() can't divide
+// one length by another to find where the cuts meet the slanted sides.
 // =============================================================================
 
+@use "sass:list";
 @use "sass:math";
 
 // Mark geometry, in em of the heading
@@ -23,10 +27,71 @@ $mark-gap: 0.08em; // between the bars
 $mark-cut: 0.08em; // the corner cuts
 $mark-space: 0.1em; // mark to text
 
+// Bars per heading level; levels not listed have no mark
+$heading-bars: (
+  1: 1,
+  2: 2,
+  3: 3,
+);
+
 // Where a cut meets a slanted side, measured along x from the side's end
 $mark-cut-run: $mark-slant * math.div($mark-cut, $mark-height);
 
-$mark-width: $mark-slant + $mark-bar * 2 + $mark-gap;
+// One bar's outline, $x from the left, starting at its top-left cut
+@function -bar-points($x) {
+  @return (
+    ($x + $mark-cut) 0,
+    ($x + $mark-bar) 0,
+    ($x + $mark-bar + $mark-slant - $mark-cut-run) ($mark-height - $mark-cut),
+    ($x + $mark-bar + $mark-slant - $mark-cut) $mark-height,
+    ($x + $mark-slant) $mark-height,
+    ($x + $mark-cut-run) $mark-cut
+  );
+}
+
+// All $bars bars in one polygon: each bar's outline, back to its first point,
+// then on to the next; the closing edge retraces the bridges
+@function -mark-polygon($bars) {
+  $points: ();
+
+  @for $i from 0 to $bars {
+    $bar: -bar-points($i * ($mark-bar + $mark-gap));
+
+    $points: list.join($points, $bar, comma);
+    $points: list.append($points, list.nth($bar, 1), comma);
+  }
+
+  @if $bars > 1 {
+    @for $i from $bars - 2 through 0 {
+      $points: list.append(
+        $points,
+        list.nth(-bar-points($i * ($mark-bar + $mark-gap)), 1),
+        comma
+      );
+    }
+  }
+
+  @return polygon($points);
+}
+
+@mixin heading-mark($bars) {
+  $width: $mark-slant + $mark-bar * $bars + $mark-gap * ($bars - 1);
+
+  position: relative;
+  padding-left: $width + $mark-space;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(1lh / 2);
+    left: 0;
+    width: $width;
+    height: $mark-height;
+    translate: 0 -50%;
+    background-color: var(--lunar-muted);
+    clip-path: -mark-polygon($bars);
+  }
+}
 
 h1,
 h2,
@@ -34,38 +99,17 @@ h3,
 h4,
 h5,
 h6 {
-  position: relative;
-  padding-left: $mark-width + $mark-space;
   font-family: var(--lunar-font-sans);
   font-weight: var(--lunar-font-bold);
   line-height: var(--lunar-leading-tight);
   color: var(--lunar-fg);
   letter-spacing: var(--lunar-tracking-tight);
   margin-bottom: var(--lunar-space-4);
+}
 
-  // Bars: parallelograms leaning "\", cut at the top-left and bottom-right
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: calc(1lh / 2);
-    left: 0;
-    width: $mark-slant + $mark-bar;
-    height: $mark-height;
-    translate: 0 -50%;
-    background-color: var(--lunar-muted);
-    clip-path: polygon(
-      $mark-cut 0,
-      $mark-bar 0,
-      ($mark-bar + $mark-slant - $mark-cut-run) ($mark-height - $mark-cut),
-      ($mark-bar + $mark-slant - $mark-cut) $mark-height,
-      $mark-slant $mark-height,
-      $mark-cut-run $mark-cut
-    );
-  }
-
-  &::after {
-    left: $mark-bar + $mark-gap;
+@each $level, $bars in $heading-bars {
+  h#{$level} {
+    @include heading-mark($bars);
   }
 }
 

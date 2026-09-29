@@ -60,8 +60,7 @@
   }
 
   // The theme's heading mark; it would sit beside the SVG
-  &::before,
-  &::after {
+  &::before {
     content: none;
   }
 
