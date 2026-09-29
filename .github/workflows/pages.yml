@@ -48,7 +48,9 @@ jobs:
       # all with relative URLs, so they work under /lunarcss/
       - run: pnpm build
         env:
-          # Read by the analytics plugin once it's added; unset, nothing reads it
+          # The analytics() plugin in vite.config.js adds the Cloudflare beacon
+          # when this is set (a variable on the github-pages environment or the
+          # repository); unset, the pages get no beacon
           CF_ANALYTICS_TOKEN: ${{ vars.CF_ANALYTICS_TOKEN }}
 
       - uses: actions/configure-pages@v6

@@ -61,6 +61,44 @@ function fontLicenses() {
   };
 }
 
+// Adds the Cloudflare Web Analytics beacon to the built pages, only when
+// CF_ANALYTICS_TOKEN is set: the Pages deploy sets it, so local builds, `pnpm
+// dev` and the npm release stay clean. The token is public by design (it ends
+// up in the page source). The stylesheets have no HTML, so they're untouched.
+//
+// With the beacon comes a line saying so, in place of the
+// <!-- analytics-notice --> comment in each page's footer, so the notice shows
+// exactly where the beacon does. Without a token the comment is just removed.
+function analytics() {
+  const token = process.env.CF_ANALYTICS_TOKEN;
+  const marker = "<!-- analytics-notice -->";
+  const notice =
+    "<p><small>Visits are counted with Cloudflare Web Analytics: no cookies, no personal data.</small></p>";
+
+  return {
+    name: "lunarcss-analytics",
+    apply: "build",
+    transformIndexHtml(html) {
+      if (!token) return html.replace(marker, "");
+
+      return {
+        html: html.replace(marker, notice),
+        tags: [
+          {
+            tag: "script",
+            attrs: {
+              defer: true,
+              src: "https://static.cloudflareinsights.com/beacon.min.js",
+              "data-cf-beacon": JSON.stringify({ token }),
+            },
+            injectTo: "body",
+          },
+        ],
+      };
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
 
@@ -68,7 +106,7 @@ export default defineConfig(({ mode }) => {
     root: "src",
     // Relative asset URLs, so the fonts stylesheet finds fonts/ from any host or CDN path
     base: "./",
-    plugins: [banner(), fontLicenses(), demoSource()],
+    plugins: [banner(), fontLicenses(), analytics(), demoSource()],
     publicDir: "../public",
 
     css: {
