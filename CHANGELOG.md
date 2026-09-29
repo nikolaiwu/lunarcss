@@ -34,7 +34,7 @@ Initial release, to be published as 0.1.0.
 - Forced colors (Windows contrast themes): tokens map to system colors, controls and card decoration drawn with backgrounds opt out of forcing so they stay visible, buttons fall back to a bordered rectangle, and focus shows a system `Highlight` outline
 - The theme no longer pads the `body` or hides horizontal overflow on `html`: padding is placement, so the page gutter moved to the optional layout stylesheet as `--lunar-page-gutter`, and wide content scrolls instead of being clipped
 - Light and dark themes via `light-dark()`, with `data-theme` to force either mode
-- `--lunar-light` / `--lunar-dark` main color tokens, plus semantic, typography, spacing, radius, shadow, transition, z-index and content-width tokens
+- `--lunar-light` / `--lunar-dark` main color tokens, plus semantic, typography, spacing, radius, transition, z-index and content-width tokens
 - Published to npm as `@nikolaiwu/lunarcss`, with the compiled CSS and SCSS source
 
 [Unreleased]: https://github.com/nikolaiwu/lunarcss/commits/main
