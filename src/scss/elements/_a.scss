@@ -3,65 +3,67 @@
 // =============================================================================
 // Styles for the a element: an inline chip, a smaller cousin of the button.
 //
-// The chip is ::before, behind the text (z-index -1; the link isolates, so it
-// stays inside it): a muted tint with an accent line along the bottom, its
-// top-right corner cut with clip-path. On hover and focus an accent sweep
-// with a 45° leading edge grows across it. The sweep is a second background
-// layer on the same ::before, not ::after, which the new-tab arrow needs.
+// Everything is drawn on the link itself, with box-decoration-break: clone, so
+// a link that wraps gets the whole chip on every line. (A positioned
+// pseudo-element can't: its containing block runs from the first line's
+// start to the last line's end, which collapses to nothing once it wraps.)
 //
-// The sweep is a hard-edged gradient tile that grows from zero width. Its
-// edge runs through the tile's centre at 45°, so the tile has to be twice the
-// chip's width plus its height to cover it completely.
+// The chip is a muted tint with an accent line along the bottom (the border).
+// Its top-right corner is cut by the gradient itself, not clip-path, which
+// would only cut the corner of the box around all the lines: at an explicit
+// angle, a gradient's 0% line runs through the corner it starts from, so
+// 225deg with a hard stop cut ÷ √2 along the gradient draws a 45° cut, cut
+// long on each side, in every line's top-right corner.
+//
+// On hover and focus, an accent copy of the same shape grows across from the
+// left, on top of the tint. It's the same gradient in a tile that widens, so
+// its cut rides the leading edge and lands on the chip's own at full width.
 //
 // Links that open a new tab (target="_blank") get an arrow after the text: an
 // SVG mask on ::after, painted in currentColor. Its alternative text tells
 // screen readers where the link goes, where `/ "…"` is supported.
 // =============================================================================
 
-@use "../mixins";
-
 $external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E");
+
+// A chip layer in $color, its top-right corner cut
+@function -chip($color) {
+  @return linear-gradient(
+    225deg,
+    transparent calc(var(--_link-cut) * 0.7071),
+    #{$color} 0
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Links
 // ---------------------------------------------------------------------------
 a {
-  position: relative;
-  isolation: isolate;
+  --_link-cut: calc(var(--lunar-space-1) * 1.5);
+  --_link-tint: color-mix(in oklch, var(--lunar-bg) 80%, var(--lunar-muted));
+
   padding-inline: var(--lunar-space-2);
   color: var(--lunar-fg);
   text-decoration: none;
+  border-bottom: var(--lunar-border-width) solid var(--lunar-accent);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: color-mix(
-      in oklch,
-      var(--lunar-bg) 80%,
-      var(--lunar-muted)
-    );
-    background-image: linear-gradient(
-      -45deg,
-      transparent 50%,
-      var(--lunar-accent) 50%
-    );
-    background-position: left center;
-    background-size: 0 100%;
-    background-repeat: no-repeat;
-    border-bottom: var(--lunar-border-width) solid var(--lunar-accent);
-    clip-path: mixins.cut-corner-polygon(
-      calc(var(--lunar-space-1) * 1.5),
-      (top-right)
-    );
-    transition: background-size var(--lunar-transition-slow);
-  }
+  // Sweep on top, tint below
+  background-image:
+    -chip(var(--lunar-accent)),
+    -chip(var(--_link-tint));
+  background-position: left top;
+  background-size:
+    0 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--lunar-transition-slow);
 
-  &:is(:hover, :focus-visible)::before {
-    background-size: calc(200% + 2em) 100%;
+  &:is(:hover, :focus-visible) {
+    background-size:
+      100% 100%,
+      100% 100%;
   }
 }
 
