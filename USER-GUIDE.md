@@ -330,7 +330,7 @@ import "@nikolaiwu/lunarcss";
 import "@nikolaiwu/lunarcss/layout";
 ```
 
-It's about 0.6 kB gzipped and gives you:
+It's about 0.8 kB gzipped and gives you:
 
 | Markup                             | Layout                                                                                                                                            |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
