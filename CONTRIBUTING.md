@@ -107,7 +107,7 @@ lunarcss/
 
 For maintainers. Versions follow [Semantic Versioning](https://semver.org/); [CHANGELOG.md](CHANGELOG.md) says what counts as a breaking change.
 
-1. Move the `[Unreleased]` notes in `CHANGELOG.md` under a new version heading and commit.
+1. Move the `[Unreleased]` notes in `CHANGELOG.md` under a new version heading. The README's size badge is static, so check it against `pnpm build && gzip -9c dist/lunarcss.min.css | wc -c` and update it if the rounded kB figure changed. Commit.
 2. Bump the version: `pnpm release:patch`, `pnpm release:minor` or `pnpm release:major`. This updates `package.json`, commits and creates a `vX.Y.Z` tag. The working tree must be clean.
 3. Push the commit and tag: `git push --follow-tags`.
 

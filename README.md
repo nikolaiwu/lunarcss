@@ -1,5 +1,10 @@
 # 🌙 LunarCSS
 
+[![npm](https://img.shields.io/npm/v/@nikolaiwu/lunarcss)](https://www.npmjs.com/package/@nikolaiwu/lunarcss)
+[![Release](https://img.shields.io/github/actions/workflow/status/nikolaiwu/lunarcss/release.yml?label=release)](https://github.com/nikolaiwu/lunarcss/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/npm/l/@nikolaiwu/lunarcss)](LICENSE)
+[![Gzipped size: 10 kB](https://img.shields.io/badge/gzipped-10_kB-blue)](https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css)
+
 A classless CSS theme: it styles plain HTML elements with element selectors only, so there are no classes to learn and no markup to change. Retro-futuristic defaults, light and dark, and a set of tokens to make it your own.
 
 [Showcase](https://nikolaiwu.github.io/lunarcss/) · [User Guide](USER-GUIDE.md) · [Changelog](CHANGELOG.md)
