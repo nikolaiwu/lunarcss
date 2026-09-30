@@ -4,6 +4,8 @@ A classless CSS theme: it styles plain HTML elements with element selectors only
 
 [Showcase](https://nikolaiwu.github.io/lunarcss/) · [User Guide](USER-GUIDE.md) · [Changelog](CHANGELOG.md)
 
+[![The same HTML page twice: unstyled browser defaults on the left, and with LunarCSS on the right, split between the light and dark themes](https://nikolaiwu.github.io/lunarcss/before-after.png)](https://nikolaiwu.github.io/lunarcss/demo.html)
+
 ## Features
 
 - **Classless**: every standard element styled, no classes needed
