@@ -19,6 +19,9 @@
 // left, on top of the tint. It's the same gradient in a tile that widens, so
 // its cut rides the leading edge and lands on the chip's own at full width.
 //
+// Links in headings drop the chip: no tint or padding, just the underline
+// and the sweep.
+//
 // Links that open a new tab (target="_blank") get an arrow after the text: an
 // SVG mask on ::after, painted in currentColor. Its alternative text tells
 // screen readers where the link goes, where `/ "…"` is supported.
@@ -64,6 +67,22 @@ a {
     background-size:
       100% 100%,
       100% 100%;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// In headings
+// ---------------------------------------------------------------------------
+// No chip, just the accent underline and the sweep. Heading lines are tighter
+// than the font's content area, so when a heading wraps, each line's tint
+// would cover the underline of the line above.
+:is(h1, h2, h3, h4, h5, h6) a {
+  padding-inline: 0;
+  background-image: -chip(var(--lunar-accent));
+  background-size: 0 100%;
+
+  &:is(:hover, :focus-visible) {
+    background-size: 100% 100%;
   }
 }
 
