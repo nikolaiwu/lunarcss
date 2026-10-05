@@ -23,3 +23,19 @@ article {
 
   @include mixins.card;
 }
+
+// ---------------------------------------------------------------------------
+// Card Title
+// ---------------------------------------------------------------------------
+// A card's title is one size, the h4's, whatever its level: the level follows
+// the page's outline (h2 under the page's h1, h3 under a section's h2), and
+// an h2 is too big for a card. The mark still counts the level. An h1 keeps
+// its size, since it makes the article the page's main content, and headings
+// in the body of the article aren't touched.
+article > header > :is(h2, h3, h4, h5, h6) {
+  font-size: var(--lunar-text-2xl);
+
+  @media (max-width: 640px) {
+    font-size: var(--lunar-text-xl);
+  }
+}

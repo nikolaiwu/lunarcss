@@ -19,6 +19,7 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Changed
 
+- A card's title (`h2` to `h6` in an `article`'s `header`) is the size of an `h4` whatever its level, so an `h2` title, as under a page's `h1`, is no longer too big for its card
 - A figure around an image, video or other media hugs it, instead of filling the width and leaving empty space beside a narrower image. A long caption wraps to the media's width. Figures around a quote or a table are unchanged
 - Links in headings drop the chip (no tint or padding) and keep the accent underline and the hover/focus sweep. The tint covered the underline of each line above when a linked heading wrapped, so wrapped titles, such as post titles in a card grid, showed the underline only under their last line ([#5](https://github.com/nikolaiwu/lunarcss/issues/5))
 

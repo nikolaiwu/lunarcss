@@ -222,6 +222,8 @@ Every `<article>` is a card: a bordered box with cut corners for self-contained 
 </article>
 ```
 
+Pick the title's heading level to fit the page's outline: `h2` when the cards sit right under the page's `h1`, `h3` under a section's `h2`. A title in the card's `header` is the same size at any level from `h2` to `h6`, so the outline never changes the look. An `h1` keeps its full size, for an article that is the page's main content.
+
 Use `article`, not `section`, for cards: `section` is meant for a themed part of a larger document.
 
 ### Cut corners
