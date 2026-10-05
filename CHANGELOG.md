@@ -18,6 +18,7 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Changed
 
+- A figure around an image, video or other media hugs it, instead of filling the width and leaving empty space beside a narrower image. A long caption wraps to the media's width. Figures around a quote or a table are unchanged
 - Links in headings drop the chip (no tint or padding) and keep the accent underline and the hover/focus sweep. The tint covered the underline of each line above when a linked heading wrapped, so wrapped titles, such as post titles in a card grid, showed the underline only under their last line ([#5](https://github.com/nikolaiwu/lunarcss/issues/5))
 
 ### Fixed

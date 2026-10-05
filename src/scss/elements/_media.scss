@@ -86,6 +86,18 @@ figure {
   }
 }
 
+// A figure around media hugs it, so an image narrower than the page leaves no
+// empty space beside it. contain: inline-size stops the caption's text from
+// widening the figure: it wraps to the media's width instead. Figures around
+// a quote or a table keep the full width.
+figure:has(> :is(img, picture, video, iframe, svg, canvas)) {
+  width: fit-content;
+
+  > figcaption {
+    contain: inline-size;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Figcaption
 // ---------------------------------------------------------------------------
