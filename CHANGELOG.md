@@ -14,6 +14,7 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Added
 
+- Table hover marks columns too: hovering a body cell highlights its column's header as well as its row, and hovering a header highlights its whole column, for tables up to 12 columns wide
 - `time` is styled as a label: small, muted, semibold capitals with slightly wider spacing, so dates read as metadata
 - A link with `aria-current` (such as `aria-current="page"` on the current page's link in a nav) shows its hover state, the accent sweep, all the time. It also keeps the sweep in forced colors
 

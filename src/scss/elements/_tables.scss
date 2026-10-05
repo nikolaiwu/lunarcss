@@ -6,6 +6,9 @@
 
 @use "../mixins";
 
+// Row and column hover
+$hover-tint: color-mix(in oklch, var(--lunar-bg) 92%, var(--lunar-muted));
+
 // ---------------------------------------------------------------------------
 // Table
 // ---------------------------------------------------------------------------
@@ -80,11 +83,32 @@ tbody tr {
   }
 
   &:hover {
-    background-color: color-mix(
-      in oklch,
-      var(--lunar-bg) 92%,
-      var(--lunar-muted)
-    );
+    background-color: $hover-tint;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Column Hover
+// ---------------------------------------------------------------------------
+// Hovering a body cell marks its column's header, so you can see which
+// column you're reading. Hovering a header lights up its whole column.
+// There's no column element to hover (col doesn't take :hover), so the table
+// asks which cell position is hovered, one rule per position up to
+// $hover-columns. nth-child counts cells, not columns, so in a row with a
+// colspan or rowspan the cells after it point at the wrong column. The
+// footer's cells stay clear, so its striped band isn't covered.
+$hover-columns: 12;
+
+@for $i from 1 through $hover-columns {
+  table:has(tbody > tr > :nth-child(#{$i}):hover)
+    thead
+    > tr
+    > :nth-child(#{$i}),
+  table:has(thead > tr > :nth-child(#{$i}):hover)
+    :is(thead, tbody)
+    > tr
+    > :nth-child(#{$i}) {
+    background-color: $hover-tint;
   }
 }
 
@@ -120,6 +144,8 @@ td {
   text-align: left;
   color: var(--lunar-fg);
   vertical-align: top;
+  // Fades in like the row hover
+  transition: background-color var(--lunar-transition-fast);
 }
 
 th {
