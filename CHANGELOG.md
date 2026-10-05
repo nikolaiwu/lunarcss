@@ -14,6 +14,7 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Added
 
+- `time` is styled as a label: small, muted, semibold capitals with slightly wider spacing, so dates read as metadata
 - A link with `aria-current` (such as `aria-current="page"` on the current page's link in a nav) shows its hover state, the accent sweep, all the time. It also keeps the sweep in forced colors
 
 ### Changed

@@ -106,8 +106,15 @@ cite {
 // ---------------------------------------------------------------------------
 // Time
 // ---------------------------------------------------------------------------
+// Set like a label: small, muted, semibold capitals, spaced a little wider so
+// the capitals don't crowd. It reads as metadata (a post's date, an update
+// note) beside the text around it.
 time {
-  // No special styling, semantic only
+  font-size: var(--lunar-text-xs);
+  font-weight: var(--lunar-font-semibold);
+  letter-spacing: var(--lunar-tracking-wide);
+  text-transform: uppercase;
+  color: var(--lunar-muted);
 }
 
 // ---------------------------------------------------------------------------
