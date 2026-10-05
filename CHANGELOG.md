@@ -16,6 +16,10 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 - Links in headings drop the chip (no tint or padding) and keep the accent underline and the hover/focus sweep. The tint covered the underline of each line above when a linked heading wrapped, so wrapped titles, such as post titles in a card grid, showed the underline only under their last line ([#5](https://github.com/nikolaiwu/lunarcss/issues/5))
 
+### Fixed
+
+- In forced colors (Windows contrast themes), a hovered or focused link inside a paragraph, card header or other decorated element kept its text color on the `Highlight` sweep, which made it unreadable in light contrast themes. The text now switches to `HighlightText`
+
 ## [0.1.1] - 2026-09-29
 
 ### Fixed
