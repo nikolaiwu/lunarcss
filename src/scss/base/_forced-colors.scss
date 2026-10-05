@@ -49,6 +49,7 @@
   :is(h1, h2, h3)::before,
   hr,
   a[target="_blank"]::after,
+  a[aria-current]:not([aria-current="false"]),
   blockquote,
   blockquote::before,
   pre,
@@ -100,14 +101,15 @@
   // ---------------------------------------------------------------------------
   // Inside an element that opts out above (a paragraph, a card header), a link
   // inherits the opt-out and keeps its chip, so the sweep is drawn in
-  // Highlight. Its text has to switch to HighlightText, the color paired with
+  // Highlight. A link to the current page opts out itself, so its sweep marks
+  // it here too. Its text has to switch to HighlightText, the color paired with
   // it, and at once: during a sweep, the part not yet covered would put that
   // text on Canvas.
   a {
     transition: none;
   }
 
-  a:is(:hover, :focus-visible) {
+  a:is(:hover, :focus-visible, [aria-current]:not([aria-current="false"])) {
     color: HighlightText;
   }
 

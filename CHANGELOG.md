@@ -12,6 +12,10 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ## [Unreleased]
 
+### Added
+
+- A link with `aria-current` (such as `aria-current="page"` on the current page's link in a nav) shows its hover state, the accent sweep, all the time. It also keeps the sweep in forced colors
+
 ### Changed
 
 - Links in headings drop the chip (no tint or padding) and keep the accent underline and the hover/focus sweep. The tint covered the underline of each line above when a linked heading wrapped, so wrapped titles, such as post titles in a card grid, showed the underline only under their last line ([#5](https://github.com/nikolaiwu/lunarcss/issues/5))

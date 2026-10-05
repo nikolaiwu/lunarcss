@@ -336,7 +336,7 @@ It's about 0.8 kB gzipped and gives you:
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `body`                             | Centred page, limited to `--lunar-page-width`, with a `--lunar-page-gutter` at the screen edges                                                   |
 | `body > header` containing a `nav` | Title and navigation on one row, wrapping on small screens                                                                                        |
-| `nav ul`                           | Horizontal row of links, no bullets                                                                                                               |
+| `nav ul`                           | Horizontal row of links, no bullets. Mark the current page's link with `aria-current="page"`: the theme shows it in its hover state.              |
 | `main` and `aside` as siblings     | Sidebar beside the content above 60rem, stacked below. Source order picks the side: `aside` first puts it on the left, `main` first on the right. |
 | A parent of only `article`s        | [Responsive card grid](#card-grid), equal heights, footers aligned                                                                                |
 | A parent of only form controls     | Button/input group: a flex row with a `--lunar-button-gap` (2px) gap, so grouped controls read as one shape                                       |
