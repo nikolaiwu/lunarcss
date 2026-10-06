@@ -44,6 +44,23 @@
       var(--lunar-light) var(--lunar-muted-mix)
     )
   );
+  // Muted text: the same mix taken further toward the text color, so small
+  // text (captions, dates, labels) meets WCAG AA (4.5:1) with the default
+  // colors. --lunar-muted stays lighter, for decoration: rules, brackets,
+  // ticks and stripes that shouldn't stand out.
+  --lunar-muted-text-mix: 65%;
+  --lunar-muted-text: light-dark(
+    color-mix(
+      in oklch,
+      var(--lunar-light),
+      var(--lunar-dark) var(--lunar-muted-text-mix)
+    ),
+    color-mix(
+      in oklch,
+      var(--lunar-dark),
+      var(--lunar-light) var(--lunar-muted-text-mix)
+    )
+  );
   --lunar-border: light-dark(var(--lunar-dark), var(--lunar-light));
   --lunar-success: light-dark(#16a34a, #4ade80);
   --lunar-warning: light-dark(#d97706, #fbbf24);

@@ -11,6 +11,10 @@
 //   </article>
 //
 // The look comes from the `card` mixin (mixins/_card.scss), shared with <dialog>.
+//
+// Except a full-page article: the only article in <main>, such as a blog
+// post, is the page's content, not a card, so it's left plain. Several
+// articles in <main> are still cards (and a grid, with the layout stylesheet).
 // =============================================================================
 
 @use "../mixins";
@@ -20,7 +24,10 @@
 // ---------------------------------------------------------------------------
 article {
   margin-bottom: var(--lunar-space-4);
+}
 
+// :where() keeps it at the specificity of a plain `article`
+article:where(:not(main > article:only-of-type)) {
   @include mixins.card;
 }
 

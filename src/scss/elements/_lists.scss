@@ -99,7 +99,7 @@ ol {
 ol > li::marker {
   font-family: var(--lunar-font-mono);
   font-size: 0.8em;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 }
 
 // ---------------------------------------------------------------------------
@@ -151,7 +151,7 @@ dt {
   font-weight: var(--lunar-font-bold);
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 
   // Leader: one row of dots from the end of the term to the column edge,
   // sitting on the baseline (an empty inline-block's baseline is its bottom)

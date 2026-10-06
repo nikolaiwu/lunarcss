@@ -76,7 +76,7 @@ blockquote {
     font-style: normal;
     letter-spacing: var(--lunar-tracking-wide);
     text-transform: uppercase;
-    color: var(--lunar-muted);
+    color: var(--lunar-muted-text);
 
     &::before {
       content: "— ";

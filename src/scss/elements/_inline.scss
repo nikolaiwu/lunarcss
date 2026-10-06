@@ -26,7 +26,7 @@ i {
 // ---------------------------------------------------------------------------
 small {
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 }
 
 // ---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ small {
 s,
 del {
   text-decoration: line-through;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 }
 
 // ---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ q {
 // ---------------------------------------------------------------------------
 cite {
   font-style: italic;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 }
 
 // ---------------------------------------------------------------------------
@@ -114,7 +114,7 @@ time {
   font-weight: var(--lunar-font-semibold);
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 }
 
 // ---------------------------------------------------------------------------

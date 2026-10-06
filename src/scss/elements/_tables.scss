@@ -47,7 +47,7 @@ caption {
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
   text-align: left;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
   caption-side: top;
 }
 
@@ -63,7 +63,7 @@ thead th {
   font-weight: var(--lunar-font-regular);
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
   border-bottom: var(--lunar-border-width) solid var(--lunar-border);
 
   @include mixins.ruler($count: 4, $start: true);

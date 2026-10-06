@@ -14,12 +14,15 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Added
 
+- `--lunar-muted-text` (with `--lunar-muted-text-mix`, default 65%), a muted color for secondary text that meets WCAG AA. `--lunar-muted` is now for decoration only
 - Table hover marks columns too: hovering a body cell highlights its column's header as well as its row, and hovering a header highlights its whole column, for tables up to 12 columns wide
 - `time` is styled as a label: small, muted, semibold capitals with slightly wider spacing, so dates read as metadata
 - A link with `aria-current` (such as `aria-current="page"` on the current page's link in a nav) shows its hover state, the accent sweep, all the time. It also keeps the sweep in forced colors
 
 ### Changed
 
+- Secondary text (`small`, `time`, `figcaption`, table captions and header labels, `dt`, `legend`, `cite`, `samp`, `s`/`del`, list numbers, placeholders) uses `--lunar-muted-text`: about 4.6:1 contrast in light mode and 5.4:1 in dark, up from 3.1:1 and 3.7:1
+- An article that's the only one in `main`, such as a blog post, is no longer drawn as a card. The User Guide's reset for full-page articles is no longer needed
 - A card's title (`h2` to `h6` in an `article`'s `header`) is the size of an `h4` whatever its level, so an `h2` title, as under a page's `h1`, is no longer too big for its card
 - A figure around an image, video or other media hugs it, instead of filling the width and leaving empty space beside a narrower image. A long caption wraps to the media's width. Figures around a quote or a table are unchanged
 - Links in headings drop the chip (no tint or padding) and keep the accent underline and the hover/focus sweep. The tint covered the underline of each line above when a linked heading wrapped, so wrapped titles, such as post titles in a card grid, showed the underline only under their last line ([#5](https://github.com/nikolaiwu/lunarcss/issues/5))

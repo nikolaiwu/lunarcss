@@ -295,28 +295,18 @@ Without the layout stylesheet, cards simply stack, which is the theme's default 
 
 ### Full-page articles
 
-Because every article is a card, a whole blog post wrapped in `<main><article>` is also boxed. If you don't want that, reset it:
+A blog post is semantically an `<article>`, but a whole post drawn as a card looks wrong. So an article that's the only one in `<main>` is left plain: no border, padding or header and footer rules. Several articles in `<main>` are still cards.
 
-```css
-main > article {
-  padding: 0;
-}
-
-main > article::before,
-main > article::after,
-main > article > footer::before {
-  content: none;
-}
-
-main > article > header {
-  padding-bottom: 0;
-  background: none;
-}
+```html
+<main>
+  <article>
+    <header><h1>Post title</h1></header>
+    <p>The post…</p>
+  </article>
+</main>
 ```
 
-The card grid needs `:has()` support (Chrome 105+, Firefox 121+, Safari 15.4+), which every browser that supports `light-dark()` already has.
-
----
+To make a lone article a card anyway, wrap it in a `<section>` or any other element inside `<main>`.
 
 ## Layout
 
@@ -483,32 +473,39 @@ LunarCSS is built on two main colors. Light mode uses the light color for the ba
 
 The remaining color tokens are listed below. Most use `light-dark()`, so one definition covers both modes and no theme overrides are needed.
 
-| Token              | Used for                                                                   |
-| ------------------ | -------------------------------------------------------------------------- |
-| `--lunar-bg`       | Page background (built from `--lunar-light` / `--lunar-dark`)              |
-| `--lunar-fg`       | Primary text (built from `--lunar-light` / `--lunar-dark`)                 |
-| `--lunar-border`   | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)         |
-| `--lunar-muted`    | Secondary text, placeholders (built from `--lunar-light` / `--lunar-dark`) |
-| `--lunar-accent`   | Buttons, link underlines, checked controls, focus, the text caret          |
-| `--lunar-success`  | Success state, a valid field's border, a meter in its optimum range        |
-| `--lunar-warning`  | Warning state, a meter in its suboptimal range                             |
-| `--lunar-error`    | Error state, an invalid field's border, a meter far from its optimum       |
-| `--lunar-info`     | Informational state                                                        |
-| `--lunar-backdrop` | Dim behind an open `<dialog>` (the page color at half opacity)             |
+| Token                | Used for                                                                                            |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| `--lunar-bg`         | Page background (built from `--lunar-light` / `--lunar-dark`)                                       |
+| `--lunar-fg`         | Primary text (built from `--lunar-light` / `--lunar-dark`)                                          |
+| `--lunar-border`     | Borders and dividers (built from `--lunar-light` / `--lunar-dark`)                                  |
+| `--lunar-muted`      | Decoration: rules, brackets, ticks, stripes (built from `--lunar-light` / `--lunar-dark`)           |
+| `--lunar-muted-text` | Secondary text: captions, dates, labels, placeholders (built from `--lunar-light` / `--lunar-dark`) |
+| `--lunar-accent`     | Buttons, link underlines, checked controls, focus, the text caret                                   |
+| `--lunar-success`    | Success state, a valid field's border, a meter in its optimum range                                 |
+| `--lunar-warning`    | Warning state, a meter in its suboptimal range                                                      |
+| `--lunar-error`      | Error state, an invalid field's border, a meter far from its optimum                                |
+| `--lunar-info`       | Informational state                                                                                 |
+| `--lunar-backdrop`   | Dim behind an open `<dialog>` (the page color at half opacity)                                      |
 
 For the default values, see `src/scss/_config.scss`.
 
-#### Muted color
+#### Muted colors
 
-`--lunar-muted` follows your main colors automatically. It mixes the background color toward the text color, so it's a bit darker than the background in light mode and a bit lighter in dark mode. Adjust how far it moves with one setting:
+Two tokens follow your main colors automatically, both mixing the background color toward the text color: a bit darker than the background in light mode, a bit lighter in dark mode.
+
+- `--lunar-muted` is for decoration (rules, brackets, list ticks, stripes), so it's kept light and doesn't compete with the content.
+- `--lunar-muted-text` is for secondary text (captions, dates, table labels, `small`, placeholders). It goes further toward the text color, so it stays readable.
+
+Adjust how far each one moves:
 
 ```css
 :root {
-  --lunar-muted-mix: 70%; /* default 50%; higher = more contrast */
+  --lunar-muted-mix: 60%; /* decoration; default 50% */
+  --lunar-muted-text-mix: 70%; /* text; default 65%; higher = more contrast */
 }
 ```
 
-Muted text is still text, so keep it readable. With the default colors, the default `50%` gives about 3.1:1 contrast in light mode and 3.7:1 in dark mode: enough for large text, but below WCAG AA (4.5:1) for small text. Use `65%` or more to meet AA in both modes. (If you change the main colors, check the contrast again.)
+With the default colors, muted text is about 4.6:1 in light mode and 5.4:1 in dark mode, which meets WCAG AA (4.5:1) for small text. Keep `--lunar-muted-text-mix` at `65%` or more, and if you change the main colors, check the contrast again.
 
 Override any token to rebrand. For example, to change the accent to purple:
 

@@ -105,7 +105,7 @@ figure:has(> :is(img, picture, video, iframe, svg, canvas)) {
 // centres the lines of a caption that wraps.
 figcaption {
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
   text-align: center;
 
   @include mixins.striped-label($lead: null);

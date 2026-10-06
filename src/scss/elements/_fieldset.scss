@@ -46,7 +46,7 @@ legend {
   font-weight: var(--lunar-font-bold);
   letter-spacing: var(--lunar-tracking-wide);
   text-transform: uppercase;
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
 
   @include mixins.striped-label(
     $lead: calc(var(--_fieldset-padding) - var(--lunar-space-2)),

@@ -95,7 +95,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
   }
 
   &::placeholder {
-    color: var(--lunar-muted);
+    color: var(--lunar-muted-text);
   }
 
   &:disabled {
@@ -222,7 +222,7 @@ textarea {
   }
 
   &::placeholder {
-    color: var(--lunar-muted);
+    color: var(--lunar-muted-text);
   }
 
   &:disabled {
@@ -321,7 +321,7 @@ input[type="file"] {
   width: 100%;
   padding: var(--lunar-space-2);
   font-size: var(--lunar-text-sm);
-  color: var(--lunar-muted);
+  color: var(--lunar-muted-text);
   border: var(--lunar-border-width) dashed var(--lunar-border);
   cursor: pointer;
   margin-bottom: var(--lunar-space-4);
