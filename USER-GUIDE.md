@@ -332,7 +332,7 @@ It's about 0.8 kB gzipped and gives you:
 | `main` and `aside` as siblings     | Sidebar beside the content above 60rem, stacked below. Source order picks the side: `aside` first puts it on the left, `main` first on the right. |
 | A parent of only `article`s        | [Responsive card grid](#card-grid), equal heights, footers aligned                                                                                |
 | A parent of only form controls     | Button/input group: a flex row with a `--lunar-button-gap` (2px) gap, so grouped controls read as one shape                                       |
-| `body > footer`                    | Its blocks spread across one row, wrapping on small screens                                                                                       |
+| `body > footer`                    | Its blocks spread across one row, wrapping on small screens. On a short page it sits at the bottom of the window                                  |
 
 So a full page needs no classes at all:
 

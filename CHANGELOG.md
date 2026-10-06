@@ -14,6 +14,7 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ### Added
 
+- Layout stylesheet: the page footer sits at the bottom of the window on a short page, in the plain page shell and the sidebar layout alike
 - `--lunar-muted-text` (with `--lunar-muted-text-mix`, default 65%), a muted color for secondary text that meets WCAG AA. `--lunar-muted` is now for decoration only
 - Table hover marks columns too: hovering a body cell highlights its column's header as well as its row, and hovering a header highlights its whole column, for tables up to 12 columns wide
 - `time` is styled as a label: small, muted, semibold capitals with slightly wider spacing, so dates read as metadata

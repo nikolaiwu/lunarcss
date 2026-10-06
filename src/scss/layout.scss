@@ -50,6 +50,24 @@
     margin-block-end: var(--lunar-layout-gap);
   }
 
+  // Footer at the bottom of the window on a short page, not right under the
+  // content. The body is at least the window's height, and the footer is
+  // sticky with a whole window as its top offset: it's pushed down as far as
+  // the body lets it, to the body's end. On a long page it's already there, so
+  // nothing moves. It works the same in the plain shell and the sidebar grid,
+  // whatever rows they have. Screen only: a printed page has no window.
+  @media screen {
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    body > footer {
+      position: sticky;
+      top: 100vh;
+    }
+  }
+
   // Sidebar: <main> and <aside> as siblings sit side by side when there's room.
   // Source order picks the side — <aside> first puts it on the left, <main>
   // first puts it on the right. Below the breakpoint they stack in that order.
