@@ -26,8 +26,11 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# Personal local notes (e.g. PUBLISHING.local.md)
+# Personal local notes and Claude Code pointers (e.g. CLAUDE.local.md)
 *.local.md
+
+# Personal Claude Code settings
+.claude/settings.local.json
 
 # Cache
 .cache/

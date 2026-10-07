@@ -56,10 +56,6 @@ Reference `docs/mixins.md`: `cut-corner-border`, `card`, `dotted`, `striped`, ho
 
 Reference `docs/demo-pages.md`: the classless Acme demo, the showcase and its build-time source previews, and `showcase.scss`.
 
-## Templates and design tools
-
-Reference `docs/templates.md`: the templates built on the theme (Lunar Blog, a planned Next.js dashboard), how they use it, the theme-gap flow and local theme mode, and why the theme releases first. Their image generators live in `design/<template>/`, next to the theme's own in `design/lunarcss-theme/`; each folder's README says how to run them.
-
 ## Conventions
 
 Reference `docs/conventions.md`: SCSS file structure, the classless rule, and keeping the docs in sync with tokens.

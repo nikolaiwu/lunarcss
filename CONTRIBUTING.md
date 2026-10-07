@@ -11,7 +11,7 @@ Bug reports, fixes and new element styles are welcome. For anything bigger, such
 5. **Progressive enhancement.** Base styles work in every supported browser; newer features are layered on where they're supported.
 6. **Minimal reset.** Just enough to normalize, not opinionated overrides.
 
-The [docs/](docs/) folder explains how the pieces fit: cascade layers, tokens, mixins, components, the build and the demo pages. [docs/templates.md](docs/templates.md) covers the templates built on the theme, such as [Lunar Blog](https://github.com/nikolaiwu/lunar-blog).
+The [docs/](docs/) folder explains how the pieces fit: cascade layers, tokens, mixins, components, the build and the demo pages.
 
 ## Setup
 
@@ -90,9 +90,6 @@ lunarcss/
 │   └── copy.js                   # Copy buttons for the showcase's CDN links
 ├── types/stylesheet.d.ts         # Lets TypeScript resolve the CSS imports
 ├── public/                       # Copied as is: favicon, social image, robots.txt
-├── design/                       # Image generators (see design/README.md)
-│   ├── lunarcss-theme/           # The theme's social card and before/after image
-│   └── lunar-blog/               # Lunar Blog's social card and touch icon
 ├── docs/                         # How the theme is built
 ├── vite/demo-source.js           # Build-time source previews for the showcase
 ├── .github/workflows/
