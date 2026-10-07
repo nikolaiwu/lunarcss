@@ -29,7 +29,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
+      href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.2/dist/lunarcss.min.css"
     />
     <title>My Page</title>
   </head>
@@ -40,7 +40,7 @@ This guide covers everything you need to know to use and customize LunarCSS.
 </html>
 ```
 
-The `@0.1` in the URL is a version range: you get fixes automatically, but not breaking changes. Use an exact version (e.g. `@0.1.0`) to pin completely, or `@latest` only for experiments. The same paths work on unpkg (`https://unpkg.com/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css`).
+The `@0.2` in the URL is a version range: you get fixes automatically, but not breaking changes. Use an exact version (e.g. `@0.2.0`) to pin completely, or `@latest` only for experiments. The same paths work on unpkg (`https://unpkg.com/@nikolaiwu/lunarcss@0.2/dist/lunarcss.min.css`).
 
 ### Option 2: npm
 
@@ -98,11 +98,11 @@ For the full look, load `lunarcss-fonts.min.css` **before** the theme:
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss-fonts.min.css"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.2/dist/lunarcss-fonts.min.css"
 />
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.1/dist/lunarcss.min.css"
+  href="https://cdn.jsdelivr.net/npm/@nikolaiwu/lunarcss@0.2/dist/lunarcss.min.css"
 />
 ```
 

@@ -12,6 +12,8 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-07
+
 ### Added
 
 - Layout stylesheet: the page footer sits at the bottom of the window on a short page, in the plain page shell and the sidebar layout alike
@@ -106,6 +108,7 @@ Initial release.
 
 - The showcase documents every element next to its source and carries social tags, a social image and a favicon; the Acme Robotics demo is a classless landing page, kept out of search results with `noindex`
 
-[Unreleased]: https://github.com/nikolaiwu/lunarcss/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/nikolaiwu/lunarcss/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/nikolaiwu/lunarcss/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/nikolaiwu/lunarcss/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/nikolaiwu/lunarcss/releases/tag/v0.1.0
