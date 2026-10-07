@@ -2,21 +2,11 @@
 # =============================================================================
 # LunarCSS - social card generator
 # =============================================================================
-# Writes design/og-image.svg (1200x630): the source for the og:image PNG,
-# meant to be tweaked in Figma and exported at 1x.
-#
-# It draws the theme's components from their real geometry at about 1.6x, in
-# the dark theme's colors, snapped to whole pixels so a 1x export stays crisp:
-# straight lines are filled rectangles, the few stroked outlines have 2px
-# strokes set 1px in from the edge, and there are no <pattern> fills, which
-# Figma drops on import. The muted color is the theme's 50% OKLCH mix of the
-# two main colors, worked out ahead of time.
-#
-# Run from the repo root (plain Python 3, no dependencies):
-#   python3 design/og-image.py
+# Writes og-image.svg next to this file, the source of the theme's
+# public/og-image.png. Plain Python 3, no dependencies. See README.md.
 # =============================================================================
 
-import math
+import math, os
 BG='#2a2c2f'; FG='#ece8e3'; MUTED='#878285'; ACCENT='#ff5623'; SUCCESS='#4ade80'
 def n(v): return ('%.2f'%v).rstrip('0').rstrip('.')
 def rect(x,y,w,h): return f'M{n(x)} {n(y)}h{n(w)}v{n(h)}h{n(-w)}Z'
@@ -178,4 +168,4 @@ a(f'''      <path id="table-column-starts" d="{starts}" fill="{FG}"/>
   <text id="url" x="{R}" y="614" text-anchor="end" font-family="Space Mono" font-size="16" letter-spacing="0.4" fill="{MUTED}">nikolaiwu.github.io/lunarcss</text>
 </svg>
 ''')
-open("design/og-image.svg", "w").write(''.join(o))
+open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "og-image.svg"), "w").write(''.join(o))

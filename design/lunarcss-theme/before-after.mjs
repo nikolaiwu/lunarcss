@@ -2,18 +2,8 @@
 // =============================================================================
 // LunarCSS - before/after image generator
 // =============================================================================
-// Writes public/before-after.png: the classless demo page (src/demo.html) as
-// the browser draws it with no stylesheets, beside the same markup with
-// LunarCSS, split diagonally between the light and dark themes. The HTML is
-// identical in every shot; only the <link> tags change.
-//
-// It serves dist/ over a throwaway local server (file:// would block the
-// crossorigin stylesheets), screenshots each variant with headless Chrome,
-// then screenshots a composite page that frames them.
-//
-// Run from the repo root after a build (plain Node, no dependencies):
-//   pnpm build && node design/before-after.mjs
-// Set CHROME to the browser binary if it isn't in the default macOS spot.
+// Writes public/before-after.png from the built demo page. Plain Node, no
+// dependencies; build first (pnpm build). See README.md.
 // =============================================================================
 
 import { spawn } from "node:child_process";
@@ -21,12 +11,15 @@ import { mkdtempSync, readFileSync, rmSync, copyFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const CHROME =
   process.env.CHROME ??
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const DIST = "dist";
-const OUT = "public/before-after.png";
+// The repo root, two folders up, so it runs from anywhere
+const ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const DIST = join(ROOT, "dist");
+const OUT = join(ROOT, "public/before-after.png");
 
 // Page viewport for each shot, in CSS pixels (captured at 2x)
 const SHOT = { width: 1200, height: 1000 };
