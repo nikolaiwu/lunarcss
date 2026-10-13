@@ -12,6 +12,10 @@ New tokens, new element styles and bug fixes are minor or patch releases. Before
 
 ## [Unreleased]
 
+### Added
+
+- Showcase: a link to Lunar Blog, the free Astro starter built on the theme, under the intro
+
 ## [0.2.0] - 2026-10-07
 
 ### Added
